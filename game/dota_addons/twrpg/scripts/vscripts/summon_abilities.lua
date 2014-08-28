@@ -8,12 +8,16 @@ abyssCount = 0
 
 -- Earth Elemental abilities
 
+--[[Channeled ability which heals the caster and deals damage to the enemy units
+	around the caster while draining his mana
+	It is also supposed to ministun but thats not implemented yet]]
 function StompInterval(keys)
 	local caster = keys.caster
 	local mana = caster:GetMana()
 	local table = {}
 	local casterloc = caster:GetAbsOrigin() 
 
+	-- Getting the info so that we can toggle the ability off when the caster is out of mana
 	local playerID = caster:GetOwner():GetPlayerID()
 	local ability = caster:FindAbilityByName("elementalist_earth_elemental_toggle_ability")
 
@@ -28,6 +32,7 @@ function StompInterval(keys)
 
 	--print(caster:GetOwner():GetClassname())
 
+	-- Checks if the caster has enough mana
 	if mana >= 2 then
 		caster:SpendMana(2, caster) --[[Returns:void
 		Spend mana from this unit, this can be used for spending mana from abilities or item usage.
@@ -35,6 +40,8 @@ function StompInterval(keys)
 		caster:Heal(100.0, caster) --[[Returns:void
 		Heal this unit.
 		]]
+
+		-- Finds all valid targets around the caster and deals damage to them
 		local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 
 		for i,v in ipairs(unittodamage) do
@@ -43,6 +50,7 @@ function StompInterval(keys)
 		end
 
 	else
+		-- If the caster doesnt have enough mana then it toggles the spell off
 		caster:CastAbilityToggle(ability, playerID) --[[Returns:void
 		Toggle an ability. ( hAbility, iPlayerIndex )
 		]]
@@ -50,11 +58,13 @@ function StompInterval(keys)
 
 end
 
+--[[Chance on being called for whenever the caster takes damage
+	On activation it deals scaling damage to the attacker]]
 function ThornsAura(keys)
 	local caster = keys.caster
 	local target = keys.attacker
 	local table = {}
-	local ownerInt = caster:GetOwner():GetIntellect()
+	local ownerInt = caster:GetOwner():GetIntellect() -- Gets the intelligence  of the hero that owns this unit
 
 	table.attacker = caster
 	table.victim = target
@@ -66,6 +76,7 @@ function ThornsAura(keys)
 	]]
 end
 
+-- Was playing around with this function, doesnt work, ignore
 --[[function ThornsAuraArmor(keys)
 	local caster = keys.caster
 	local getability = caster:FindAbilityByName("elementalist_earth_elemental_thorns_ability")
@@ -73,6 +84,9 @@ end
 	caster:AddNewModifier(caster, getability, "modifier_thorns_armor", {armor_bonus = 80})
 end]]
 
+--[[Has a chance to trigger everytime the caster is hit
+	Once it activates it heals all allied units in a radius for 10% of the casters
+	maximum health]]
 function SoulOfTheForestHeal( keys )
 	local caster = keys.caster
 	local table = {}
@@ -80,11 +94,13 @@ function SoulOfTheForestHeal( keys )
 	local casterMaxHP = caster:GetMaxHealth()
 	print("magma test")
 
-	
+	-- Checks if the attacker is the caster to prevent crashes if the caster
+	-- is forcefully killed by script
 	if keys.attacker == caster then
 		return nil
 	end
 
+	-- Finds all valid units in a radius around the caster and heals them
 	local unittoheal =FindUnitsInRadius(caster:GetTeam(), casterloc, nil, 500, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 	for i,v in ipairs(unittoheal) do
 		v:Heal(casterMaxHP*0.1, caster)
@@ -95,6 +111,7 @@ end
 
 -- Fire Elemental abilities
 
+--[[A cleave ability which deals scaling damage on the target unit position]]
 function FlameFists(keys)
 	local caster = keys.caster
 	local table = {}
@@ -107,6 +124,7 @@ function FlameFists(keys)
 	table.damage = casterDmg*ownerInt
 	table.damage_type = DAMAGE_TYPE_MAGICAL
 
+	-- Finds all valid targets and deals damage to them
 	local unittodamage = FindUnitsInRadius(caster:GetTeam(), targetloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 	for i,v in ipairs(unittodamage) do
 		table.victim = v
@@ -114,6 +132,8 @@ function FlameFists(keys)
 	end
 end
 
+--[[An aura which deals damage to targets around the caster
+	it also deals damage to the caster]]
 function ImmolationAura(keys)
 	local caster = keys.caster
 	local table = {}
@@ -124,17 +144,21 @@ function ImmolationAura(keys)
 	table.damage = 50 + ownerInt * 6
 	table.damage_type = DAMAGE_TYPE_MAGICAL
 
+	-- Find all valid targets around the caster and deal damage to them
 	local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 	for i,v in ipairs(unittodamage) do
 		table.victim = v
 		ApplyDamage(table)
 	end
+
+	-- Deal damage to the caster
 	table.victim = caster
 	table.damage_type = DAMAGE_TYPE_MAGICAL
 	--print("immolration aura test")
 	ApplyDamage(table)
 end
 
+--[[Suicide ability which deals damage in an area depending on the casters missing health]]
 function MagmaExplosion(keys)
 	local caster = keys.caster
 	local table = {}
@@ -149,16 +173,20 @@ function MagmaExplosion(keys)
 	table.damage = casterMaxHP - casterCurrentHP
 	table.damage_type = DAMAGE_TYPE_MAGICAL
 
+	-- Find all valid targets and deal damage to them
 	local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 	for i,v in ipairs(unittodamage) do
 		table.victim = v
 		ApplyDamage(table)
 	end
 
+	-- Kill the caster
 	caster:ForceKill(true)
 	--print("Magma test 3")
 end
 
+--[[This ability activates when the caster dies and acts as an explosion,
+	dealing damage to targets around the caster at the time of his death]]
 function BlazingHasteExplosion( keys )
 	local caster = keys.caster
 	local table = {}
@@ -167,10 +195,12 @@ function BlazingHasteExplosion( keys )
 	local casterMaxHP = caster:GetMaxHealth()
 	--print("magma test")
 
+	-- Damage done is equal to the casters maximum health
 	table.attacker = caster
 	table.damage = casterMaxHP
 	table.damage_type = DAMAGE_TYPE_MAGICAL
 
+	-- Find all valid targets and deal damage to them
 	local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 	for i,v in ipairs(unittodamage) do
 		table.victim = v
@@ -180,6 +210,7 @@ end
 
 -- Water Elemental abilities
 
+--[[Heal the target unit for an amount that is equal to 5% of the casters MaxHP]]
 function Purification( keys )
 	local caster = keys.caster
 	local target = keys.target
@@ -198,12 +229,16 @@ end
 
 -- Lightning Elemental abilities
 
+--[[Chain lightning spell which deals damage to 3 additional targets
+	Fires every 4th attack using lightningCount as the attack counter]]
 function ChainLightning( keys )
+	-- Counts the number of attack that have been made
 	lightningCount = lightningCount + 1
 	
 
 	print("lightning 1")
 
+	-- Once it reaches 4 attacks, it starts doing the chain lightning code
 	if lightningCount % 4 == 0 then
 		local caster = keys.caster
 		local target = keys.target
@@ -213,6 +248,7 @@ function ChainLightning( keys )
 
 		print("lightning 2")
 
+		-- Applies the first chain lightning damage to the original attack target
 		table.attacker = caster
 		table.victim = target
 		table.damage_type = DAMAGE_TYPE_MAGICAL
@@ -221,12 +257,16 @@ function ChainLightning( keys )
 		Pass ''table'' - Inputs: victim, attacker, damage, damage_type, damage_flags, abilityReturn damage done.
 		]]
 
+		-- Saves all valid targets to which the chain can jump
 		local unittodamage = FindUnitsInRadius(caster:GetTeam(), targetloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false) --[[Returns:table
 		Finds the units in a given radius with the given flags. ( iTeamNumber, vPosition, hCacheUnit, flRadius, iTeamFilter, iTypeFilter, iFlagFilter, iOrder, bCanGrowCache )
 		]]
 
+		-- Chains to the closest target first
 		for i,v in ipairs(unittodamage) do
 			print("lightning 3")
+			-- As long as it hasnt chained to 3 targets already, it will continue
+			-- searching and dealing damage to targets it can find
 			if hitCount < 3 then
 				targetloc = v:GetAbsOrigin()
 				table.victim = v
@@ -238,6 +278,9 @@ function ChainLightning( keys )
 	end
 end
 
+--[[Massive damage sinle target spell which ministuns on impact
+	It is called once every 8th attack, keeping count of the attacks using lightningCount
+	and reseting the counter once it reaches 8 attacks]]
 function ThunderStrike(keys)
 	if lightningCount == 8 then
 		local target = keys.target
@@ -252,16 +295,19 @@ function ThunderStrike(keys)
 		table.damage = 200
 		ApplyDamage(table)
 
+		-- Adds the ministun
 		target:AddNewModifier(caster, nil, "modifier_stunned", {duration = 0.1}) --[[Returns:void
 		No Description Set
 		]]
 
+		-- Resets the attack counter
 		lightningCount = 0
 	end
 end
 
 -- Shadow Elemental abilities
 
+--[[Simple dash to point ability which deals damage to targets around the dashing point]]
 function AbyssDash( keys )
 	local caster = keys.caster
 	local casterloc = caster:GetAbsOrigin()
@@ -303,6 +349,9 @@ function AbyssDash( keys )
 	end
 end
 
+--[[This is supposed to be like a black hole ability, sucking everything to the center
+	On cast, a dummy is created which uses a Vacuum-based spell
+	Once every target is pulled to the center, the damage is applied]]
 function AbyssPull( keys )
 	local caster = keys.caster
 	local casterloc = caster:GetAbsOrigin()
@@ -343,6 +392,9 @@ function AbyssPull( keys )
 end
 
 
+--[[It is a cleave ability, dealing extra damage on each attack
+	Everytime its called it increases the abyss hit count by 1
+	Once the count reaches 5, it gives additional damage to the cleave]]
 function AbyssReach( keys )
 	-- Define the caster, target, target location and damage
 	local caster = keys.caster
