@@ -1,0 +1,35 @@
+"elementalist_summon_duration"
+{
+	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
+	"BaseClass"			"ability_datadriven"
+	"MaxLevel"			"1"
+
+	"OnCreated"
+	{
+		"ApplyModifier"
+		{
+			"Target"	"CASTER"
+			"ModifierName"	"modifier_killsummon"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_killsummon"
+		{
+			"Passive"	"1"
+			"Duration"	"120.0"
+			"IsBuff"	"1"
+			"ThinkInterval"	"120.0"
+
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"summons.lua"
+					"Function"		"KillSummon"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,54 @@
+"elementalist_summon_lightning_elemental"
+	{
+		// General
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"		"ABILITY_DATADRIVEN"
+		"AbilityTextureName"	"invoker_wex"
+		
+		// Casting
+		"AbilityCastRange"		"1000"
+		"AbilityCastPoint"		"0.0"
+
+		// Time
+		"AbilityCooldown"		"5.0"
+
+		// Cost
+		"AbilityManaCost" 		"25"
+
+		// SpellStart
+		OnSpellStart
+		{
+			"SpawnUnit"
+			{
+				"UnitName"	"elementalist_lightning_elemental"
+				"UnitCount"	"1"
+				"SpawnRadius"	"10"
+				"Target"	"POINT"
+				"Duration"		"120.0"
+				"OnSpawn"
+				{
+					"ApplyModifier"
+					{
+						"Target"	"TARGET"
+						"ModifierName"	"elementalist_lightning_elemental_nomana"
+					}
+				}
+			}
+		}
+
+		// Modifiers
+
+		"Modifiers"
+		{
+			"elementalist_lightning_elemental_nomana"
+			{
+				"Duration"	"0.1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"	"-1000"
+				}
+			}
+		}
+
+		// Special
+	}

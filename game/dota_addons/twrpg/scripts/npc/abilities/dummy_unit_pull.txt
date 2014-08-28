@@ -1,0 +1,38 @@
+"dummy_unit_pull"
+{
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+	"BaseClass"						"dark_seer_vacuum"
+	"AbilityTextureName"			"zuus_arc_lightning"
+	"MaxLevel"						"1"
+	"AOERadius"						"500"
+
+	"AbilityManaCost"				"0"
+	"AbilityCastRange"				"600"
+	"AbilityCastPoint"				"0.0"
+	"AbilityCooldown"				"0.0"
+
+	"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"500"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"0.4"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"50"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius_tree"				"275"
+			}
+		}
+	
+}

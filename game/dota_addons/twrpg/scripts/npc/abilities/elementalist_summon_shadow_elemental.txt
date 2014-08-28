@@ -1,0 +1,32 @@
+"elementalist_summon_shadow_elemental"
+	{
+		// General
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"		"ABILITY_DATADRIVEN"
+		"AbilityTextureName"	"enigma_malefice"
+		
+		// Casting
+		"AbilityCastRange"		"1000"
+		"AbilityCastPoint"		"0.0"
+
+		// Time
+		"AbilityCooldown"		"5.0"
+
+		// Cost
+		"AbilityManaCost" 		"25"
+
+		// SpellStart
+		OnSpellStart
+		{
+			"SpawnUnit"
+			{
+				"UnitName"	"elementalist_shadow_elemental"
+				"UnitCount"	"1"
+				"SpawnRadius"	"10"
+				"Target"	"POINT"
+				"Duration"		"30.0"
+			}
+		}
+
+		// Special
+	}

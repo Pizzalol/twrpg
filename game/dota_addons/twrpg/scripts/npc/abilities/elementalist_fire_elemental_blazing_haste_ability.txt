@@ -1,0 +1,26 @@
+"elementalist_fire_elemental_blazing_haste_ability"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"BaseClass"						"troll_warlord_fervor"
+	"AbilityTextureName"			"phoenix_fire_spirits"
+	"MaxLevel"						"1"
+
+		
+	// Casting
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"max_stacks"			"4"
+		}
+		"02"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"attack_speed"			"25"
+		}
+	}
+}

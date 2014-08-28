@@ -1,0 +1,22 @@
+"elementalist_shadow_elemental_abyss_pull_ability"
+{
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+	"BaseClass"						"ability_datadriven"
+	"AbilityTextureName"			"invoker_quas"
+	"MaxLevel"						"1"
+	"AOERadius"						"300"
+
+	"AbilityManaCost"				"0"
+	"AbilityCastPoint"				"0.1"
+	"AbilityCooldown"				"5.0"
+
+	"OnSpellStart"
+	{
+		"RunScript"
+		{
+			"ScriptFile"	"summon_abilities.lua"
+			"Function"		"AbyssPull"
+		}
+	}
+	
+}

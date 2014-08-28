@@ -1,0 +1,37 @@
+
+"elementalist_shadow_elemental_abyss_reach_ability"
+{
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AOE"
+	"BaseClass"						"ability_datadriven"
+	"AbilityTextureName"			"shadow_demon_shadow_poison"
+	"MaxLevel"						"1"
+
+	"Modifiers"
+	{			
+		"modifier_abyss_reach"
+		{
+			"IsHidden"	"1"
+			"Passive"	"1"
+			"OnAttackLanded"
+			{
+				"RunScript"
+				{
+					"Target"	"TARGET"
+					"ScriptFile"	"summon_abilities.lua"
+					"Function"		"AbyssReach"
+				}
+			}	
+		}
+
+		"modifier_abyss_reach_attackspeed"
+		{
+			"IsHidden"	"1"
+			"Passive"	"1"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "20"
+			}
+		}
+	}
+}

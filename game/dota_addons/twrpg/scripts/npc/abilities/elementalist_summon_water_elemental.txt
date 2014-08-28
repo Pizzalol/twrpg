@@ -1,0 +1,32 @@
+"elementalist_summon_water_elemental"
+	{
+		// General
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"		"ABILITY_DATADRIVEN"
+		"AbilityTextureName"	"invoker_quas"
+		
+		// Casting
+		"AbilityCastRange"		"1000"
+		"AbilityCastPoint"		"0.0"
+
+		// Time
+		"AbilityCooldown"		"5.0"
+
+		// Cost
+		"AbilityManaCost" 		"25"
+
+		// SpellStart
+		OnSpellStart
+		{
+			"SpawnUnit"
+			{
+				"UnitName"	"elementalist_water_elemental"
+				"UnitCount"	"1"
+				"SpawnRadius"	"10"
+				"Target"	"POINT"
+				"Duration"		"120.0"
+			}
+		}
+
+		// Special
+	}

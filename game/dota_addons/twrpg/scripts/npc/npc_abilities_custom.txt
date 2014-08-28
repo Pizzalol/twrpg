@@ -1,49 +1,1293 @@
-// Dota Heroes File
+//Generated using Dota Custom File Generator by cris9696
 "DOTAAbilities"
 {
-	"Version"		"1"
 
-	//=================================================================================================================
-	// Templar Assassin: Refraction Holdout
-	//=================================================================================================================
-	"templar_assassin_refraction_holdout"
+
+	//Start of file dummy_unit.txt
+	"dummy_unit"
+	{
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass" "ability_datadriven"
+		"AbilityTextureName" "bane_fiends_grip"
+		"MaxLevel" "1"
+		"Modifiers"
+		{
+			"dummy_unit"
+			{
+				"Passive" "1"
+				"IsHidden" "0"
+				"States"
+				{
+					"MODIFIER_STATE_UNSELECTABLE" "MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP" "MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+	}
+	//End of file dummy_unit.txt
+
+
+	//Start of file dummy_unit_pull.txt
+	"dummy_unit_pull"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"BaseClass"						"dark_seer_vacuum"
+		"AbilityTextureName"			"zuus_arc_lightning"
+		"MaxLevel"						"1"
+		"AOERadius"						"500"
+	
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"0.0"
+	
+		"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"				"FIELD_INTEGER"
+					"radius"				"500"
+				}
+				"02"
+				{
+					"var_type"				"FIELD_FLOAT"
+					"duration"				"0.4"
+				}
+				"03"
+				{
+					"var_type"				"FIELD_INTEGER"
+					"damage"				"50"
+				}
+				"04"
+				{
+					"var_type"				"FIELD_INTEGER"
+					"radius_tree"				"275"
+				}
+			}
+		
+	}
+	//End of file dummy_unit_pull.txt
+
+
+	//Start of file elementalist_earth_elemental_ground_shake_ability.txt
+	// Earth Elemental toggle ability
+	
+		"elementalist_earth_elemental_toggle_ability"
+		{
+			// General
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"
+			"BaseClass"						"ability_datadriven"
+			"AbilityTextureName"			"invoker_exort"
+			"MaxLevel"						"1"
+	
+			// Casting
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityCastPoint"				"0.0"
+	
+			// Time		
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityCooldown"				"0.0"
+	
+			// Damage.
+			//-------------------------------------------------------------------------------------------------------------
+	
+			// Cost
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityManaCost"				"10"
+	
+			"OnToggleOn"
+			{
+				"ApplyModifier"
+				{
+					"Target"	"CASTER"
+					"ModifierName"	"modifier_stomptest"
+				}
+			}
+	
+			"OnToggleOff"
+			{
+				"RemoveModifier"
+				{
+					"Target"	"CASTER"
+					"ModifierName"	"modifier_stomptest"
+				}
+			}
+	
+			"Modifiers"
+			{
+				"modifier_stomptest"
+				{
+					"IsBuff"	"1"
+					"ThinkInterval"	"1.0"
+	
+					"OnIntervalThink"
+					{
+						"RunScript"
+						{
+							"ScriptFile"	"summon_abilities.lua"
+							"Function"		"StompInterval"
+						}
+					}
+				}
+			}
+		}
+	//End of file elementalist_earth_elemental_ground_shake_ability.txt
+
+
+	//Start of file elementalist_earth_elemental_souloftheforest_ability.txt
+	"elementalist_earth_elemental_souloftheforest_ability"
+	{
+			// General
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+			"BaseClass" 					"ability_datadriven"
+			"AbilityTextureName"            "invoker_quas"
+	
+			"precache"
+			{
+				"particle_folder"				"particles/test_particle"
+				"soundfile"					"soundevents/game_sounds/ability_reflect_damage.vsndevts"
+			}
+			
+			// Casting
+			//-------------------------------------------------------------------------------------------------------------
+	
+			
+			
+			
+	
+			"Modifiers"
+			{
+				"modifier_souloftheforest"
+				{
+					"IsHidden"				"0"
+					"Passive"				"1"
+					
+					"Aura"					"modifier_souloftheforest_protection"
+					"Aura_Radius"			"500"
+					"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+					"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
+					"Aura_ApplyToCaster"		"0"
+				}
+	
+				"modifier_souloftheforest_protection"
+				{
+					"IsHidden"		"0"
+	
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"	"-15"
+					}
+				}
+	
+				"modifier_souloftheforest_magicprotection"
+				{
+					"Passive"	"1"
+					"IsHidden"	"1"
+	
+					"OnTakeDamage"
+					{
+						"Random"
+						{
+							"Chance" "100.00"
+							//"PseudoRandom"	"DOTA_PSEUDO_RANDOM_JUGG_CRIT"
+							"OnSuccess"
+							{
+								"RunScript"
+								{
+									"Caster"			"CASTER"
+									"ScriptFile"		"summon_abilities.lua"
+									"Function"			"SoulOfTheForestHeal"
+								}					
+							}
+	
+							"OnFailure"
+							{
+								
+							}
+						}
+					}
+	
+	
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_INCOMING_SPELL_DAMAGE_CONSTANT"	"-70"
+					}
+				}			
+			}		
+	}
+	//End of file elementalist_earth_elemental_souloftheforest_ability.txt
+
+
+	//Start of file elementalist_earth_elemental_taunt_ability.txt
+	// Earth Elemental taunt
+		"elementalist_earth_elemental_taunt_ability"
+		{
+			// General
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
+			"BaseClass"						"axe_berserkers_call"
+			"AbilityTextureName"			"axe_berserkers_call"
+			"MaxLevel"						"1"
+	
+			// Casting
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityCastPoint"				"0.0"
+	
+			// Time		
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityCooldown"				"6.0"
+	
+			// Damage.
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityDamage"					"0"
+	
+			// Cost
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityManaCost"				"0"
+			
+			// Special
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"				"FIELD_INTEGER"
+					"radius"				"400"
+				}
+				"02"
+				{
+					"var_type"				"FIELD_INTEGER"
+					"bonus_armor"			"100"
+				}
+				"03"
+				{
+					"var_type"				"FIELD_FLOAT"
+					"duration"				"4.0"
+				}	
+			}
+		}
+	//End of file elementalist_earth_elemental_taunt_ability.txt
+
+
+	//Start of file elementalist_earth_elemental_thorns_ability.txt
+	// Earth Elemental reflect damage passive
+		"elementalist_earth_elemental_thorns_ability"
+		{
+			// General
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+			"BaseClass" 					"ability_datadriven"
+			"AbilityTextureName"            "invoker_wex"
+	
+			"precache"
+			{
+				"particle_folder"				"particles/test_particle"
+				"soundfile"					"soundevents/game_sounds/ability_reflect_damage.vsndevts"
+			}
+			
+			// Casting
+			//-------------------------------------------------------------------------------------------------------------
+	
+			
+			
+	
+			"Modifiers"
+			{
+				"modifier_thorns"
+				{
+					"Passive"		"1"
+					"EffectName"	"particles/test_particle/creature_spiked_carapace.vpcf"
+					"IsBuff"		"1"
+					"OnTakeDamage"
+					{
+						"Random"
+						{
+							"Chance" "100.00"
+							//"PseudoRandom"	"DOTA_PSEUDO_RANDOM_JUGG_CRIT"
+	
+							"OnSuccess"
+							{
+								"RunScript"
+								{
+									"Caster"			"CASTER"
+									"ScriptFile"		"summon_abilities.lua"
+									"Function"			"ThornsAura"
+								}
+						
+								"FireSound"
+								{
+									"EffectName"	"Ability.ReflectDamageStun"
+									"Target"		"ATTACKER"
+								}
+							}
+							"OnFailure"
+							{
+								
+							}
+						}
+					}
+	
+				}
+	
+				"modifier_thorns_armor"
+				{
+					"Passive"	"1"
+					"IsHidden"	"1"
+	
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"100"
+					}
+				}			
+			}
+	
+			// Special	
+			//-------------------------------------------------------------------------------------------------------------
+		}
+	//End of file elementalist_earth_elemental_thorns_ability.txt
+
+
+	//Start of file elementalist_fire_elemental_blazing_haste_ability.txt
+	"elementalist_fire_elemental_blazing_haste_ability"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
-
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"17.0 17.0 17.0 17.0"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"100"
 		
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"troll_warlord_fervor"
+		"AbilityTextureName"			"phoenix_fire_spirits"
+		"MaxLevel"						"1"
+	
+			
+		// Casting
 		"AbilitySpecial"
 		{
 			"01"
 			{
-				"var_type"					"FIELD_INTEGER"
-				"damage_absorb"				"200 300 400 500"
+				"var_type"				"FIELD_INTEGER"
+				"max_stacks"			"4"
 			}
 			"02"
 			{
-				"var_type"					"FIELD_INTEGER"
-				"bonus_damage"				"20 40 60 80"
-			}
-			"04"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"duration"					"17.0 17.0 17.0 17.0"
+				"var_type"				"FIELD_INTEGER"
+				"attack_speed"			"25"
 			}
 		}
 	}
+	//End of file elementalist_fire_elemental_blazing_haste_ability.txt
+
+
+	//Start of file elementalist_fire_elemental_blazing_haste_explosion_ability.txt
+	"elementalist_fire_elemental_blazing_haste_explosion_ability"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"			"ability_datadriven"
+		"MaxLevel"			"1"
+	
+		"OnOwnerDied"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"summon_abilities.lua"
+				"Function"		"BlazingHasteExplosion"
+			}
+		}
+	}
+	//End of file elementalist_fire_elemental_blazing_haste_explosion_ability.txt
+
+
+	//Start of file elementalist_fire_elemental_flamefists_ability.txt
+	// Fire Elemental aoe damage orb
+		"elementalist_fire_elemental_damage_ability"
+		{
+		// General
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AOE"
+			"BaseClass"						"ability_datadriven"
+			"AbilityTextureName"			"lich_chain_frost"
+			"MaxLevel"						"1"
+	
+			"precache"
+			{
+				"particle_folder"				"particles/units/heroes/hero_lich"
+			}
+	
+			// Modifiers
+			//-------------------------------------------------------------------------------------------------------------
+			"Modifiers"
+			{			
+				"elementalist_fire_elemental_flame_fists_modifier"
+				{
+					"IsHidden"	"1"
+					"Passive"	"1"
+	
+					"OnAttackLanded"
+					{
+						"RunScript"
+						{
+							"Target"	"TARGET"
+							"ScriptFile"	"summon_abilities.lua"
+							"Function"		"FlameFists"
+						}
+					}	
+				}
+			}
+		}
+	//End of file elementalist_fire_elemental_flamefists_ability.txt
+
+
+	//Start of file elementalist_fire_elemental_immolation_aura_ability.txt
+	// Fire Elemental immolation aura
+	
+		"elementalist_fire_elemental_immolation_aura_ability"
+		{
+			// General
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"
+			"BaseClass"						"ability_datadriven"
+			"AbilityTextureName"			"invoker_exort"
+			"MaxLevel"						"1"
+	
+			// Casting
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityCastPoint"				"0.0"
+	
+			// Time		
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityCooldown"				"0.0"
+	
+			// Damage.
+			//-------------------------------------------------------------------------------------------------------------
+	
+			// Cost
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityManaCost"				"0"
+	
+			"OnToggleOn"
+			{
+				"ApplyModifier"
+				{
+					"Target"	"CASTER"
+					"ModifierName"	"modifier_immolation_aura"
+				}
+				"RunScript"
+				{
+					"ScriptFile"	"summon_abilities.lua"
+					"Function"		"ImmolationAura"
+				}
+			}
+	
+			"OnToggleOff"
+			{
+				"RemoveModifier"
+				{
+					"Target"	"CASTER"
+					"ModifierName"	"modifier_immolation_aura"
+				}
+			}
+	
+			"Modifiers"
+			{
+				"modifier_immolation_aura"
+				{
+					"IsBuff"	"1"
+					"IsHidden"	"1"
+					"ThinkInterval"	"1.0"
+	
+					"OnIntervalThink"
+					{
+						"RunScript"
+						{
+							"ScriptFile"	"summon_abilities.lua"
+							"Function"		"ImmolationAura"
+						}
+					}
+				}
+			}
+		}
+	//End of file elementalist_fire_elemental_immolation_aura_ability.txt
+
+
+	//Start of file elementalist_fire_elemental_magma_explosion_ability.txt
+	// Fire Elemental aoe damage suicide ability
+		"elementalist_fire_elemental_magma_explosion_ability"
+		{
+			"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+			"BaseClass"				"ability_datadriven"
+			"AbilityTextureName"	"invoker_quas"
+			"MaxLevel"				"1"
+	
+			"AbilityCastPoint"		"0.0"
+			"AbilityManaCost"		"0"
+			"AbilityCooldown"		"0"
+			"AbilityCastRange"		"0"
+	
+			"OnSpellStart"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"summon_abilities.lua"
+					"Function"		"MagmaExplosion"
+				}
+			}
+		}
+	//End of file elementalist_fire_elemental_magma_explosion_ability.txt
+
+
+	//Start of file elementalist_lightning_elemental_chain_lightning_ability.txt
+	"elementalist_lightning_elemental_chain_lightning_ability"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"zuus_arc_lightning"
+		"MaxLevel"						"1"
+	
+		"Modifiers"
+		{
+			"elementalist_lightning_elemental_chain_lightning_modifier"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+	
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"Target"	"TARGET"
+						"ScriptFile"	"summon_abilities.lua"
+						"Function"		"ChainLightning"
+					}
+					"ApplyModifier"
+					{
+						"Target" 			"TARGET"
+						"ModifierName"		"elementalist_lightning_elemental_chain_lightning_magicresist_modifier"
+					}
+				}
+			}
+	
+			"elementalist_lightning_elemental_chain_lightning_magicresist_modifier"
+			{
+				"IsHidden"	"0"
+				"IsDebuff"	"1"
+				"Duration"	"4"
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"-20"
+				}
+			}
+		}
+	}
+	//End of file elementalist_lightning_elemental_chain_lightning_ability.txt
+
+
+	//Start of file elementalist_lightning_elemental_electric_aura_ability.txt
+	"elementalist_lightning_elemental_electric_aura_ability"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"zuus_static_field"
+		"MaxLevel"						"1"
+	
+		
+	
+		"Modifiers"
+		{
+			"modifier_electric"
+			{
+				"IsHidden"				"1"
+				"Passive"				"1"
+				
+				"Aura"					"modifier_electric_aura"
+				"Aura_Radius"			"500"
+				"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Aura_Types"			"DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
+				"Aura_ApplyToCaster"		"1"
+			}
+	
+			"modifier_electric_aura"
+			{
+				"IsHidden"	"0"
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "10"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "10"
+				}
+			}
+		}
+	}
+	//End of file elementalist_lightning_elemental_electric_aura_ability.txt
+
+
+	//Start of file elementalist_lightning_elemental_thunder_strike_ability.txt
+	"elementalist_lightning_elemental_thunder_strike_ability"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"zuus_lightning_bolt"
+		"MaxLevel"						"1"
+	
+		
+	
+		"Modifiers"
+		{
+			"elementalist_lightning_elemental_thunder_strike_modifier"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+	
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"Target"	"TARGET"
+						"ScriptFile"	"summon_abilities.lua"
+						"Function"		"ThunderStrike"
+					}
+				}
+			}
+		}
+	}
+	//End of file elementalist_lightning_elemental_thunder_strike_ability.txt
+
+
+	//Start of file elementalist_shadow_elemental_abyss_dash_ability.txt
+	"elementalist_shadow_elemental_abyss_dash_ability"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"zuus_arc_lightning"
+		"MaxLevel"						"1"
+		"AOERadius"						"300"
+	
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"5.0"
+	
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"		"POINT"
+				"ScriptFile"	"summon_abilities.lua"
+				"Function"		"AbyssDash"
+			}
+		}
+		
+	}
+	//End of file elementalist_shadow_elemental_abyss_dash_ability.txt
+
+
+	//Start of file elementalist_shadow_elemental_abyss_presence_ability.txt
+	"elementalist_shadow_elemental_abyss_presence_ability"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"enigma_midnight_pulse"
+		"MaxLevel"						"1"
+	
+		
+	
+		"Modifiers"
+		{
+			"modifier_abyss_presence_aura"
+			{
+				"IsHidden"				"1"
+				"Passive"				"1"
+				
+				"Aura"					"modifier_abyss_presence"
+				"Aura_Radius"			"500"
+				"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Aura_Types"			"DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
+				"Aura_ApplyToCaster"		"1"
+			}
+	
+			"modifier_abyss_presence"
+			{
+				"IsHidden"	"0"
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "10"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "10"
+				}
+			}
+		}
+	}
+	//End of file elementalist_shadow_elemental_abyss_presence_ability.txt
+
+
+	//Start of file elementalist_shadow_elemental_abyss_pull_ability.txt
+	"elementalist_shadow_elemental_abyss_pull_ability"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"invoker_quas"
+		"MaxLevel"						"1"
+		"AOERadius"						"300"
+	
+		"AbilityManaCost"				"0"
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"5.0"
+	
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"summon_abilities.lua"
+				"Function"		"AbyssPull"
+			}
+		}
+		
+	}
+	//End of file elementalist_shadow_elemental_abyss_pull_ability.txt
+
+
+	//Start of file elementalist_shadow_elemental_abyss_reach_ability.txt
+	
+	"elementalist_shadow_elemental_abyss_reach_ability"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AOE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"shadow_demon_shadow_poison"
+		"MaxLevel"						"1"
+	
+		"Modifiers"
+		{			
+			"modifier_abyss_reach"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"Target"	"TARGET"
+						"ScriptFile"	"summon_abilities.lua"
+						"Function"		"AbyssReach"
+					}
+				}	
+			}
+	
+			"modifier_abyss_reach_attackspeed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "20"
+				}
+			}
+		}
+	}
+	//End of file elementalist_shadow_elemental_abyss_reach_ability.txt
+
+
+	//Start of file elementalist_summon_duration.txt
+	"elementalist_summon_duration"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"			"ability_datadriven"
+		"MaxLevel"			"1"
+	
+		"OnCreated"
+		{
+			"ApplyModifier"
+			{
+				"Target"	"CASTER"
+				"ModifierName"	"modifier_killsummon"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_killsummon"
+			{
+				"Passive"	"1"
+				"Duration"	"120.0"
+				"IsBuff"	"1"
+				"ThinkInterval"	"120.0"
+	
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"summons.lua"
+						"Function"		"KillSummon"
+					}
+				}
+			}
+		}
+	}
+	//End of file elementalist_summon_duration.txt
+
+
+	//Start of file elementalist_summon_earth_elemental.txt
+	"elementalist_summon_earth_elemental"
+		{
+			// General
+			"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+			"BaseClass"		"ABILITY_DATADRIVEN"
+			"AbilityTextureName"	"treant_natures_guise"
+			
+			// Casting
+			"AbilityCastRange"		"1000"
+			"AbilityCastPoint"		"0.0"
+	
+			// Time
+			"AbilityCooldown"		"5.0"
+	
+			// Cost
+			"AbilityManaCost" 		"25"
+	
+			// SpellStart
+			OnSpellStart
+			{
+				"RunScript"
+				{
+					"Target"			"POINT"
+					"Duration"			"120.0"
+					"ScriptFile"		"summons.lua"
+					"Function"			"SummonEarthElemental"
+				}
+	
+	
+			}
+	
+			// Special
+		}
+	//End of file elementalist_summon_earth_elemental.txt
+
+
+	//Start of file elementalist_summon_fire_elemental.txt
+	"elementalist_summon_fire_elemental"
+		{
+			// General
+			"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+			"BaseClass"		"ABILITY_DATADRIVEN"
+			"AbilityTextureName"	"invoker_exort"
+			
+			// Casting
+			"AbilityCastRange"		"1000"
+			"AbilityCastPoint"		"0.0"
+	
+			// Time
+			"AbilityCooldown"		"5.0"
+	
+			// Cost
+			"AbilityManaCost" 		"25"
+	
+			"Duration"				"120.0"
+	
+			// SpellStart
+			OnSpellStart
+			{
+				"RunScript"
+				{
+					"Target"			"POINT"
+					"Duration"			"120.0"
+					"ScriptFile"		"summons.lua"
+					"Function"			"SummonFireElemental"
+				}
+			}
+	
+			// Special
+		}
+	//End of file elementalist_summon_fire_elemental.txt
+
+
+	//Start of file elementalist_summon_lightning_elemental.txt
+	"elementalist_summon_lightning_elemental"
+		{
+			// General
+			"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+			"BaseClass"		"ABILITY_DATADRIVEN"
+			"AbilityTextureName"	"invoker_wex"
+			
+			// Casting
+			"AbilityCastRange"		"1000"
+			"AbilityCastPoint"		"0.0"
+	
+			// Time
+			"AbilityCooldown"		"5.0"
+	
+			// Cost
+			"AbilityManaCost" 		"25"
+	
+			// SpellStart
+			OnSpellStart
+			{
+				"SpawnUnit"
+				{
+					"UnitName"	"elementalist_lightning_elemental"
+					"UnitCount"	"1"
+					"SpawnRadius"	"10"
+					"Target"	"POINT"
+					"Duration"		"120.0"
+					"OnSpawn"
+					{
+						"ApplyModifier"
+						{
+							"Target"	"TARGET"
+							"ModifierName"	"elementalist_lightning_elemental_nomana"
+						}
+					}
+				}
+			}
+	
+			// Modifiers
+	
+			"Modifiers"
+			{
+				"elementalist_lightning_elemental_nomana"
+				{
+					"Duration"	"0.1"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"	"-1000"
+					}
+				}
+			}
+	
+			// Special
+		}
+	//End of file elementalist_summon_lightning_elemental.txt
+
+
+	//Start of file elementalist_summon_shadow_elemental.txt
+	"elementalist_summon_shadow_elemental"
+		{
+			// General
+			"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+			"BaseClass"		"ABILITY_DATADRIVEN"
+			"AbilityTextureName"	"enigma_malefice"
+			
+			// Casting
+			"AbilityCastRange"		"1000"
+			"AbilityCastPoint"		"0.0"
+	
+			// Time
+			"AbilityCooldown"		"5.0"
+	
+			// Cost
+			"AbilityManaCost" 		"25"
+	
+			// SpellStart
+			OnSpellStart
+			{
+				"SpawnUnit"
+				{
+					"UnitName"	"elementalist_shadow_elemental"
+					"UnitCount"	"1"
+					"SpawnRadius"	"10"
+					"Target"	"POINT"
+					"Duration"		"30.0"
+				}
+			}
+	
+			// Special
+		}
+	//End of file elementalist_summon_shadow_elemental.txt
+
+
+	//Start of file elementalist_summon_water_elemental.txt
+	"elementalist_summon_water_elemental"
+		{
+			// General
+			"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+			"BaseClass"		"ABILITY_DATADRIVEN"
+			"AbilityTextureName"	"invoker_quas"
+			
+			// Casting
+			"AbilityCastRange"		"1000"
+			"AbilityCastPoint"		"0.0"
+	
+			// Time
+			"AbilityCooldown"		"5.0"
+	
+			// Cost
+			"AbilityManaCost" 		"25"
+	
+			// SpellStart
+			OnSpellStart
+			{
+				"SpawnUnit"
+				{
+					"UnitName"	"elementalist_water_elemental"
+					"UnitCount"	"1"
+					"SpawnRadius"	"10"
+					"Target"	"POINT"
+					"Duration"		"120.0"
+				}
+			}
+	
+			// Special
+		}
+	//End of file elementalist_summon_water_elemental.txt
+
+
+	//Start of file elementalist_water_elemental_chain_heal_ability.txt
+	// Water Elemental chain heal
+		"elementalist_water_elemental_chainheal_ability"
+		{
+			// General
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+			"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+			"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+			"BaseClass"						"dazzle_shadow_wave"
+			"MaxLevel"						"1"
+			
+			// Casting
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityCastRange"				"800"
+			"AbilityCastPoint"				"0.5"
+			
+			// Time		
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityCooldown"				"2"
+	
+			// Cost
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityManaCost"				"0"
+			
+			// Damage.
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityDamage"					"0"
+	
+			// Heal
+			"Heal"					"100"
+			
+			// Special
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_INTEGER"
+					"bounce_radius"		"600"
+				}
+				"02"
+				{	
+					"var_type"			"FIELD_INTEGER"
+					"damage_radius"		"0"
+				}
+				"03"
+				{	
+					"var_type"			"FIELD_INTEGER"
+					"max_targets"		"3"
+				}
+				"04"
+				{
+					"var_type"			"FIELD_INTEGER"
+					"damage"			"0"
+				}
+				"05"
+				{
+					"var_type"			"FIELD_INTEGER"
+					"heal"				"100"
+				}
+			}
+		}
+	//End of file elementalist_water_elemental_chain_heal_ability.txt
+
+
+	//Start of file elementalist_water_elemental_purification_ability.txt
+	
+	// Water Elemental single target heal
+	"elementalist_water_elemental_purification_ability"
+		{
+			// General
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+			"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+			"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+			"BaseClass"						"ability_datadriven"
+			"AbilityTextureName"			"morphling_waveform"
+	
+			// Casting
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityCastRange"				"700"
+			"AbilityCastPoint"				"0.2"
+			
+			// Time		
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityCooldown"				"1.0"
+			
+			// Cost
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityManaCost"				"0"
+			
+			// Special
+			//-------------------------------------------------------------------------------------------------------------
+			
+			"OnSpellStart"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"summon_abilities.lua"
+					"Function"		"Purification"
+				}
+			}
+		}
+	//End of file elementalist_water_elemental_purification_ability.txt
+
+
+	//Start of file elementalist_water_elemental_slow_ability.txt
+	// Water Elemental slowing passive
+		"elementalist_water_elemental_slow_ability"
+		{
+			// General
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+			"BaseClass"						"ability_datadriven"
+			"AbilityTextureName"			"lich_chain_frost"
+			"MaxLevel"						"1"
+	
+			"precache"
+			{
+				"particle_folder"				"particles/units/heroes/hero_lich"
+			}
+	
+			// Modifiers
+			//-------------------------------------------------------------------------------------------------------------
+			"Modifiers"
+			{
+				"elementalist_water_elemental_orb_slow"
+				{
+					"IsHidden"				"0"
+					"Passive"				"1"
+					"Orb"
+					{
+						"Priority"			"DOTA_ORB_PRIORITY_ABILITY"
+					}
+					
+					"OnOrbImpact"
+					{
+						"ApplyModifier"
+						{
+							"ModifierName" "elementalist_water_elemental_ability_slow_slow"
+							"Target"
+							{
+								"Center" "TARGET"
+								"Radius" "%slow_radius"
+								"Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+								"Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
+							}
+						}
+	
+						"FireEffect"
+						{
+							"Target" "TARGET"
+							"EffectName" "particles/units/heroes/hero_lich/lich_frost_nova.vpcf"
+							"EffectAttachType" "follow_origin"
+							"EffectRadius" "slow_radius"
+						}
+					}
+				}
+	
+				"elementalist_water_elemental_ability_slow_slow"
+				{
+					"Duration" "%slow_duration"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%move_slow"
+						"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack_slow"
+					}
+	
+					"StatusEffectName" "status_effect_frost_lich"
+					"StatusEffectPriority" "9"
+					"EffectName" "particles/units/heroes/hero_lich/lich_slowed_cold.vpcf"
+				}
+			}
+	
+			// Special
+			//-------------------------------------------------------------------------------------------------------------
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"					"FIELD_INTEGER"
+					"slow_radius"				"150"
+				}
+				"02"
+				{
+					"var_type"						"FIELD_FLOAT"
+					"slow_duration"					"5.0"
+				}
+				"03"
+				{
+					"var_type"						"FIELD_INTEGER"
+					"move_slow"						"-20"
+				}
+				"04"
+				{
+					"var_type"						"FIELD_INTEGER"
+					"attack_slow"						"-20"
+				}
+			}
+		}
+	//End of file elementalist_water_elemental_slow_ability.txt
+
+
+	//Start of file elementalist_water_elemental_water_blessing_ability.txt
+	"elementalist_water_elemental_water_blessing_ability"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"			"ability_datadriven"
+		"AbilityTextureName"	"omniknight_guardian_angel"
+		"MaxLevel"			"1"
+		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO"
+	
+		"OnSpellStart"
+		{
+			"ActOnTargets"
+			{
+				"Target"
+				{
+					"Center"  				"CASTER"  // You may use "targetKey" completions here.
+					"Radius" 				"600"
+					"Teams" 				"DOTA_UNIT_TARGET_TEAM_FRIENDLY"  // You may use "targetKey" completions here.
+					"Types" 				"DOTA_UNIT_TARGET_HERO" // You may use "targetKey" completions here.
+				}
+	
+				"Action"
+				{
+					"ApplyModifier"
+					{
+						"Target"	"TARGET"
+						"ModifierName"	"modifier_water_blessing"
+					}
+				}
+			}
+		}
+	
+		"Modifiers"    				// Can be used to create custom modifier. 
+		{  							// There are many snippets that can be expanded in to the modifiers. 
+			"modifier_water_blessing"   	// This should be the name of your modifier
+			{
+				// Refer to http://hex6.se/dota/modifier_functions.txt to see what snippets can be expanded in here.
+				"IsBuff"					"1"
+				"IsPurgable"				"0"
+				"IsHidden"					"0"
+				"Duration"					"180.0"
+				
+				"Properties"
+				{
+					// You may use "modifierProperty" completions within quotes here. Below is an example
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"400"
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"		"400"
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"400"
+				}
+			}
+		}
+	}
+	//End of file elementalist_water_elemental_water_blessing_ability.txt
 }

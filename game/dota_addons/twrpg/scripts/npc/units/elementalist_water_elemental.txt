@@ -1,0 +1,110 @@
+// Hero Elementalist Water Elemental summon
+	"elementalist_water_elemental"
+	{
+		// General
+		//
+		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
+		"Model"						"models/heroes/morphling/morphling.vmdl"	// Model.
+		"SoundSet"					"Undying_Zombie"					// Name of sound set.
+		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_undying.vsndevts"
+		"ModelScale"				"0.5"
+		"Level"						"1"
+		"ConsideredHero"			"0"
+		"precache"
+		{
+			"particle_folder"		"particles/units/heroes/hero_morphling/"
+		}
+		// Abilities
+		//----------------------------------------------------------------
+		
+		"Ability1"					"elementalist_water_elemental_slow_ability"			// Ability 1.
+		"Ability2"					"elementalist_water_elemental_purification_ability"			// Ability 2.
+		"Ability3"					"elementalist_water_elemental_chainheal_ability"			// Ability 3.
+		"Ability4"					"elementalist_water_elemental_water_blessing_ability"			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		"Ability6"					""			// Ability 6 - Extra.
+		"Ability7"					""			// Ability 7 - Extra.
+		"Ability8"					""			// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"			// Physical protection.
+		"MagicalResistance"			"33"		// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"40"		// Damage range min.
+		"AttackDamageMax"			"40"		// Damage range max.
+		//"AttackDamageType"			"DAMAGE_TYPE_PURE" // Damage type
+		"AttackRate"				"1.6"		// Speed of attack.
+		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
+		"AttackRange"				"400"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/units/heroes/hero_morphling/morphling_base_attack.vpcf"			// Particle system model for projectile.
+		"ProjectileSpeed"			"1000"			// Speed of projectile.
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"		// Experience earn.
+		"BountyGoldMin"				"0"			// Gold earned min.
+		"BountyGoldMax"				"0"			// Gold earned max.
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"75"
+		"HealthBarOffset"			"235"
+		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"			// Type of locomotion - ground, air
+		"MovementSpeed"				"350"		// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"		// Base health.
+		"StatusHealthRegen"			"1"			// Health regeneration rate.
+		"StatusMana"				"0"		// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		//"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		//"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_MAGIC"
+		//"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_SOFT"
+		//"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1400"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1400"		// Range of vision at night time.
+
+		// Creature Data
+		//----------------------------------------------------------------------------------------------------------------------
+		"AttachWearables"
+			{
+				"Wearable1"
+				{
+					"ItemDef"			"336"		
+				}
+				"Wearable2"
+				{
+					"ItemDef"			"353"		
+				}
+				"Wearable3"
+				{
+					"ItemDef"			"354"		
+				}
+				"Wearable4"
+				{
+					"ItemDef"			"355"		
+				}
+				"Wearable5"
+				{
+					"ItemDef"			"356"		
+				}
+			}
+		
+	}

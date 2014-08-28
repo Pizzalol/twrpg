@@ -1,0 +1,61 @@
+// Earth Elemental toggle ability
+
+	"elementalist_earth_elemental_toggle_ability"
+	{
+		// General
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"invoker_exort"
+		"MaxLevel"						"1"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"10"
+
+		"OnToggleOn"
+		{
+			"ApplyModifier"
+			{
+				"Target"	"CASTER"
+				"ModifierName"	"modifier_stomptest"
+			}
+		}
+
+		"OnToggleOff"
+		{
+			"RemoveModifier"
+			{
+				"Target"	"CASTER"
+				"ModifierName"	"modifier_stomptest"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_stomptest"
+			{
+				"IsBuff"	"1"
+				"ThinkInterval"	"1.0"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"summon_abilities.lua"
+						"Function"		"StompInterval"
+					}
+				}
+			}
+		}
+	}

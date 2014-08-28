@@ -1,0 +1,33 @@
+"elementalist_summon_fire_elemental"
+	{
+		// General
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"		"ABILITY_DATADRIVEN"
+		"AbilityTextureName"	"invoker_exort"
+		
+		// Casting
+		"AbilityCastRange"		"1000"
+		"AbilityCastPoint"		"0.0"
+
+		// Time
+		"AbilityCooldown"		"5.0"
+
+		// Cost
+		"AbilityManaCost" 		"25"
+
+		"Duration"				"120.0"
+
+		// SpellStart
+		OnSpellStart
+		{
+			"RunScript"
+			{
+				"Target"			"POINT"
+				"Duration"			"120.0"
+				"ScriptFile"		"summons.lua"
+				"Function"			"SummonFireElemental"
+			}
+		}
+
+		// Special
+	}

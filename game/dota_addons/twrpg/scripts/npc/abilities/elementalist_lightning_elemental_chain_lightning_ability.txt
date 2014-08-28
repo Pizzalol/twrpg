@@ -1,0 +1,43 @@
+"elementalist_lightning_elemental_chain_lightning_ability"
+{
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"BaseClass"						"ability_datadriven"
+	"AbilityTextureName"			"zuus_arc_lightning"
+	"MaxLevel"						"1"
+
+	"Modifiers"
+	{
+		"elementalist_lightning_elemental_chain_lightning_modifier"
+		{
+			"IsHidden"	"1"
+			"Passive"	"1"
+
+			"OnAttackLanded"
+			{
+				"RunScript"
+				{
+					"Target"	"TARGET"
+					"ScriptFile"	"summon_abilities.lua"
+					"Function"		"ChainLightning"
+				}
+				"ApplyModifier"
+				{
+					"Target" 			"TARGET"
+					"ModifierName"		"elementalist_lightning_elemental_chain_lightning_magicresist_modifier"
+				}
+			}
+		}
+
+		"elementalist_lightning_elemental_chain_lightning_magicresist_modifier"
+		{
+			"IsHidden"	"0"
+			"IsDebuff"	"1"
+			"Duration"	"4"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"-20"
+			}
+		}
+	}
+}

@@ -1,0 +1,24 @@
+"elementalist_shadow_elemental_abyss_dash_ability"
+{
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+	"BaseClass"						"ability_datadriven"
+	"AbilityTextureName"			"zuus_arc_lightning"
+	"MaxLevel"						"1"
+	"AOERadius"						"300"
+
+	"AbilityManaCost"				"0"
+	"AbilityCastRange"				"600"
+	"AbilityCastPoint"				"0.1"
+	"AbilityCooldown"				"5.0"
+
+	"OnSpellStart"
+	{
+		"RunScript"
+		{
+			"Target"		"POINT"
+			"ScriptFile"	"summon_abilities.lua"
+			"Function"		"AbyssDash"
+		}
+	}
+	
+}

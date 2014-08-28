@@ -1,0 +1,81 @@
+"elementalist_earth_elemental_souloftheforest_ability"
+{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "invoker_quas"
+
+		"precache"
+		{
+			"particle_folder"				"particles/test_particle"
+			"soundfile"					"soundevents/game_sounds/ability_reflect_damage.vsndevts"
+		}
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+
+		
+		
+		
+
+		"Modifiers"
+		{
+			"modifier_souloftheforest"
+			{
+				"IsHidden"				"0"
+				"Passive"				"1"
+				
+				"Aura"					"modifier_souloftheforest_protection"
+				"Aura_Radius"			"500"
+				"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
+				"Aura_ApplyToCaster"		"0"
+			}
+
+			"modifier_souloftheforest_protection"
+			{
+				"IsHidden"		"0"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"	"-15"
+				}
+			}
+
+			"modifier_souloftheforest_magicprotection"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"OnTakeDamage"
+				{
+					"Random"
+					{
+						"Chance" "100.00"
+						//"PseudoRandom"	"DOTA_PSEUDO_RANDOM_JUGG_CRIT"
+						"OnSuccess"
+						{
+							"RunScript"
+							{
+								"Caster"			"CASTER"
+								"ScriptFile"		"summon_abilities.lua"
+								"Function"			"SoulOfTheForestHeal"
+							}					
+						}
+
+						"OnFailure"
+						{
+							
+						}
+					}
+				}
+
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_INCOMING_SPELL_DAMAGE_CONSTANT"	"-70"
+				}
+			}			
+		}		
+}

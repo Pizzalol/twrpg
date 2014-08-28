@@ -1,0 +1,28 @@
+"elementalist_lightning_elemental_thunder_strike_ability"
+{
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"BaseClass"						"ability_datadriven"
+	"AbilityTextureName"			"zuus_lightning_bolt"
+	"MaxLevel"						"1"
+
+	
+
+	"Modifiers"
+	{
+		"elementalist_lightning_elemental_thunder_strike_modifier"
+		{
+			"IsHidden"	"1"
+			"Passive"	"1"
+
+			"OnAttackLanded"
+			{
+				"RunScript"
+				{
+					"Target"	"TARGET"
+					"ScriptFile"	"summon_abilities.lua"
+					"Function"		"ThunderStrike"
+				}
+			}
+		}
+	}
+}

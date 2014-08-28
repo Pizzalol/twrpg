@@ -1,0 +1,15 @@
+"elementalist_fire_elemental_blazing_haste_explosion_ability"
+{
+	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
+	"BaseClass"			"ability_datadriven"
+	"MaxLevel"			"1"
+
+	"OnOwnerDied"
+	{
+		"RunScript"
+		{
+			"ScriptFile"	"summon_abilities.lua"
+			"Function"		"BlazingHasteExplosion"
+		}
+	}
+}
