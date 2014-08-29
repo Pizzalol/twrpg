@@ -278,7 +278,7 @@ function ChainLightning( keys )
 	end
 end
 
---[[Massive damage sinle target spell which ministuns on impact
+--[[Massive damage single target spell which ministuns on impact
 	It is called once every 8th attack, keeping count of the attacks using lightningCount
 	and reseting the counter once it reaches 8 attacks]]
 function ThunderStrike(keys)

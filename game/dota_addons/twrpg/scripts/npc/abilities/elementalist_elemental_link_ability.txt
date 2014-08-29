@@ -1,0 +1,52 @@
+"elementalist_elemental_link_ability"
+{
+	// General
+	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+	"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_ALL"
+	"BaseClass"		"ABILITY_DATADRIVEN"
+	"AbilityTextureName"	"invoker_invoke"
+	
+	// Casting
+	"AbilityCastRange"		"600"
+	"AbilityCastPoint"		"0.0"
+
+	// Time
+	"AbilityCooldown"		"5.0"
+
+	// Cost
+	"AbilityManaCost" 		"0"
+
+	
+
+	// SpellStart
+	OnSpellStart
+	{
+		"ApplyModifier"
+		{
+			"Target"		"CASTER"
+			"ModifierName"	"modifier_elemental_link_caster"
+		}
+		"ApplyModifier"
+		{
+			"Target"		"TARGET"
+			"ModifierName"	"modifier_elemental_link_target"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_elemental_link_caster"
+		{
+			"Duration"	"60"
+			"IsBuff"	"1"
+		}
+
+		"modifier_elemental_link_target"
+		{
+			"Duration"	"60"
+			"IsBuff"	"1"
+		}
+	}
+		// Special
+}

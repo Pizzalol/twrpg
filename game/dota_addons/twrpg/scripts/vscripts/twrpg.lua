@@ -95,7 +95,7 @@ function TWRPGGameMode:CaptureGameMode()
 		--GameMode:SetCustomHeroMaxLevel( 410 )
 		GameMode:SetCustomXPRequiredToReachNextLevel( XP_PER_LEVEL_TABLE )
 		-- Chage the minimap icon size
-		GameRules:SetHeroMinimapIconSize( 300 )
+		GameRules:SetHeroMinimapIconScale( 2 )
 		--print( '[BAREBONES] Beginning Think' )
 		--GameMode:SetContextThink("BarebonesThink", Dynamic_Wrap( TWRPGGameMode, 'Think' ), 0.1 )
 		--GameRules:GetGameModeEntity():SetThink( "Think", self, "GlobalThink", 2 )
