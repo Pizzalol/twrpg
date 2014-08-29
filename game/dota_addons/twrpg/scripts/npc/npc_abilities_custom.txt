@@ -391,13 +391,24 @@
 			"modifier_elemental_link_caster"
 			{
 				"Duration"	"60"
-				"IsBuff"	"1"
+				"IsBuff"	"1"			
 			}
 	
 			"modifier_elemental_link_target"
 			{
 				"Duration"	"60"
 				"IsBuff"	"1"
+				"ThinkInterval"	"1.0"
+	
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"Target"	"TARGET"
+						"ScriptFile"	"hero_abilities.lua"
+						"Function"		"ElementalLink"
+					}
+				}
 			}
 		}
 			// Special
