@@ -23,11 +23,11 @@
 			// Abilities
 			//----------------------------------------------------------------
 			
-			"AbilityLayout"				"5"
+			"AbilityLayout"				"4"
 			"Ability1"					"elementalist_earth_elemental_taunt_ability"			// Ability 1.
 			"Ability2"					"elementalist_earth_elemental_toggle_ability"			// Ability 2.
 			"Ability3"					""			// Ability 3.
-			"Ability4"					"elementalist_earth_elemental_souloftheforest_ability"			// Ability 4.
+			"Ability4"					""			// Ability 4.
 			"Ability5"					"elementalist_summon_duration"			// Ability 5.
 			"Ability6"					""			// Ability 6 - Extra.
 			"Ability7"					""			// Ability 7 - Extra.
@@ -230,7 +230,7 @@
 			
 			"Ability1"					"elementalist_lightning_elemental_chain_lightning_ability"			// Ability 1.
 			"Ability2"					"elementalist_lightning_elemental_thunder_strike_ability"			// Ability 2.
-			"Ability3"					"elementalist_lightning_elemental_electric_aura_ability"			// Ability 3.
+			"Ability3"					""			// Ability 3.
 			"Ability4"					""			// Ability 4.
 			"Ability5"					""			// Ability 5.
 			"Ability6"					""			// Ability 6 - Extra.
@@ -438,7 +438,7 @@
 			"Ability1"					"elementalist_water_elemental_slow_ability"			// Ability 1.
 			"Ability2"					"elementalist_water_elemental_purification_ability"			// Ability 2.
 			"Ability3"					"elementalist_water_elemental_chainheal_ability"			// Ability 3.
-			"Ability4"					"elementalist_water_elemental_water_blessing_ability"			// Ability 4.
+			"Ability4"					""			// Ability 4.
 			"Ability5"					""			// Ability 5.
 			"Ability6"					""			// Ability 6 - Extra.
 			"Ability7"					""			// Ability 7 - Extra.

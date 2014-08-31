@@ -41,5 +41,20 @@ function ElementalLinkAddAbility( keys )
 		target:AddAbility("elementalist_fire_elemental_blazing_haste_explosion_ability")
 		local blazingHasteExplosion = target:FindAbilityByName("elementalist_fire_elemental_blazing_haste_explosion_ability")
 		blazingHasteExplosion:SetLevel(1)
+
+	elseif target:GetUnitName() =="elementalist_lightning_elemental" then
+		target:AddAbility("elementalist_lightning_elemental_electric_aura_ability")
+		local electricAura = target:FindAbilityByName("elementalist_lightning_elemental_electric_aura_ability")
+		electricAura:SetLevel(1)
+
+	elseif target:GetUnitName() == "elementalist_water_elemental" then
+		target:AddAbility("elementalist_water_elemental_water_blessing_ability")
+		local waterBlessing = target:FindAbilityByName("elementalist_water_elemental_water_blessing_ability")
+		waterBlessing:SetLevel(1)
+		
+	elseif target:GetUnitName() == "elementalist_earth_elemental" then
+		target:AddAbility("elementalist_earth_elemental_souloftheforest_ability")
+		local soulOfTheForest = target:FindAbilityByName("elementalist_earth_elemental_souloftheforest_ability")
+		soulOfTheForest:SetLevel(1)
 	end
 end
