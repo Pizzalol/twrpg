@@ -13,13 +13,4 @@
 			"Function"		"BlazingHasteExplosion"
 		}
 	}
-
-	"Modifiers"
-	{
-		"modifier_test"
-		{
-			"Passive"	"1"
-			"IsBuff"	"1"
-		}
-	}
 }

@@ -1,0 +1,18 @@
+"elementalist_elemental_link_unit_death"
+{
+	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
+	"BaseClass"			"ability_datadriven"
+	"MaxLevel"			"1"
+
+	"OnOwnerDied"
+	{
+		"RunScript"
+		{
+			"Target"		"CASTER"
+			"ScriptFile"	"hero_abilities.lua"
+			"Function"		"ElementalLinkUnitDeath"
+		}
+	}
+
+	
+}

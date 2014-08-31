@@ -34,7 +34,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"BaseClass"						"dark_seer_vacuum"
-		"AbilityTextureName"			"zuus_arc_lightning"
+		"AbilityTextureName"			"dark_seer_vacuum"
 		"MaxLevel"						"1"
 		"AOERadius"						"500"
 	
@@ -374,6 +374,11 @@
 		// SpellStart
 		OnSpellStart
 		{
+			"RunScript"
+			{
+				"ScriptFile"	"hero_abilities.lua"
+				"Function"		"ElementalLinkCasterDeath"
+			}
 			"ApplyModifier"
 			{
 				"Target"		"CASTER"
@@ -436,6 +441,50 @@
 	//End of file elementalist_elemental_link_ability.txt
 
 
+	//Start of file elementalist_elemental_link_caster_death.txt
+	"elementalist_elemental_link_caster_death"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"			"ability_datadriven"
+		"MaxLevel"			"1"
+	
+		"OnOwnerDied"
+		{
+			"RunScript"
+			{
+				"Target"		"CASTER"
+				"ScriptFile"	"hero_abilities.lua"
+				"Function"		"ElementalLinkCasterDeath"
+			}
+		}
+	
+		
+	}
+	//End of file elementalist_elemental_link_caster_death.txt
+
+
+	//Start of file elementalist_elemental_link_unit_death.txt
+	"elementalist_elemental_link_unit_death"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"			"ability_datadriven"
+		"MaxLevel"			"1"
+	
+		"OnOwnerDied"
+		{
+			"RunScript"
+			{
+				"Target"		"CASTER"
+				"ScriptFile"	"hero_abilities.lua"
+				"Function"		"ElementalLinkUnitDeath"
+			}
+		}
+	
+		
+	}
+	//End of file elementalist_elemental_link_unit_death.txt
+
+
 	//Start of file elementalist_fire_elemental_blazing_haste_ability.txt
 	"elementalist_fire_elemental_blazing_haste_ability"
 	{
@@ -480,15 +529,6 @@
 			{
 				"ScriptFile"	"summon_abilities.lua"
 				"Function"		"BlazingHasteExplosion"
-			}
-		}
-	
-		"Modifiers"
-		{
-			"modifier_test"
-			{
-				"Passive"	"1"
-				"IsBuff"	"1"
 			}
 		}
 	}

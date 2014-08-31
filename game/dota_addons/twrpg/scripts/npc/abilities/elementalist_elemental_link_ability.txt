@@ -22,6 +22,11 @@
 	// SpellStart
 	OnSpellStart
 	{
+		"RunScript"
+		{
+			"ScriptFile"	"hero_abilities.lua"
+			"Function"		"ElementalLinkCasterDeath"
+		}
 		"ApplyModifier"
 		{
 			"Target"		"CASTER"

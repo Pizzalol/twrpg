@@ -29,7 +29,7 @@ function SummonFireElemental(keys)
 		end
 	end
 
-	local fireelemental = CreateUnitByName("elementalist_fire_elemental", target, true, player, caster, team) --[[Returns:handle
+	local fireelemental = CreateUnitByName("elementalist_fire_elemental", target, true, caster, caster, team) --[[Returns:handle
 	Creates a DOTA unit by its dota_npc_units.txt name ( szUnitName, vLocation, bFindClearSpace, hNPCOwner, hUnitOwner, iTeamNumber )
 	]]
 	fireelemental:SetControllableByPlayer(caster:GetPlayerID(), true) --[[Returns:void
