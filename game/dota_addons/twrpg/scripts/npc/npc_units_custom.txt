@@ -141,9 +141,9 @@
 			"Ability1"					"elementalist_fire_elemental_damage_ability"			// Ability 1.
 			"Ability2"					"elementalist_fire_elemental_immolation_aura_ability"			// Ability 2.
 			"Ability3"					"elementalist_fire_elemental_magma_explosion_ability"			// Ability 3.
-			"Ability4"					"elementalist_fire_elemental_blazing_haste_ability"			// Ability 4.
+			"Ability4"					""			// Ability 4.
 			"Ability5"					"elementalist_summon_duration"			// Ability 5.
-			"Ability6"					"elementalist_fire_elemental_blazing_haste_explosion_ability"			// Ability 6 - Extra.
+			"Ability6"					""			// Ability 6 - Extra.
 			"Ability7"					""			// Ability 7 - Extra.
 			"Ability8"					""			// Ability 8 - Extra.
 	

@@ -32,6 +32,11 @@
 			"Target"		"TARGET"
 			"ModifierName"	"modifier_elemental_link_target"
 		}
+		"ApplyModifier"
+		{
+			"Target"		"TARGET"
+			"ModifierName"	"modifier_elemental_link_ability"
+		}
 	}
 
 	"Modifiers"
@@ -55,6 +60,21 @@
 					"Target"	"TARGET"
 					"ScriptFile"	"hero_abilities.lua"
 					"Function"		"ElementalLink"
+				}
+			}
+		}
+		"modifier_elemental_link_ability"
+		{
+			"IsBuff"	"1"
+			"IsHidden"	"1"
+
+			"OnCreated"
+			{
+				"RunScript"
+				{
+					"Target"	"TARGET"
+					"ScriptFile"	"hero_abilities.lua"
+					"Function"		"ElementalLinkAddAbility"
 				}
 			}
 		}

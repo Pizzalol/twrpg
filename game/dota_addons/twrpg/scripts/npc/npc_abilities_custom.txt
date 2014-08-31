@@ -384,6 +384,11 @@
 				"Target"		"TARGET"
 				"ModifierName"	"modifier_elemental_link_target"
 			}
+			"ApplyModifier"
+			{
+				"Target"		"TARGET"
+				"ModifierName"	"modifier_elemental_link_ability"
+			}
 		}
 	
 		"Modifiers"
@@ -407,6 +412,21 @@
 						"Target"	"TARGET"
 						"ScriptFile"	"hero_abilities.lua"
 						"Function"		"ElementalLink"
+					}
+				}
+			}
+			"modifier_elemental_link_ability"
+			{
+				"IsBuff"	"1"
+				"IsHidden"	"1"
+	
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"Target"	"TARGET"
+						"ScriptFile"	"hero_abilities.lua"
+						"Function"		"ElementalLinkAddAbility"
 					}
 				}
 			}
@@ -452,6 +472,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass"			"ability_datadriven"
 		"MaxLevel"			"1"
+		"AbilityTextureName"	"invoker_quas"
 	
 		"OnOwnerDied"
 		{
@@ -459,6 +480,15 @@
 			{
 				"ScriptFile"	"summon_abilities.lua"
 				"Function"		"BlazingHasteExplosion"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_test"
+			{
+				"Passive"	"1"
+				"IsBuff"	"1"
 			}
 		}
 	}

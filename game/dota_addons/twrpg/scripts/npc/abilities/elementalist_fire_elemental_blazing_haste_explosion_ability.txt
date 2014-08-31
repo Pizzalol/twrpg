@@ -3,6 +3,7 @@
 	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
 	"BaseClass"			"ability_datadriven"
 	"MaxLevel"			"1"
+	"AbilityTextureName"	"invoker_quas"
 
 	"OnOwnerDied"
 	{
@@ -10,6 +11,15 @@
 		{
 			"ScriptFile"	"summon_abilities.lua"
 			"Function"		"BlazingHasteExplosion"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_test"
+		{
+			"Passive"	"1"
+			"IsBuff"	"1"
 		}
 	}
 }
