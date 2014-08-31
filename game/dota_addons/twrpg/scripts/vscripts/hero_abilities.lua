@@ -112,6 +112,7 @@ function ElementalLinkCasterDeath( keys )
 	for i,v in ipairs(summonCheck) do
 		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
 			v:RemoveModifierByName("modifier_elemental_link_target")
+			v:RemoveModifierByName("modifier_elemental_link_ability")
 			v:RemoveAbility("elementalist_fire_elemental_blazing_haste_ability")
 			v:RemoveAbility("elementalist_fire_elemental_blazing_haste_explosion_ability")
 			v:RemoveAbility("elementalist_elemental_link_unit_death")
@@ -128,6 +129,7 @@ function ElementalLinkCasterDeath( keys )
 	for i,v in ipairs(summonCheck) do
 		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
 			v:RemoveModifierByName("modifier_elemental_link_target")
+			v:RemoveModifierByName("modifier_elemental_link_ability")
 			v:RemoveAbility("elementalist_earth_elemental_souloftheforest_ability")
 			v:RemoveAbility("elementalist_elemental_link_unit_death")
 			return
@@ -141,6 +143,7 @@ function ElementalLinkCasterDeath( keys )
 	for i,v in ipairs(summonCheck) do
 		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
 			v:RemoveModifierByName("modifier_elemental_link_target")
+			v:RemoveModifierByName("modifier_elemental_link_ability")
 			v:RemoveAbility("elementalist_lightning_elemental_electric_aura_ability")
 			v:RemoveAbility("elementalist_elemental_link_unit_death")
 			return
@@ -155,6 +158,7 @@ function ElementalLinkCasterDeath( keys )
 	for i,v in ipairs(summonCheck) do
 		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
 			v:RemoveModifierByName("modifier_elemental_link_target")
+			v:RemoveModifierByName("modifier_elemental_link_ability")
 			v:RemoveAbility("elementalist_water_elemental_water_blessing_ability")
 			v:RemoveAbility("elementalist_elemental_link_unit_death")
 			print("Link recast check 5")
