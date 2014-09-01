@@ -49,7 +49,16 @@
 		"modifier_elemental_link_caster"
 		{
 			"Duration"	"60"
-			"IsBuff"	"1"			
+			"IsBuff"	"1"	
+
+			"OnTakeDamage"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"hero_abilities.lua"
+					"Function"		"OnCasterDamaged"
+				}
+			}		
 		}
 
 		"modifier_elemental_link_target"

@@ -1,4 +1,6 @@
 
+
+
 --[[A link spell between 2 targets
 	Gets the location of the two targets and compares the distance between them
 	If the distance is greater than the link breaking point then it breaks the link]]
@@ -167,4 +169,33 @@ function ElementalLinkCasterDeath( keys )
 	end
 	print("Link recast check 6")
 
+end
+
+function OnCasterHeal( keys )
+	local caster = keys.caster
+
+	HealthTemp = HealthTemp or {}
+	HealthTemp[caster] = HealthTemp[caster] or 0
+
+	HealthTemp[caster] = caster:GetHealth() 
+
+	print(HealthTemp[caster])
+end
+
+function OnCasterDamaged( keys )
+	local caster = keys.caster
+
+	HealthTemp = HealthTemp or {}
+	HealthTemp[caster] = HealthTemp[caster] or 0
+	local damage = 0
+
+	if HealthTemp[caster] == 0 then
+		damage = caster:GetMaxHealth() - caster:GetHealth() 
+	else
+		damage = HealthTemp[caster] - caster:GetHealth() 
+	end
+
+	HealthTemp[caster] = caster:GetHealth() 
+
+	print("Damage done to the caster = " .. tostring(damage))
 end

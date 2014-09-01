@@ -36,6 +36,13 @@ function TWRPGGameMode:new( o )
 	return o
 end
 
+--[[function TWRPGGameMode:OnEntityHurt(keys)
+	print("[BAREBONES] Entity Hurt")
+	DeepPrintTable(keys)
+	local entCause = EntIndexToHScript(keys.entindex_attacker)
+	local entVictim = EntIndexToHScript(keys.entindex_killed)
+end]]
+
 function TWRPGGameMode:InitGameMode()
 	TWRPGGameMode = self
 	print('[twrpg] Starting to load twrpg gamemode...')
@@ -49,6 +56,9 @@ function TWRPGGameMode:InitGameMode()
 	GameRules:SetTreeRegrowTime( 60.0 )
 	GameRules:SetUseCustomHeroXPValues ( true )
 	GameRules:SetGoldPerTick(0)
+
+	--ListenToGameEvent('entity_hurt', Dynamic_Wrap(TWRPGGameMode, 'OnEntityHurt'), self)
+
 	print('[twrpg] Rules set')
 end
 
