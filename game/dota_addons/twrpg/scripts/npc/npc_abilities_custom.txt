@@ -410,6 +410,20 @@
 						"ScriptFile"	"hero_abilities.lua"
 						"Function"		"OnCasterDamaged"
 					}
+				}
+	
+				"OnHealReceived"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"hero_abilities.lua"
+						"Function"		"OnCasterHealed"
+					}
+				}
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"	"-50"
 				}		
 			}
 	
