@@ -10,8 +10,6 @@ function ElementalLink( keys )
 	local target = keys.target
 	local targetloc = target:GetAbsOrigin()
 
-	--print(casterloc)
-	--print(targetloc)
 	-- Distance calculation
 	local targetdistance = casterloc - targetloc
 	local distance = targetdistance:Length2D()
@@ -39,6 +37,7 @@ function ElementalLink( keys )
 		end
 
 		target:RemoveAbility("elementalist_elemental_link_unit_death")
+		ParticleManager:DestroyParticle(ElementalLinkParticle, true)
 	end
 end
 
@@ -101,6 +100,7 @@ end
 function ElementalLinkUnitDeath( keys )
 	local caster = keys.caster
 
+	ParticleManager:DestroyParticle(ElementalLinkParticle, true)
 	caster:RemoveModifierByName("modifier_elemental_link_target")
 	caster:RemoveAbility("elementalist_fire_elemental_blazing_haste_ability")
 	caster:RemoveAbility("elementalist_fire_elemental_blazing_haste_explosion_ability")
@@ -114,17 +114,19 @@ function ElementalLinkUnitDeath( keys )
 	caster:RemoveAbility("elementalist_elemental_link_unit_death")
 end
 
---[[This function is used for recasting the link and in case the caster of the link dies
+--[[This function is used when the caster dies while the link is active
 	It searches for a unit owned by the caster and checks if it has the elemental modifier
 	part of the elemental link, if it does then remove abilities from it including the modifier]]
 function ElementalLinkCasterDeath( keys )
 	local caster = keys.caster
 
-	local summonCheck = Entities:FindAllByModel("models/heroes/phoenix/phoenix_bird.vmdl") --[[Returns:table
-	Find entities by model name.
-	]]
-	print(summonCheck)
-	print("Link recast check 1")
+	-- Destroys the link particle
+	ParticleManager:DestroyParticle(ElementalLinkParticle, true)
+	
+	-- Finds the linked summon
+	local summonCheck = Entities:FindAllByModel("models/heroes/phoenix/phoenix_bird.vmdl") 
+	--print(summonCheck)
+	--print("Link recast check 1")
 	for i,v in ipairs(summonCheck) do
 		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
 			v:RemoveModifierByName("modifier_elemental_link_target")
@@ -132,16 +134,14 @@ function ElementalLinkCasterDeath( keys )
 			v:RemoveAbility("elementalist_fire_elemental_blazing_haste_ability")
 			v:RemoveAbility("elementalist_fire_elemental_blazing_haste_explosion_ability")
 			v:RemoveAbility("elementalist_elemental_link_unit_death")
-			print("Link recast check 2")
+			--print("Link recast check 2")
 			return
 		end
 	end
 
-	local summonCheck = Entities:FindAllByModel("models/heroes/treant_protector/treant_protector.vmdl") --[[Returns:table
-	Find entities by model name.
-	]]
-	print(summonCheck)
-	print("Link recast check 3")
+	local summonCheck = Entities:FindAllByModel("models/heroes/treant_protector/treant_protector.vmdl") 
+	--print(summonCheck)
+	--print("Link recast check 3")
 	for i,v in ipairs(summonCheck) do
 		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
 			v:RemoveModifierByName("modifier_elemental_link_target")
@@ -152,10 +152,8 @@ function ElementalLinkCasterDeath( keys )
 		end
 	end
 
-	local summonCheck = Entities:FindAllByModel("models/heroes/razor/razor.vmdl") --[[Returns:table
-	Find entities by model name.
-	]]
-	print(summonCheck)
+	local summonCheck = Entities:FindAllByModel("models/heroes/razor/razor.vmdl") 
+	--print(summonCheck)
 	for i,v in ipairs(summonCheck) do
 		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
 			v:RemoveModifierByName("modifier_elemental_link_target")
@@ -166,22 +164,97 @@ function ElementalLinkCasterDeath( keys )
 		end
 	end
 
-	local summonCheck = Entities:FindAllByModel("models/heroes/morphling/morphling.vmdl") --[[Returns:table
-	Find entities by model name.
-	]]
-	print(summonCheck)
-	print("Link recast check 4")
+	local summonCheck = Entities:FindAllByModel("models/heroes/morphling/morphling.vmdl") 
+	--print(summonCheck)
+	--print("Link recast check 4")
 	for i,v in ipairs(summonCheck) do
 		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
 			v:RemoveModifierByName("modifier_elemental_link_target")
 			v:RemoveModifierByName("modifier_elemental_link_ability")
 			v:RemoveAbility("elementalist_water_elemental_water_blessing_ability")
 			v:RemoveAbility("elementalist_elemental_link_unit_death")
-			print("Link recast check 5")
+			--print("Link recast check 5")
 			return
 		end
 	end
-	print("Link recast check 6")
+	--print("Link recast check 6")
+
+end
+
+--[[This function is called on every cast of the ability
+	It sets up the link along with the particle
+	If an existing link exists then it kills it]]
+function ElementalLinkCasted( keys )
+	local caster = keys.caster
+	local target = keys.target
+	casterloc = caster:GetAbsOrigin()
+	targetloc = target:GetAbsOrigin() 
+
+	-- If theres an existing particle link then kill it
+	if ElementalLinkParticle ~= nil then
+		ParticleManager:DestroyParticle(ElementalLinkParticle, true)
+	end
+
+	-- Link particle creation
+	ElementalLinkParticle = ParticleManager:CreateParticle("particles/units/heroes/hero_wisp/wisp_tether.vpcf", PATTACH_CUSTOMORIGIN, caster)
+	ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 0, caster, 5, "attach_hitloc", casterloc, false)
+	ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 1, target, 5, "attach_mouth", targetloc, false)
+
+	-- Tries to find if a summon is linked
+	local summonCheck = Entities:FindAllByModel("models/heroes/phoenix/phoenix_bird.vmdl") 
+	--print(summonCheck)
+	--print("Link recast check 1")
+	for i,v in ipairs(summonCheck) do
+		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
+			v:RemoveModifierByName("modifier_elemental_link_target")
+			v:RemoveModifierByName("modifier_elemental_link_ability")
+			v:RemoveAbility("elementalist_fire_elemental_blazing_haste_ability")
+			v:RemoveAbility("elementalist_fire_elemental_blazing_haste_explosion_ability")
+			v:RemoveAbility("elementalist_elemental_link_unit_death")
+			--print("Link recast check 2")
+			return
+		end
+	end
+
+	local summonCheck = Entities:FindAllByModel("models/heroes/treant_protector/treant_protector.vmdl") 
+	--print(summonCheck)
+	--print("Link recast check 3")
+	for i,v in ipairs(summonCheck) do
+		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
+			v:RemoveModifierByName("modifier_elemental_link_target")
+			v:RemoveModifierByName("modifier_elemental_link_ability")
+			v:RemoveAbility("elementalist_earth_elemental_souloftheforest_ability")
+			v:RemoveAbility("elementalist_elemental_link_unit_death")
+			return
+		end
+	end
+
+	local summonCheck = Entities:FindAllByModel("models/heroes/razor/razor.vmdl") 
+	--print(summonCheck)
+	for i,v in ipairs(summonCheck) do
+		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
+			v:RemoveModifierByName("modifier_elemental_link_target")
+			v:RemoveModifierByName("modifier_elemental_link_ability")
+			v:RemoveAbility("elementalist_lightning_elemental_electric_aura_ability")
+			v:RemoveAbility("elementalist_elemental_link_unit_death")
+			return
+		end
+	end
+
+	local summonCheck = Entities:FindAllByModel("models/heroes/morphling/morphling.vmdl") 
+	--print(summonCheck)
+	--print("Link recast check 4")
+	for i,v in ipairs(summonCheck) do
+		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
+			v:RemoveModifierByName("modifier_elemental_link_target")
+			v:RemoveModifierByName("modifier_elemental_link_ability")
+			v:RemoveAbility("elementalist_water_elemental_water_blessing_ability")
+			v:RemoveAbility("elementalist_elemental_link_unit_death")
+			--print("Link recast check 5")
+			return
+		end
+	end
+
 
 end
 
@@ -195,7 +268,7 @@ function OnCasterHealed( keys )
 
 	HealthTemp[caster] = caster:GetHealth() 
 
-	print(HealthTemp[caster])
+	--print(HealthTemp[caster])
 end
 
 --[[This function is run whenever the caster of the Elemental Link is damaged

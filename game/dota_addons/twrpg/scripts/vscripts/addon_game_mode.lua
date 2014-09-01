@@ -22,8 +22,9 @@ PrecacheResource( "particle_folder", "particles/folder", context )
 	PrecacheResource( "particle_folder", "particles/frostivus_gameplay", context )
 	PrecacheUnitByNameSync('npc_precache_everything', context)
 	--Testing precaching
-	PrecacheResource("particle_folder", "particles/units/heroes/hero_morphling/", context)
+	PrecacheResource("particle_folder", "particles/twrpg_gameplay/hero_morphling/", context)
 	PrecacheResource("model_folder", "models/heroes/morphling/", context)
+	PrecacheResource("particle_folder", "particles/twrpg_gameplay", context)
 end
 -- Create the game mode when we activate
 function Activate()

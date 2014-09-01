@@ -25,7 +25,7 @@
 	"npc_dota_hero_kunkka"			"0"
 	"npc_dota_hero_elder_titan"		"0"
 	"npc_dota_hero_storm_spirit"		"0"
-	"npc_dota_hero_queenofpain"		"0"
+	"npc_dota_hero_queenofpain"		"1"
 	"npc_dota_hero_enchantress"	"1"
 	"npc_dota_hero_templar_assassin"	"0"
 }

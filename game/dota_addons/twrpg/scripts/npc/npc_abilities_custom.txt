@@ -368,6 +368,10 @@
 	
 		// Cost
 		"AbilityManaCost" 		"0"
+		"Precache"
+		{
+			"particle_folder"	"particles/units/heroes/hero_wisp"
+		}
 	
 		
 	
@@ -377,7 +381,7 @@
 			"RunScript"
 			{
 				"ScriptFile"	"hero_abilities.lua"
-				"Function"		"ElementalLinkCasterDeath"
+				"Function"		"ElementalLinkCasted"
 			}
 			"ApplyModifier"
 			{
@@ -394,6 +398,8 @@
 				"Target"		"TARGET"
 				"ModifierName"	"modifier_elemental_link_ability"
 			}
+			
+			
 		}
 	
 		"Modifiers"
