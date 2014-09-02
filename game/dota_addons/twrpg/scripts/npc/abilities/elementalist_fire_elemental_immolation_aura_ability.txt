@@ -22,6 +22,11 @@
 		// Cost
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
+		"Precache"
+		{
+			"particle_folder"	"particles/units/heroes/hero_phoenix"
+		}
+
 
 		"OnToggleOn"
 		{

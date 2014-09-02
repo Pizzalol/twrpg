@@ -140,6 +140,12 @@ function ImmolationAura(keys)
 	local casterloc = caster:GetAbsOrigin()
 	local ownerInt = caster:GetOwner():GetIntellect()
 
+	-- Test particle for Immolation aura
+	local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+	ParticleManager:SetParticleControlEnt(particle, 3, caster, 5, "attach_hitloc", casterloc, false)
+	--ParticleManager:SetParticleControl(particle, 0, casterloc+Vector(1000,0,0))
+	--ParticleManager:SetParticleControl(particle, 3, casterloc+Vector(0,0,50))
+
 	table.attacker = caster
 	table.damage = 50 + ownerInt * 6
 	table.damage_type = DAMAGE_TYPE_MAGICAL
@@ -154,8 +160,8 @@ function ImmolationAura(keys)
 	-- Deal damage to the caster
 	table.victim = caster
 	table.damage_type = DAMAGE_TYPE_MAGICAL
-	--print("immolration aura test")
-	ApplyDamage(table)
+	print("immolration aura test")
+	--ApplyDamage(table)
 end
 
 --[[Suicide ability which deals damage in an area depending on the casters missing health]]
