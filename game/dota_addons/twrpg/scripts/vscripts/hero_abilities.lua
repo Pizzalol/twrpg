@@ -121,7 +121,9 @@ function ElementalLinkCasterDeath( keys )
 	local caster = keys.caster
 
 	-- Destroys the link particle
-	ParticleManager:DestroyParticle(ElementalLinkParticle, true)
+	if ElementalLinkParticle ~= nil then
+		ParticleManager:DestroyParticle(ElementalLinkParticle, true)
+	end
 	
 	-- Finds the linked summon
 	local summonCheck = Entities:FindAllByModel("models/heroes/phoenix/phoenix_bird.vmdl") 

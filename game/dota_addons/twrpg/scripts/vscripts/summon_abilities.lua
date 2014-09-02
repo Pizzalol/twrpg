@@ -241,6 +241,7 @@ function ChainLightning( keys )
 	-- Once it reaches 4 attacks, it starts doing the chain lightning code
 	if lightningCount % 4 == 0 then
 		local caster = keys.caster
+		local casterloc = caster:GetAbsOrigin()
 		local target = keys.target
 		local targetloc = target:GetAbsOrigin() 
 		local hitCount = 0
@@ -248,17 +249,19 @@ function ChainLightning( keys )
 
 		print("lightning 2")
 
-		-- Applies the first chain lightning damage to the original attack target
+		-- Define the table
 		table.attacker = caster
-		table.victim = target
 		table.damage_type = DAMAGE_TYPE_MAGICAL
-		table.damage = 500
-		ApplyDamage(table) --[[Returns:float
-		Pass ''table'' - Inputs: victim, attacker, damage, damage_type, damage_flags, abilityReturn damage done.
-		]]
+		table.damage = 200
+
+		-- Create the particle
+		local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf", PATTACH_CUSTOMORIGIN, caster)
+		ParticleManager:SetParticleControlEnt(particle, 0, caster, 5, "attach_hitloc", casterloc, false)
+		ParticleManager:SetParticleControlEnt(particle, 1, target, 5, "attach_hitloc", targetloc, false)
+		ParticleManager:ReleaseParticleIndex(particle)
 
 		-- Saves all valid targets to which the chain can jump
-		local unittodamage = FindUnitsInRadius(caster:GetTeam(), targetloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false) --[[Returns:table
+		local unittodamage = FindUnitsInRadius(caster:GetTeam(), targetloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, FIND_CLOSEST, false) --[[Returns:table
 		Finds the units in a given radius with the given flags. ( iTeamNumber, vPosition, hCacheUnit, flRadius, iTeamFilter, iTypeFilter, iFlagFilter, iOrder, bCanGrowCache )
 		]]
 
@@ -267,12 +270,23 @@ function ChainLightning( keys )
 			print("lightning 3")
 			-- As long as it hasnt chained to 3 targets already, it will continue
 			-- searching and dealing damage to targets it can find
-			if hitCount < 3 then
+			if hitCount < 4 then
+				-- Changing caster and target for particle chaining
+				caster = target
+				target = v
+				print("Attacking this target " .. tostring(target))
+				casterloc = targetloc
 				targetloc = v:GetAbsOrigin()
 				table.victim = v
 				ApplyDamage(table)
+
+				-- Creating the particle
+				local particlelink = ParticleManager:CreateParticle("particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf", PATTACH_CUSTOMORIGIN, caster)
+				ParticleManager:SetParticleControlEnt(particlelink, 0, caster, 5, "attach_hitloc", casterloc, false)
+				ParticleManager:SetParticleControlEnt(particlelink, 1, target, 5, "attach_hitloc", targetloc, false)
+				ParticleManager:ReleaseParticleIndex(particlelink)
+
 				hitCount = hitCount + 1
-				unittodamage = FindUnitsInRadius(caster:GetTeam(), targetloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 			end
 		end
 	end
@@ -284,6 +298,7 @@ end
 function ThunderStrike(keys)
 	if lightningCount == 8 then
 		local target = keys.target
+		local targetloc = target:GetAbsOrigin()
 		local caster = keys.caster
 		local table = {}
 
@@ -295,10 +310,14 @@ function ThunderStrike(keys)
 		table.damage = 200
 		ApplyDamage(table)
 
+		-- Create the spell particle
+		local lightningBoltParticle = ParticleManager:CreateParticle("particles/units/heroes/hero_zuus/zuus_lightning_bolt.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
+		ParticleManager:SetParticleControl(lightningBoltParticle, 1, targetloc + Vector(0,0,2000))
+		ParticleManager:ReleaseParticleIndex(lightningBoltParticle)
+		
+
 		-- Adds the ministun
-		target:AddNewModifier(caster, nil, "modifier_stunned", {duration = 0.1}) --[[Returns:void
-		No Description Set
-		]]
+		target:AddNewModifier(caster, nil, "modifier_stunned", {duration = 0.1}) 
 
 		-- Resets the attack counter
 		lightningCount = 0

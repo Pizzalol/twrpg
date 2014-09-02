@@ -794,6 +794,10 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"zuus_lightning_bolt"
 		"MaxLevel"						"1"
+		"Precache"
+		{
+			"particle_folder"	"particles/units/heroes/hero_zuus"
+		}
 	
 		
 	
