@@ -97,6 +97,13 @@
 			//-------------------------------------------------------------------------------------------------------------
 			"AbilityManaCost"				"10"
 	
+			"Precache"
+			{
+				"particle_folder"	"particles/units/heroes/hero_sandking"
+				"particle_folder"	"particles/units/heroes/hero_phoenix"
+			}
+	
+	
 			"OnToggleOn"
 			{
 				"ApplyModifier"
@@ -129,8 +136,11 @@
 							"ScriptFile"	"summon_abilities.lua"
 							"Function"		"StompInterval"
 						}
+						
+	
 					}
 				}
+	
 			}
 		}
 	//End of file elementalist_earth_elemental_ground_shake_ability.txt
@@ -629,6 +639,11 @@
 			// Cost
 			//-------------------------------------------------------------------------------------------------------------
 			"AbilityManaCost"				"0"
+			"Precache"
+			{
+				"particle_folder"	"particles/units/heroes/hero_phoenix"
+			}
+	
 	
 			"OnToggleOn"
 			{

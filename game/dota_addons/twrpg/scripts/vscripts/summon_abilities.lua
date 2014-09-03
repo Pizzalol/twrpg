@@ -26,7 +26,7 @@ function StompInterval(keys)
 	--	print(k,v)
 	--end
 
-	table.attacker = keys.caster
+	table.attacker = caster
 	table.damage = 50
 	table.damage_type = DAMAGE_TYPE_MAGICAL 
 
@@ -40,6 +40,13 @@ function StompInterval(keys)
 		caster:Heal(100.0, caster) --[[Returns:void
 		Heal this unit.
 		]]
+		print("Particle pls")
+		local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_sandking/sandking_epicenter_pulse.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+		--ParticleManager:SetParticleControlEnt(particle, 0, caster, 5, "attach_hitloc", casterloc, false)
+		--ParticleManager:SetParticleControlEnt(particle, 1, caster, 5, "attach_hitloc", casterloc+Vector(200,0,0), false)
+		--local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground_hit.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+		ParticleManager:SetParticleControl(particle, 0, casterloc+Vector(500,500,500))
+		ParticleManager:SetParticleControl(particle, 1, casterloc+Vector(300,0,0))
 
 		-- Finds all valid targets around the caster and deals damage to them
 		local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
@@ -48,6 +55,8 @@ function StompInterval(keys)
 			table.victim = v
 			ApplyDamage(table)
 		end
+
+		
 
 	else
 		-- If the caster doesnt have enough mana then it toggles the spell off

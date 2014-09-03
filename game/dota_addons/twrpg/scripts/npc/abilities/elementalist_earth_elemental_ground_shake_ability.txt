@@ -23,6 +23,13 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"10"
 
+		"Precache"
+		{
+			"particle_folder"	"particles/units/heroes/hero_sandking"
+			"particle_folder"	"particles/units/heroes/hero_phoenix"
+		}
+
+
 		"OnToggleOn"
 		{
 			"ApplyModifier"
@@ -55,7 +62,10 @@
 						"ScriptFile"	"summon_abilities.lua"
 						"Function"		"StompInterval"
 					}
+					
+
 				}
 			}
+
 		}
 	}
