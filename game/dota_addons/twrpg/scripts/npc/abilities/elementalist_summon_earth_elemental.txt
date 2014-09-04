@@ -8,6 +8,7 @@
 		// Casting
 		"AbilityCastRange"		"1000"
 		"AbilityCastPoint"		"0.0"
+		"MaxLevel"				"5"
 
 		// Time
 		"AbilityCooldown"		"5.0"
@@ -21,7 +22,8 @@
 			"RunScript"
 			{
 				"Target"			"POINT"
-				"Duration"			"120.0"
+				"HPScale"			"%hpscale"
+				"ModelScale"		"%modelscale"
 				"ScriptFile"		"summons.lua"
 				"Function"			"SummonEarthElemental"
 			}
@@ -30,4 +32,17 @@
 		}
 
 		// Special
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"hpscale"			"50 75 100 200 300"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"modelscale"		"0.2 0.4 0.6 0.8 1.0"
+			}
+		}
 	}

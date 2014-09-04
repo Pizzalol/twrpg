@@ -8,6 +8,7 @@
 		// Casting
 		"AbilityCastRange"		"1000"
 		"AbilityCastPoint"		"0.0"
+		"MaxLevel"				"5"
 
 		// Time
 		"AbilityCooldown"		"5.0"
@@ -18,37 +19,27 @@
 		// SpellStart
 		OnSpellStart
 		{
-			"SpawnUnit"
+			"RunScript"
 			{
-				"UnitName"	"elementalist_lightning_elemental"
-				"UnitCount"	"1"
-				"SpawnRadius"	"10"
-				"Target"	"POINT"
-				"Duration"		"120.0"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"Target"	"TARGET"
-						"ModifierName"	"elementalist_lightning_elemental_nomana"
-					}
-				}
+				"Target"			"POINT"
+				"HPScale"			"%hpscale"
+				"ModelScale"		"%modelscale"
+				"ScriptFile"		"summons.lua"
+				"Function"			"SummonLightningElemental"
 			}
 		}
 
-		// Modifiers
-
-		"Modifiers"
+		"AbilitySpecial"
 		{
-			"elementalist_lightning_elemental_nomana"
+			"01"
 			{
-				"Duration"	"0.1"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"	"-1000"
-				}
+				"var_type"			"FIELD_FLOAT"
+				"hpscale"			"10 20 30 50 100"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"modelscale"		"0.2 0.4 0.6 0.8 1.0"
 			}
 		}
-
-		// Special
 	}

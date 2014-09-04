@@ -8,9 +8,9 @@
 		"AbilityTextureName"			"lich_chain_frost"
 		"MaxLevel"						"1"
 
-		"precache"
+		"Precache"
 		{
-			"particle_folder"				"particles/units/heroes/hero_lich"
+			"particle_folder"				"particles/units/heroes/hero_phoenix"
 		}
 
 		// Modifiers

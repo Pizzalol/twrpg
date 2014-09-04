@@ -4,6 +4,10 @@
 	"BaseClass"						"ability_datadriven"
 	"AbilityTextureName"			"zuus_arc_lightning"
 	"MaxLevel"						"1"
+	"Precache"
+	{
+		"particle_folder"	"particles/units/heroes/hero_zuus"
+	}
 
 	"Modifiers"
 	{
@@ -16,9 +20,11 @@
 			{
 				"RunScript"
 				{
-					"Target"	"TARGET"
-					"ScriptFile"	"summon_abilities.lua"
-					"Function"		"ChainLightning"
+					"Target"				"TARGET"
+					"DamagePercentage"		"%damagepercentage"
+					"ChainJumps"			"%chainjumps"
+					"ScriptFile"			"summon_abilities.lua"
+					"Function"				"ChainLightning"
 				}
 				"ApplyModifier"
 				{
@@ -38,6 +44,20 @@
 			{
 				"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"-20"
 			}
+		}
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"damagepercentage"		"0.75"
+		}
+		"02"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"chainjumps"			"3"
 		}
 	}
 }

@@ -19,47 +19,38 @@ function SummonFireElemental(keys)
 	local team = caster:GetTeamNumber() 
 	local heroloc = caster:GetAbsOrigin() 
 	local target = keys.target_points[1]
-	local checkelement = Entities:FindAllByClassname("npc_dota_creature") --[[Returns:table
-	Finds all entities by class name. Returns an array containing all the found entities.
-	]]
+	local modelScale = keys.ModelScale
+	local HPScale = keys.HPScale
+	local casterInt = caster:GetIntellect()
+	print(modelScale)
+	print(HPScale)
+
+	local checkelement = Entities:FindAllByModel("models/heroes/phoenix/phoenix_bird.vmdl")
 
 	for i, element in ipairs(checkelement) do
-		if element:GetPlayerOwner() == player and element:GetModelName() == "models/heroes/phoenix/phoenix_bird.vmdl" then
+		if element:GetPlayerOwner() == player then
 			element:ForceKill(true)
 		end
 	end
 
-	local fireelemental = CreateUnitByName("elementalist_fire_elemental", target, true, caster, caster, team) --[[Returns:handle
-	Creates a DOTA unit by its dota_npc_units.txt name ( szUnitName, vLocation, bFindClearSpace, hNPCOwner, hUnitOwner, iTeamNumber )
-	]]
-	fireelemental:SetControllableByPlayer(caster:GetPlayerID(), true) --[[Returns:void
-	Set this unit controllable by the player with the passed ID.
-	]]
-	fireelemental:CreatureLevelUp(level-1) --[[Returns:void
-	Level the creature up by the specified number of levels
-	]]
+	local fireelemental = CreateUnitByName("elementalist_fire_elemental", target, true, caster, caster, team)
+	fireelemental:SetControllableByPlayer(caster:GetPlayerID(), true) 
+	fireelemental:CreatureLevelUp(level-1)
+	fireelemental:SetModelScale(modelScale)
+	fireelemental:SetMaxHealth(HPScale*casterInt)
+	fireelemental:SetHealth(fireelemental:GetMaxHealth())
 
-	if level == 1 then
-		fireelemental:SetModelScale(0.20) --[[Returns:void
-		Sets the model's scale to <i>scale</i>, <br/>so if a unit had its model scale at 1, and you use <i>SetModelScale(<b>10.0</b>)</i>, it would set the scale to <b>10.0</b>.
-		]]
+	--[[if level == 1 then
+		fireelemental:SetModelScale(0.20) 
 	elseif level == 2 then
-		fireelemental:SetModelScale(0.40) --[[Returns:void
-		Sets the model's scale to <i>scale</i>, <br/>so if a unit had its model scale at 1, and you use <i>SetModelScale(<b>10.0</b>)</i>, it would set the scale to <b>10.0</b>.
-		]]
+		fireelemental:SetModelScale(0.40) 
 	elseif level == 3 then
-		 fireelemental:SetModelScale(0.60) --[[Returns:void
-		 Sets the model's scale to <i>scale</i>, <br/>so if a unit had its model scale at 1, and you use <i>SetModelScale(<b>10.0</b>)</i>, it would set the scale to <b>10.0</b>.
-		 ]]
+		 fireelemental:SetModelScale(0.60)
 	elseif level == 4 then
-		fireelemental:SetModelScale(0.80) --[[Returns:void
-		Sets the model's scale to <i>scale</i>, <br/>so if a unit had its model scale at 1, and you use <i>SetModelScale(<b>10.0</b>)</i>, it would set the scale to <b>10.0</b>.
-		]]
+		fireelemental:SetModelScale(0.80) 
 	elseif level == 5 then
-		fireelemental:SetModelScale(1.00) --[[Returns:void
-		Sets the model's scale to <i>scale</i>, <br/>so if a unit had its model scale at 1, and you use <i>SetModelScale(<b>10.0</b>)</i>, it would set the scale to <b>10.0</b>.
-		]]
-	end
+		fireelemental:SetModelScale(1.00) 
+	end]]
 end
 
 --Earth Elemental
@@ -71,22 +62,26 @@ function SummonEarthElemental(keys)
 	local team = caster:GetTeamNumber() 
 	local heroloc = caster:GetAbsOrigin() 
 	local target = keys.target_points[1]
+	local modelScale = keys.ModelScale
+	local HPScale = keys.HPScale
+	local casterInt = caster:GetIntellect()
 
-	local earthelemental = CreateUnitByName("elementalist_earth_elemental", target, true, player, caster, team) --[[Returns:handle
-	Creates a DOTA unit by its dota_npc_units.txt name ( szUnitName, vLocation, bFindClearSpace, hNPCOwner, hUnitOwner, iTeamNumber )
-	]]
-	earthelemental:SetControllableByPlayer(caster:GetPlayerID() , true) --[[Returns:void
-	Set this unit controllable by the player with the passed ID.
-	]]
+	local checkelement = Entities:FindAllByModel("models/heroes/treant_protector/treant_protector.vmdl")
 
-	earthelemental:CreatureLevelUp(level-1) --[[Returns:void
-	Level the creature up by the specified number of levels
-	]]
+	for i, element in ipairs(checkelement) do
+		if element:GetPlayerOwner() == player then
+			element:ForceKill(true)
+		end
+	end
+
+	local earthelemental = CreateUnitByName("elementalist_earth_elemental", target, true, caster, caster, team)
+	earthelemental:SetControllableByPlayer(caster:GetPlayerID() , true)
+	earthelemental:CreatureLevelUp(level-1)
+	earthelemental:SetModelScale(modelScale)
+	earthelemental:SetMaxHealth(casterInt*HPScale)
 
 	if level == 1 then
-		earthelemental:SetModelScale(0.5) --[[Returns:void
-		Sets the model's scale to <i>scale</i>, <br/>so if a unit had its model scale at 1, and you use <i>SetModelScale(<b>10.0</b>)</i>, it would set the scale to <b>10.0</b>.
-		]]
+		earthelemental:SetModelScale(0.5) 
 		earthelemental:AddAbility("elementalist_earth_elemental_thorns_ability") --[[Returns:void
 		Add an ability to this unit by name.
 		]]
@@ -104,6 +99,89 @@ function SummonEarthElemental(keys)
 	end
 end
 
+function SummonLightningElemental(keys)
+	local caster = keys.caster
+	local level = keys.ability:GetLevel()
+	local player = caster:GetPlayerOwner()
+	local team = caster:GetTeamNumber() 
+	local heroloc = caster:GetAbsOrigin() 
+	local target = keys.target_points[1]
+	local modelScale = keys.ModelScale
+	local HPScale = keys.HPScale
+	local casterInt = caster:GetIntellect()
+	print(modelScale)
+	print(HPScale)
+
+	local checkelement = Entities:FindAllByModel("models/heroes/razor/razor.vmdl")
+
+	for i, element in ipairs(checkelement) do
+		if element:GetPlayerOwner() == player then
+			element:ForceKill(true)
+		end
+	end
+
+	local lightningelemental = CreateUnitByName("elementalist_lightning_elemental", target, true, caster, caster, team)
+	lightningelemental:SetControllableByPlayer(caster:GetPlayerID(), true) 
+	lightningelemental:CreatureLevelUp(level-1)
+	lightningelemental:SetModelScale(modelScale)
+	lightningelemental:SetMaxHealth(HPScale*casterInt)
+	lightningelemental:SetHealth(lightningelemental:GetMaxHealth())
+	lightningelemental:SetMana(0)
+
+	--[[if level == 1 then
+		fireelemental:SetModelScale(0.20) 
+	elseif level == 2 then
+		fireelemental:SetModelScale(0.40) 
+	elseif level == 3 then
+		 fireelemental:SetModelScale(0.60)
+	elseif level == 4 then
+		fireelemental:SetModelScale(0.80) 
+	elseif level == 5 then
+		fireelemental:SetModelScale(1.00) 
+	end]]
+end
+
+
+function SummonWaterElemental(keys)
+	local caster = keys.caster
+	local level = keys.ability:GetLevel()
+	local player = caster:GetPlayerOwner()
+	local team = caster:GetTeamNumber() 
+	local heroloc = caster:GetAbsOrigin() 
+	local target = keys.target_points[1]
+	local modelScale = keys.ModelScale
+	local HPScale = keys.HPScale
+	local casterInt = caster:GetIntellect()
+	print(modelScale)
+	print(HPScale)
+
+	local checkelement = Entities:FindAllByModel("models/heroes/morphling/morphling.vmdl")
+
+	for i, element in ipairs(checkelement) do
+		if element:GetPlayerOwner() == player then
+			element:ForceKill(true)
+		end
+	end
+
+	local waterelemental = CreateUnitByName("elementalist_water_elemental", target, true, caster, caster, team)
+	waterelemental:SetControllableByPlayer(caster:GetPlayerID(), true) 
+	waterelemental:CreatureLevelUp(level-1)
+	waterelemental:SetModelScale(modelScale)
+	waterelemental:SetMaxHealth(HPScale*casterInt)
+	waterelemental:SetHealth(waterelemental:GetMaxHealth())
+
+	--[[if level == 1 then
+		fireelemental:SetModelScale(0.20) 
+	elseif level == 2 then
+		fireelemental:SetModelScale(0.40) 
+	elseif level == 3 then
+		 fireelemental:SetModelScale(0.60)
+	elseif level == 4 then
+		fireelemental:SetModelScale(0.80) 
+	elseif level == 5 then
+		fireelemental:SetModelScale(1.00) 
+	end]]
+end
 
 
 

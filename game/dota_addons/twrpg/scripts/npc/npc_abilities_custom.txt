@@ -100,7 +100,6 @@
 			"Precache"
 			{
 				"particle_folder"	"particles/units/heroes/hero_sandking"
-				"particle_folder"	"particles/units/heroes/hero_phoenix"
 			}
 	
 	
@@ -136,7 +135,20 @@
 							"ScriptFile"	"summon_abilities.lua"
 							"Function"		"StompInterval"
 						}
+	
+	
+						"AttachEffect"
+						{
+							"EffectName"		"particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
+							"EffectAttachType"	"follow_origin"
+							"Target"			"TARGET"
 						
+							"ControlPoints"
+							{
+								"00"		"0 0 0"
+								"01"		"500 0 0"
+							}
+						}
 	
 					}
 				}
@@ -585,9 +597,9 @@
 			"AbilityTextureName"			"lich_chain_frost"
 			"MaxLevel"						"1"
 	
-			"precache"
+			"Precache"
 			{
-				"particle_folder"				"particles/units/heroes/hero_lich"
+				"particle_folder"				"particles/units/heroes/hero_phoenix"
 			}
 	
 			// Modifiers
@@ -723,6 +735,10 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"zuus_arc_lightning"
 		"MaxLevel"						"1"
+		"Precache"
+		{
+			"particle_folder"	"particles/units/heroes/hero_zuus"
+		}
 	
 		"Modifiers"
 		{
@@ -735,9 +751,11 @@
 				{
 					"RunScript"
 					{
-						"Target"	"TARGET"
-						"ScriptFile"	"summon_abilities.lua"
-						"Function"		"ChainLightning"
+						"Target"				"TARGET"
+						"DamagePercentage"		"%damagepercentage"
+						"ChainJumps"			"%chainjumps"
+						"ScriptFile"			"summon_abilities.lua"
+						"Function"				"ChainLightning"
 					}
 					"ApplyModifier"
 					{
@@ -757,6 +775,20 @@
 				{
 					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"-20"
 				}
+			}
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damagepercentage"		"0.75"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"chainjumps"			"3"
 			}
 		}
 	}
@@ -1022,6 +1054,7 @@
 			// Casting
 			"AbilityCastRange"		"1000"
 			"AbilityCastPoint"		"0.0"
+			"MaxLevel"				"5"
 	
 			// Time
 			"AbilityCooldown"		"5.0"
@@ -1035,7 +1068,8 @@
 				"RunScript"
 				{
 					"Target"			"POINT"
-					"Duration"			"120.0"
+					"HPScale"			"%hpscale"
+					"ModelScale"		"%modelscale"
 					"ScriptFile"		"summons.lua"
 					"Function"			"SummonEarthElemental"
 				}
@@ -1044,6 +1078,19 @@
 			}
 	
 			// Special
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"hpscale"			"50 75 100 200 300"
+				}
+				"02"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"modelscale"		"0.2 0.4 0.6 0.8 1.0"
+				}
+			}
 		}
 	//End of file elementalist_summon_earth_elemental.txt
 
@@ -1059,6 +1106,7 @@
 			// Casting
 			"AbilityCastRange"		"1000"
 			"AbilityCastPoint"		"0.0"
+			"MaxLevel"				"5"
 	
 			// Time
 			"AbilityCooldown"		"5.0"
@@ -1066,7 +1114,7 @@
 			// Cost
 			"AbilityManaCost" 		"25"
 	
-			"Duration"				"120.0"
+			
 	
 			// SpellStart
 			OnSpellStart
@@ -1074,13 +1122,27 @@
 				"RunScript"
 				{
 					"Target"			"POINT"
-					"Duration"			"120.0"
+					"ModelScale"		"%modelscale"
+					"HPScale"			"%hpscale"
 					"ScriptFile"		"summons.lua"
 					"Function"			"SummonFireElemental"
 				}
 			}
 	
 			// Special
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"modelscale"		"0.2 0.4 0.6 0.8 1.0"
+				}
+				"02"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"hpscale"			"10 20 50 100 200"
+				}
+			}
 		}
 	//End of file elementalist_summon_fire_elemental.txt
 
@@ -1096,6 +1158,7 @@
 			// Casting
 			"AbilityCastRange"		"1000"
 			"AbilityCastPoint"		"0.0"
+			"MaxLevel"				"5"
 	
 			// Time
 			"AbilityCooldown"		"5.0"
@@ -1106,39 +1169,29 @@
 			// SpellStart
 			OnSpellStart
 			{
-				"SpawnUnit"
+				"RunScript"
 				{
-					"UnitName"	"elementalist_lightning_elemental"
-					"UnitCount"	"1"
-					"SpawnRadius"	"10"
-					"Target"	"POINT"
-					"Duration"		"120.0"
-					"OnSpawn"
-					{
-						"ApplyModifier"
-						{
-							"Target"	"TARGET"
-							"ModifierName"	"elementalist_lightning_elemental_nomana"
-						}
-					}
+					"Target"			"POINT"
+					"HPScale"			"%hpscale"
+					"ModelScale"		"%modelscale"
+					"ScriptFile"		"summons.lua"
+					"Function"			"SummonLightningElemental"
 				}
 			}
 	
-			// Modifiers
-	
-			"Modifiers"
+			"AbilitySpecial"
 			{
-				"elementalist_lightning_elemental_nomana"
+				"01"
 				{
-					"Duration"	"0.1"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"	"-1000"
-					}
+					"var_type"			"FIELD_FLOAT"
+					"hpscale"			"10 20 30 50 100"
+				}
+				"02"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"modelscale"		"0.2 0.4 0.6 0.8 1.0"
 				}
 			}
-	
-			// Special
 		}
 	//End of file elementalist_summon_lightning_elemental.txt
 
@@ -1190,6 +1243,7 @@
 			// Casting
 			"AbilityCastRange"		"1000"
 			"AbilityCastPoint"		"0.0"
+			"MaxLevel"				"5"
 	
 			// Time
 			"AbilityCooldown"		"5.0"
@@ -1200,17 +1254,30 @@
 			// SpellStart
 			OnSpellStart
 			{
-				"SpawnUnit"
+				"RunScript"
 				{
-					"UnitName"	"elementalist_water_elemental"
-					"UnitCount"	"1"
-					"SpawnRadius"	"10"
-					"Target"	"POINT"
-					"Duration"		"120.0"
+					"Target"			"POINT"
+					"HPScale"			"%hpscale"
+					"ModelScale"		"%modelscale"
+					"ScriptFile"		"summons.lua"
+					"Function"			"SummonWaterElemental"
 				}
 			}
 	
 			// Special
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"hpscale"			"15 30 60 120 240"
+				}
+				"02"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"modelscale"		"0.2 0.4 0.6 0.8 1.0"
+				}
+			}
 		}
 	//End of file elementalist_summon_water_elemental.txt
 

@@ -8,6 +8,7 @@
 		// Casting
 		"AbilityCastRange"		"1000"
 		"AbilityCastPoint"		"0.0"
+		"MaxLevel"				"5"
 
 		// Time
 		"AbilityCooldown"		"5.0"
@@ -15,7 +16,7 @@
 		// Cost
 		"AbilityManaCost" 		"25"
 
-		"Duration"				"120.0"
+		
 
 		// SpellStart
 		OnSpellStart
@@ -23,11 +24,25 @@
 			"RunScript"
 			{
 				"Target"			"POINT"
-				"Duration"			"120.0"
+				"ModelScale"		"%modelscale"
+				"HPScale"			"%hpscale"
 				"ScriptFile"		"summons.lua"
 				"Function"			"SummonFireElemental"
 			}
 		}
 
 		// Special
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"modelscale"		"0.2 0.4 0.6 0.8 1.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"hpscale"			"10 20 50 100 200"
+			}
+		}
 	}

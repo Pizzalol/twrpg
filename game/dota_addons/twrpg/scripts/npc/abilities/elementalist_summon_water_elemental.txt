@@ -8,6 +8,7 @@
 		// Casting
 		"AbilityCastRange"		"1000"
 		"AbilityCastPoint"		"0.0"
+		"MaxLevel"				"5"
 
 		// Time
 		"AbilityCooldown"		"5.0"
@@ -18,15 +19,28 @@
 		// SpellStart
 		OnSpellStart
 		{
-			"SpawnUnit"
+			"RunScript"
 			{
-				"UnitName"	"elementalist_water_elemental"
-				"UnitCount"	"1"
-				"SpawnRadius"	"10"
-				"Target"	"POINT"
-				"Duration"		"120.0"
+				"Target"			"POINT"
+				"HPScale"			"%hpscale"
+				"ModelScale"		"%modelscale"
+				"ScriptFile"		"summons.lua"
+				"Function"			"SummonWaterElemental"
 			}
 		}
 
 		// Special
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"hpscale"			"15 30 60 120 240"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"modelscale"		"0.2 0.4 0.6 0.8 1.0"
+			}
+		}
 	}

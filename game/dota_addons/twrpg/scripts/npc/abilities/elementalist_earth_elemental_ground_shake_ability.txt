@@ -26,7 +26,6 @@
 		"Precache"
 		{
 			"particle_folder"	"particles/units/heroes/hero_sandking"
-			"particle_folder"	"particles/units/heroes/hero_phoenix"
 		}
 
 
@@ -62,7 +61,20 @@
 						"ScriptFile"	"summon_abilities.lua"
 						"Function"		"StompInterval"
 					}
+
+
+					"AttachEffect"
+					{
+						"EffectName"		"particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"TARGET"
 					
+						"ControlPoints"
+						{
+							"00"		"0 0 0"
+							"01"		"500 0 0"
+						}
+					}
 
 				}
 			}

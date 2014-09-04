@@ -40,13 +40,15 @@ function StompInterval(keys)
 		caster:Heal(100.0, caster) --[[Returns:void
 		Heal this unit.
 		]]
-		print("Particle pls")
-		local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_sandking/sandking_epicenter_pulse.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+
+		-- Tried to create this sandking particle but it never showed up in game, no clue why
+		--print("Particle pls")
+		--local particle = ParticleManager:CreateParticle("particles/twrpg_gameplay/sandking_epicenter.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
 		--ParticleManager:SetParticleControlEnt(particle, 0, caster, 5, "attach_hitloc", casterloc, false)
 		--ParticleManager:SetParticleControlEnt(particle, 1, caster, 5, "attach_hitloc", casterloc+Vector(200,0,0), false)
 		--local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground_hit.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
-		ParticleManager:SetParticleControl(particle, 0, casterloc+Vector(500,500,500))
-		ParticleManager:SetParticleControl(particle, 1, casterloc+Vector(300,0,0))
+		--ParticleManager:SetParticleControl(particle, 0, casterloc)
+		--ParticleManager:SetParticleControl(particle, 3, casterloc+Vector(300,0,0))
 
 		-- Finds all valid targets around the caster and deals damage to them
 		local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
@@ -132,6 +134,10 @@ function FlameFists(keys)
 	table.attacker = caster
 	table.damage = casterDmg*ownerInt
 	table.damage_type = DAMAGE_TYPE_MAGICAL
+
+	local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground_hit.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
+	ParticleManager:SetParticleControl(particle, 0, targetloc)
+	ParticleManager:SetParticleControl(particle, 3, targetloc)
 
 	-- Finds all valid targets and deals damage to them
 	local unittodamage = FindUnitsInRadius(caster:GetTeam(), targetloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
@@ -246,7 +252,7 @@ end
 
 --[[Chain lightning spell which deals damage to 3 additional targets
 	Fires every 4th attack using lightningCount as the attack counter]]
-function ChainLightning( keys )
+--[[function ChainLightning( keys )
 	-- Counts the number of attack that have been made
 	lightningCount = lightningCount + 1
 	
@@ -280,7 +286,7 @@ function ChainLightning( keys )
 		Finds the units in a given radius with the given flags. ( iTeamNumber, vPosition, hCacheUnit, flRadius, iTeamFilter, iTypeFilter, iFlagFilter, iOrder, bCanGrowCache )
 		]]
 
-		-- Chains to the closest target first
+		--[[ Chains to the closest target first
 		for i,v in ipairs(unittodamage) do
 			print("lightning 3")
 			-- As long as it hasnt chained to 3 targets already, it will continue
@@ -305,7 +311,127 @@ function ChainLightning( keys )
 			end
 		end
 	end
+end]]
+
+function ChainLightning( keys )
+	lightningCount = lightningCount + 1
+
+	if lightningCount % 4 == 0 then
+		local caster = keys.caster
+		local target = keys.target
+		local casterloc = caster:GetAbsOrigin()
+		local targetloc = target:GetAbsOrigin()
+		local tableDamage = {}
+		local damagepercentage = keys.DamagePercentage
+		local hitTable = {}
+		local chainjumps = keys.ChainJumps
+
+		local damage = 200 * damagepercentage
+
+		tableDamage.attacker = caster
+		tableDamage.victim = target
+		tableDamage.damage = damage
+		tableDamage.damage_type = DAMAGE_TYPE_MAGICAL
+		ApplyDamage(tableDamage)
+		print("The first unit is " .. target:GetName())
+		table.insert(hitTable, target)
+
+		local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf", PATTACH_CUSTOMORIGIN, caster)
+		ParticleManager:SetParticleControlEnt(particle, 0, caster, 5, "attach_hitloc", casterloc, false)
+		ParticleManager:SetParticleControlEnt(particle, 1, target, 5, "attach_hitloc", targetloc, false)
+		ParticleManager:ReleaseParticleIndex(particle)
+
+
+		for i = 0, chainjumps do
+			for _, unit in pairs(FindUnitsInRadius(caster:GetTeam(), targetloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, FIND_CLOSEST, false)) do
+				print("The #" .. i .. " unit found is " .. unit:GetName())
+				local checkunit = 0
+
+				for c = 0, #hitTable do					--iterate through hit units`
+					if hitTable[c] == unit then
+						checkunit = 1					--unit has been hit
+					end
+				end
+
+				if checkunit == 0 then					--if unit has not been hit
+					print("Dealing " .. damage .." to " .. unit:GetName())
+					--caster = target
+					particleCaster = target						
+					target = unit
+					targetloc = target:GetAbsOrigin()						--unit becomes new start point
+					local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf", PATTACH_CUSTOMORIGIN, particleCaster)
+					ParticleManager:SetParticleControlEnt(particle, 0, particleCaster, 5, "attach_hitloc", targetloc, false)
+					targetloc = target:GetAbsOrigin()
+					ParticleManager:SetParticleControlEnt(particle, 1, target, 5, "attach_hitloc", targetloc, false)
+					ParticleManager:ReleaseParticleIndex(particle)
+					table.insert( hitTable, target )	--log as a hit unit
+					tableDamage.victim = target
+					ApplyDamage(tableDamage)	--Deal damage
+					break
+				end
+			end
+		end
+	end
 end
+
+
+
+
+
+
+
+-- Testing
+--[[function Chainlightning(keys)
+	local dmg = keys.dmg				--base attack damage
+	local jumps = keys.maxjumps			--get max jumps from key values
+	local shock = keys.shockperc / 100	--%shock damage from keyvalues
+	local Target = keys.target			--Attacked unit
+	local Caster = keys.caster			--Attacking unit
+	local hitTable = {}					--Table of hit units. Lightning never strikes twice in the same place
+	
+	dmg = (dmg * shock)
+	
+	local damageTable = {victim = Target, attacker = Caster, damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL}
+	ApplyDamage(damageTable)	--Deal damage
+	print("The first unit is " .. Target:GetName())
+	table.insert( hitTable, Target)
+	lightningBolt = ParticleManager:CreateParticle("particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, Caster)
+	ParticleManager:SetParticleControl(lightningBolt,1,Vector(Target:GetAbsOrigin().x,Target:GetAbsOrigin().y,Target:GetAbsOrigin().z+((Target:GetBoundingMaxs().z - Target:GetBoundingMins().z)/2)))
+	
+	for i = 0, jumps do
+		for _, unit in pairs(Entities:FindAllInSphere(Target:GetAbsOrigin(), 400)) do
+			if (unit:GetClassname() == "npc_dota_creature" or unit:GetClassname() == "npc_dota_creep_neutral") and unit:GetTeamNumber() == 3 and unit:IsAlive() then
+				print("The #" .. i .. " unit found is " .. unit:GetName())
+				local checkunit = 0 					--bool check if we hit this unit before
+				
+				for c = 0, #hitTable do					--iterate through hit units`
+					if hitTable[c] == unit then
+						checkunit = 1					--unit has been hit
+					end
+				end
+				
+				if checkunit == 0 then					--if unit has not been hit
+					print("Dealing " .. dmg .." to " .. unit:GetName())
+					Caster = Target						
+					Target = unit						--unit becomes new start point
+					lightningBolt = ParticleManager:CreateParticle("particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, Caster)
+					ParticleManager:SetParticleControl(lightningBolt,1,Vector(Target:GetAbsOrigin().x,Target:GetAbsOrigin().y,Target:GetAbsOrigin().z+((Target:GetBoundingMaxs().z - Target:GetBoundingMins().z)/2)))
+					table.insert( hitTable, Target )	--log as a hit unit
+					damageTable = {victim = Target, attacker = Caster, damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL}
+					ApplyDamage(damageTable)	--Deal damage
+					break
+				end
+			end
+		end
+	end
+end]]
+
+
+
+
+
+
+
 
 --[[Massive damage single target spell which ministuns on impact
 	It is called once every 8th attack, keeping count of the attacks using lightningCount

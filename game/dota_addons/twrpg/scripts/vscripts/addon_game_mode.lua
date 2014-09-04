@@ -18,6 +18,7 @@ PrecacheResource( "particle_folder", "particles/folder", context )
 ]]
 	PrecacheUnitByNameSync('npc_dota_hero_treant', context)
 	PrecacheUnitByNameSync('npc_dota_hero_phoenix', context)
+	PrecacheUnitByNameSync("npc_dota_hero_razor", context)
 	PrecacheResource( "soundfile", "*.vsndevts", context )
 	PrecacheResource( "particle_folder", "particles/frostivus_gameplay", context )
 	PrecacheUnitByNameSync('npc_precache_everything', context)
@@ -27,6 +28,7 @@ PrecacheResource( "particle_folder", "particles/folder", context )
 	PrecacheResource("particle_folder", "particles/twrpg_gameplay", context)
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_treant", context)
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_sandking", context)
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_zuus", context)
 end
 -- Create the game mode when we activate
 function Activate()
