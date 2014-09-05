@@ -3,7 +3,7 @@
 	{
 		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"				"ability_datadriven"
-		"AbilityTextureName"	"invoker_quas"
+		"AbilityTextureName"	"phoenix_fire_spirits"
 		"MaxLevel"				"1"
 
 		"AbilityCastPoint"		"0.0"

@@ -4,7 +4,7 @@
 		// General
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
 		"BaseClass"						"axe_berserkers_call"
-		"AbilityTextureName"			"axe_berserkers_call"
+		"AbilityTextureName"			"brewmaster_earth_spell_immunity"
 		"MaxLevel"						"1"
 
 		// Casting

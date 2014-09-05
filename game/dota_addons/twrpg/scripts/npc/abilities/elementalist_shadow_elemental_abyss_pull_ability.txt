@@ -2,7 +2,7 @@
 {
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
 	"BaseClass"						"ability_datadriven"
-	"AbilityTextureName"			"invoker_quas"
+	"AbilityTextureName"			"shadow_demon_demonic_purge"
 	"MaxLevel"						"1"
 	"AOERadius"						"300"
 

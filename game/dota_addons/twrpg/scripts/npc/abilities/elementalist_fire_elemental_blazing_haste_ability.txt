@@ -5,7 +5,7 @@
 	
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	"BaseClass"						"troll_warlord_fervor"
-	"AbilityTextureName"			"phoenix_fire_spirits"
+	"AbilityTextureName"			"brewmaster_fire_permanent_immolation"
 	"MaxLevel"						"1"
 
 		

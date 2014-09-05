@@ -79,6 +79,7 @@ function SummonEarthElemental(keys)
 	earthelemental:CreatureLevelUp(level-1)
 	earthelemental:SetModelScale(modelScale)
 	earthelemental:SetMaxHealth(casterInt*HPScale)
+	earthelemental:SetHealth(earthelemental:GetMaxHealth())
 
 	if level == 1 then
 		earthelemental:SetModelScale(0.5) 

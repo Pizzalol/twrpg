@@ -2,7 +2,7 @@
 {
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
 	"BaseClass"						"ability_datadriven"
-	"AbilityTextureName"			"enigma_midnight_pulse"
+	"AbilityTextureName"			"nevermore_dark_lord"
 	"MaxLevel"						"1"
 
 	

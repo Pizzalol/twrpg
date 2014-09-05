@@ -5,7 +5,7 @@
 		// General
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"invoker_exort"
+		"AbilityTextureName"			"treant_overgrowth"
 		"MaxLevel"						"1"
 
 		// Casting

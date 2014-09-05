@@ -2,6 +2,7 @@
 {
 	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
 	"BaseClass"			"ability_datadriven"
+	"AbilityTextureName"	"faceless_void_time_lock"
 	"MaxLevel"			"1"
 
 	"OnCreated"

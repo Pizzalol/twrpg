@@ -4,7 +4,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass" 					"ability_datadriven"
-		"AbilityTextureName"            "invoker_quas"
+		"AbilityTextureName"            "treant_living_armor"
 
 		"precache"
 		{

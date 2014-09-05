@@ -2,7 +2,7 @@
 {
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
 	"BaseClass"						"ability_datadriven"
-	"AbilityTextureName"			"zuus_static_field"
+	"AbilityTextureName"			"disruptor_static_storm"
 	"MaxLevel"						"1"
 
 	

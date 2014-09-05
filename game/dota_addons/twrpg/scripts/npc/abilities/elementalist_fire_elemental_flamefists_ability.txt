@@ -5,7 +5,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AOE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"lich_chain_frost"
+		"AbilityTextureName"			"warlock_golem_flaming_fists"
 		"MaxLevel"						"1"
 
 		"Precache"

@@ -79,7 +79,7 @@
 			// General
 			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"
 			"BaseClass"						"ability_datadriven"
-			"AbilityTextureName"			"invoker_exort"
+			"AbilityTextureName"			"treant_overgrowth"
 			"MaxLevel"						"1"
 	
 			// Casting
@@ -165,7 +165,7 @@
 			//-------------------------------------------------------------------------------------------------------------
 			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 			"BaseClass" 					"ability_datadriven"
-			"AbilityTextureName"            "invoker_quas"
+			"AbilityTextureName"            "treant_living_armor"
 	
 			"precache"
 			{
@@ -250,7 +250,7 @@
 			// General
 			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
 			"BaseClass"						"axe_berserkers_call"
-			"AbilityTextureName"			"axe_berserkers_call"
+			"AbilityTextureName"			"brewmaster_earth_spell_immunity"
 			"MaxLevel"						"1"
 	
 			// Casting
@@ -301,7 +301,7 @@
 			//-------------------------------------------------------------------------------------------------------------
 			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 			"BaseClass" 					"ability_datadriven"
-			"AbilityTextureName"            "invoker_wex"
+			"AbilityTextureName"            "bristleback_bristleback"
 	
 			"precache"
 			{
@@ -544,7 +544,7 @@
 		
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass"						"troll_warlord_fervor"
-		"AbilityTextureName"			"phoenix_fire_spirits"
+		"AbilityTextureName"			"brewmaster_fire_permanent_immolation"
 		"MaxLevel"						"1"
 	
 			
@@ -572,7 +572,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass"			"ability_datadriven"
 		"MaxLevel"			"1"
-		"AbilityTextureName"	"invoker_quas"
+		"AbilityTextureName"	"invoker_exort"
 	
 		"OnOwnerDied"
 		{
@@ -594,7 +594,7 @@
 			//-------------------------------------------------------------------------------------------------------------
 			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AOE"
 			"BaseClass"						"ability_datadriven"
-			"AbilityTextureName"			"lich_chain_frost"
+			"AbilityTextureName"			"warlock_golem_flaming_fists"
 			"MaxLevel"						"1"
 	
 			"Precache"
@@ -634,7 +634,7 @@
 			// General
 			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"
 			"BaseClass"						"ability_datadriven"
-			"AbilityTextureName"			"invoker_exort"
+			"AbilityTextureName"			"jakiro_liquid_fire"
 			"MaxLevel"						"1"
 	
 			// Casting
@@ -708,7 +708,7 @@
 		{
 			"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 			"BaseClass"				"ability_datadriven"
-			"AbilityTextureName"	"invoker_quas"
+			"AbilityTextureName"	"phoenix_fire_spirits"
 			"MaxLevel"				"1"
 	
 			"AbilityCastPoint"		"0.0"
@@ -800,7 +800,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"zuus_static_field"
+		"AbilityTextureName"			"disruptor_static_storm"
 		"MaxLevel"						"1"
 	
 		
@@ -875,7 +875,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"zuus_arc_lightning"
+		"AbilityTextureName"			"nevermore_shadowraze1"
 		"MaxLevel"						"1"
 		"AOERadius"						"300"
 	
@@ -903,7 +903,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"enigma_midnight_pulse"
+		"AbilityTextureName"			"nevermore_dark_lord"
 		"MaxLevel"						"1"
 	
 		
@@ -942,7 +942,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"invoker_quas"
+		"AbilityTextureName"			"shadow_demon_demonic_purge"
 		"MaxLevel"						"1"
 		"AOERadius"						"300"
 	
@@ -1009,6 +1009,7 @@
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass"			"ability_datadriven"
+		"AbilityTextureName"	"faceless_void_time_lock"
 		"MaxLevel"			"1"
 	
 		"OnCreated"
@@ -1293,6 +1294,7 @@
 			"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
 			"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 			"BaseClass"						"dazzle_shadow_wave"
+			//"AbilityTextureName"			"ancient_apparition_chilling_touch"
 			"MaxLevel"						"1"
 			
 			// Casting

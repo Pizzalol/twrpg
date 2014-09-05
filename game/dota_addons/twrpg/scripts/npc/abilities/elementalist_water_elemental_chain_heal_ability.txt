@@ -8,6 +8,7 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"BaseClass"						"dazzle_shadow_wave"
+		//"AbilityTextureName"			"ancient_apparition_chilling_touch"
 		"MaxLevel"						"1"
 		
 		// Casting
