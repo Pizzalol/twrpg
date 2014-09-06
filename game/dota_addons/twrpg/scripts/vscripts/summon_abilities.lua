@@ -248,6 +248,23 @@ function Purification( keys )
 	]]
 end
 
+function ChainHeal( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local targetloc = target:GetAbsOrigin()
+	local chainjumps = keys.ChainJumps
+	local targetshealed = 0
+
+	local unitstoheal = FindUnitsInRadius(caster:GetTeam(), targetloc, nil, 800, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, 0, FIND_CLOSEST, false)
+
+	for i,v in ipairs(unitstoheal) do
+		if targetshealed < chainjumps then
+			v:SetHealth(v:GetMaxHealth())
+			targetshealed = targetshealed + 1
+		end
+	end
+end
+
 -- Lightning Elemental abilities
 
 --[[Chain lightning spell which deals damage to 3 additional targets

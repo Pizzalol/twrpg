@@ -1285,69 +1285,40 @@
 
 	//Start of file elementalist_water_elemental_chain_heal_ability.txt
 	// Water Elemental chain heal
-		"elementalist_water_elemental_chainheal_ability"
+	"elementalist_water_elemental_chainheal_ability"
+	{
+			
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"ancient_apparition_chilling_touch"
+		"MaxLevel"						"1"
+		"Precache"
 		{
-			// General
-			//-------------------------------------------------------------------------------------------------------------
-			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
-			"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-			"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
-			"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
-			"BaseClass"						"dazzle_shadow_wave"
-			//"AbilityTextureName"			"ancient_apparition_chilling_touch"
-			"MaxLevel"						"1"
-			
-			// Casting
-			//-------------------------------------------------------------------------------------------------------------
-			"AbilityCastRange"				"800"
-			"AbilityCastPoint"				"0.5"
-			
-			// Time		
-			//-------------------------------------------------------------------------------------------------------------
-			"AbilityCooldown"				"2"
+			"particle_folder"	"particles/units/heroes/hero_zuus"
+		}
 	
-			// Cost
-			//-------------------------------------------------------------------------------------------------------------
-			"AbilityManaCost"				"0"
-			
-			// Damage.
-			//-------------------------------------------------------------------------------------------------------------
-			"AbilityDamage"					"0"
-	
-			// Heal
-			"Heal"					"100"
-			
-			// Special
-			//-------------------------------------------------------------------------------------------------------------
-			"AbilitySpecial"
+		"OnSpellStart"
+		{
+			"RunScript"
 			{
-				"01"
-				{
-					"var_type"			"FIELD_INTEGER"
-					"bounce_radius"		"600"
-				}
-				"02"
-				{	
-					"var_type"			"FIELD_INTEGER"
-					"damage_radius"		"0"
-				}
-				"03"
-				{	
-					"var_type"			"FIELD_INTEGER"
-					"max_targets"		"3"
-				}
-				"04"
-				{
-					"var_type"			"FIELD_INTEGER"
-					"damage"			"0"
-				}
-				"05"
-				{
-					"var_type"			"FIELD_INTEGER"
-					"heal"				"100"
-				}
+				"Target"		"TARGET"
+				"ChainJumps"	"%chainjumps"
+				"ScriptFile"	"summon_abilities.lua"
+				"Function"		"ChainHeal"
 			}
 		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"chainjumps"			"3"
+			}
+		}
+	}
 	//End of file elementalist_water_elemental_chain_heal_ability.txt
 
 
