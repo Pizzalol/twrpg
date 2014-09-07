@@ -311,3 +311,62 @@ function OnCasterDamaged( keys )
 		end
 	end
 end
+
+function DreamgateCast( keys )
+	local caster = keys.caster
+	local target = keys.target_points[1]
+	local fire
+	local water
+	local lightning
+	local earth
+	local shadow
+
+	if caster:HasModifier("modifier_dreamgate") then
+		local checkelement = Entities:FindAllByModel("models/heroes/phoenix/phoenix_bird.vmdl")
+
+		for i,v in ipairs(checkelement) do
+			if v:GetOwner() == caster then
+				v:SetAbsOrigin(target+Vector(100,0,0))
+				break
+			end
+		end
+
+		local checkelement = Entities:FindAllByModel("models/heroes/morphling/morphling.vmdl")
+
+		for i,v in ipairs(checkelement) do
+			if v:GetOwner() == caster then
+				v:SetAbsOrigin(target+Vector(75,75,0))
+				break
+			end
+		end
+
+		local checkelement = Entities:FindAllByModel("models/heroes/razor/razor.vmdl")
+
+		for i,v in ipairs(checkelement) do
+			if v:GetOwner() == caster then
+				v:SetAbsOrigin(target+Vector(0,100,0))
+				break
+			end
+		end
+
+		local checkelement = Entities:FindAllByModel("models/heroes/treant_protector/treant_protector.vmdl")
+
+		for i,v in ipairs(checkelement) do
+			if v:GetOwner() == caster then
+				v:SetAbsOrigin(target+Vector(-100,0,0))
+				break
+			end
+		end
+
+		local checkelement = Entities:FindAllByModel("models/heroes/enigma/enigma.vmdl")
+
+		for i,v in ipairs(checkelement) do
+			if v:GetOwner() == caster then
+				v:SetAbsOrigin(target+Vector(0,-100,0))
+				break
+			end
+		end
+
+		caster:RemoveModifierByName("modifier_dreamgate")
+	end
+end

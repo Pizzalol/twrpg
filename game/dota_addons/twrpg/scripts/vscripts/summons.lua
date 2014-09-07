@@ -40,6 +40,22 @@ function SummonFireElemental(keys)
 	fireelemental:SetMaxHealth(HPScale*casterInt)
 	fireelemental:SetHealth(fireelemental:GetMaxHealth())
 
+	if caster:HasModifier("modifier_dreamgate") then
+		local damagetable = {}
+		damagetable.attacker = caster
+		damagetable.damage = 200
+		damagetable.damage_type = DAMAGE_TYPE_MAGICAL
+
+		local unitToDamage = FindUnitsInRadius(caster:GetTeam(), target, nil, 300, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, FIND_CLOSEST, false)
+
+		for i,v in ipairs(unitToDamage) do
+			damagetable.victim = v
+			ApplyDamage(damagetable)
+			v:AddNewModifier(caster, nil, "modifier_stunned", {duration = 3})
+		end
+		caster:RemoveModifierByName("modifier_dreamgate")
+	end
+
 	--[[if level == 1 then
 		fireelemental:SetModelScale(0.20) 
 	elseif level == 2 then

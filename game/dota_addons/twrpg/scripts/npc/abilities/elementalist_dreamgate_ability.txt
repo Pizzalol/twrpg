@@ -1,0 +1,59 @@
+"elementalist_dreamgate_ability"
+{
+	// General
+	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+	"BaseClass"		"ABILITY_DATADRIVEN"
+	"AbilityTextureName"	"elder_titan_earth_splitter"
+	
+	// Casting
+	"AbilityCastRange"		"600"
+	"AbilityCastPoint"		"0.0"
+	"AOERadius"				"500"
+
+	// Time
+	"AbilityCooldown"		"5.0"
+
+	// Cost
+	"AbilityManaCost" 		"0"
+	"Precache"
+	{
+		"particle_folder"	"particles/units/heroes/hero_wisp"
+	}
+
+	
+
+	// SpellStart
+	OnSpellStart
+	{
+		"ApplyModifier"
+		{
+			"Target"			"CASTER"
+			"ModifierName"		"modifier_dreamgate"
+		}
+
+		"DelayedAction"
+		{
+			"Delay"		"1.0"
+			"Action"
+			{
+				"RunScript"
+				{
+					"Target"		"POINT"
+					"ScriptFile"	"hero_abilities.lua"
+					"Function"		"DreamgateCast"
+				}
+			}
+		}
+		
+	}
+
+	"Modifiers"
+	{
+		"modifier_dreamgate"
+		{
+			"Duration"	"1.5"
+			"IsHidden"	"1"
+		}
+	}
+		// Special
+}
