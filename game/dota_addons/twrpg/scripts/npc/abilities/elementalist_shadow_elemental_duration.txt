@@ -1,0 +1,36 @@
+"elementalist_shadow_elemental_duration"
+{
+	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
+	"BaseClass"			"ability_datadriven"
+	"AbilityTextureName"	"faceless_void_time_lock"
+	"MaxLevel"			"1"
+
+	"OnCreated"
+	{
+		"ApplyModifier"
+		{
+			"Target"	"CASTER"
+			"ModifierName"	"modifier_killsummon"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_killsummon"
+		{
+			"Passive"	"1"
+			"Duration"	"30.0"
+			"IsBuff"	"1"
+			"ThinkInterval"	"30.0"
+
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"summons.lua"
+					"Function"		"KillSummon"
+				}
+			}
+		}
+	}
+}

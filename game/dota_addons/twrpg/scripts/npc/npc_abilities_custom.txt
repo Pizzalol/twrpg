@@ -1067,6 +1067,46 @@
 	//End of file elementalist_shadow_elemental_abyss_reach_ability.txt
 
 
+	//Start of file elementalist_shadow_elemental_duration.txt
+	"elementalist_shadow_elemental_duration"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"			"ability_datadriven"
+		"AbilityTextureName"	"faceless_void_time_lock"
+		"MaxLevel"			"1"
+	
+		"OnCreated"
+		{
+			"ApplyModifier"
+			{
+				"Target"	"CASTER"
+				"ModifierName"	"modifier_killsummon"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_killsummon"
+			{
+				"Passive"	"1"
+				"Duration"	"30.0"
+				"IsBuff"	"1"
+				"ThinkInterval"	"30.0"
+	
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"summons.lua"
+						"Function"		"KillSummon"
+					}
+				}
+			}
+		}
+	}
+	//End of file elementalist_shadow_elemental_duration.txt
+
+
 	//Start of file elementalist_summon_duration.txt
 	"elementalist_summon_duration"
 	{
@@ -1127,7 +1167,7 @@
 			"AbilityManaCost" 		"25"
 	
 			// SpellStart
-			OnSpellStart
+			"OnSpellStart"
 			{
 				"RunScript"
 				{
@@ -1181,7 +1221,7 @@
 			
 	
 			// SpellStart
-			OnSpellStart
+			"OnSpellStart"
 			{
 				"RunScript"
 				{
@@ -1231,7 +1271,7 @@
 			"AbilityManaCost" 		"25"
 	
 			// SpellStart
-			OnSpellStart
+			"OnSpellStart"
 			{
 				"RunScript"
 				{
@@ -1279,19 +1319,32 @@
 			"AbilityManaCost" 		"25"
 	
 			// SpellStart
-			OnSpellStart
+			"OnSpellStart"
 			{
-				"SpawnUnit"
+				"RunScript"
 				{
-					"UnitName"	"elementalist_shadow_elemental"
-					"UnitCount"	"1"
-					"SpawnRadius"	"10"
-					"Target"	"POINT"
-					"Duration"		"30.0"
+					"Target"			"POINT"
+					"ModelScale"		"%modelscale"
+					"HPScale"			"%hpscale"
+					"ScriptFile"		"summons.lua"
+					"Function"			"SummonShadowElemental"
 				}
 			}
 	
 			// Special
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"modelscale"		"1.5"
+				}
+				"02"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"hpscale"			"40"
+				}
+			}
 		}
 	//End of file elementalist_summon_shadow_elemental.txt
 
@@ -1316,7 +1369,7 @@
 			"AbilityManaCost" 		"25"
 	
 			// SpellStart
-			OnSpellStart
+			"OnSpellStart"
 			{
 				"RunScript"
 				{
@@ -1536,44 +1589,10 @@
 	
 		"OnSpellStart"
 		{
-			"ActOnTargets"
+			"RunScript"
 			{
-				"Target"
-				{
-					"Center"  				"CASTER"  // You may use "targetKey" completions here.
-					"Radius" 				"600"
-					"Teams" 				"DOTA_UNIT_TARGET_TEAM_FRIENDLY"  // You may use "targetKey" completions here.
-					"Types" 				"DOTA_UNIT_TARGET_HERO" // You may use "targetKey" completions here.
-				}
-	
-				"Action"
-				{
-					"ApplyModifier"
-					{
-						"Target"	"TARGET"
-						"ModifierName"	"modifier_water_blessing"
-					}
-				}
-			}
-		}
-	
-		"Modifiers"    				// Can be used to create custom modifier. 
-		{  							// There are many snippets that can be expanded in to the modifiers. 
-			"modifier_water_blessing"   	// This should be the name of your modifier
-			{
-				// Refer to http://hex6.se/dota/modifier_functions.txt to see what snippets can be expanded in here.
-				"IsBuff"					"1"
-				"IsPurgable"				"0"
-				"IsHidden"					"0"
-				"Duration"					"180.0"
-				
-				"Properties"
-				{
-					// You may use "modifierProperty" completions within quotes here. Below is an example
-					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"400"
-					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"		"400"
-					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"400"
-				}
+				"ScriptFile"	"summon_abilities.lua"
+				"Function"		"WaterBlessing"
 			}
 		}
 	}

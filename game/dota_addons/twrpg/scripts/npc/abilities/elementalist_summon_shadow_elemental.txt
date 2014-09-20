@@ -16,17 +16,30 @@
 		"AbilityManaCost" 		"25"
 
 		// SpellStart
-		OnSpellStart
+		"OnSpellStart"
 		{
-			"SpawnUnit"
+			"RunScript"
 			{
-				"UnitName"	"elementalist_shadow_elemental"
-				"UnitCount"	"1"
-				"SpawnRadius"	"10"
-				"Target"	"POINT"
-				"Duration"		"30.0"
+				"Target"			"POINT"
+				"ModelScale"		"%modelscale"
+				"HPScale"			"%hpscale"
+				"ScriptFile"		"summons.lua"
+				"Function"			"SummonShadowElemental"
 			}
 		}
 
 		// Special
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"modelscale"		"1.5"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"hpscale"			"40"
+			}
+		}
 	}

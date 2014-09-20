@@ -19,7 +19,7 @@
 		
 
 		// SpellStart
-		OnSpellStart
+		"OnSpellStart"
 		{
 			"RunScript"
 			{

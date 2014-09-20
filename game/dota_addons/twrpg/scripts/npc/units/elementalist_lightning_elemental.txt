@@ -21,7 +21,7 @@
 		"Ability2"					"elementalist_lightning_elemental_thunder_strike_ability"			// Ability 2.
 		"Ability3"					""			// Ability 3.
 		"Ability4"					""			// Ability 4.
-		"Ability5"					""			// Ability 5.
+		"Ability5"					"elementalist_summon_duration"			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
 		"Ability8"					""			// Ability 8 - Extra.

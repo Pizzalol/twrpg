@@ -23,9 +23,9 @@ if TWRPGGameMode == nil then
 	TWRPGGameMode = class({})
 end
 
-function TWRPGGameMode:InitGameMode()
+--[[function TWRPGGameMode:InitGameMode()
 	print( "Template addon is loaded." )
-end
+end]]
 
 GameMode = nil
 
@@ -43,6 +43,30 @@ end
 	local entVictim = EntIndexToHScript(keys.entindex_killed)
 end]]
 
+function TWRPGGameMode:OnPlayerPicked( keys )
+	local spawnedUnit = keys.hero
+	local spawnedUnitIndex = EntIndexToHScript(keys.heroindex)
+
+	if spawnedUnitIndex:GetClassname() == "npc_dota_hero_enchantress" then
+		spawnedUnitIndex:GetAbilityByIndex(3):SetLevel(1)
+	end
+end
+
+function TWRPGGameMode:OnPlayerLeveledUp( keys )
+	local player = keys.player - 1
+	if PlayerResource:IsValidPlayer(player) then
+		local hero = PlayerResource:GetSelectedHeroEntity(player) 
+		local level = hero:GetLevel()
+		print(level)
+		if level % 40 == 0 and level <= 320 then
+			local abilityLevel = (level/40) + 1
+			hero:GetAbilityByIndex(3):SetLevel(abilityLevel)
+		end
+	else
+		print("Invalid player!")
+	end
+end
+
 function TWRPGGameMode:InitGameMode()
 	TWRPGGameMode = self
 	print('[twrpg] Starting to load twrpg gamemode...')
@@ -58,6 +82,18 @@ function TWRPGGameMode:InitGameMode()
 	GameRules:SetGoldPerTick(0)
 
 	--ListenToGameEvent('entity_hurt', Dynamic_Wrap(TWRPGGameMode, 'OnEntityHurt'), self)
+	--ListenToGameEvent( "npc_spawned", Dynamic_Wrap( TWRPGGameMode, "OnNPCSpawned" ), self )
+	ListenToGameEvent( "dota_player_pick_hero", Dynamic_Wrap( TWRPGGameMode, "OnPlayerPicked" ), self )
+	--ListenToGameEvent( "player_reconnected", Dynamic_Wrap( TWRPGGameMode, 'OnPlayerReconnected' ), self )
+	--ListenToGameEvent( "entity_killed", Dynamic_Wrap( TWRPGGameMode, 'OnEntityKilled' ), self )
+	--ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( TWRPGGameMode, "OnGameRulesStateChange" ), self )
+	--ListenToGameEvent( "player_stats_updated", Dynamic_Wrap(TWRPGGameMode, 'OnPlayerStatsUpdated'), self)
+	--ListenToGameEvent( "dota_player_learned_ability", Dynamic_Wrap(TWRPGGameMode, 'OnPlayerLearnedAbility'), self)
+	ListenToGameEvent( "dota_player_gained_level", Dynamic_Wrap(TWRPGGameMode, 'OnPlayerLeveledUp'), self)
+	--ListenToGameEvent( "dota_inventory_changed", Dynamic_Wrap(TWRPGGameMode, 'OnInventoryChanged'), self)
+	--ListenToGameEvent( "dota_item_purchased", Dynamic_Wrap(TWRPGGameMode, 'OnItemPurchased'), self)
+	--ListenToGameEvent( "dota_player_used_ability", Dynamic_Wrap(TWRPGGameMode, 'OnAbilityCast'), self)
+	--ListenToGameEvent( "dota_item_picked_up", Dynamic_Wrap(TWRPGGameMode, 'OnItemPickedUp'), self)
 
 	print('[twrpg] Rules set')
 end

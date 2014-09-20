@@ -17,7 +17,7 @@
 		"AbilityManaCost" 		"25"
 
 		// SpellStart
-		OnSpellStart
+		"OnSpellStart"
 		{
 			"RunScript"
 			{

@@ -77,4 +77,28 @@
 			}
 		}
 	}
+	"item_test_item"
+	{
+		"ID" "2107"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass" "item_datadriven"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"Modifiers"
+		{
+			"modifier_intellect"
+			{
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%bonus_int"
+				}
+			}
+		}
+		
+	}
+
 }

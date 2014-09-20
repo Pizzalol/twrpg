@@ -200,5 +200,26 @@ function SummonWaterElemental(keys)
 	end]]
 end
 
+function SummonShadowElemental(keys)
+	local caster = keys.caster
+	local level = keys.ability:GetLevel()
+	local player = caster:GetPlayerOwner()
+	local team = caster:GetTeamNumber() 
+	local heroloc = caster:GetAbsOrigin() 
+	local target = keys.target_points[1]
+	local modelScale = keys.ModelScale
+	local HPScale = keys.HPScale
+	local casterInt = caster:GetIntellect()
+	print(modelScale)
+	print(HPScale)
+
+	local shadowelemental = CreateUnitByName("elementalist_shadow_elemental", target, true, caster, caster, team)
+	shadowelemental:SetControllableByPlayer(caster:GetPlayerID(), true) 
+	shadowelemental:CreatureLevelUp(level-1)
+	shadowelemental:SetModelScale(modelScale)
+	shadowelemental:SetMaxHealth(HPScale*casterInt)
+	shadowelemental:SetHealth(shadowelemental:GetMaxHealth())
+end
+
 
 

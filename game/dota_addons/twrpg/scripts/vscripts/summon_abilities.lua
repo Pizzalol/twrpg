@@ -265,6 +265,16 @@ function ChainHeal( keys )
 	end
 end
 
+function WaterBlessing( keys )
+	local target = keys.caster:GetOwner()
+
+	local testItem = CreateItem("item_test_item", nil, nil)
+	testItem:ApplyDataDrivenModifier(target, target, "modifier_intellect", {bonus_int=200})
+	print("Testing for test item")
+	UTIL_RemoveImmediate(testItem) 
+	testItem = nil
+end
+
 -- Lightning Elemental abilities
 
 --[[Chain lightning spell which deals damage to 3 additional targets
@@ -602,4 +612,24 @@ function AbyssReach( keys )
 		table.victim = v
 		ApplyDamage(table)
 	end
+end
+
+function AbyssEye( keys )
+	local caster = keys.caster
+	local casterloc = caster:GetAbsOrigin() 
+
+	-- Spiral part
+	local x
+	local y
+	local dx
+	local dy
+	local maxY = 5
+	local maxX = 5
+	local maxBlocks = maxX*maxY
+
+	for i=0, maxBlocks, 1 do
+		if((-maxX/2 <= x) and (x <= maxX/2) and (-maxY/2 <= y) and (y <= maxY/2)) then
+			-- Do stuff
+		end
+		
 end
