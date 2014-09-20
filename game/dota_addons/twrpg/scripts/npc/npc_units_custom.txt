@@ -348,7 +348,7 @@
 			"Ability2"					"elementalist_shadow_elemental_abyss_pull_ability"			// Ability 2.
 			"Ability3"					"elementalist_shadow_elemental_abyss_reach_ability"			// Ability 3.
 			"Ability4"					"elementalist_shadow_elemental_abyss_presence_ability"			// Ability 4.
-			"Ability5"					""			// Ability 5.
+			"Ability5"					"elementalist_shadow_elemental_abyss_eye_ability"			// Ability 5.
 			"Ability6"					"elementalist_shadow_elemental_duration"			// Ability 6 - Extra.
 			"Ability7"					""			// Ability 7 - Extra.
 			"Ability8"					""			// Ability 8 - Extra.

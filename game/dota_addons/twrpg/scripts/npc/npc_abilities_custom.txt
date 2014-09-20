@@ -961,6 +961,32 @@
 	//End of file elementalist_shadow_elemental_abyss_dash_ability.txt
 
 
+	//Start of file elementalist_shadow_elemental_abyss_eye_ability.txt
+	"elementalist_shadow_elemental_abyss_eye_ability"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"shadow_demon_demonic_purge"
+		"MaxLevel"						"1"
+		"AOERadius"						"300"
+	
+		"AbilityManaCost"				"0"
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"5.0"
+	
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"summon_abilities.lua"
+				"Function"		"AbyssEye"
+			}
+		}
+		
+	}
+	//End of file elementalist_shadow_elemental_abyss_eye_ability.txt
+
+
 	//Start of file elementalist_shadow_elemental_abyss_presence_ability.txt
 	"elementalist_shadow_elemental_abyss_presence_ability"
 	{

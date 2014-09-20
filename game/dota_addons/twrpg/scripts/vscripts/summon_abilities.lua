@@ -617,19 +617,168 @@ end
 function AbyssEye( keys )
 	local caster = keys.caster
 	local casterloc = caster:GetAbsOrigin() 
+	local owner = caster:GetOwner()
 
 	-- Spiral part
-	local x
-	local y
-	local dx
-	local dy
-	local maxY = 5
-	local maxX = 5
-	local maxBlocks = maxX*maxY
+	-- checks whose turn it is to step
+	local xstep
+	local ystep
+	
+	-- x and y orientation
+	local xcheck = false
+	local ycheck = false
 
-	for i=0, maxBlocks, 1 do
-		if((-maxX/2 <= x) and (x <= maxX/2) and (-maxY/2 <= y) and (y <= maxY/2)) then
-			-- Do stuff
+	-- Test to see if y or x should swap orientation
+	local checkersCheck = false
+
+	-- Counter for steps
+	local counter = 1
+	local counterMax = 4
+	-- Counter for how often the maximum should be reduced
+	local counterMaxMax = 1
+	--positional vectors
+	local vectorX = 0
+	local vectorY = 0
+
+	-- create dummy at start coordinates to be linked with
+	local dummy = CreateUnitByName("npc_dummy_unit", casterloc, false, owner, owner, owner:GetTeam()) 
+	--dummy:HasFlyMovementCapability() 
+	dummy:AddNewModifier(dummy, nil, "modifier_phased", {})
+	local dummyability = dummy:FindAbilityByName("dummy_unit")
+	dummyability:SetLevel(1)
+	dummy:SetAbsOrigin(casterloc+Vector(0,0,500))
+
+	-- first block
+	local dummySpiralStart = CreateUnitByName("npc_dummy_unit", casterloc+Vector(600,600,0), false, owner, owner, owner:GetTeam()) 
+	dummySpiralStart:AddNewModifier(dummySpiralStart, nil, "modifier_phased", {})
+	local dummyability = dummySpiralStart:FindAbilityByName("dummy_unit")
+	dummyability:SetLevel(1)
+
+	-- particle
+	ElementalLinkParticle = ParticleManager:CreateParticle("particles/units/heroes/hero_wisp/wisp_tether.vpcf", PATTACH_CUSTOMORIGIN, dummy)
+	ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 0, dummy, 5, "attach_hitloc", dummy:GetAbsOrigin(), false)
+	ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 1, dummySpiralStart, 5, "attach_mouth", dummySpiralStart:GetAbsOrigin(), false)
+
+	-- Setting up the counters
+	
+	-- do loops for the rest
+	--while(xstep>0) do
+	--	xstep = xstep - 1
+	--	print("Is it in the loop?")
+		-- create a dummy
+		--[[Timers:CreateTimer(1,function()
+			--ParticleManager:DestroyParticle(ElementalLinkParticle, true)
+			vectorX = counter * 250
+			dummySpiral = CreateUnitByName("npc_dummy_unit", casterloc+Vector(600-vectorX,600,0), false, owner, owner, owner:GetTeam())
+			dummySpiral:AddNewModifier(dummySpiral, nil, "modifier_phased", {})
+			local dummyability = dummySpiral:FindAbilityByName("dummy_unit")
+			dummyability:SetLevel(1)
+			print("Counter is " .. tostring(counter))
+			counter = counter + 1
+
+			ElementalLinkParticle = ParticleManager:CreateParticle("particles/units/heroes/hero_wisp/wisp_tether.vpcf", PATTACH_CUSTOMORIGIN, dummy)
+			ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 0, dummy, 5, "attach_hitloc", dummy:GetAbsOrigin(), false)
+			ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 1, dummySpiral, 5, "attach_mouth", dummySpiral:GetAbsOrigin(), false)
+
+			if counter <= counterMax then
+				return 1.0
+			else
+				counter = 1
+				return
+			end
+			end)]]
+	--end
+
+	ystep = true
+	xstep = false
+
+	xcheck = true
+
+	
+
+	Timers:CreateTimer(2, function()
+		-- check whose turn it is to go and calculate
+		if ystep then
+			if not ycheck then
+				vectorY = vectorY - 250
+			else
+				vectorY = vectorY + 250
+			end
+		else
+			if not xcheck then
+				vectorX = vectorX - 250
+			else
+				vectorX = vectorX + 250
+			end
 		end
-		
+
+		dummySpiral = CreateUnitByName("npc_dummy_unit", casterloc+Vector(-650-vectorX,600-vectorY,0), false, owner, owner, owner:GetTeam())
+		dummySpiral:AddNewModifier(dummySpiral, nil, "modifier_phased", {})
+		local dummyability = dummySpiral:FindAbilityByName("dummy_unit")
+		dummyability:SetLevel(1)
+
+		ElementalLinkParticle = ParticleManager:CreateParticle("particles/units/heroes/hero_wisp/wisp_tether.vpcf", PATTACH_CUSTOMORIGIN, dummy)
+		ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 0, dummy, 5, "attach_hitloc", dummy:GetAbsOrigin(), false)
+		ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 1, dummySpiral, 5, "attach_mouth", dummySpiral:GetAbsOrigin(), false)
+
+		counter = counter + 1
+		print("Counter is ".. tostring(counter))
+		print("Counter Maximum is " .. tostring(counterMax))
+
+		if counter <= counterMax then
+			return 0.1
+		else
+			ystep = not ystep
+			xstep = not xstep
+			counter = 0
+			counterMaxMax = counterMaxMax + 1
+			if counterMaxMax == 2 then
+				counterMax = counterMax - 1
+				counterMaxMax = 0
+			end 
+
+			if checkersCheck then
+				xcheck = not xcheck
+			else
+				ycheck = not ycheck
+			end
+
+			checkersCheck = not checkersCheck
+
+			if counterMax < 0 then
+				return
+			else
+				return 0.1
+			end
+		end
+
+
+
+		end)
+
+	--[[for i=4,0,-1 do
+		xstep = i
+		ystep = i
+		while(ystep>0) do
+			ystep = ystep - 1
+			if ycheck then
+				-- create a dummy in a positive direction
+			else
+				-- create a dummy in a negative direction
+			end
+		end
+
+		while(xstep>0) do
+			xstep = xstep - 1
+			if xcheck then
+				-- create a dummy in a positive direction
+			else
+				-- create a dummy in a negative direction
+			end
+		end
+
+		ycheck = not ycheck
+		xcheck = not xcheck
+	end]]
+
 end
