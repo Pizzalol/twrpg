@@ -618,6 +618,11 @@ function AbyssEye( keys )
 	local caster = keys.caster
 	local casterloc = caster:GetAbsOrigin() 
 	local owner = caster:GetOwner()
+	local damageTable = {}
+
+	damageTable.attacker = caster
+	damageTable.damage_type = DAMAGE_TYPE_PURE
+	damageTable.damage = 50
 
 	-- Spiral part
 	-- checks whose turn it is to step
@@ -633,7 +638,7 @@ function AbyssEye( keys )
 
 	-- Counter for steps
 	local counter = 1
-	local counterMax = 4
+	local counterMax = 8
 	-- Counter for how often the maximum should be reduced
 	local counterMaxMax = 1
 	--positional vectors
@@ -649,10 +654,17 @@ function AbyssEye( keys )
 	dummy:SetAbsOrigin(casterloc+Vector(0,0,500))
 
 	-- first block
-	local dummySpiralStart = CreateUnitByName("npc_dummy_unit", casterloc+Vector(600,600,0), false, owner, owner, owner:GetTeam()) 
+	local dummySpiralStart = CreateUnitByName("npc_dummy_unit", casterloc+Vector(700,-700,0), false, owner, owner, owner:GetTeam()) 
 	dummySpiralStart:AddNewModifier(dummySpiralStart, nil, "modifier_phased", {})
 	local dummyability = dummySpiralStart:FindAbilityByName("dummy_unit")
 	dummyability:SetLevel(1)
+
+	local targetsToDamage = FindUnitsInRadius(caster:GetTeam(), dummySpiralStart:GetAbsOrigin(), nil, 155, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
+
+	for _,v in ipairs(targetsToDamage) do
+		damageTable.victim = v
+		ApplyDamage(damageTable)
+	end
 
 	-- particle
 	ElementalLinkParticle = ParticleManager:CreateParticle("particles/units/heroes/hero_wisp/wisp_tether.vpcf", PATTACH_CUSTOMORIGIN, dummy)
@@ -696,37 +708,52 @@ function AbyssEye( keys )
 
 	
 
-	Timers:CreateTimer(2, function()
+	Timers:CreateTimer(0.045, function()
 		-- check whose turn it is to go and calculate
 		if ystep then
 			if not ycheck then
-				vectorY = vectorY - 250
+				vectorY = vectorY - 155
 			else
-				vectorY = vectorY + 250
+				vectorY = vectorY + 155
 			end
 		else
 			if not xcheck then
-				vectorX = vectorX - 250
+				vectorX = vectorX - 155
 			else
-				vectorX = vectorX + 250
+				vectorX = vectorX + 155
 			end
 		end
-
-		dummySpiral = CreateUnitByName("npc_dummy_unit", casterloc+Vector(-650-vectorX,600-vectorY,0), false, owner, owner, owner:GetTeam())
+		ParticleManager:DestroyParticle(ElementalLinkParticle, true)
+		dummySpiral = CreateUnitByName("npc_dummy_unit", casterloc+Vector(700-vectorX,-700-vectorY,0), false, owner, owner, owner:GetTeam())
 		dummySpiral:AddNewModifier(dummySpiral, nil, "modifier_phased", {})
 		local dummyability = dummySpiral:FindAbilityByName("dummy_unit")
 		dummyability:SetLevel(1)
 
+		local targetsToDamage = FindUnitsInRadius(caster:GetTeam(), dummySpiral:GetAbsOrigin(), nil, 155, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
+
+		for _,v in ipairs(targetsToDamage) do
+			damageTable.victim = v
+			ApplyDamage(damageTable)
+		end
+
 		ElementalLinkParticle = ParticleManager:CreateParticle("particles/units/heroes/hero_wisp/wisp_tether.vpcf", PATTACH_CUSTOMORIGIN, dummy)
 		ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 0, dummy, 5, "attach_hitloc", dummy:GetAbsOrigin(), false)
 		ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 1, dummySpiral, 5, "attach_mouth", dummySpiral:GetAbsOrigin(), false)
+
+		-- Kill the dummy
+		Timers:CreateTimer(0.0,function()
+			local temporaryDummy = dummySpiral
+			Timers:CreateTimer(0.03,function()
+				temporaryDummy:RemoveSelf()
+				end)
+			end)
 
 		counter = counter + 1
 		print("Counter is ".. tostring(counter))
 		print("Counter Maximum is " .. tostring(counterMax))
 
 		if counter <= counterMax then
-			return 0.1
+			return 0.045
 		else
 			ystep = not ystep
 			xstep = not xstep
@@ -746,9 +773,11 @@ function AbyssEye( keys )
 			checkersCheck = not checkersCheck
 
 			if counterMax < 0 then
+				ParticleManager:DestroyParticle(ElementalLinkParticle, true)
+				--dummySpiral:RemoveSelf() 
 				return
 			else
-				return 0.1
+				return 0.045
 			end
 		end
 
