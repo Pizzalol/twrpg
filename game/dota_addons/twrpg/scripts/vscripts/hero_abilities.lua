@@ -31,12 +31,15 @@ function ElementalLink( keys )
 
 		elseif target:GetUnitName() == "elementalist_lightning_elemental" then
 			target:RemoveAbility("elementalist_lightning_elemental_electric_aura_ability")
+			target:RemoveModifierByName("modifier_electric") 
 
 		elseif target:GetUnitName() == "elementalist_earth_elemental" then
 			target:RemoveAbility("elementalist_earth_elemental_souloftheforest_ability")
+			target:RemoveModifierByName("modifier_souloftheforest")
 		end
 
 		target:RemoveAbility("elementalist_elemental_link_unit_death")
+		target:RemoveModifierByName("modifier_elemental_link_ability") 
 		ParticleManager:DestroyParticle(ElementalLinkParticle, true)
 	end
 end
@@ -149,6 +152,7 @@ function ElementalLinkCasterDeath( keys )
 			v:RemoveModifierByName("modifier_elemental_link_target")
 			v:RemoveModifierByName("modifier_elemental_link_ability")
 			v:RemoveAbility("elementalist_earth_elemental_souloftheforest_ability")
+			v:RemoveModifierByName("modifier_souloftheforest")
 			v:RemoveAbility("elementalist_elemental_link_unit_death")
 			return
 		end
@@ -161,6 +165,7 @@ function ElementalLinkCasterDeath( keys )
 			v:RemoveModifierByName("modifier_elemental_link_target")
 			v:RemoveModifierByName("modifier_elemental_link_ability")
 			v:RemoveAbility("elementalist_lightning_elemental_electric_aura_ability")
+			v:RemoveModifierByName("modifier_electric") 
 			v:RemoveAbility("elementalist_elemental_link_unit_death")
 			return
 		end
@@ -315,6 +320,7 @@ end
 function DreamgateCast( keys )
 	local caster = keys.caster
 	local target = keys.target_points[1]
+	local team = caster:GetTeam()
 	local fire
 	local water
 	local lightning
@@ -322,6 +328,13 @@ function DreamgateCast( keys )
 	local shadow
 
 	if caster:HasModifier("modifier_dreamgate") then
+
+		-- Creating wisps
+		local wisp = CreateUnitByName("elementalist_wisp", target, true, caster, caster, team)
+		wisp:SetControllableByPlayer(caster:GetPlayerID(), true)
+
+
+
 		local checkelement = Entities:FindAllByModel("models/heroes/phoenix/phoenix_bird.vmdl")
 
 		for i,v in ipairs(checkelement) do

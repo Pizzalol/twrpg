@@ -443,6 +443,7 @@
 	    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_ALL"
 		"BaseClass"		"ABILITY_DATADRIVEN"
 		"AbilityTextureName"	"invoker_invoke"
+		"HotKeyOverride" 		"Y"
 		
 		// Casting
 		"AbilityCastRange"		"600"
@@ -885,6 +886,7 @@
 			"modifier_electric_aura"
 			{
 				"IsHidden"	"0"
+				"TextureName"	"disruptor_static_storm"
 	
 				"Properties"
 				{
@@ -1191,6 +1193,7 @@
 	
 			// Cost
 			"AbilityManaCost" 		"25"
+			"HotKeyOverride" 		"T"
 	
 			// SpellStart
 			"OnSpellStart"

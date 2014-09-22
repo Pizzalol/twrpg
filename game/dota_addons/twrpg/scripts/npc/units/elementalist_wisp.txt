@@ -1,28 +1,24 @@
-// Hero Elementalist Earth Elemental summon
-	"elementalist_earth_elemental"
+// Hero Elementalist Fire Elemental summon
+	"elementalist_wisp"
 	{
 		// General
 		//
 		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
-		"Model"						"models/heroes/treant_protector/treant_protector.vmdl"	// Model.
+		"Model"						"models/heroes/wisp/wisp.vmdl"	// Model.
 		"SoundSet"					"Undying_Zombie"					// Name of sound set.
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_undying.vsndevts"
 		"ModelScale"				"0.5"
 		"Level"						"1"
 		"ConsideredHero"			"0"
-		"Precache"
-		{
-			"particle_folder"		"particles/units/heroes/hero_treant"
-		}
+		
 		// Abilities
 		//----------------------------------------------------------------
 		
-		"AbilityLayout"				"4"
-		"Ability1"					"elementalist_earth_elemental_taunt_ability"			// Ability 1.
-		"Ability2"					"elementalist_earth_elemental_toggle_ability"			// Ability 2.
+		"Ability1"					""			// Ability 1.
+		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
 		"Ability4"					""			// Ability 4.
-		"Ability5"					"elementalist_summon_duration"			// Ability 5.
+		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
 		"Ability8"					""			// Ability 8 - Extra.
@@ -34,15 +30,15 @@
 
 		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"			"37"		// Damage range min.
 		"AttackDamageMax"			"45"		// Damage range max.
 		"AttackRate"				"1.6"		// Speed of attack.
 		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
-		"AttackRange"				"128"		// Range within a target can be attacked.
-		"ProjectileModel"			""			// Particle system model for projectile.
-		"ProjectileSpeed"			""			// Speed of projectile.
+		"AttackRange"				"600"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/units/heroes/hero_wisp/wisp_base_attack.vpcf"			// Particle system model for projectile.
+		"ProjectileSpeed"			"900"			// Speed of projectile.
 
 		// Bounty
 		//----------------------------------------------------------------
@@ -64,10 +60,10 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"1200"		// Base health.
+		//"StatusHealth"				"1200"		// Base health.
 		"StatusHealthRegen"			"1"			// Health regeneration rate.
-		"StatusMana"				"100"		// Base mana.
-		"StatusManaRegen"			"1"			// Mana regeneration rate.
+		"StatusMana"				"0"		// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
 
 		// Team
 		//----------------------------------------------------------------
@@ -81,30 +77,10 @@
 		"VisionDaytimeRange"		"1400"		// Range of vision during day light.
 		"VisionNighttimeRange"		"1400"		// Range of vision at night time.
 
+		// AI
+		"vscripts"					"ai_elementalist_wisp.lua"
+
 		// Creature Data
 		//----------------------------------------------------------------------------------------------------------------------
-		Creature
-		{
-			"AttachWearables"
-			{
-				"Wearable1"
-				{
-					"ItemDef"			"227"		
-				}
-				"Wearable2"
-				{
-					"ItemDef"			"228"		
-				}
-				"Wearable3"
-				{
-					"ItemDef"			"229"		
-				}
-				"Wearable4"
-				{
-					"ItemDef"			"230"		
-				}
-			}
-		}
-			
 		
 	}

@@ -24,6 +24,7 @@
 		"modifier_electric_aura"
 		{
 			"IsHidden"	"0"
+			"TextureName"	"disruptor_static_storm"
 
 			"Properties"
 			{

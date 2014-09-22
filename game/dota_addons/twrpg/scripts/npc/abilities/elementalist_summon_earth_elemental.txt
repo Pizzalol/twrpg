@@ -15,6 +15,7 @@
 
 		// Cost
 		"AbilityManaCost" 		"25"
+		"HotKeyOverride" 		"T"
 
 		// SpellStart
 		"OnSpellStart"
