@@ -8,41 +8,39 @@ behaviorSystem = {} -- create the global so we can assign to it
 
 function Spawn( entityKeyValues )
 	thisEntity:SetContextThink( "AIThink", AIThink, 0.25 )
-    --behaviorSystem = AICore:CreateBehaviorSystem( { BehaviorNone, BehaviorDismember, BehaviorThrowHook, BehaviorRunAway } )
-    behaviorSystem = AICore:CreateBehaviorSystem( { BehaviorNone, BehaviorDismember } ) 
+	--thisEntity:AddNewModifier(thisEntity, nil, "modifier_phased", {}) 
+    --behaviorSystem = AICore:CreateBehaviorSystem( { BehaviorFollow, BehaviorAttack, BehaviorReturn, BehaviorRunAway } )
+    behaviorSystem = AICore:CreateBehaviorSystem( { BehaviorFollow, BehaviorAttack, BehaviorReturn } ) 
 end
 
 function AIThink() -- For some reason AddThinkToEnt doesn't accept member functions
        return behaviorSystem:Think()
 end
 
-function CollectRetreatMarkers()
-	local result = {}
-	local i = 1
-	local wp = nil
-	while true do
-		wp = Entities:FindByName( nil, string.format("waypoint_%d", i ) )
-		if not wp then
-			return result
-		end
-		table.insert( result, wp:GetOrigin() )
-		i = i + 1
-	end
-end
-POSITIONS_retreat = CollectRetreatMarkers()
 
+owner = thisEntity:GetOwner()
+result = {owner:GetAbsOrigin()+Vector(100,0,0),
+owner:GetAbsOrigin()+Vector(100,100,0),
+owner:GetAbsOrigin()+Vector(0,100,0),
+owner:GetAbsOrigin()+Vector(-100,0,0),
+owner:GetAbsOrigin()+Vector(-100,-100,0),
+owner:GetAbsOrigin()+Vector(0,-100,0),
+owner:GetAbsOrigin()+Vector(100,-100,0),
+owner:GetAbsOrigin()+Vector(-100,100,0)}
+
+POSITIONS_retreat = result
 --------------------------------------------------------------------------------------------------------
 
-BehaviorNone = {}
+BehaviorFollow = {}
 
-function BehaviorNone:Evaluate()
+function BehaviorFollow:Evaluate()
 	return 1 -- must return a value > 0, so we have a default
 end
 
-function BehaviorNone:Begin()
+function BehaviorFollow:Begin()
 	self.endTime = GameRules:GetGameTime() + 1
 	
-	local owner = thisEntity:GetOwner()
+	--local owner = thisEntity:GetOwner()
 	
 	if owner then
 		self.order =
@@ -60,15 +58,37 @@ function BehaviorNone:Begin()
 	end
 end
 
-function BehaviorNone:Continue()
+function BehaviorFollow:Continue()
 	self.endTime = GameRules:GetGameTime() + 1
+
+	result = {owner:GetAbsOrigin()+Vector(100,0,0),
+	owner:GetAbsOrigin()+Vector(100,100,0),
+	owner:GetAbsOrigin()+Vector(0,100,0),
+	owner:GetAbsOrigin()+Vector(-100,0,0),
+	owner:GetAbsOrigin()+Vector(-100,-100,0),
+	owner:GetAbsOrigin()+Vector(0,-100,0),
+	owner:GetAbsOrigin()+Vector(100,-100,0),
+	owner:GetAbsOrigin()+Vector(-100,100,0)}
+	
+	POSITIONS_retreat = result
+
+	local happyPlaceIndex =  RandomInt( 1, #POSITIONS_retreat )
+	escapePoint = POSITIONS_retreat[ happyPlaceIndex ]
+
+	self.order =
+	{
+		UnitIndex = thisEntity:entindex(),
+		OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
+		Position = escapePoint
+		
+	}
 end
 
 --------------------------------------------------------------------------------------------------------
 
-BehaviorDismember = {}
+BehaviorAttack = {}
 
-function BehaviorDismember:Evaluate()
+function BehaviorAttack:Evaluate()
 	self.dismemberAbility = thisEntity:FindAbilityByName("creature_dismember")
 	local target
 	local desire = 0
@@ -85,17 +105,15 @@ function BehaviorDismember:Evaluate()
 	target = AICore:RandomEnemyHeroInRange(thisEntity, range)
 
 	if target then
-		desire = 5
+		desire = 2
 		self.target = target
-	else
-		desire = 0
 	end
 
 	return desire
 end
 
-function BehaviorDismember:Begin()
-	self.endTime = GameRules:GetGameTime() + 1
+function BehaviorAttack:Begin()
+	self.endTime = GameRules:GetGameTime() + 2
 
 	self.order =
 	{
@@ -105,9 +123,9 @@ function BehaviorDismember:Begin()
 	}
 end
 
-BehaviorDismember.Continue = BehaviorDismember.Begin --if we re-enter this ability, we might have a different target; might as well do a full reset
+BehaviorAttack.Continue = BehaviorAttack.Begin --if we re-enter this ability, we might have a different target; might as well do a full reset
 
-function BehaviorDismember:Think(dt)
+function BehaviorAttack:Think(dt)
 	if not self.target:IsAlive() then
 		self.endTime = GameRules:GetGameTime()
 		return
@@ -115,14 +133,15 @@ function BehaviorDismember:Think(dt)
 end
 
 --------------------------------------------------------------------------------------------------------
---[[
-BehaviorThrowHook = {}
 
-function BehaviorThrowHook:Evaluate()
+BehaviorReturn = {}
+
+function BehaviorReturn:Evaluate()
 	local desire = 0
+	local vDistance
 	
 	-- let's not choose this twice in a row
-	if currentBehavior == self then return desire end
+	--[[if currentBehavior == self then return desire end
 
 	self.hookAbility = thisEntity:FindAbilityByName( "creature_meat_hook" )
 	
@@ -132,7 +151,8 @@ function BehaviorThrowHook:Evaluate()
 			desire = 4
 		end
 	end
-	
+
+
 	local enemies = FindUnitsInRadius( DOTA_TEAM_BADGUYS, thisEntity:GetOrigin(), nil, 400, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, 0, false )
 	if #enemies > 0 then
 		for _,enemy in pairs(enemies) do
@@ -143,30 +163,48 @@ function BehaviorThrowHook:Evaluate()
 				desire = 2
 			end
 		end
-	end 
+	end ]]
+
+	vDistance = (thisEntity:GetOrigin() - owner:GetOrigin()):Length2D() 
+
+	if vDistance >= 500 then
+		desire = 4
+	else
+		desire = 1
+	end
 
 	return desire
 end
 
-function BehaviorThrowHook:Begin()
+function BehaviorReturn:Begin()
 	self.endTime = GameRules:GetGameTime() + 1
-
-	local targetPoint = self.target:GetOrigin() + RandomVector( 100 )
 	
-	self.order =
-	{
-		UnitIndex = thisEntity:entindex(),
-		OrderType = DOTA_UNIT_ORDER_CAST_POSITION,
-		AbilityIndex = self.hookAbility:entindex(),
-		Position = targetPoint
-	}
+	--local owner = thisEntity:GetOwner()
+	thisEntity:SetOrigin(owner:GetOrigin()+Vector(100,100,0))
+	
+	if owner then
+		self.order =
+		{
+			UnitIndex = thisEntity:entindex(),
+			OrderType = DOTA_UNIT_ORDER_MOVE_TO_TARGET,
+			TargetIndex = owner:entindex()
+		}
+	else
+		self.order =
+		{
+			UnitIndex = thisEntity:entindex(),
+			OrderType = DOTA_UNIT_ORDER_STOP
+		}
+	end
 
 end
 
-BehaviorThrowHook.Continue = BehaviorThrowHook.Begin
+function BehaviorReturn:Continue()
+	self.endTime = GameRules:GetGameTime() + 1	
+end
 
 --------------------------------------------------------------------------------------------------------
-
+--[[
 BehaviorRunAway = {}
 
 function BehaviorRunAway:Evaluate()
@@ -254,6 +292,6 @@ BehaviorRunAway.Continue = BehaviorRunAway.Begin
 
 --------------------------------------------------------------------------------------------------------
 
-AICore.possibleBehaviors = { BehaviorNone, BehaviorDismember, BehaviorThrowHook, BehaviorRunAway }
+AICore.possibleBehaviors = { BehaviorFollow, BehaviorAttack, BehaviorReturn, BehaviorRunAway }
 ]]
-AICore.possibleBehaviors = { BehaviorNone, BehaviorDismember }
+AICore.possibleBehaviors = { BehaviorFollow, BehaviorAttack, BehaviorReturn }
