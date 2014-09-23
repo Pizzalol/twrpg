@@ -62,9 +62,13 @@
 				"Passive"	"1"
 				"IsHidden"	"1"
 
-				"Properties"
+				"OnCreated"
 				{
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"100"
+					"RunScript"
+					{
+						"ScriptFile"	"summon_abilities.lua"
+						"Function"		"ThornsAuraArmor"
+					}
 				}
 			}			
 		}

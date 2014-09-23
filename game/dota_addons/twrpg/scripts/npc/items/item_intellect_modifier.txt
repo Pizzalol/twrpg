@@ -1,0 +1,105 @@
+"item_intellect_modifier"
+	{
+		"ID" "2106"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass" "item_datadriven"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"Modifiers"
+		{
+			"modifier_intellect_mod_1"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"1"
+				}
+			}
+			"modifier_intellect_mod_2"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"2"
+				}
+			}
+			"modifier_intellect_mod_4"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"4"
+				}
+			}
+			"modifier_intellect_mod_8"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"8"
+				}
+			}
+			"modifier_intellect_mod_16"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"16"
+				}
+			}
+			"modifier_intellect_mod_32"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"32"
+				}
+			}
+			"modifier_intellect_mod_64"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"64"
+				}
+			}
+			"modifier_intellect_mod_128"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"128"
+				}
+			}
+			"modifier_intellect_mod_256"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"256"
+				}
+			}
+			"modifier_intellect_mod_512"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"512"
+				}
+			}
+		}
+	}

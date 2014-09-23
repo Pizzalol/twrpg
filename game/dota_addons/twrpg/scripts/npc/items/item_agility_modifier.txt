@@ -1,0 +1,105 @@
+"item_agility_modifier"
+	{
+		"ID" "2107"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass" "item_datadriven"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"Modifiers"
+		{
+			"modifier_agility_mod_1"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"1"
+				}
+			}
+			"modifier_agility_mod_2"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"2"
+				}
+			}
+			"modifier_agility_mod_4"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"4"
+				}
+			}
+			"modifier_agility_mod_8"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"8"
+				}
+			}
+			"modifier_agility_mod_16"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"16"
+				}
+			}
+			"modifier_agility_mod_32"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"32"
+				}
+			}
+			"modifier_agility_mod_64"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"64"
+				}
+			}
+			"modifier_agility_mod_128"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"128"
+				}
+			}
+			"modifier_agility_mod_256"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"256"
+				}
+			}
+			"modifier_agility_mod_512"
+			{
+				"IsHidden" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"512"
+				}
+			}
+		}
+	}

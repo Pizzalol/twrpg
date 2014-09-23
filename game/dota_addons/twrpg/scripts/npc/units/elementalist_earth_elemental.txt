@@ -20,7 +20,7 @@
 		"AbilityLayout"				"4"
 		"Ability1"					"elementalist_earth_elemental_taunt_ability"			// Ability 1.
 		"Ability2"					"elementalist_earth_elemental_toggle_ability"			// Ability 2.
-		"Ability3"					""			// Ability 3.
+		"Ability3"					"elementalist_earth_elemental_thorns_ability"			// Ability 3.
 		"Ability4"					""			// Ability 4.
 		"Ability5"					"elementalist_summon_duration"			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.

@@ -9,10 +9,44 @@
 
 	"OnSpellStart"
 	{
-		"RunScript"
+		"ApplyModifier"
 		{
-			"ScriptFile"	"summon_abilities.lua"
-			"Function"		"WaterBlessing"
+			"ModifierName"			"modifier_water_blessing"
+			"Target"
+			{
+				"Center"			"CASTER"
+				"Radius"			"600"
+				"Teams"				"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Types"				"DOTA_UNIT_TARGET_HERO"
+			}
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_water_blessing"
+		{
+			"IsBuff"		"1"
+			"Duration"		"10"
+			"TextureName"	"omniknight_guardian_angel"
+
+			"OnCreated"
+			{
+				"RunScript"
+				{
+					"Target"		"TARGET"
+					"ScriptFile"	"summon_abilities.lua"
+					"Function"		"WaterBlessing"
+				}
+			}
+			"OnDestroy"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"summon_abilities.lua"
+					"Function"		"WaterBlessingRemove"
+				}
+			}
 		}
 	}
 }

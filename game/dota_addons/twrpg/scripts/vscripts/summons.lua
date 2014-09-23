@@ -97,23 +97,14 @@ function SummonEarthElemental(keys)
 	earthelemental:SetMaxHealth(casterInt*HPScale)
 	earthelemental:SetHealth(earthelemental:GetMaxHealth())
 
-	if level == 1 then
+	--[[if level == 1 then
 		earthelemental:SetModelScale(0.5) 
-		earthelemental:AddAbility("elementalist_earth_elemental_thorns_ability") --[[Returns:void
-		Add an ability to this unit by name.
-		]]
-		local earthability = earthelemental:FindAbilityByName("elementalist_earth_elemental_thorns_ability") --[[Returns:handle
-		Retrieve an ability by name from the unit.
-		]]
+		earthelemental:AddAbility("elementalist_earth_elemental_thorns_ability") 
+		local earthability = earthelemental:FindAbilityByName("elementalist_earth_elemental_thorns_ability")
 		print("hello")
-		earthability:SetLevel(1) --[[Returns:void
-		Sets the level of this ability.
-		]]
-		--earthelemental:AddNewModifier(earthelemental, nil, "modifier_item_assault_positive", {bonus_attack_speed = 35 , armor = 10}) --[[Returns:void
-		--No Description Set
-		--]]
+		earthability:SetLevel(1)
 		print("hello again")
-	end
+	end]]
 end
 
 function SummonLightningElemental(keys)

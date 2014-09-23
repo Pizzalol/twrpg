@@ -87,13 +87,28 @@ function ThornsAura(keys)
 	]]
 end
 
--- Was playing around with this function, doesnt work, ignore
---[[function ThornsAuraArmor(keys)
+-- [[Adds armor to the unit depending on the owners intelligence]]
+function ThornsAuraArmor(keys)
 	local caster = keys.caster
-	local getability = caster:FindAbilityByName("elementalist_earth_elemental_thorns_ability")
+	local owner = caster:GetOwner()
+	local ownerInt = owner:GetIntellect() 
+	local bitTable = {512,256,128,64,32,16,8,4,2,1}
+	local armor = math.floor(ownerInt / 10)
 
-	caster:AddNewModifier(caster, getability, "modifier_thorns_armor", {armor_bonus = 80})
-end]]
+	-- Creates temporary item to steal the modifiers from
+	local armorBonus = CreateItem("item_armor_modifier", nil, nil) 
+	for p=1, #bitTable do
+		local val = bitTable[p]
+		local count = math.floor(armor / val)
+		if count >= 1 then
+			armorBonus:ApplyDataDrivenModifier(caster, caster, "modifier_armor_mod_" .. val, {})
+			armor = armor - val
+		end
+	end
+	-- Cleanup
+	UTIL_RemoveImmediate(armorBonus)
+	armorBonus = nil
+end
 
 --[[Has a chance to trigger everytime the caster is hit
 	Once it activates it heals all allied units in a radius for 10% of the casters
@@ -266,13 +281,47 @@ function ChainHeal( keys )
 end
 
 function WaterBlessing( keys )
-	local target = keys.caster:GetOwner()
+	local caster = keys.target 
+	local primaryAttribute = caster:GetPrimaryAttribute() 
+	local attribute
+	local attributeBoostItem
+	local modifierName
+	print("Primary attribute is " .. tostring(primaryAttribute))
 
-	local testItem = CreateItem("item_test_item", nil, nil)
-	testItem:ApplyDataDrivenModifier(target, target, "modifier_intellect", {bonus_int=200})
-	print("Testing for test item")
-	UTIL_RemoveImmediate(testItem) 
-	testItem = nil
+	-- 0 STR
+	-- 1 AGI
+	-- 2 INT
+	if primaryAttribute == 0 then
+		attribute = caster:GetStrength() 
+		attributeBoostItem = CreateItem("item_strength_modifier", nil, nil)
+		modifierName = "strength"
+	elseif primaryAttribute == 1 then
+		attribute = caster:GetAgility()
+		attributeBoostItem = CreateItem("item_agility_modifier", nil, nil)
+		modifierName = "agility"
+	else
+		attribute = caster:GetIntellect()
+		attributeBoostItem = CreateItem("item_intellect_modifier", nil, nil)
+		modifierName = "intellect" 
+	end
+	print("Modifier name is " .. modifierName)
+
+	local bitTable = {512,256,128,64,32,16,8,4,2,1}
+	local attributeBoost = math.floor(attribute * 0.1)
+	print("Attribute boost is ".. tostring(attributeBoost))
+
+	 
+	for p=1, #bitTable do
+		local val = bitTable[p]
+		local count = math.floor(attributeBoost / val)
+		if count >= 1 then
+			attributeBoostItem:ApplyDataDrivenModifier(caster, caster, "modifier_" .. modifierName .. "_mod_" .. val, {})
+			attributeBoost = attributeBoost - val
+		end
+	end
+	-- Cleanup
+	UTIL_RemoveImmediate(attributeBoostItem)
+	attributeBoostItem = nil
 end
 
 -- Lightning Elemental abilities
