@@ -2,6 +2,7 @@
 
 lightningCount = 0
 abyssCount = 0
+bitTable = {512,256,128,64,32,16,8,4,2,1}
 
 
 
@@ -91,8 +92,7 @@ end
 function ThornsAuraArmor(keys)
 	local caster = keys.caster
 	local owner = caster:GetOwner()
-	local ownerInt = owner:GetIntellect() 
-	local bitTable = {512,256,128,64,32,16,8,4,2,1}
+	local ownerInt = owner:GetIntellect()	
 	local armor = math.floor(ownerInt / 10)
 
 	-- Creates temporary item to steal the modifiers from
@@ -190,8 +190,9 @@ function ImmolationAura(keys)
 	-- Deal damage to the caster
 	table.victim = caster
 	table.damage_type = DAMAGE_TYPE_MAGICAL
-	print("immolration aura test")
-	--ApplyDamage(table)
+	table.damage = caster:GetHealth() * 0.1
+	print("Immolation aura dealing damage to self: " .. tostring(table.damage))
+	ApplyDamage(table)
 end
 
 --[[Suicide ability which deals damage in an area depending on the casters missing health]]
@@ -281,8 +282,8 @@ function ChainHeal( keys )
 end
 
 function WaterBlessing( keys )
-	local caster = keys.target 
-	local primaryAttribute = caster:GetPrimaryAttribute() 
+	local target = keys.target 
+	local primaryAttribute = target:GetPrimaryAttribute() 
 	local attribute
 	local attributeBoostItem
 	local modifierName
@@ -292,21 +293,21 @@ function WaterBlessing( keys )
 	-- 1 AGI
 	-- 2 INT
 	if primaryAttribute == 0 then
-		attribute = caster:GetStrength() 
+		attribute = target:GetStrength() 
 		attributeBoostItem = CreateItem("item_strength_modifier", nil, nil)
 		modifierName = "strength"
 	elseif primaryAttribute == 1 then
-		attribute = caster:GetAgility()
+		attribute = target:GetAgility()
 		attributeBoostItem = CreateItem("item_agility_modifier", nil, nil)
 		modifierName = "agility"
 	else
-		attribute = caster:GetIntellect()
+		attribute = target:GetIntellect()
 		attributeBoostItem = CreateItem("item_intellect_modifier", nil, nil)
 		modifierName = "intellect" 
 	end
 	print("Modifier name is " .. modifierName)
 
-	local bitTable = {512,256,128,64,32,16,8,4,2,1}
+	 
 	local attributeBoost = math.floor(attribute * 0.1)
 	print("Attribute boost is ".. tostring(attributeBoost))
 
@@ -315,13 +316,43 @@ function WaterBlessing( keys )
 		local val = bitTable[p]
 		local count = math.floor(attributeBoost / val)
 		if count >= 1 then
-			attributeBoostItem:ApplyDataDrivenModifier(caster, caster, "modifier_" .. modifierName .. "_mod_" .. val, {})
+			attributeBoostItem:ApplyDataDrivenModifier(target, target, "modifier_" .. modifierName .. "_mod_" .. val, {})
 			attributeBoost = attributeBoost - val
 		end
 	end
 	-- Cleanup
 	UTIL_RemoveImmediate(attributeBoostItem)
 	attributeBoostItem = nil
+end
+
+function WaterBlessingRemove( keys )
+	local target = keys.target
+	local primaryAttribute = target:GetPrimaryAttribute() 
+	local modifierName
+	print("Primary attribute is " .. tostring(primaryAttribute))
+
+	-- 0 STR
+	-- 1 AGI
+	-- 2 INT
+	if primaryAttribute == 0 then
+		modifierName = "strength"
+	elseif primaryAttribute == 1 then
+		modifierName = "agility"
+	else
+		modifierName = "intellect" 
+	end
+	
+ 
+	-- Gets the list of modifiers on the hero and loops through removing and health modifier
+	local modCount = target:GetModifierCount()
+	for i = 0, modCount do
+		for u = 1, #bitTable do
+			local val = bitTable[u]
+			if target:GetModifierNameByIndex(i) == "modifier_".. modifierName .. "_mod_" .. val  then
+				target:RemoveModifierByName("modifier_" .. modifierName .. "_mod_" .. val)
+			end
+		end
+	end
 end
 
 -- Lightning Elemental abilities

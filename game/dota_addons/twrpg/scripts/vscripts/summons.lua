@@ -136,6 +136,34 @@ function SummonLightningElemental(keys)
 	lightningelemental:SetHealth(lightningelemental:GetMaxHealth())
 	lightningelemental:SetMana(0)
 
+	-- Dreamgate chain bonus
+	if caster:HasModifier("modifier_dreamgate") then
+		local dummyUnit = CreateUnitByName("npc_dummy_unit", target, false, nil, nil, team)
+		dummyUnit:AddNewModifier(dummyUnit, nil, "modifier_phased", {}) 
+		local dummyAbility = dummyUnit:FindAbilityByName("dummy_unit")
+		dummyAbility:SetLevel(1)
+
+		dummyUnit:AddAbility("dummy_unit_lightning_armor_reduction") 
+		local dummyDreamgateAbility = dummyUnit:FindAbilityByName("dummy_unit_lightning_armor_reduction") 
+		dummyDreamgateAbility:SetLevel(level) 
+		Timers:CreateTimer(0.01, function()
+		dummyUnit:CastAbilityNoTarget(dummyDreamgateAbility, 0) 
+		print("Timer 1")
+		Timers:CreateTimer(2, function()
+			dummyUnit:RemoveSelf() 
+			print("Timer 2")
+			end)
+		end)
+
+		local unitToStun = FindUnitsInRadius(team, target, nil, 600, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, FIND_CLOSEST, false) 
+
+		for _,v in ipairs(unitToStun) do
+			v:AddNewModifier(caster, nil, "modifier_stunned", {duration = 6}) 
+		end
+
+		caster:RemoveModifierByName("modifier_dreamgate") 
+	end
+
 	--[[if level == 1 then
 		fireelemental:SetModelScale(0.20) 
 	elseif level == 2 then
@@ -177,6 +205,28 @@ function SummonWaterElemental(keys)
 	waterelemental:SetModelScale(modelScale)
 	waterelemental:SetMaxHealth(HPScale*casterInt)
 	waterelemental:SetHealth(waterelemental:GetMaxHealth())
+
+	if caster:HasModifier("modifier_dreamgate") then
+		local dummyUnit = CreateUnitByName("npc_dummy_unit", target, false, nil, nil, team)
+		dummyUnit:AddNewModifier(dummyUnit, nil, "modifier_phased", {}) 
+		--local dummyAbility = dummyUnit:FindAbilityByName("dummy_unit")
+		--dummyAbility:SetLevel(1)
+
+		dummyUnit:AddAbility("dummy_unit_water_well") 
+		local dummyDreamgateAbility = dummyUnit:FindAbilityByName("dummy_unit_water_well")
+		dummyDreamgateAbility:SetLevel(1)
+
+		Timers:CreateTimer(0.01, function()
+		dummyUnit:CastAbilityNoTarget(dummyDreamgateAbility, 0) 
+		print("Healing well 1")
+		Timers:CreateTimer(6.5, function()
+			dummyUnit:RemoveSelf() 
+			print("Healing well 2")
+			end)
+		end)
+
+		caster:RemoveModifierByName("modifier_dreamgate")
+	end
 
 	--[[if level == 1 then
 		fireelemental:SetModelScale(0.20) 

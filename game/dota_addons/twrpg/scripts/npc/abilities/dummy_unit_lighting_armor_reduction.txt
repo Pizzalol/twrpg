@@ -1,0 +1,51 @@
+"dummy_unit_lightning_armor_reduction"
+{
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+	"BaseClass"						"ability_datadriven"
+	"AbilityTextureName"			"dark_seer_vacuum"
+	"MaxLevel"						"5"
+	"AOERadius"						"500"
+
+	"AbilityManaCost"				"0"
+	"AbilityCastRange"				"600"
+	"AbilityCastPoint"				"0.0"
+	"AbilityCooldown"				"0.0"
+
+	"OnSpellStart"
+	{
+		"ApplyModifier"
+		{
+			"ModifierName"			"modifier_lightning_armor_reduction"
+			"Target"
+			{
+				"Center"			"CASTER"
+				"Radius"			"600"
+				"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Types"				"DOTA_UNIT_TARGET_ALL"
+			}
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_lightning_armor_reduction"
+		{
+			"Duration"		"18.0"
+			"IsDebuff"		"1"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_reduction"
+			}
+		}
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"armor_reduction"				"-50 -100 -150 -200 -250"
+		}
+	}	
+}

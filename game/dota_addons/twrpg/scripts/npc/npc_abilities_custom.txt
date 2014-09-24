@@ -29,6 +29,61 @@
 	//End of file dummy_unit.txt
 
 
+	//Start of file dummy_unit_lighting_armor_reduction.txt
+	"dummy_unit_lightning_armor_reduction"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"dark_seer_vacuum"
+		"MaxLevel"						"5"
+		"AOERadius"						"500"
+	
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"0.0"
+	
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"			"modifier_lightning_armor_reduction"
+				"Target"
+				{
+					"Center"			"CASTER"
+					"Radius"			"600"
+					"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Types"				"DOTA_UNIT_TARGET_ALL"
+				}
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_lightning_armor_reduction"
+			{
+				"Duration"		"18.0"
+				"IsDebuff"		"1"
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_reduction"
+				}
+			}
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"armor_reduction"				"-50 -100 -150 -200 -250"
+			}
+		}	
+	}
+	//End of file dummy_unit_lighting_armor_reduction.txt
+
+
 	//Start of file dummy_unit_pull.txt
 	"dummy_unit_pull"
 	{
@@ -71,13 +126,75 @@
 	//End of file dummy_unit_pull.txt
 
 
+	//Start of file dummy_unit_water_well.txt
+	"dummy_unit_water_well"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"dark_seer_vacuum"
+		"MaxLevel"						"1"
+		"AOERadius"						"500"
+	
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"0.0"
+	
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"			"modifier_water_well"
+				"Target"				"CASTER"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_water_well"
+			{
+				"Duration"		"6.0"
+				"ThinkInterval"	"1.0"
+	
+				"OnIntervalThink"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"		"modifier_water_well_healing"
+						"Target"
+						{
+							"Center"			"CASTER"
+							"Radius"			"600"
+							"Teams"				"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+							"Types"				"DOTA_UNIT_TARGET_ALL"
+						}
+					}
+				}
+			}
+	
+			"modifier_water_well_healing"
+			{
+				"Duration"	"6.0"
+				"IsBuff"	"1"
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE"		"4"
+				}
+			}
+		}
+	}
+	//End of file dummy_unit_water_well.txt
+
+
 	//Start of file elementalist_dreamgate_ability.txt
 	"elementalist_dreamgate_ability"
 	{
 		// General
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"BaseClass"		"ABILITY_DATADRIVEN"
 		"AbilityTextureName"	"elder_titan_earth_splitter"
+		"MaxLevel"				"8"
 		
 		// Casting
 		"AbilityCastRange"		"600"
@@ -112,6 +229,7 @@
 				{
 					"RunScript"
 					{
+						"NumberOfWisps"	"%numberofwisps"		
 						"Target"		"POINT"
 						"ScriptFile"	"hero_abilities.lua"
 						"Function"		"DreamgateCast"
@@ -130,6 +248,14 @@
 			}
 		}
 			// Special
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"numberofwisps"		"3 4 5 6 6 7 7 8"
+			}
+		}
 	}
 	//End of file elementalist_dreamgate_ability.txt
 
@@ -1656,6 +1782,7 @@
 				{
 					"RunScript"
 					{
+						"Target"		"TARGET"
 						"ScriptFile"	"summon_abilities.lua"
 						"Function"		"WaterBlessingRemove"
 					}

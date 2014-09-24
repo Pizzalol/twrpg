@@ -43,6 +43,7 @@
 			{
 				"RunScript"
 				{
+					"Target"		"TARGET"
 					"ScriptFile"	"summon_abilities.lua"
 					"Function"		"WaterBlessingRemove"
 				}

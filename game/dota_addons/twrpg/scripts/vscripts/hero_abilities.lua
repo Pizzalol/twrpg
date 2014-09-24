@@ -1,4 +1,9 @@
 
+fire = "phoenix"
+water = "morphling"
+lightning = "razor"
+earth = "treant_protector"
+shadow = "enigma"
 
 
 --[[A link spell between 2 targets
@@ -122,6 +127,7 @@ end
 	part of the elemental link, if it does then remove abilities from it including the modifier]]
 function ElementalLinkCasterDeath( keys )
 	local caster = keys.caster
+	local elemental
 
 	-- Destroys the link particle
 	if ElementalLinkParticle ~= nil then
@@ -129,62 +135,63 @@ function ElementalLinkCasterDeath( keys )
 	end
 	
 	-- Finds the linked summon
-	local summonCheck = Entities:FindAllByModel("models/heroes/phoenix/phoenix_bird.vmdl") 
-	--print(summonCheck)
-	--print("Link recast check 1")
-	for i,v in ipairs(summonCheck) do
-		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
-			v:RemoveModifierByName("modifier_elemental_link_target")
-			v:RemoveModifierByName("modifier_elemental_link_ability")
-			v:RemoveAbility("elementalist_fire_elemental_blazing_haste_ability")
-			v:RemoveAbility("elementalist_fire_elemental_blazing_haste_explosion_ability")
-			v:RemoveAbility("elementalist_elemental_link_unit_death")
-			--print("Link recast check 2")
-			return
-		end
+
+	-- Fire Elemental
+	elemental = CheckElemental(caster,fire)
+	if elemental ~= nil and elemental:HasModifier("modifier_elemental_link_target")  then
+		elemental:RemoveModifierByName("modifier_elemental_link_target") 
+		elemental:RemoveModifierByName("modifier_elemental_link_ability")
+		elemental:RemoveAbility("elementalist_fire_elemental_blazing_haste_ability") 
+		elemental:RemoveAbility("elementalist_fire_elemental_blazing_haste_explosion_ability")
+		elemental:RemoveAbility("elementalist_elemental_link_unit_death") 
+
+		return
+	else
+		elemental = nil
+	end
+	
+	-- Earth Elemental
+	elemental = CheckElemental(caster,earth)
+	if elemental ~= nil and elemental:HasModifier("modifier_elemental_link_target")  then
+		elemental:RemoveModifierByName("modifier_elemental_link_target") 
+		elemental:RemoveModifierByName("modifier_elemental_link_ability")
+		elemental:RemoveAbility("elementalist_earth_elemental_souloftheforest_ability")
+		-- Remove the aura after removing the ability
+		elemental:RemoveModifierByName("modifier_souloftheforest") 
+		elemental:RemoveAbility("elementalist_elemental_link_unit_death") 
+
+		return
+	else
+		elemental = nil
 	end
 
-	local summonCheck = Entities:FindAllByModel("models/heroes/treant_protector/treant_protector.vmdl") 
-	--print(summonCheck)
-	--print("Link recast check 3")
-	for i,v in ipairs(summonCheck) do
-		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
-			v:RemoveModifierByName("modifier_elemental_link_target")
-			v:RemoveModifierByName("modifier_elemental_link_ability")
-			v:RemoveAbility("elementalist_earth_elemental_souloftheforest_ability")
-			v:RemoveModifierByName("modifier_souloftheforest")
-			v:RemoveAbility("elementalist_elemental_link_unit_death")
-			return
-		end
+	-- Lightning Elemental
+	elemental = CheckElemental(caster,lightning)
+	if elemental ~= nil and elemental:HasModifier("modifier_elemental_link_target")  then
+		elemental:RemoveModifierByName("modifier_elemental_link_target") 
+		elemental:RemoveModifierByName("modifier_elemental_link_ability")
+		elemental:RemoveAbility("elementalist_lightning_elemental_electric_aura_ability")
+		-- Remove the aura after removing the ability
+		elemental:RemoveModifierByName("modifier_electric") 
+		elemental:RemoveAbility("elementalist_elemental_link_unit_death") 
+
+		return
+	else
+		elemental = nil
 	end
 
-	local summonCheck = Entities:FindAllByModel("models/heroes/razor/razor.vmdl") 
-	--print(summonCheck)
-	for i,v in ipairs(summonCheck) do
-		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
-			v:RemoveModifierByName("modifier_elemental_link_target")
-			v:RemoveModifierByName("modifier_elemental_link_ability")
-			v:RemoveAbility("elementalist_lightning_elemental_electric_aura_ability")
-			v:RemoveModifierByName("modifier_electric") 
-			v:RemoveAbility("elementalist_elemental_link_unit_death")
-			return
-		end
-	end
+	-- Water Elemental
+	elemental = CheckElemental(caster,water)
+	if elemental ~= nil and elemental:HasModifier("modifier_elemental_link_target")  then
+		elemental:RemoveModifierByName("modifier_elemental_link_target") 
+		elemental:RemoveModifierByName("modifier_elemental_link_ability")
+		elemental:RemoveAbility("elementalist_water_elemental_water_blessing_ability")
+		elemental:RemoveAbility("elementalist_elemental_link_unit_death") 
 
-	local summonCheck = Entities:FindAllByModel("models/heroes/morphling/morphling.vmdl") 
-	--print(summonCheck)
-	--print("Link recast check 4")
-	for i,v in ipairs(summonCheck) do
-		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
-			v:RemoveModifierByName("modifier_elemental_link_target")
-			v:RemoveModifierByName("modifier_elemental_link_ability")
-			v:RemoveAbility("elementalist_water_elemental_water_blessing_ability")
-			v:RemoveAbility("elementalist_elemental_link_unit_death")
-			--print("Link recast check 5")
-			return
-		end
+		return
 	end
 	--print("Link recast check 6")
+	return
 
 end
 
@@ -194,8 +201,9 @@ end
 function ElementalLinkCasted( keys )
 	local caster = keys.caster
 	local target = keys.target
-	casterloc = caster:GetAbsOrigin()
-	targetloc = target:GetAbsOrigin() 
+	local casterloc = caster:GetAbsOrigin()
+	local targetloc = target:GetAbsOrigin()
+	local elemental 
 
 	-- If theres an existing particle link then kill it
 	if ElementalLinkParticle ~= nil then
@@ -208,61 +216,63 @@ function ElementalLinkCasted( keys )
 	ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 1, target, 5, "attach_mouth", targetloc, false)
 
 	-- Tries to find if a summon is linked
-	local summonCheck = Entities:FindAllByModel("models/heroes/phoenix/phoenix_bird.vmdl") 
-	--print(summonCheck)
-	--print("Link recast check 1")
-	for i,v in ipairs(summonCheck) do
-		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
-			v:RemoveModifierByName("modifier_elemental_link_target")
-			v:RemoveModifierByName("modifier_elemental_link_ability")
-			v:RemoveAbility("elementalist_fire_elemental_blazing_haste_ability")
-			v:RemoveAbility("elementalist_fire_elemental_blazing_haste_explosion_ability")
-			v:RemoveAbility("elementalist_elemental_link_unit_death")
-			--print("Link recast check 2")
-			return
-		end
+	-- Fire Elemental
+	elemental = CheckElemental(caster,fire)
+	if elemental ~= nil and elemental:HasModifier("modifier_elemental_link_target")  then
+		elemental:RemoveModifierByName("modifier_elemental_link_target") 
+		elemental:RemoveModifierByName("modifier_elemental_link_ability")
+		elemental:RemoveAbility("elementalist_fire_elemental_blazing_haste_ability") 
+		elemental:RemoveAbility("elementalist_fire_elemental_blazing_haste_explosion_ability")
+		elemental:RemoveAbility("elementalist_elemental_link_unit_death") 
+
+		return
+	else
+		elemental = nil
 	end
 
-	local summonCheck = Entities:FindAllByModel("models/heroes/treant_protector/treant_protector.vmdl") 
-	--print(summonCheck)
-	--print("Link recast check 3")
-	for i,v in ipairs(summonCheck) do
-		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
-			v:RemoveModifierByName("modifier_elemental_link_target")
-			v:RemoveModifierByName("modifier_elemental_link_ability")
-			v:RemoveAbility("elementalist_earth_elemental_souloftheforest_ability")
-			v:RemoveAbility("elementalist_elemental_link_unit_death")
-			return
-		end
+	-- Earth Elemental
+	elemental = CheckElemental(caster,earth)
+	if elemental ~= nil and elemental:HasModifier("modifier_elemental_link_target")  then
+		elemental:RemoveModifierByName("modifier_elemental_link_target") 
+		elemental:RemoveModifierByName("modifier_elemental_link_ability")
+		elemental:RemoveAbility("elementalist_earth_elemental_souloftheforest_ability")
+		-- Remove the aura after removing the ability
+		elemental:RemoveModifierByName("modifier_souloftheforest") 
+		elemental:RemoveAbility("elementalist_elemental_link_unit_death") 
+
+		return
+	else
+		elemental = nil
 	end
 
-	local summonCheck = Entities:FindAllByModel("models/heroes/razor/razor.vmdl") 
-	--print(summonCheck)
-	for i,v in ipairs(summonCheck) do
-		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
-			v:RemoveModifierByName("modifier_elemental_link_target")
-			v:RemoveModifierByName("modifier_elemental_link_ability")
-			v:RemoveAbility("elementalist_lightning_elemental_electric_aura_ability")
-			v:RemoveAbility("elementalist_elemental_link_unit_death")
-			return
-		end
+	-- Lightning Elemental
+	elemental = CheckElemental(caster,lightning)
+	if elemental ~= nil and elemental:HasModifier("modifier_elemental_link_target")  then
+		elemental:RemoveModifierByName("modifier_elemental_link_target") 
+		elemental:RemoveModifierByName("modifier_elemental_link_ability")
+		elemental:RemoveAbility("elementalist_lightning_elemental_electric_aura_ability")
+		-- Remove the aura after removing the ability
+		elemental:RemoveModifierByName("modifier_electric") 
+		elemental:RemoveAbility("elementalist_elemental_link_unit_death") 
+
+		return
+	else
+		elemental = nil
 	end
 
-	local summonCheck = Entities:FindAllByModel("models/heroes/morphling/morphling.vmdl") 
-	--print(summonCheck)
-	--print("Link recast check 4")
-	for i,v in ipairs(summonCheck) do
-		if v:HasModifier("modifier_elemental_link_target") and v:GetOwner() == caster then
-			v:RemoveModifierByName("modifier_elemental_link_target")
-			v:RemoveModifierByName("modifier_elemental_link_ability")
-			v:RemoveAbility("elementalist_water_elemental_water_blessing_ability")
-			v:RemoveAbility("elementalist_elemental_link_unit_death")
-			--print("Link recast check 5")
-			return
-		end
+	-- Water Elemental
+	elemental = CheckElemental(caster,water)
+	if elemental ~= nil and elemental:HasModifier("modifier_elemental_link_target")  then
+		elemental:RemoveModifierByName("modifier_elemental_link_target") 
+		elemental:RemoveModifierByName("modifier_elemental_link_ability")
+		elemental:RemoveAbility("elementalist_water_elemental_water_blessing_ability")
+		elemental:RemoveAbility("elementalist_elemental_link_unit_death") 
+
+		return
 	end
 
-
+	-- Just in case
+	return
 end
 
 --[[This function is run whenever the caster of the Elemental Link is healed]]
@@ -321,67 +331,74 @@ function DreamgateCast( keys )
 	local caster = keys.caster
 	local target = keys.target_points[1]
 	local team = caster:GetTeam()
-	local fire
-	local water
-	local lightning
-	local earth
-	local shadow
+	local numWisps = keys.NumberOfWisps
+	local elemental
 
 	if caster:HasModifier("modifier_dreamgate") then
 
 		-- Creating wisps
-		local wisp = CreateUnitByName("elementalist_wisp", target, true, caster, caster, team)
-		wisp:SetControllableByPlayer(caster:GetPlayerID(), true)
-		local wispAbility = wisp:FindAbilityByName("elementalist_wisp_phase_aura")
-		wispAbility:SetLevel(1) 
-
-
-
-		local checkelement = Entities:FindAllByModel("models/heroes/phoenix/phoenix_bird.vmdl")
-
-		for i,v in ipairs(checkelement) do
-			if v:GetOwner() == caster then
-				v:SetAbsOrigin(target+Vector(100,0,0))
-				break
-			end
+		for i=1, numWisps do
+			local wisp = CreateUnitByName("elementalist_wisp", target, true, caster, caster, team)
+			wisp:SetControllableByPlayer(caster:GetPlayerID(), true)
+			local wispAbility = wisp:FindAbilityByName("elementalist_wisp_phase_aura")
+			wispAbility:SetLevel(1)
 		end
 
-		local checkelement = Entities:FindAllByModel("models/heroes/morphling/morphling.vmdl")
 
-		for i,v in ipairs(checkelement) do
-			if v:GetOwner() == caster then
-				v:SetAbsOrigin(target+Vector(75,75,0))
-				break
-			end
+
+		-- Checking if an elemental exists and then relocating him
+
+		-- Fire Elemental
+		elemental = CheckElemental(caster,fire)
+		if elemental ~= nil then
+			elemental:SetAbsOrigin(target+Vector(100,0,0))
+			--elemental:AddNewModifier(elemental, nil, "modifier_elder_titan_echo_stomp", {}) 
+			elemental = nil
 		end
 
-		local checkelement = Entities:FindAllByModel("models/heroes/razor/razor.vmdl")
-
-		for i,v in ipairs(checkelement) do
-			if v:GetOwner() == caster then
-				v:SetAbsOrigin(target+Vector(0,100,0))
-				break
-			end
+		-- Water Elemental
+		elemental = CheckElemental(caster,water)
+		if elemental ~= nil then
+			elemental:SetAbsOrigin(target+Vector(75,75,0))
+			elemental = nil
 		end
 
-		local checkelement = Entities:FindAllByModel("models/heroes/treant_protector/treant_protector.vmdl")
-
-		for i,v in ipairs(checkelement) do
-			if v:GetOwner() == caster then
-				v:SetAbsOrigin(target+Vector(-100,0,0))
-				break
-			end
+		-- Lightning Elemental
+		elemental = CheckElemental(caster,lightning)
+		if elemental ~= nil then
+			elemental:SetAbsOrigin(target+Vector(0,100,0))
+			elemental = nil
 		end
 
-		local checkelement = Entities:FindAllByModel("models/heroes/enigma/enigma.vmdl")
+		-- Earth Elemental
+		elemental = CheckElemental(caster,earth)
+		if elemental ~= nil then
+			elemental:SetAbsOrigin(target+Vector(-100,0,0))
+			elemental = nil
+		end
 
-		for i,v in ipairs(checkelement) do
-			if v:GetOwner() == caster then
-				v:SetAbsOrigin(target+Vector(0,-100,0))
-				break
-			end
+		-- Shadow Elemental
+		elemental = CheckElemental(caster,shadow)
+		if elemental ~= nil then
+			elemental:SetAbsOrigin(target+Vector(0,-100,0))
+			elemental = nil
 		end
 
 		caster:RemoveModifierByName("modifier_dreamgate")
+	end
+end
+
+function CheckElemental( caster, elemental )
+	local elementalModel = elemental
+
+	if elemental == "phoenix" then
+		elementalModel = "phoenix_bird"
+	end
+
+	local elementalTable = Entities:FindAllByModel("models/heroes/" .. elemental .. "/" .. elementalModel .. ".vmdl")
+	for _,v in ipairs(elementalTable) do
+		if v:GetOwner() == caster then
+			return v
+		end
 	end
 end
