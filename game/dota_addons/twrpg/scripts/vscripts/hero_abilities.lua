@@ -201,9 +201,25 @@ end
 function ElementalLinkCasted( keys )
 	local caster = keys.caster
 	local target = keys.target
+	local ability = keys.ability
 	local casterloc = caster:GetAbsOrigin()
 	local targetloc = target:GetAbsOrigin()
 	local elemental 
+
+	-- Checks if its a valid target
+	if not(target==CheckElemental(caster,fire) or target==CheckElemental(caster,water) or target==CheckElemental(caster,earth) or target==CheckElemental(caster,lightning)) then
+		ability:EndCooldown()
+		print("Invalid target block")
+		Timers:CreateTimer(0.01,function()
+			print("Invalid target timer")
+			target:RemoveModifierByName("modifier_elemental_link_target") 
+			target:RemoveModifierByName("modifier_elemental_link_ability")
+			caster:RemoveModifierByName("modifier_elemental_link_caster")
+			end)
+
+		caster:AddSpeechBubble(1,"That is not a valid target", 2.0, 50, -10)
+		return
+	end 
 
 	-- If theres an existing particle link then kill it
 	if ElementalLinkParticle ~= nil then

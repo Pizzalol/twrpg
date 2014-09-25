@@ -1,3 +1,5 @@
+require('hero_abilities')
+
 
 function KillSummon( keys )
 	local caster = keys.caster
@@ -22,15 +24,14 @@ function SummonFireElemental(keys)
 	local modelScale = keys.ModelScale
 	local HPScale = keys.HPScale
 	local casterInt = caster:GetIntellect()
+	local elemental
 	print(modelScale)
 	print(HPScale)
 
-	local checkelement = Entities:FindAllByModel("models/heroes/phoenix/phoenix_bird.vmdl")
-
-	for i, element in ipairs(checkelement) do
-		if element:GetPlayerOwner() == player then
-			element:ForceKill(true)
-		end
+	-- Check if the elemental exists already
+	elemental = CheckElemental(caster,fire)
+	if elemental ~= nil then
+		elemental:ForceKill(true)
 	end
 
 	local fireelemental = CreateUnitByName("elementalist_fire_elemental", target, true, caster, caster, team)
@@ -82,12 +83,10 @@ function SummonEarthElemental(keys)
 	local HPScale = keys.HPScale
 	local casterInt = caster:GetIntellect()
 
-	local checkelement = Entities:FindAllByModel("models/heroes/treant_protector/treant_protector.vmdl")
-
-	for i, element in ipairs(checkelement) do
-		if element:GetPlayerOwner() == player then
-			element:ForceKill(true)
-		end
+	-- Check if the elemental exists already
+	elemental = CheckElemental(caster,earth)
+	if elemental ~= nil then
+		elemental:ForceKill(true)
 	end
 
 	local earthelemental = CreateUnitByName("elementalist_earth_elemental", target, true, caster, caster, team)
@@ -120,12 +119,10 @@ function SummonLightningElemental(keys)
 	print(modelScale)
 	print(HPScale)
 
-	local checkelement = Entities:FindAllByModel("models/heroes/razor/razor.vmdl")
-
-	for i, element in ipairs(checkelement) do
-		if element:GetPlayerOwner() == player then
-			element:ForceKill(true)
-		end
+	-- Check if the elemental exists already
+	elemental = CheckElemental(caster,lightning)
+	if elemental ~= nil then
+		elemental:ForceKill(true)
 	end
 
 	local lightningelemental = CreateUnitByName("elementalist_lightning_elemental", target, true, caster, caster, team)
@@ -191,12 +188,10 @@ function SummonWaterElemental(keys)
 	print(modelScale)
 	print(HPScale)
 
-	local checkelement = Entities:FindAllByModel("models/heroes/morphling/morphling.vmdl")
-
-	for i, element in ipairs(checkelement) do
-		if element:GetPlayerOwner() == player then
-			element:ForceKill(true)
-		end
+	-- Check if the elemental exists already
+	elemental = CheckElemental(caster,water)
+	if elemental ~= nil then
+		elemental:ForceKill(true)
 	end
 
 	local waterelemental = CreateUnitByName("elementalist_water_elemental", target, true, caster, caster, team)
@@ -251,15 +246,49 @@ function SummonShadowElemental(keys)
 	local modelScale = keys.ModelScale
 	local HPScale = keys.HPScale
 	local casterInt = caster:GetIntellect()
+
+	local elemental = {}
+	elemental.fire = CheckElemental(caster,fire)
+	if elemental.fire then elemental.fireDistance = (elemental.fire:GetAbsOrigin() - target):Length2D()
+	end
+
+	elemental.earth = CheckElemental(caster,earth)
+	if elemental.earth then elemental.earthDistance = (elemental.earth:GetAbsOrigin() - target):Length2D()
+	end
+
+	elemental.water = CheckElemental(caster,water)
+	if elemental.water then elemental.waterDistance = (elemental.water:GetAbsOrigin() - target):Length2D() 
+	end
+
+	elemental.lightning = CheckElemental(caster,lightning)
+	if elemental.lightning then elemental.lightningDistance = (elemental.lightning:GetAbsOrigin() - target):Length2D() 
+	end
+
 	print(modelScale)
 	print(HPScale)
 
-	local shadowelemental = CreateUnitByName("elementalist_shadow_elemental", target, true, caster, caster, team)
-	shadowelemental:SetControllableByPlayer(caster:GetPlayerID(), true) 
-	shadowelemental:CreatureLevelUp(level-1)
-	shadowelemental:SetModelScale(modelScale)
-	shadowelemental:SetMaxHealth(HPScale*casterInt)
-	shadowelemental:SetHealth(shadowelemental:GetMaxHealth())
+	if (elemental.fire and elemental.fireDistance <= 1000) and 
+		(elemental.earth and elemental.earthDistance <= 1000) and
+		(elemental.water and elemental.waterDistance <= 1000) and
+		(elemental.lightning and elemental.lightningDistance <= 1000) then
+
+		elemental.fire:ForceKill(true)
+		elemental.water:ForceKill(true)
+		elemental.earth:ForceKill(true)
+		elemental.lightning:ForceKill(true) 
+
+		local shadowelemental = CreateUnitByName("elementalist_shadow_elemental", target, true, caster, caster, team)
+		shadowelemental:SetControllableByPlayer(caster:GetPlayerID(), true) 
+		shadowelemental:CreatureLevelUp(level-1)
+		shadowelemental:SetModelScale(modelScale)
+		shadowelemental:SetMaxHealth(HPScale*casterInt)
+		shadowelemental:SetHealth(shadowelemental:GetMaxHealth())
+
+		shadowelemental:AddNewModifier(caster, nil, "modifier_stunned", {duration = 5})
+		shadowelemental:AddNewModifier(caster, nil, "modifier_invulnerable", {duration = 5}) 
+	else
+		caster:AddSpeechBubble(1,"Need all elementals present", 5.0, 50, -10)
+	end
 end
 
 

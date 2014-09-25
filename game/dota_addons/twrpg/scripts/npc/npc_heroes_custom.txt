@@ -13,7 +13,7 @@
 		"Ability3"		"elementalist_summon_lightning_elemental"
 		"Ability4"		"elementalist_summon_earth_elemental"
 		"Ability5"		"elementalist_summon_shadow_elemental"
-		"Ability6"		"elementalist_dreamgate_ability"
+		"Ability6"		"elementalist_elemental_link_ability"
 		"Ability7"		"elementalist_elemental_link_caster_death"
 	}
 	//End of file elementalist.txt

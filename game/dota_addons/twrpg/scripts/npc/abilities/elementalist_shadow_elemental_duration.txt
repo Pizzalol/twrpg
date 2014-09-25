@@ -19,9 +19,9 @@
 		"modifier_killsummon"
 		{
 			"Passive"	"1"
-			"Duration"	"30.0"
+			"Duration"	"35.0"
 			"IsBuff"	"1"
-			"ThinkInterval"	"30.0"
+			"ThinkInterval"	"35.0"
 
 			"OnIntervalThink"
 			{

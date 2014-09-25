@@ -23,7 +23,7 @@
 
 		"modifier_wisp_phase"
 		{
-			"IsBuff"	"1"
+			"IsHidden"	"1"
 
 			"States"
 			{
