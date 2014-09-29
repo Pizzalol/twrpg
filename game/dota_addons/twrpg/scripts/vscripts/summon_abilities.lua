@@ -1,6 +1,6 @@
 -- Global variables
 
-lightningCount = 0
+--lightningCount = 0
 abyssCount = 0
 bitTable = {512,256,128,64,32,16,8,4,2,1}
 
@@ -76,7 +76,10 @@ function ThornsAura(keys)
 	local caster = keys.caster
 	local target = keys.attacker
 	local table = {}
+	local damageAmount = keys.DamageAmount
 	local ownerInt = caster:GetOwner():GetIntellect() -- Gets the intelligence  of the hero that owns this unit
+
+	print("Damage taken was " .. tostring(damageAmount))
 
 	table.attacker = caster
 	table.victim = target
@@ -421,9 +424,9 @@ end
 end]]
 
 function ChainLightning( keys )
-	lightningCount = lightningCount + 1
+	print("Chain Lightning lightning count is " .. tostring(lightningCount[keys.caster]))
 
-	if lightningCount % 4 == 0 then
+	if lightningCount[keys.caster] % 4 == 0 then
 		local caster = keys.caster
 		local target = keys.target
 		local casterloc = caster:GetAbsOrigin()
@@ -432,14 +435,16 @@ function ChainLightning( keys )
 		local damagepercentage = keys.DamagePercentage
 		local hitTable = {}
 		local chainjumps = keys.ChainJumps
+		local ability = keys.ability
 
-		local damage = 200 * damagepercentage
+		local damage = 50 * damagepercentage
 
 		tableDamage.attacker = caster
 		tableDamage.victim = target
 		tableDamage.damage = damage
 		tableDamage.damage_type = DAMAGE_TYPE_MAGICAL
 		ApplyDamage(tableDamage)
+		ability:ApplyDataDrivenModifier(target,target,"elementalist_lightning_elemental_chain_lightning_magicresist_modifier",{})
 		print("The first unit is " .. target:GetName())
 		table.insert(hitTable, target)
 
@@ -474,6 +479,7 @@ function ChainLightning( keys )
 					table.insert( hitTable, target )	--log as a hit unit
 					tableDamage.victim = target
 					ApplyDamage(tableDamage)	--Deal damage
+					ability:ApplyDataDrivenModifier(target,target,"elementalist_lightning_elemental_chain_lightning_magicresist_modifier",{})
 					break
 				end
 			end
@@ -544,7 +550,11 @@ end]]
 	It is called once every 8th attack, keeping count of the attacks using lightningCount
 	and reseting the counter once it reaches 8 attacks]]
 function ThunderStrike(keys)
-	if lightningCount == 8 then
+	lightningCount = lightningCount or {}
+	lightningCount[keys.caster] = lightningCount[keys.caster] or 0
+	lightningCount[keys.caster] = lightningCount[keys.caster] + 1
+	if lightningCount[keys.caster] == 8 then
+		print("ThunderStrike Lightning count is " .. tostring(lightningCount[keys.caster]))
 		local target = keys.target
 		local targetloc = target:GetAbsOrigin()
 		local caster = keys.caster
@@ -568,7 +578,7 @@ function ThunderStrike(keys)
 		target:AddNewModifier(caster, nil, "modifier_stunned", {duration = 0.1}) 
 
 		-- Resets the attack counter
-		lightningCount = 0
+		lightningCount[keys.caster] = 0
 	end
 end
 

@@ -23,6 +23,7 @@ function SummonFireElemental(keys)
 	local target = keys.target_points[1]
 	local modelScale = keys.ModelScale
 	local HPScale = keys.HPScale
+	local baseHP = keys.BaseHP
 	local casterInt = caster:GetIntellect()
 	local elemental
 	print(modelScale)
@@ -38,7 +39,7 @@ function SummonFireElemental(keys)
 	fireelemental:SetControllableByPlayer(caster:GetPlayerID(), true) 
 	fireelemental:CreatureLevelUp(level-1)
 	fireelemental:SetModelScale(modelScale)
-	fireelemental:SetMaxHealth(HPScale*casterInt)
+	fireelemental:SetMaxHealth(baseHP+HPScale*casterInt)
 	fireelemental:SetHealth(fireelemental:GetMaxHealth())
 
 	if caster:HasModifier("modifier_dreamgate") then
@@ -57,17 +58,26 @@ function SummonFireElemental(keys)
 		caster:RemoveModifierByName("modifier_dreamgate")
 	end
 
-	--[[if level == 1 then
-		fireelemental:SetModelScale(0.20) 
-	elseif level == 2 then
-		fireelemental:SetModelScale(0.40) 
-	elseif level == 3 then
-		 fireelemental:SetModelScale(0.60)
-	elseif level == 4 then
-		fireelemental:SetModelScale(0.80) 
-	elseif level == 5 then
-		fireelemental:SetModelScale(1.00) 
-	end]]
+	if level == 2 then
+		fireelemental:SetBaseDamageMin(228) 
+		fireelemental:SetBaseDamageMax(236)
+	elseif level >= 3 then
+		fireelemental:AddAbility("elementalist_fire_elemental_immolation_aura_ability")
+		fireAbility = fireelemental:FindAbilityByName("elementalist_fire_elemental_immolation_aura_ability")
+		fireAbility:SetLevel(1) 
+		fireelemental:SetBaseDamageMin(1038) 
+		fireelemental:SetBaseDamageMax(1046)
+	end
+	if level == 4 then
+		fireelemental:SetBaseDamageMin(1788) 
+		fireelemental:SetBaseDamageMax(1796) 
+	elseif level >= 5 then
+		fireelemental:AddAbility("elementalist_fire_elemental_magma_explosion_ability") 
+		fireAbility = fireelemental:FindAbilityByName("elementalist_fire_elemental_magma_explosion_ability")
+		fireAbility:SetLevel(1)
+		fireelemental:SetBaseDamageMin(2538)
+		fireelemental:SetBaseDamageMax(2546) 
+	end
 end
 
 --Earth Elemental
@@ -81,7 +91,10 @@ function SummonEarthElemental(keys)
 	local target = keys.target_points[1]
 	local modelScale = keys.ModelScale
 	local HPScale = keys.HPScale
+	local baseHP = keys.BaseHP
 	local casterInt = caster:GetIntellect()
+	local earthAbility
+	
 
 	-- Check if the elemental exists already
 	elemental = CheckElemental(caster,earth)
@@ -90,20 +103,26 @@ function SummonEarthElemental(keys)
 	end
 
 	local earthelemental = CreateUnitByName("elementalist_earth_elemental", target, true, caster, caster, team)
-	earthelemental:SetControllableByPlayer(caster:GetPlayerID() , true)
-	earthelemental:CreatureLevelUp(level-1)
+	earthelemental:SetControllableByPlayer(caster:GetPlayerID() , true)	
 	earthelemental:SetModelScale(modelScale)
-	earthelemental:SetMaxHealth(casterInt*HPScale)
+	earthelemental:SetMaxHealth(baseHP+casterInt*HPScale)
 	earthelemental:SetHealth(earthelemental:GetMaxHealth())
+	earthelemental:CreatureLevelUp(level-1)
+	earthelemental:SetBaseDamageMin(level*1000+243)
+	earthelemental:SetBaseDamageMax(level*1000+263)
 
-	--[[if level == 1 then
-		earthelemental:SetModelScale(0.5) 
-		earthelemental:AddAbility("elementalist_earth_elemental_thorns_ability") 
-		local earthability = earthelemental:FindAbilityByName("elementalist_earth_elemental_thorns_ability")
-		print("hello")
-		earthability:SetLevel(1)
-		print("hello again")
-	end]]
+	if level >= 3 then
+	 	earthelemental:AddAbility("elementalist_earth_elemental_taunt_ability")
+	 	earthAbility = earthelemental:FindAbilityByName("elementalist_earth_elemental_taunt_ability")
+	 	earthAbility:SetLevel(1)
+	end
+	if level >= 5 then
+		earthelemental:AddAbility("elementalist_earth_elemental_ground_shake_ability")
+		earthAbility = earthelemental:FindAbilityByName("elementalist_earth_elemental_ground_shake_ability")
+		earthAbility:SetLevel(1)
+	end
+	
+
 end
 
 function SummonLightningElemental(keys)
@@ -115,6 +134,7 @@ function SummonLightningElemental(keys)
 	local target = keys.target_points[1]
 	local modelScale = keys.ModelScale
 	local HPScale = keys.HPScale
+	local baseHP = keys.BaseHP
 	local casterInt = caster:GetIntellect()
 	print(modelScale)
 	print(HPScale)
@@ -129,7 +149,7 @@ function SummonLightningElemental(keys)
 	lightningelemental:SetControllableByPlayer(caster:GetPlayerID(), true) 
 	lightningelemental:CreatureLevelUp(level-1)
 	lightningelemental:SetModelScale(modelScale)
-	lightningelemental:SetMaxHealth(HPScale*casterInt)
+	lightningelemental:SetMaxHealth(baseHP+HPScale*casterInt)
 	lightningelemental:SetHealth(lightningelemental:GetMaxHealth())
 	lightningelemental:SetMana(0)
 
@@ -161,17 +181,26 @@ function SummonLightningElemental(keys)
 		caster:RemoveModifierByName("modifier_dreamgate") 
 	end
 
-	--[[if level == 1 then
-		fireelemental:SetModelScale(0.20) 
-	elseif level == 2 then
-		fireelemental:SetModelScale(0.40) 
-	elseif level == 3 then
-		 fireelemental:SetModelScale(0.60)
-	elseif level == 4 then
-		fireelemental:SetModelScale(0.80) 
-	elseif level == 5 then
-		fireelemental:SetModelScale(1.00) 
-	end]]
+	if level == 2 then
+		lightningelemental:SetBaseDamageMin(776) 
+		lightningelemental:SetBaseDamageMax(784)
+	elseif level >= 3 then
+		lightningelemental:AddAbility("elementalist_lightning_elemental_chain_lightning_ability")
+		lightningAbility = lightningelemental:FindAbilityByName("elementalist_lightning_elemental_chain_lightning_ability")
+		lightningAbility:SetLevel(1) 
+		lightningelemental:SetBaseDamageMin(1526) 
+		lightningelemental:SetBaseDamageMax(1534)
+	end
+	if level == 4 then
+		lightningelemental:SetBaseDamageMin(2276) 
+		lightningelemental:SetBaseDamageMax(2284) 
+	elseif level >= 5 then
+		--lightningelemental:AddAbility("elementalist_fire_elemental_magma_explosion_ability") 
+		--lightningAbility = lightningelemental:FindAbilityByName("elementalist_fire_elemental_magma_explosion_ability")
+		--lightningAbility:SetLevel(1)
+		lightningelemental:SetBaseDamageMin(3026)
+		lightningelemental:SetBaseDamageMax(3034) 
+	end
 end
 
 
@@ -184,6 +213,7 @@ function SummonWaterElemental(keys)
 	local target = keys.target_points[1]
 	local modelScale = keys.ModelScale
 	local HPScale = keys.HPScale
+	local baseHP = keys.BaseHP
 	local casterInt = caster:GetIntellect()
 	print(modelScale)
 	print(HPScale)
@@ -198,7 +228,7 @@ function SummonWaterElemental(keys)
 	waterelemental:SetControllableByPlayer(caster:GetPlayerID(), true) 
 	waterelemental:CreatureLevelUp(level-1)
 	waterelemental:SetModelScale(modelScale)
-	waterelemental:SetMaxHealth(HPScale*casterInt)
+	waterelemental:SetMaxHealth(baseHP+HPScale*casterInt)
 	waterelemental:SetHealth(waterelemental:GetMaxHealth())
 
 	if caster:HasModifier("modifier_dreamgate") then
@@ -222,18 +252,22 @@ function SummonWaterElemental(keys)
 
 		caster:RemoveModifierByName("modifier_dreamgate")
 	end
+	if level > 1 then
+		level = level - 2
+		waterelemental:SetBaseDamageMin(209 + 300*level)
+		waterelemental:SetBaseDamageMax(213 + 300*level)
+	end
 
-	--[[if level == 1 then
-		fireelemental:SetModelScale(0.20) 
-	elseif level == 2 then
-		fireelemental:SetModelScale(0.40) 
-	elseif level == 3 then
-		 fireelemental:SetModelScale(0.60)
-	elseif level == 4 then
-		fireelemental:SetModelScale(0.80) 
-	elseif level == 5 then
-		fireelemental:SetModelScale(1.00) 
-	end]]
+	if level >= 3 then
+		waterelemental:AddAbility("elementalist_water_elemental_purification_ability")
+		waterAbility = waterelemental:FindAbilityByName("elementalist_water_elemental_purification_ability")
+		waterAbility:SetLevel(1)
+	end
+	if level >= 5 then
+		waterelemental:AddAbility("elementalist_water_elemental_chain_heal_ability")
+		waterAbility = waterelemental:FindAbilityByName("elementalist_water_elemental_chain_heal_ability")
+		waterAbility:SetLevel(1)
+	end
 end
 
 function SummonShadowElemental(keys)
@@ -245,6 +279,7 @@ function SummonShadowElemental(keys)
 	local target = keys.target_points[1]
 	local modelScale = keys.ModelScale
 	local HPScale = keys.HPScale
+	local baseHP = keys.BaseHP
 	local casterInt = caster:GetIntellect()
 
 	local elemental = {}
@@ -281,7 +316,7 @@ function SummonShadowElemental(keys)
 		shadowelemental:SetControllableByPlayer(caster:GetPlayerID(), true) 
 		shadowelemental:CreatureLevelUp(level-1)
 		shadowelemental:SetModelScale(modelScale)
-		shadowelemental:SetMaxHealth(HPScale*casterInt)
+		shadowelemental:SetMaxHealth(baseHP+HPScale*casterInt)
 		shadowelemental:SetHealth(shadowelemental:GetMaxHealth())
 
 		shadowelemental:AddNewModifier(caster, nil, "modifier_stunned", {duration = 5})

@@ -26,11 +26,6 @@
 					"ScriptFile"			"summon_abilities.lua"
 					"Function"				"ChainLightning"
 				}
-				"ApplyModifier"
-				{
-					"Target" 			"TARGET"
-					"ModifierName"		"elementalist_lightning_elemental_chain_lightning_magicresist_modifier"
-				}
 			}
 		}
 
@@ -42,7 +37,7 @@
 
 			"Properties"
 			{
-				"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"-20"
+				"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"%magicresist"
 			}
 		}
 	}
@@ -58,6 +53,11 @@
 		{
 			"var_type"				"FIELD_INTEGER"
 			"chainjumps"			"3"
+		}
+		"03"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"magicresist"			"-20"
 		}
 	}
 }

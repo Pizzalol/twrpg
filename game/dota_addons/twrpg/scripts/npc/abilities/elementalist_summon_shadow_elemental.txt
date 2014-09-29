@@ -4,16 +4,17 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
 		"BaseClass"		"ABILITY_DATADRIVEN"
 		"AbilityTextureName"	"enigma_malefice"
+		"MaxLevel"				"1"
 		
 		// Casting
 		"AbilityCastRange"		"1000"
 		"AbilityCastPoint"		"0.0"
 
 		// Time
-		"AbilityCooldown"		"5.0"
+		"AbilityCooldown"		"120.0"
 
 		// Cost
-		"AbilityManaCost" 		"25"
+		"AbilityManaCost" 		"5000"
 
 		// SpellStart
 		"OnSpellStart"
@@ -23,6 +24,7 @@
 				"Target"			"POINT"
 				"ModelScale"		"%modelscale"
 				"HPScale"			"%hpscale"
+				//"BaseHP"			"%basehp"
 				"ScriptFile"		"summons.lua"
 				"Function"			"SummonShadowElemental"
 			}
@@ -41,5 +43,14 @@
 				"var_type"			"FIELD_FLOAT"
 				"hpscale"			"40"
 			}
+			//{
+			//	"var_type"			"FIELD_FLOAT"
+			//	"tooltipduration"	"30.0"
+			//}
+			//"04"
+			//{
+			//	"var_type"			"FIELD_INTEGER"
+			//	"basehp"			"183000"
+			//}
 		}
 	}

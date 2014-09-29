@@ -6,15 +6,17 @@
 		"AbilityTextureName"	"invoker_exort"
 		
 		// Casting
-		"AbilityCastRange"		"1000"
-		"AbilityCastPoint"		"0.0"
+		"AbilityCastRange"		"400 425 450 475 500"
+		"AbilityCastPoint"		"0.7"
 		"MaxLevel"				"5"
+		"LevelsBetweenUpgrades" "20"
+		"RequiredLevel"			"5"
 
 		// Time
-		"AbilityCooldown"		"5.0"
+		"AbilityCooldown"		"45.0"
 
 		// Cost
-		"AbilityManaCost" 		"25"
+		"AbilityManaCost" 		"50 150 450 750 1250"
 
 		
 
@@ -26,6 +28,7 @@
 				"Target"			"POINT"
 				"ModelScale"		"%modelscale"
 				"HPScale"			"%hpscale"
+				"BaseHP"			"%basehp"
 				"ScriptFile"		"summons.lua"
 				"Function"			"SummonFireElemental"
 			}
@@ -42,7 +45,17 @@
 			"02"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"hpscale"			"10 20 50 100 200"
+				"hpscale"			"6.5 8 9.5 11 12.5"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"tooltipduration"	"180.0"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"basehp"			"2050 4100 6150 8200 10250"
 			}
 		}
 	}

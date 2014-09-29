@@ -11,6 +11,9 @@
 	// Casting
 	"AbilityCastRange"		"600"
 	"AbilityCastPoint"		"0.0"
+	"MaxLevel"				"3"
+	"LevelsBetweenUpgrades" "20"
+	"RequiredLevel"			"120"
 
 	// Time
 	"AbilityCooldown"		"5.0"

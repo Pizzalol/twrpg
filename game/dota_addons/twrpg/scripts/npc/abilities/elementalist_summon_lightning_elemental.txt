@@ -6,15 +6,17 @@
 		"AbilityTextureName"	"invoker_wex"
 		
 		// Casting
-		"AbilityCastRange"		"1000"
+		"AbilityCastRange"		"500"
 		"AbilityCastPoint"		"0.0"
 		"MaxLevel"				"5"
+		"LevelsBetweenUpgrades" "20"
+		"RequiredLevel"			"30"
 
 		// Time
-		"AbilityCooldown"		"5.0"
+		"AbilityCooldown"		"60.0"
 
 		// Cost
-		"AbilityManaCost" 		"25"
+		"AbilityManaCost" 		"150 450 900 1500 2500"
 
 		// SpellStart
 		"OnSpellStart"
@@ -24,6 +26,7 @@
 				"Target"			"POINT"
 				"HPScale"			"%hpscale"
 				"ModelScale"		"%modelscale"
+				"BaseHP"			"%basehp"
 				"ScriptFile"		"summons.lua"
 				"Function"			"SummonLightningElemental"
 			}
@@ -34,12 +37,22 @@
 			"01"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"hpscale"			"10 20 30 50 100"
+				"hpscale"			"6.5 8 9.5 11 12.5"
 			}
 			"02"
 			{
 				"var_type"			"FIELD_FLOAT"
 				"modelscale"		"0.2 0.4 0.6 0.8 1.0"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"tooltipduration"	"180.0"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"basehp"			"4010 8020 12030 16040 20050"
 			}
 		}
 	}

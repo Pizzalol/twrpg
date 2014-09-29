@@ -1,6 +1,6 @@
 // Earth Elemental toggle ability
 
-	"elementalist_earth_elemental_toggle_ability"
+	"elementalist_earth_elemental_ground_shake_ability"
 	{
 		// General
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"

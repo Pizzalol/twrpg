@@ -1,7 +1,7 @@
 "elementalist_dreamgate_ability"
 {
 	// General
-	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 	"BaseClass"		"ABILITY_DATADRIVEN"
 	"AbilityTextureName"	"elder_titan_earth_splitter"
 	"MaxLevel"				"8"

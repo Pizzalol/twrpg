@@ -37,6 +37,7 @@
 						{
 							"RunScript"
 							{
+								"DamageAmount"		"%attack_damage"
 								"Caster"			"CASTER"
 								"ScriptFile"		"summon_abilities.lua"
 								"Function"			"ThornsAura"
