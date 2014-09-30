@@ -22,5 +22,15 @@
 			"var_type"				"FIELD_INTEGER"
 			"attack_speed"			"25"
 		}
+		"03"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"radius"				"500"
+		}
+		"04"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"hpdamage"				"5"
+		}
 	}
 }

@@ -37,6 +37,8 @@
 			}
 			"RunScript"
 			{
+				"Radius"		"%radius"
+				"HPCost"		"%hpcost"
 				"ScriptFile"	"summon_abilities.lua"
 				"Function"		"ImmolationAura"
 			}
@@ -63,10 +65,26 @@
 				{
 					"RunScript"
 					{
+						"Radius"		"%radius"
+						"HPCost"		"%hpcost"
 						"ScriptFile"	"summon_abilities.lua"
 						"Function"		"ImmolationAura"
 					}
 				}
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"500"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"hpcost"			"10"
 			}
 		}
 	}

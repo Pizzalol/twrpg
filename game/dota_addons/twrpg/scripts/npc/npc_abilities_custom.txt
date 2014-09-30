@@ -788,6 +788,16 @@
 				"var_type"				"FIELD_INTEGER"
 				"attack_speed"			"25"
 			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"500"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"hpdamage"				"5"
+			}
 		}
 	}
 	//End of file elementalist_fire_elemental_blazing_haste_ability.txt
@@ -843,10 +853,20 @@
 						"RunScript"
 						{
 							"Target"	"TARGET"
+							"Radius"	"%radius"
 							"ScriptFile"	"summon_abilities.lua"
 							"Function"		"FlameFists"
 						}
 					}	
+				}
+			}
+	
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_INTEGER"
+					"radius"			"300"
 				}
 			}
 		}
@@ -893,6 +913,8 @@
 				}
 				"RunScript"
 				{
+					"Radius"		"%radius"
+					"HPCost"		"%hpcost"
 					"ScriptFile"	"summon_abilities.lua"
 					"Function"		"ImmolationAura"
 				}
@@ -919,10 +941,26 @@
 					{
 						"RunScript"
 						{
+							"Radius"		"%radius"
+							"HPCost"		"%hpcost"
 							"ScriptFile"	"summon_abilities.lua"
 							"Function"		"ImmolationAura"
 						}
 					}
+				}
+			}
+	
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_INTEGER"
+					"radius"			"500"
+				}
+				"02"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"hpcost"			"10"
 				}
 			}
 		}
@@ -947,8 +985,18 @@
 			{
 				"RunScript"
 				{
+					"Radius"		"%radius"
 					"ScriptFile"	"summon_abilities.lua"
 					"Function"		"MagmaExplosion"
+				}
+			}
+	
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_INTEGER"
+					"radius"			"500"
 				}
 			}
 		}
@@ -1792,6 +1840,7 @@
 				"elementalist_water_elemental_ability_slow_slow"
 				{
 					"Duration" "%slow_duration"
+					"IsDebuff"	"1"
 					"Properties"
 					{
 						"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%move_slow"
@@ -1821,12 +1870,12 @@
 				"03"
 				{
 					"var_type"						"FIELD_INTEGER"
-					"move_slow"						"-20"
+					"move_slow"						"-40"
 				}
 				"04"
 				{
 					"var_type"						"FIELD_INTEGER"
-					"attack_slow"						"-20"
+					"attack_slow"						"-30"
 				}
 			}
 		}

@@ -150,6 +150,9 @@ function FlameFists(keys)
 	local targetloc = target:GetAbsOrigin()
 	local casterDmg = caster:GetAttackDamage()
 	local ownerInt = caster:GetOwner():GetIntellect()
+	local radius = keys.Radius
+
+	if caster:HasModifier("modifier_elemental_link_target") then radius = 500 end
 
 	table.attacker = caster
 	table.damage = casterDmg*ownerInt
@@ -160,7 +163,7 @@ function FlameFists(keys)
 	ParticleManager:SetParticleControl(particle, 3, targetloc)
 
 	-- Finds all valid targets and deals damage to them
-	local unittodamage = FindUnitsInRadius(caster:GetTeam(), targetloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
+	local unittodamage = FindUnitsInRadius(caster:GetTeam(), targetloc, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 	for i,v in ipairs(unittodamage) do
 		table.victim = v
 		ApplyDamage(table)
@@ -174,6 +177,9 @@ function ImmolationAura(keys)
 	local table = {}
 	local casterloc = caster:GetAbsOrigin()
 	local ownerInt = caster:GetOwner():GetIntellect()
+	local hpcost = keys.HPCost/100
+	local radius = keys.Radius
+	print("Current HP cost is: " .. tostring(hpcost))
 
 	-- Test particle for Immolation aura
 	local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
@@ -186,16 +192,17 @@ function ImmolationAura(keys)
 	table.damage_type = DAMAGE_TYPE_MAGICAL
 
 	-- Find all valid targets around the caster and deal damage to them
-	local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
+	local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 	for i,v in ipairs(unittodamage) do
 		table.victim = v
 		ApplyDamage(table)
 	end
 
+	if caster:HasModifier("modifier_elemental_link_target") then hpcost = hpcost/2 end
 	-- Deal damage to the caster
 	table.victim = caster
 	table.damage_type = DAMAGE_TYPE_MAGICAL
-	table.damage = caster:GetHealth() * 0.1
+	table.damage = caster:GetHealth() * hpcost
 	print("Immolation aura dealing damage to self: " .. tostring(table.damage))
 	ApplyDamage(table)
 end
@@ -208,6 +215,7 @@ function MagmaExplosion(keys)
 	local ownerInt = caster:GetOwner():GetIntellect()
 	local casterMaxHP = caster:GetMaxHealth()
 	local casterCurrentHP = caster:GetHealth()
+	local radius = keys.Radius
 
 	--print("magma test")
 
@@ -216,7 +224,7 @@ function MagmaExplosion(keys)
 	table.damage_type = DAMAGE_TYPE_MAGICAL
 
 	-- Find all valid targets and deal damage to them
-	local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
+	local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 	for i,v in ipairs(unittodamage) do
 		table.victim = v
 		ApplyDamage(table)

@@ -27,10 +27,20 @@
 					"RunScript"
 					{
 						"Target"	"TARGET"
+						"Radius"	"%radius"
 						"ScriptFile"	"summon_abilities.lua"
 						"Function"		"FlameFists"
 					}
 				}	
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"300"
 			}
 		}
 	}

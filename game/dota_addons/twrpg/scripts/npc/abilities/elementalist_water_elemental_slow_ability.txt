@@ -53,6 +53,7 @@
 			"elementalist_water_elemental_ability_slow_slow"
 			{
 				"Duration" "%slow_duration"
+				"IsDebuff"	"1"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%move_slow"
@@ -82,12 +83,12 @@
 			"03"
 			{
 				"var_type"						"FIELD_INTEGER"
-				"move_slow"						"-20"
+				"move_slow"						"-40"
 			}
 			"04"
 			{
 				"var_type"						"FIELD_INTEGER"
-				"attack_slow"						"-20"
+				"attack_slow"						"-30"
 			}
 		}
 	}
