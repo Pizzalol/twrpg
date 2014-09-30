@@ -15,7 +15,7 @@
 			"Passive"				"1"
 			
 			"Aura"					"modifier_electric_aura"
-			"Aura_Radius"			"500"
+			"Aura_Radius"			"750"
 			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 			"Aura_Types"			"DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
 			"Aura_ApplyToCaster"		"1"
@@ -28,8 +28,8 @@
 
 			"Properties"
 			{
-				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "10"
-				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "10"
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "40"
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "40"
 			}
 		}
 	}

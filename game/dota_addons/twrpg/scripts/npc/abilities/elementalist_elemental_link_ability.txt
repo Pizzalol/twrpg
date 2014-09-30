@@ -9,17 +9,17 @@
 	"HotKeyOverride" 		"Y"
 	
 	// Casting
-	"AbilityCastRange"		"600"
+	"AbilityCastRange"		"%leash_range"
 	"AbilityCastPoint"		"0.0"
 	"MaxLevel"				"3"
-	"LevelsBetweenUpgrades" "20"
+	"LevelsBetweenUpgrades" "40"
 	"RequiredLevel"			"120"
 
 	// Time
-	"AbilityCooldown"		"5.0"
+	"AbilityCooldown"		"45 30 15"
 
 	// Cost
-	"AbilityManaCost" 		"0"
+	"AbilityManaCost" 		"2500 1250 0"
 	"Precache"
 	{
 		"particle_folder"	"particles/units/heroes/hero_wisp"
@@ -58,7 +58,7 @@
 	{
 		"modifier_elemental_link_caster"
 		{
-			"Duration"	"60"
+			"Duration"	"%duration"
 			"IsBuff"	"1"	
 
 			"OnTakeDamage"
@@ -81,13 +81,13 @@
 
 			"Properties"
 			{
-				"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"	"-50"
+				"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"	"damage_share_pct"
 			}		
 		}
 
 		"modifier_elemental_link_target"
 		{
-			"Duration"	"60"
+			"Duration"	"%duration"
 			"IsBuff"	"1"
 			"ThinkInterval"	"1.0"
 
@@ -117,5 +117,34 @@
 			}
 		}
 	}
-		// Special
+	// Special
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"duration"			"120"
+		}
+		"02"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"damage_share_pct"	"-50"
+		}
+		"03"
+		{
+			"var_type"			"FIELD_INTEGER"
+			"leash_range"		"600 800 1000"
+		}
+		"04"
+		{
+			"var_type"			"FIELD_INTEGER"
+			"leash_break"		"800 1000 1200"
+		}
+		"05"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"tooltip_share_pct"	"50"
+		}
+	}
+
 }

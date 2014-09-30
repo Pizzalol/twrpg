@@ -20,7 +20,7 @@ function StompInterval(keys)
 
 	-- Getting the info so that we can toggle the ability off when the caster is out of mana
 	local playerID = caster:GetOwner():GetPlayerID()
-	local ability = caster:FindAbilityByName("elementalist_earth_elemental_toggle_ability")
+	local ability = caster:FindAbilityByName("elementalist_earth_elemental_ground_shake_ability")
 
 
 	--for k,v in pairs(keys) do
@@ -32,9 +32,11 @@ function StompInterval(keys)
 	table.damage_type = DAMAGE_TYPE_MAGICAL 
 
 	--print(caster:GetOwner():GetClassname())
+	print("Earth elemental current mana: " .. tostring(mana))
 
 	-- Checks if the caster has enough mana
 	if mana >= 2 then
+		print("Earth elemental mana while having enough: " .. tostring(mana))
 		caster:SpendMana(2, caster) --[[Returns:void
 		Spend mana from this unit, this can be used for spending mana from abilities or item usage.
 		]]

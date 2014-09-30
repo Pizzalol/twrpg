@@ -35,7 +35,7 @@
 					"Target"
 					{
 						"Center"			"CASTER"
-						"Radius"			"600"
+						"Radius"			"275"
 						"Teams"				"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 						"Types"				"DOTA_UNIT_TARGET_ALL"
 					}

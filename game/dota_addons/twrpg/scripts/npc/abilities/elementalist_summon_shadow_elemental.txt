@@ -7,11 +7,11 @@
 		"MaxLevel"				"1"
 		
 		// Casting
-		"AbilityCastRange"		"1000"
+		"AbilityCastRange"		"600"
 		"AbilityCastPoint"		"0.0"
 
 		// Time
-		"AbilityCooldown"		"120.0"
+		"AbilityCooldown"		"150.0"
 
 		// Cost
 		"AbilityManaCost" 		"5000"
@@ -24,7 +24,7 @@
 				"Target"			"POINT"
 				"ModelScale"		"%modelscale"
 				"HPScale"			"%hpscale"
-				//"BaseHP"			"%basehp"
+				"BaseHP"			"%basehp"
 				"ScriptFile"		"summons.lua"
 				"Function"			"SummonShadowElemental"
 			}
@@ -43,14 +43,15 @@
 				"var_type"			"FIELD_FLOAT"
 				"hpscale"			"40"
 			}
-			//{
-			//	"var_type"			"FIELD_FLOAT"
-			//	"tooltipduration"	"30.0"
-			//}
-			//"04"
-			//{
-			//	"var_type"			"FIELD_INTEGER"
-			//	"basehp"			"183000"
-			//}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"tooltipduration"	"30.0"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"basehp"			"183000"
+			}
 		}
 	}

@@ -6,7 +6,7 @@
 		"AbilityTextureName"	"treant_natures_guise"
 		
 		// Casting
-		"AbilityCastRange"		"600"
+		"AbilityCastRange"		"400 425 450 475 500"
 		"AbilityCastPoint"		"0.8"
 		"MaxLevel"				"5"
 		"LevelsBetweenUpgrades" "20"

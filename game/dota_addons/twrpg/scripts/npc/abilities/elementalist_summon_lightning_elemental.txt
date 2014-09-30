@@ -6,7 +6,7 @@
 		"AbilityTextureName"	"invoker_wex"
 		
 		// Casting
-		"AbilityCastRange"		"500"
+		"AbilityCastRange"		"400 425 450 475 500"
 		"AbilityCastPoint"		"0.0"
 		"MaxLevel"				"5"
 		"LevelsBetweenUpgrades" "20"

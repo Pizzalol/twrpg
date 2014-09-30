@@ -6,7 +6,7 @@
 		"AbilityTextureName"	"invoker_quas"
 		
 		// Casting
-		"AbilityCastRange"		"420 440 460 480 500"
+		"AbilityCastRange"		"400 425 450 475 500"
 		"AbilityCastPoint"		"1.0"
 		"MaxLevel"				"5"
 		"LevelsBetweenUpgrades" "20"
