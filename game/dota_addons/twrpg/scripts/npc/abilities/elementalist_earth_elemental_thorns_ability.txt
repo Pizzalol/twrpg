@@ -24,13 +24,12 @@
 			"modifier_thorns"
 			{
 				"Passive"		"1"
-				"EffectName"	"particles/test_particle/creature_spiked_carapace.vpcf"
 				"IsBuff"		"1"
 				"OnTakeDamage"
 				{
 					"Random"
 					{
-						"Chance" "100.00"
+						"Chance" "%chance"
 						//"PseudoRandom"	"DOTA_PSEUDO_RANDOM_JUGG_CRIT"
 
 						"OnSuccess"
@@ -38,15 +37,10 @@
 							"RunScript"
 							{
 								"DamageAmount"		"%attack_damage"
+								"ReflectAmount"		"%reflect_amount"
 								"Caster"			"CASTER"
 								"ScriptFile"		"summon_abilities.lua"
 								"Function"			"ThornsAura"
-							}
-					
-							"FireSound"
-							{
-								"EffectName"	"Ability.ReflectDamageStun"
-								"Target"		"ATTACKER"
 							}
 						}
 						"OnFailure"
@@ -67,6 +61,7 @@
 				{
 					"RunScript"
 					{
+						"BaseArmor"		"%armor_base"
 						"ScriptFile"	"summon_abilities.lua"
 						"Function"		"ThornsAuraArmor"
 					}
@@ -76,4 +71,22 @@
 
 		// Special	
 		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"chance"			"100"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"reflect_amount"	"100"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"armor_base"		"80"
+			}
+		}
 	}

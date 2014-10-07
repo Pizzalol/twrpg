@@ -252,10 +252,12 @@ function SummonWaterElemental(keys)
 
 		caster:RemoveModifierByName("modifier_dreamgate")
 	end
+
+	local damage_temp
 	if level > 1 then
-		level = level - 2
-		waterelemental:SetBaseDamageMin(209 + 300*level)
-		waterelemental:SetBaseDamageMax(213 + 300*level)
+		damage_temp = level - 2
+		waterelemental:SetBaseDamageMin(209 + 300*damage_temp)
+		waterelemental:SetBaseDamageMax(213 + 300*damage_temp)
 	end
 
 	if level >= 3 then
@@ -264,6 +266,7 @@ function SummonWaterElemental(keys)
 		waterAbility:SetLevel(1)
 	end
 	if level >= 5 then
+		print("Give me chain heal")
 		waterelemental:AddAbility("elementalist_water_elemental_chain_heal_ability")
 		waterAbility = waterelemental:FindAbilityByName("elementalist_water_elemental_chain_heal_ability")
 		waterAbility:SetLevel(1)

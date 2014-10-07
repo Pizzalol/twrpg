@@ -315,12 +315,15 @@
 				"modifier_stomptest"
 				{
 					"IsBuff"	"1"
-					"ThinkInterval"	"1.0"
+					"ThinkInterval"	"%stomp_interval"
 	
 					"OnIntervalThink"
 					{
 						"RunScript"
 						{
+							"HealAmount"	"%heal_amount"
+							"Upkeep"		"%mana_per_interval"
+							"Radius"		"%stomp_radius"
 							"ScriptFile"	"summon_abilities.lua"
 							"Function"		"StompInterval"
 						}
@@ -335,13 +338,37 @@
 							"ControlPoints"
 							{
 								"00"		"0 0 0"
-								"01"		"500 0 0"
+								"01"		"%stomp_radius 0 0"
 							}
 						}
 	
 					}
 				}
 	
+			}
+	
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"				"FIELD_FLOAT"
+					"stomp_interval"		"1.0"
+				}
+				"02"
+				{
+					"var_type"				"FIELD_INTEGER"
+					"stomp_radius"			"500"
+				}
+				"03"
+				{
+					"var_type"				"FIELD_FLOAT"
+					"mana_per_interval"		"2.0"
+				}
+				"04"
+				{
+					"var_type"				"FIELD_FLOAT"
+					"heal_amount"			"2000"
+				}
 			}
 		}
 	//End of file elementalist_earth_elemental_ground_shake_ability.txt
@@ -509,13 +536,12 @@
 				"modifier_thorns"
 				{
 					"Passive"		"1"
-					"EffectName"	"particles/test_particle/creature_spiked_carapace.vpcf"
 					"IsBuff"		"1"
 					"OnTakeDamage"
 					{
 						"Random"
 						{
-							"Chance" "100.00"
+							"Chance" "%chance"
 							//"PseudoRandom"	"DOTA_PSEUDO_RANDOM_JUGG_CRIT"
 	
 							"OnSuccess"
@@ -523,15 +549,10 @@
 								"RunScript"
 								{
 									"DamageAmount"		"%attack_damage"
+									"ReflectAmount"		"%reflect_amount"
 									"Caster"			"CASTER"
 									"ScriptFile"		"summon_abilities.lua"
 									"Function"			"ThornsAura"
-								}
-						
-								"FireSound"
-								{
-									"EffectName"	"Ability.ReflectDamageStun"
-									"Target"		"ATTACKER"
 								}
 							}
 							"OnFailure"
@@ -552,6 +573,7 @@
 					{
 						"RunScript"
 						{
+							"BaseArmor"		"%armor_base"
 							"ScriptFile"	"summon_abilities.lua"
 							"Function"		"ThornsAuraArmor"
 						}
@@ -561,6 +583,24 @@
 	
 			// Special	
 			//-------------------------------------------------------------------------------------------------------------
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"chance"			"100"
+				}
+				"02"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"reflect_amount"	"100"
+				}
+				"03"
+				{
+					"var_type"			"FIELD_INTEGER"
+					"armor_base"		"80"
+				}
+			}
 		}
 	//End of file elementalist_earth_elemental_thorns_ability.txt
 
@@ -1705,7 +1745,7 @@
 
 	//Start of file elementalist_water_elemental_chain_heal_ability.txt
 	// Water Elemental chain heal
-	"elementalist_water_elemental_chainheal_ability"
+	"elementalist_water_elemental_chain_heal_ability"
 	{
 			
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
@@ -1763,7 +1803,7 @@
 			
 			// Time		
 			//-------------------------------------------------------------------------------------------------------------
-			"AbilityCooldown"				"1.0"
+			"AbilityCooldown"				"1.25"
 			
 			// Cost
 			//-------------------------------------------------------------------------------------------------------------
@@ -1776,8 +1816,18 @@
 			{
 				"RunScript"
 				{
+					"HPHeal"		"%hpheal"
 					"ScriptFile"	"summon_abilities.lua"
 					"Function"		"Purification"
+				}
+			}
+	
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"hpheal"			"15"
 				}
 			}
 		}
@@ -1912,7 +1962,7 @@
 			"modifier_water_blessing"
 			{
 				"IsBuff"		"1"
-				"Duration"		"10"
+				"Duration"		"%duration"
 				"TextureName"	"omniknight_guardian_angel"
 	
 				"OnCreated"
@@ -1920,6 +1970,7 @@
 					"RunScript"
 					{
 						"Target"		"TARGET"
+						"AttributeIncrease"	"%attribute_increase"
 						"ScriptFile"	"summon_abilities.lua"
 						"Function"		"WaterBlessing"
 					}
@@ -1933,6 +1984,20 @@
 						"Function"		"WaterBlessingRemove"
 					}
 				}
+			}
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"180"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"attribute_increase"	"10"
 			}
 		}
 	}

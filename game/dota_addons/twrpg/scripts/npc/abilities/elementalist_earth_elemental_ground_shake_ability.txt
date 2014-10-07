@@ -52,12 +52,15 @@
 			"modifier_stomptest"
 			{
 				"IsBuff"	"1"
-				"ThinkInterval"	"1.0"
+				"ThinkInterval"	"%stomp_interval"
 
 				"OnIntervalThink"
 				{
 					"RunScript"
 					{
+						"HealAmount"	"%heal_amount"
+						"Upkeep"		"%mana_per_interval"
+						"Radius"		"%stomp_radius"
 						"ScriptFile"	"summon_abilities.lua"
 						"Function"		"StompInterval"
 					}
@@ -72,12 +75,36 @@
 						"ControlPoints"
 						{
 							"00"		"0 0 0"
-							"01"		"500 0 0"
+							"01"		"%stomp_radius 0 0"
 						}
 					}
 
 				}
 			}
 
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stomp_interval"		"1.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stomp_radius"			"500"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"mana_per_interval"		"2.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"heal_amount"			"2000"
+			}
 		}
 	}

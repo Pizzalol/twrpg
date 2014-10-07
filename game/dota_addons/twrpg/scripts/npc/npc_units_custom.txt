@@ -438,8 +438,8 @@
 			//----------------------------------------------------------------
 			
 			"Ability1"					"elementalist_water_elemental_slow_ability"			// Ability 1.
-			"Ability2"					"elementalist_water_elemental_purification_ability"			// Ability 2.
-			"Ability3"					"elementalist_water_elemental_chainheal_ability"			// Ability 3.
+			"Ability2"					""			// Ability 2.
+			"Ability3"					""			// Ability 3.
 			"Ability4"					""			// Ability 4.
 			"Ability5"					"elementalist_summon_duration"			// Ability 5.
 			"Ability6"					""			// Ability 6 - Extra.

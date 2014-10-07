@@ -50,6 +50,21 @@ function TWRPGGameMode:OnPlayerPicked( keys )
 	if spawnedUnitIndex:GetClassname() == "npc_dota_hero_enchantress" then
 		spawnedUnitIndex:GetAbilityByIndex(3):SetLevel(1)
 	end
+
+	--[[a = 9.0
+	oldX = a/2
+	newX = (oldX + (a/oldX))/2
+
+	result = math.abs(newX - oldX)
+
+	while (result > 0.001) do
+		oldX = newX
+		newX = (oldX + (a/oldX))/2
+		result = math.abs(newX - oldX)
+	end
+	print("Result is " .. tostring(result))
+	print("Square root is " .. tostring(newX))
+	print("Old square root is " .. tostring(oldX))]]
 end
 
 function TWRPGGameMode:OnPlayerLeveledUp( keys )

@@ -17,6 +17,9 @@ function StompInterval(keys)
 	local mana = caster:GetMana()
 	local table = {}
 	local casterloc = caster:GetAbsOrigin() 
+	local upkeep = keys.Upkeep
+	local heal = keys.HealAmount
+	local radius = keys.Radius
 
 	-- Getting the info so that we can toggle the ability off when the caster is out of mana
 	local playerID = caster:GetOwner():GetPlayerID()
@@ -35,12 +38,12 @@ function StompInterval(keys)
 	print("Earth elemental current mana: " .. tostring(mana))
 
 	-- Checks if the caster has enough mana
-	if mana >= 2 then
+	if mana >= upkeep then
 		print("Earth elemental mana while having enough: " .. tostring(mana))
-		caster:SpendMana(2, caster) --[[Returns:void
+		caster:SpendMana(upkeep, caster) --[[Returns:void
 		Spend mana from this unit, this can be used for spending mana from abilities or item usage.
 		]]
-		caster:Heal(100.0, caster) --[[Returns:void
+		caster:Heal(heal, caster) --[[Returns:void
 		Heal this unit.
 		]]
 
@@ -54,10 +57,11 @@ function StompInterval(keys)
 		--ParticleManager:SetParticleControl(particle, 3, casterloc+Vector(300,0,0))
 
 		-- Finds all valid targets around the caster and deals damage to them
-		local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
+		local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 
 		for i,v in ipairs(unittodamage) do
 			table.victim = v
+			v:AddNewModifier(caster, nil, "modifier_stunned", {duration = 0.1})
 			ApplyDamage(table)
 		end
 
@@ -79,6 +83,7 @@ function ThornsAura(keys)
 	local target = keys.attacker
 	local table = {}
 	local damageAmount = keys.DamageAmount
+	local reflectAmount = keys.ReflectAmount / 100
 	local ownerInt = caster:GetOwner():GetIntellect() -- Gets the intelligence  of the hero that owns this unit
 
 	print("Damage taken was " .. tostring(damageAmount))
@@ -86,19 +91,22 @@ function ThornsAura(keys)
 	table.attacker = caster
 	table.victim = target
 	table.damage_type = DAMAGE_TYPE_PURE
-	table.damage = 100 + 2*ownerInt
+	table.damage = damageAmount * reflectAmount
 
-	ApplyDamage(table) --[[Returns:float
-	Pass ''table'' - Inputs: victim, attacker, damage, damage_type, damage_flags, abilityReturn damage done.
-	]]
+	ApplyDamage(table)
 end
 
 -- [[Adds armor to the unit depending on the owners intelligence]]
 function ThornsAuraArmor(keys)
 	local caster = keys.caster
 	local owner = caster:GetOwner()
-	local ownerInt = owner:GetIntellect()	
+	local ownerInt = owner:GetIntellect()
+	local baseArmor = keys.BaseArmor	
 	local armor = math.floor(ownerInt / 10)
+
+	--print("Base armor value: " .. tostring(baseArmor))
+
+	armor = armor + baseArmor
 
 	-- Creates temporary item to steal the modifiers from
 	local armorBonus = CreateItem("item_armor_modifier", nil, nil) 
@@ -265,7 +273,8 @@ function Purification( keys )
 	local caster = keys.caster
 	local target = keys.target
 	local casterMaxHP = caster:GetMaxHealth()
-	local healAmount = casterMaxHP*0.05
+	local hpHeal = keys.HPHeal
+	local healAmount = casterMaxHP*(hpHeal/100)
 	--local healAmount = 100
 
 	--if target:HasModifier("modifier_souloftheforest_protection") then
@@ -296,7 +305,8 @@ end
 
 function WaterBlessing( keys )
 	local target = keys.target 
-	local primaryAttribute = target:GetPrimaryAttribute() 
+	local primaryAttribute = target:GetPrimaryAttribute()
+	local attributePercentage = keys.AttributeIncrease / 100
 	local attribute
 	local attributeBoostItem
 	local modifierName
@@ -321,7 +331,7 @@ function WaterBlessing( keys )
 	print("Modifier name is " .. modifierName)
 
 	 
-	local attributeBoost = math.floor(attribute * 0.1)
+	local attributeBoost = math.floor(attribute * attributePercentage)
 	print("Attribute boost is ".. tostring(attributeBoost))
 
 	 

@@ -1,5 +1,5 @@
 // Water Elemental chain heal
-"elementalist_water_elemental_chainheal_ability"
+"elementalist_water_elemental_chain_heal_ability"
 {
 		
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"

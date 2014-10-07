@@ -27,7 +27,7 @@
 		"modifier_water_blessing"
 		{
 			"IsBuff"		"1"
-			"Duration"		"10"
+			"Duration"		"%duration"
 			"TextureName"	"omniknight_guardian_angel"
 
 			"OnCreated"
@@ -35,6 +35,7 @@
 				"RunScript"
 				{
 					"Target"		"TARGET"
+					"AttributeIncrease"	"%attribute_increase"
 					"ScriptFile"	"summon_abilities.lua"
 					"Function"		"WaterBlessing"
 				}
@@ -48,6 +49,20 @@
 					"Function"		"WaterBlessingRemove"
 				}
 			}
+		}
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"duration"			"180"
+		}
+		"02"
+		{
+			"var_type"			"FIELD_INTEGER"
+			"attribute_increase"	"10"
 		}
 	}
 }

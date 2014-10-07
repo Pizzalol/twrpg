@@ -18,7 +18,7 @@
 		
 		// Time		
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"1.0"
+		"AbilityCooldown"				"1.25"
 		
 		// Cost
 		//-------------------------------------------------------------------------------------------------------------
@@ -31,8 +31,18 @@
 		{
 			"RunScript"
 			{
+				"HPHeal"		"%hpheal"
 				"ScriptFile"	"summon_abilities.lua"
 				"Function"		"Purification"
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"hpheal"			"15"
 			}
 		}
 	}
