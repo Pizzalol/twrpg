@@ -404,7 +404,7 @@
 					"Passive"				"1"
 					
 					"Aura"					"modifier_souloftheforest_protection"
-					"Aura_Radius"			"500"
+					"Aura_Radius"			"%radius"
 					"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 					"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
 					"Aura_ApplyToCaster"		"0"
@@ -416,7 +416,7 @@
 	
 					"Properties"
 					{
-						"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"	"-15"
+						"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"	"%damage_reduction"
 					}
 				}
 	
@@ -429,12 +429,14 @@
 					{
 						"Random"
 						{
-							"Chance" "100.00"
+							"Chance" "%heal_chance"
 							//"PseudoRandom"	"DOTA_PSEUDO_RANDOM_JUGG_CRIT"
 							"OnSuccess"
 							{
 								"RunScript"
 								{
+									"HealAmount"		"%heal_amount"
+									"Radius"			"%radius"
 									"Caster"			"CASTER"
 									"ScriptFile"		"summon_abilities.lua"
 									"Function"			"SoulOfTheForestHeal"
@@ -451,9 +453,38 @@
 	
 					"Properties"
 					{
-						"MODIFIER_PROPERTY_INCOMING_SPELL_DAMAGE_CONSTANT"	"-70"
+						"MODIFIER_PROPERTY_INCOMING_SPELL_DAMAGE_CONSTANT"	"%magic_reduction"
 					}
 				}			
+			}
+	
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_INTEGER"
+					"radius"			"500"
+				}
+				"02"
+				{
+					"var_type"			"FIELD_INTEGER"
+					"damage_reduction"	"-15"
+				}
+				"03"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"heal_chance"		"100"
+				}
+				"04"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"heal_amount"		"10"
+				}
+				"05"
+				{
+					"var_type"			"FIELD_INTEGER"
+					"magic_reduction"	"-70"
+				}
 			}		
 	}
 	//End of file elementalist_earth_elemental_souloftheforest_ability.txt
@@ -492,7 +523,7 @@
 				"01"
 				{
 					"var_type"				"FIELD_INTEGER"
-					"radius"				"400"
+					"radius"				"500"
 				}
 				"02"
 				{

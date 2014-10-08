@@ -131,6 +131,8 @@ function SoulOfTheForestHeal( keys )
 	local table = {}
 	local casterloc = caster:GetAbsOrigin()
 	local casterMaxHP = caster:GetMaxHealth()
+	local healAmount = keys.HealAmount / 100
+	local radius = keys.Radius
 	print("magma test")
 
 	-- Checks if the attacker is the caster to prevent crashes if the caster
@@ -140,9 +142,9 @@ function SoulOfTheForestHeal( keys )
 	end
 
 	-- Finds all valid units in a radius around the caster and heals them
-	local unittoheal =FindUnitsInRadius(caster:GetTeam(), casterloc, nil, 500, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
+	local unittoheal =FindUnitsInRadius(caster:GetTeam(), casterloc, nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 	for i,v in ipairs(unittoheal) do
-		v:Heal(casterMaxHP*0.1, caster)
+		v:Heal(casterMaxHP*healAmount, caster)
 	end
 end
 
