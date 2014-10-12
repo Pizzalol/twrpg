@@ -209,15 +209,6 @@ function ElementalLinkCasted( keys )
 	-- Checks if its a valid target
 	if not(target==CheckElemental(caster,fire) or target==CheckElemental(caster,water) or target==CheckElemental(caster,earth) or target==CheckElemental(caster,lightning)) then
 		ability:EndCooldown()
-		print("Invalid target block")
-		Timers:CreateTimer(0.01,function()
-			print("Invalid target timer")
-			target:RemoveModifierByName("modifier_elemental_link_target") 
-			target:RemoveModifierByName("modifier_elemental_link_ability")
-			caster:RemoveModifierByName("modifier_elemental_link_caster")
-			end)
-
-		caster:AddSpeechBubble(1,"That is not a valid target", 2.0, 50, -10)
 		return
 	end 
 
@@ -241,7 +232,7 @@ function ElementalLinkCasted( keys )
 		elemental:RemoveAbility("elementalist_fire_elemental_blazing_haste_explosion_ability")
 		elemental:RemoveAbility("elementalist_elemental_link_unit_death") 
 
-		return
+		--return
 	else
 		elemental = nil
 	end
@@ -256,7 +247,7 @@ function ElementalLinkCasted( keys )
 		elemental:RemoveModifierByName("modifier_souloftheforest") 
 		elemental:RemoveAbility("elementalist_elemental_link_unit_death") 
 
-		return
+		--return
 	else
 		elemental = nil
 	end
@@ -271,7 +262,7 @@ function ElementalLinkCasted( keys )
 		elemental:RemoveModifierByName("modifier_electric") 
 		elemental:RemoveAbility("elementalist_elemental_link_unit_death") 
 
-		return
+		--return
 	else
 		elemental = nil
 	end
@@ -284,11 +275,13 @@ function ElementalLinkCasted( keys )
 		elemental:RemoveAbility("elementalist_water_elemental_water_blessing_ability")
 		elemental:RemoveAbility("elementalist_elemental_link_unit_death") 
 
-		return
+		--return
 	end
 
-	-- Just in case
-	return
+	-- Add abilities to the actual new target
+	ability:ApplyDataDrivenModifier(caster,target,"modifier_elemental_link_target",{})
+	ability:ApplyDataDrivenModifier(caster,target,"modifier_elemental_link_ability",{})
+	ability:ApplyDataDrivenModifier(caster,caster,"modifier_elemental_link_caster",{})
 end
 
 --[[This function is run whenever the caster of the Elemental Link is healed]]

@@ -23,10 +23,20 @@
 				"RunScript"
 				{
 					"Target"	"TARGET"
+					"ManaGain"		"%mana"
 					"ScriptFile"	"summon_abilities.lua"
 					"Function"		"ThunderStrike"
 				}
 			}
+		}
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"mana"				"15"
 		}
 	}
 }

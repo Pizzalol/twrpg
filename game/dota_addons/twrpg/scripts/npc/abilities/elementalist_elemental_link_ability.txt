@@ -9,7 +9,7 @@
 	"HotKeyOverride" 		"Y"
 	
 	// Casting
-	"AbilityCastRange"		"%leash_range"
+	"AbilityCastRange"		"600 800 1000"
 	"AbilityCastPoint"		"0.0"
 	"MaxLevel"				"3"
 	"LevelsBetweenUpgrades" "40"
@@ -32,26 +32,10 @@
 	{
 		"RunScript"
 		{
+			"Target"		"TARGET"
 			"ScriptFile"	"hero_abilities.lua"
 			"Function"		"ElementalLinkCasted"
-		}
-		"ApplyModifier"
-		{
-			"Target"		"CASTER"
-			"ModifierName"	"modifier_elemental_link_caster"
-		}
-		"ApplyModifier"
-		{
-			"Target"		"TARGET"
-			"ModifierName"	"modifier_elemental_link_target"
-		}
-		"ApplyModifier"
-		{
-			"Target"		"TARGET"
-			"ModifierName"	"modifier_elemental_link_ability"
-		}
-		
-		
+		}		
 	}
 
 	"Modifiers"

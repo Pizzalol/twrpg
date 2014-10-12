@@ -1,6 +1,7 @@
 -- Global variables
 
 --lightningCount = 0
+lightningCount = lightningCount or {}
 abyssCount = 0
 bitTable = {512,256,128,64,32,16,8,4,2,1}
 
@@ -454,12 +455,17 @@ function ChainLightning( keys )
 		local casterloc = caster:GetAbsOrigin()
 		local targetloc = target:GetAbsOrigin()
 		local tableDamage = {}
-		local damagepercentage = keys.DamagePercentage
+		local damagepercentage = keys.DamagePercentage / 100
 		local hitTable = {}
 		local chainjumps = keys.ChainJumps
 		local ability = keys.ability
+		local mana = keys.ManaGain
 
-		local damage = 50 * damagepercentage
+		local damage = 50
+
+		if caster:HasModifier("elementalist_elemental_link_target") then damagepercentage = 1 end
+		print(caster:GetManaRegen())
+		caster:GiveMana(mana) 
 
 		tableDamage.attacker = caster
 		tableDamage.victim = target
@@ -500,6 +506,7 @@ function ChainLightning( keys )
 					ParticleManager:ReleaseParticleIndex(particle)
 					table.insert( hitTable, target )	--log as a hit unit
 					tableDamage.victim = target
+					tableDamage.damage = tableDamage.damage * damagepercentage
 					ApplyDamage(tableDamage)	--Deal damage
 					ability:ApplyDataDrivenModifier(target,target,"elementalist_lightning_elemental_chain_lightning_magicresist_modifier",{})
 					break
@@ -572,7 +579,6 @@ end]]
 	It is called once every 8th attack, keeping count of the attacks using lightningCount
 	and reseting the counter once it reaches 8 attacks]]
 function ThunderStrike(keys)
-	lightningCount = lightningCount or {}
 	lightningCount[keys.caster] = lightningCount[keys.caster] or 0
 	lightningCount[keys.caster] = lightningCount[keys.caster] + 1
 	if lightningCount[keys.caster] == 8 then
@@ -581,8 +587,14 @@ function ThunderStrike(keys)
 		local targetloc = target:GetAbsOrigin()
 		local caster = keys.caster
 		local table = {}
+		local mana = keys.ManaGain
+
+		caster:GiveMana(mana)
 
 		print("ThunderStrike cast")
+
+		-- Normal : 12x INT
+		-- Enhanced : 20x INT
 
 		table.attacker = caster
 		table.victim = target
@@ -604,6 +616,99 @@ function ThunderStrike(keys)
 	end
 end
 
+
+function CurrentProjectile(keys)
+	local caster = keys.caster
+	local ability = keys.ability
+
+	if caster:GetMana() >= 3 then
+		local manaCost = keys.ManaCost
+		caster:SpendMana(manaCost, caster) 
+		 print("HELLO I AM SUPPOSED TO BE A FUCKING PROJECTILE")		
+		local origin = caster:GetOrigin()
+		origin.z = origin.z + 60
+		--local projectiles = vPlayerProjectiles[caster:GetPlayerID()]
+		--if projectiles == nil then
+		--projectiles = {}
+		--vPlayerProjectiles[caster:GetPlayerID()] = projectiles
+		--end
+		local info =
+		{
+			EffectName = keys.EffectName,
+			Ability = ability,
+			vSpawnOrigin = caster:GetAbsOrigin(),
+			fDistance = tonumber(keys.FixedDistance),
+			fStartRadius = tonumber(keys.StartRadius),
+			fEndRadius = tonumber(keys.EndRadius),
+			Source = caster,
+			bHasFrontalCone = false,
+			iMoveSpeed = tonumber(keys.MoveSpeed),
+			bReplaceExisting = true,
+			iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
+			iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
+			iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+			--iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+			--iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
+			--iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_OTHER,
+			--fMaxSpeed = 5200,
+			fExpireTime = GameRules:GetGameTime() + 8.0,
+			bProvidesVision = false,
+			iVisionRadius = 0,
+			iVisionTeamNumber = caster:GetTeamNumber()
+		}
+		--print ('0-------------0')
+		--PrintTable(info)
+		--print ('0--------------0')
+		local speed = keys.MoveSpeed
+		info.vVelocity = caster:GetForwardVector() * speed
+		ProjectileManager:CreateLinearProjectile( info )
+	else
+		ability = caster:FindAbilityByName("elementalist_lightning_elemental_lightning_current_sub_ability")
+		caster:CastAbilityNoTarget(ability, -1)
+	end
+
+end
+
+function CurrentProjectileHit( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local targetLocation = target:GetAbsOrigin()
+	local table = {}
+	table.attacker = keys.caster
+	table.damage_type = DAMAGE_TYPE_PURE
+	table.damage = 100
+
+	--Normal: Magic
+	--Enhanced: Pure
+
+	local unittodamage = FindUnitsInRadius(caster:GetTeam(), targetLocation, nil, 250, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
+
+	for i,v in ipairs(unittodamage) do
+		table.victim = v
+		ApplyDamage(table)
+	end
+end
+
+function LightningCurrentToggle( keys )
+	local caster = keys.caster
+	local ability = caster:FindAbilityByName("elementalist_lightning_elemental_lightning_current_sub_ability") 
+	caster:CastAbilityNoTarget(ability, -1)  
+end
+
+function LightningCurrentSwap( keys )
+	local state = keys.State
+	local caster = keys.caster
+
+	if state == 0 then
+		caster:SwapAbilities("elementalist_lightning_elemental_lightning_current_ability", "elementalist_lightning_elemental_lightning_current_sub_ability", true, false)
+	elseif state == 1 then
+		caster:SwapAbilities("elementalist_lightning_elemental_lightning_current_ability", "elementalist_lightning_elemental_lightning_current_sub_ability", false, true)
+	else
+		return
+	end	
+end
+
+
 -- Shadow Elemental abilities
 
 --[[Simple dash to point ability which deals damage to targets around the dashing point]]
@@ -613,10 +718,15 @@ function AbyssDash( keys )
 	local target = keys.target_points[1]
 	local facevec = target - casterloc
 	local distance = facevec:Length2D() -- calculates the distance between the two points
+	local radius = keys.Radius
 	--print("Dash distance " .. distance)
 
 	-- Sets the new distance depending on the target point because it overshoots by ~100-200 for whatever reason
-	if distance >= 400 then 
+	if distance >= 800 then
+		distance = distance - 300
+	elseif distance >= 600 then
+		distance = distance - 300
+	elseif distance >= 400 then 
 		distance = distance - 200
 	elseif distance >= 200 then
 		distance = distance - 100
@@ -637,7 +747,7 @@ function AbyssDash( keys )
 	table.damage = 300
 
 	-- Saving every valid target in a table
-	local unittodamage = FindUnitsInRadius(caster:GetTeam(), target, nil, 300, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false) --[[Returns:table
+	local unittodamage = FindUnitsInRadius(caster:GetTeam(), target, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false) --[[Returns:table
 	Finds the units in a given radius with the given flags. ( iTeamNumber, vPosition, hCacheUnit, flRadius, iTeamFilter, iTypeFilter, iFlagFilter, iOrder, bCanGrowCache )
 	]]
 
@@ -656,7 +766,12 @@ function AbyssPull( keys )
 	local casterloc = caster:GetAbsOrigin()
 	local owner = caster:GetOwner()
 	local playerID = owner:GetPlayerID()
-	local table = {}
+	local damageTable = {}
+	local radius = keys.Radius
+
+	damageTable.damage = 100
+	damageTable.damage_type = DAMAGE_TYPE_MAGICAL
+	damageTable.attacker = caster
 
 	-- Create a dummy unit which will cast the spell on the caster location
 	local dummy = CreateUnitByName("npc_dummy_unit", casterloc, false, owner, owner, owner:GetTeam()) 
@@ -688,6 +803,16 @@ function AbyssPull( keys )
 			end)
 		end)
 
+	Timers:CreateTimer(0.4, function()
+		local unittodamage = FindUnitsInRadius(caster:GetTeam(), casterloc, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false) 
+
+
+		for i,v in ipairs(unittodamage) do
+			damageTable.victim = v
+			ApplyDamage(damageTable)
+		end
+		 end)
+
 end
 
 
@@ -701,6 +826,7 @@ function AbyssReach( keys )
 	local target = keys.target
 	local targetloc = target:GetAbsOrigin()
 	local casterDmg = caster:GetAttackDamage()
+	local radius = keys.Radius
 	--local ownerInt = caster:GetOwner():GetIntellect()
 
 	-- Counts how many attacks have been made so far
@@ -719,7 +845,7 @@ function AbyssReach( keys )
 	end
 
 	-- Find all valid targets and damage them
-	local unittodamage = FindUnitsInRadius(caster:GetTeam(), targetloc, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
+	local unittodamage = FindUnitsInRadius(caster:GetTeam(), targetloc, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 	for i,v in ipairs(unittodamage) do
 		table.victim = v
 		ApplyDamage(table)
@@ -731,6 +857,7 @@ function AbyssEye( keys )
 	local casterloc = caster:GetAbsOrigin() 
 	local owner = caster:GetOwner()
 	local damageTable = {}
+	local radius = keys.Radius
 
 	damageTable.attacker = caster
 	damageTable.damage_type = DAMAGE_TYPE_PURE
@@ -766,7 +893,7 @@ function AbyssEye( keys )
 	dummy:SetAbsOrigin(casterloc+Vector(0,0,500))
 
 	-- first block
-	local dummySpiralStart = CreateUnitByName("npc_dummy_unit", casterloc+Vector(700,-700,0), false, owner, owner, owner:GetTeam()) 
+	local dummySpiralStart = CreateUnitByName("npc_dummy_unit", casterloc+Vector(radius,-radius,0), false, owner, owner, owner:GetTeam()) 
 	dummySpiralStart:AddNewModifier(dummySpiralStart, nil, "modifier_phased", {})
 	local dummyability = dummySpiralStart:FindAbilityByName("dummy_unit")
 	dummyability:SetLevel(1)
@@ -836,7 +963,7 @@ function AbyssEye( keys )
 			end
 		end
 		ParticleManager:DestroyParticle(ElementalLinkParticle, true)
-		dummySpiral = CreateUnitByName("npc_dummy_unit", casterloc+Vector(700-vectorX,-700-vectorY,0), false, owner, owner, owner:GetTeam())
+		dummySpiral = CreateUnitByName("npc_dummy_unit", casterloc+Vector(radius-vectorX,-radius-vectorY,0), false, owner, owner, owner:GetTeam())
 		dummySpiral:AddNewModifier(dummySpiral, nil, "modifier_phased", {})
 		local dummyability = dummySpiral:FindAbilityByName("dummy_unit")
 		dummyability:SetLevel(1)

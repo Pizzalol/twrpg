@@ -23,6 +23,7 @@
 					"Target"				"TARGET"
 					"DamagePercentage"		"%damagepercentage"
 					"ChainJumps"			"%chainjumps"
+					"ManaGain"				"%mana"
 					"ScriptFile"			"summon_abilities.lua"
 					"Function"				"ChainLightning"
 				}
@@ -47,7 +48,7 @@
 		"01"
 		{
 			"var_type"				"FIELD_FLOAT"
-			"damagepercentage"		"0.75"
+			"damagepercentage"		"75"
 		}
 		"02"
 		{
@@ -57,7 +58,12 @@
 		"03"
 		{
 			"var_type"				"FIELD_FLOAT"
-			"magicresist"			"-20"
+			"magicresist"			"-12"
+		}
+		"04"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"mana"					"2"
 		}
 	}
 }

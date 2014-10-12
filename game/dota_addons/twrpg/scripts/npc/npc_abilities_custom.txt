@@ -113,12 +113,12 @@
 				"03"
 				{
 					"var_type"				"FIELD_INTEGER"
-					"damage"				"50"
+					"damage"				"0"
 				}
 				"04"
 				{
 					"var_type"				"FIELD_INTEGER"
-					"radius_tree"				"275"
+					"radius_tree"				"0"
 				}
 			}
 		
@@ -648,7 +648,7 @@
 		"HotKeyOverride" 		"Y"
 		
 		// Casting
-		"AbilityCastRange"		"%leash_range"
+		"AbilityCastRange"		"600 800 1000"
 		"AbilityCastPoint"		"0.0"
 		"MaxLevel"				"3"
 		"LevelsBetweenUpgrades" "40"
@@ -671,26 +671,10 @@
 		{
 			"RunScript"
 			{
+				"Target"		"TARGET"
 				"ScriptFile"	"hero_abilities.lua"
 				"Function"		"ElementalLinkCasted"
-			}
-			"ApplyModifier"
-			{
-				"Target"		"CASTER"
-				"ModifierName"	"modifier_elemental_link_caster"
-			}
-			"ApplyModifier"
-			{
-				"Target"		"TARGET"
-				"ModifierName"	"modifier_elemental_link_target"
-			}
-			"ApplyModifier"
-			{
-				"Target"		"TARGET"
-				"ModifierName"	"modifier_elemental_link_ability"
-			}
-			
-			
+			}		
 		}
 	
 		"Modifiers"
@@ -928,7 +912,7 @@
 							"ScriptFile"	"summon_abilities.lua"
 							"Function"		"FlameFists"
 						}
-					}	
+					}
 				}
 			}
 	
@@ -1100,6 +1084,7 @@
 						"Target"				"TARGET"
 						"DamagePercentage"		"%damagepercentage"
 						"ChainJumps"			"%chainjumps"
+						"ManaGain"				"%mana"
 						"ScriptFile"			"summon_abilities.lua"
 						"Function"				"ChainLightning"
 					}
@@ -1124,7 +1109,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"damagepercentage"		"0.75"
+				"damagepercentage"		"75"
 			}
 			"02"
 			{
@@ -1134,7 +1119,12 @@
 			"03"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"magicresist"			"-20"
+				"magicresist"			"-12"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"mana"					"2"
 			}
 		}
 	}
@@ -1159,7 +1149,7 @@
 				"Passive"				"1"
 				
 				"Aura"					"modifier_electric_aura"
-				"Aura_Radius"			"750"
+				"Aura_Radius"			"%radius"
 				"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 				"Aura_Types"			"DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
 				"Aura_ApplyToCaster"		"1"
@@ -1172,13 +1162,184 @@
 	
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "40"
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "40"
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%movement"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack"
 				}
+			}
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"radius"		"750"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"movement"		"40"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"attack"		"40"
+			}
+			"04"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"chain_lightning"	"0"
+			}
+			"05"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"thunderstrike"		"5"
+			}
+			"06"
+			{
+				"var_type"		"FIELD_STRING"
+				"lightning_current"	"PURE"
 			}
 		}
 	}
 	//End of file elementalist_lightning_elemental_electric_aura_ability.txt
+
+
+	//Start of file elementalist_lightning_elemental_lightning_current_ability.txt
+	"elementalist_lightning_elemental_lightning_current_ability"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"warlock_golem_flaming_fists"
+	
+		"Precache"
+		{
+		"particle_folder" "particles/units/heroes/hero_magnataur/"
+		"soundfile" "soundevents/game_sounds_heroes/game_sounds_death_prophet.vsndevts"
+		}
+	
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"lightning_current_modifier"
+				"Target"		"CASTER"
+			}
+	
+			"RunScript"
+			{
+				"ScriptFile"	"summon_abilities.lua"
+				"Function"		"LightningCurrentSwap"
+				"State"			"1"
+			}
+		}
+	
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit" "1"
+			"RunScript"
+			{
+				"ScriptFile"		"summon_abilities.lua"
+				"Function"			"CurrentProjectileHit"
+			}
+		
+		}
+	
+		"Modifiers"
+		{
+			"lightning_current_modifier"
+			{
+				"IsHidden"		"1"
+				"ThinkInterval"	"0.5"
+	
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"summon_abilities.lua"
+						"Function"		"CurrentProjectile"
+						"EffectName" "particles/units/heroes/hero_magnataur/magnataur_shockwave.vpcf"
+						"MoveSpeed" "200"
+						//"StartPosition" "attach_attack1"
+						"FixedDistance" "%range"
+						"StartRadius" "50"
+						"EndRadius" "50"
+						"TargetTeams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+						"TargetTypes" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+						//"TargetFlags" "DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS"
+						"HasFrontalCone" "0"
+						//"ProvidesVision" "1"
+						//"VisionRadius" "300"
+	
+						"ManaCost"		"%mana_cost"
+					}
+				}
+	
+				"States"
+				{
+					"MODIFIER_STATE_DISARMED"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_ROOTED"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+	
+				"OnOrder"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"summon_abilities.lua"
+						"Function"		"LightningCurrentToggle"
+					}
+				}
+			}
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"mana_cost"		"3"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"radius"		"250"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"range"			"800"
+			}
+		}
+	
+		
+	}
+	//End of file elementalist_lightning_elemental_lightning_current_ability.txt
+
+
+	//Start of file elementalist_lightning_elemental_lightning_current_sub_ability.txt
+	"elementalist_lightning_elemental_lightning_current_sub_ability"
+	{
+		"BaseClass"		"ability_datadriven"
+		"AbilityTextureName"			"invoker_quas"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+	
+		"OnSpellStart"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"lightning_current_modifier"
+				"Target"		"CASTER"
+			}
+	
+			"RunScript"
+			{
+				"ScriptFile"	"summon_abilities.lua"
+				"Function"		"LightningCurrentSwap"
+				"State"			"0"
+			}
+		}
+	}
+	//End of file elementalist_lightning_elemental_lightning_current_sub_ability.txt
 
 
 	//Start of file elementalist_lightning_elemental_thunder_strike_ability.txt
@@ -1207,10 +1368,20 @@
 					"RunScript"
 					{
 						"Target"	"TARGET"
+						"ManaGain"		"%mana"
 						"ScriptFile"	"summon_abilities.lua"
 						"Function"		"ThunderStrike"
 					}
 				}
+			}
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"mana"				"15"
 			}
 		}
 	}
@@ -1224,20 +1395,35 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"nevermore_shadowraze1"
 		"MaxLevel"						"1"
-		"AOERadius"						"300"
+		"AOERadius"						"425"
 	
 		"AbilityManaCost"				"0"
-		"AbilityCastRange"				"600"
+		"AbilityCastRange"				"1000"
 		"AbilityCastPoint"				"0.1"
-		"AbilityCooldown"				"5.0"
+		"AbilityCooldown"				"10.0"
 	
 		"OnSpellStart"
 		{
 			"RunScript"
 			{
 				"Target"		"POINT"
+				"Radius"		"%radius"
 				"ScriptFile"	"summon_abilities.lua"
 				"Function"		"AbyssDash"
+			}
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"range"			"1000"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"radius"		"425"
 			}
 		}
 		
@@ -1252,18 +1438,28 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"shadow_demon_demonic_purge"
 		"MaxLevel"						"1"
-		"AOERadius"						"300"
+		"AOERadius"						"700"
 	
 		"AbilityManaCost"				"0"
 		"AbilityCastPoint"				"0.1"
-		"AbilityCooldown"				"5.0"
+		"AbilityCooldown"				"30.0"
 	
 		"OnSpellStart"
 		{
 			"RunScript"
 			{
+				"Radius"		"%radius"
 				"ScriptFile"	"summon_abilities.lua"
 				"Function"		"AbyssEye"
+			}
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"700"
 			}
 		}
 		
@@ -1289,7 +1485,7 @@
 				"Passive"				"1"
 				
 				"Aura"					"modifier_abyss_presence"
-				"Aura_Radius"			"500"
+				"Aura_Radius"			"%radius"
 				"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 				"Aura_Types"			"DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
 				"Aura_ApplyToCaster"		"1"
@@ -1301,9 +1497,28 @@
 	
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "10"
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "10"
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%movement"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack"
 				}
+			}
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"500"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"movement"			"70"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"attack"			"70"
 			}
 		}
 	}
@@ -1317,18 +1532,28 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"shadow_demon_demonic_purge"
 		"MaxLevel"						"1"
-		"AOERadius"						"300"
+		"AOERadius"						"500"
 	
 		"AbilityManaCost"				"0"
 		"AbilityCastPoint"				"0.1"
-		"AbilityCooldown"				"5.0"
+		"AbilityCooldown"				"15.0"
 	
 		"OnSpellStart"
 		{
 			"RunScript"
 			{
+				"Radius"		"%radius"
 				"ScriptFile"	"summon_abilities.lua"
 				"Function"		"AbyssPull"
+			}
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"radius"		"500"
 			}
 		}
 		
@@ -1337,7 +1562,6 @@
 
 
 	//Start of file elementalist_shadow_elemental_abyss_reach_ability.txt
-	
 	"elementalist_shadow_elemental_abyss_reach_ability"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AOE"
@@ -1356,6 +1580,7 @@
 					"RunScript"
 					{
 						"Target"	"TARGET"
+						"Radius"	"%radius"
 						"ScriptFile"	"summon_abilities.lua"
 						"Function"		"AbyssReach"
 					}
@@ -1369,8 +1594,27 @@
 	
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "20"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack"
 				}
+			}
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"radius"		"250"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"attack"		"20"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"empower"		"2"
 			}
 		}
 	}

@@ -4,20 +4,35 @@
 	"BaseClass"						"ability_datadriven"
 	"AbilityTextureName"			"nevermore_shadowraze1"
 	"MaxLevel"						"1"
-	"AOERadius"						"300"
+	"AOERadius"						"425"
 
 	"AbilityManaCost"				"0"
-	"AbilityCastRange"				"600"
+	"AbilityCastRange"				"1000"
 	"AbilityCastPoint"				"0.1"
-	"AbilityCooldown"				"5.0"
+	"AbilityCooldown"				"10.0"
 
 	"OnSpellStart"
 	{
 		"RunScript"
 		{
 			"Target"		"POINT"
+			"Radius"		"%radius"
 			"ScriptFile"	"summon_abilities.lua"
 			"Function"		"AbyssDash"
+		}
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"		"FIELD_INTEGER"
+			"range"			"1000"
+		}
+		"02"
+		{
+			"var_type"		"FIELD_INTEGER"
+			"radius"		"425"
 		}
 	}
 	

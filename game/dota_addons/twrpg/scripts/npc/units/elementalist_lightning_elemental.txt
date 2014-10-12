@@ -18,11 +18,11 @@
 		//----------------------------------------------------------------
 		
 		"Ability1"					"elementalist_lightning_elemental_thunder_strike_ability"		// Ability 1.
-		"Ability2"					"elementalist_lightning_elemental_chain_lightning_ability"			// Ability 2.
+		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
 		"Ability4"					""			// Ability 4.
 		"Ability5"					"elementalist_summon_duration"			// Ability 5.
-		"Ability6"					""			// Ability 6 - Extra.
+		"Ability6"					"elementalist_lightning_elemental_lightning_current_sub_ability"			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
 		"Ability8"					""			// Ability 8 - Extra.
 

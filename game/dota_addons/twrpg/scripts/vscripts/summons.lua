@@ -195,9 +195,9 @@ function SummonLightningElemental(keys)
 		lightningelemental:SetBaseDamageMin(2276) 
 		lightningelemental:SetBaseDamageMax(2284) 
 	elseif level >= 5 then
-		--lightningelemental:AddAbility("elementalist_fire_elemental_magma_explosion_ability") 
-		--lightningAbility = lightningelemental:FindAbilityByName("elementalist_fire_elemental_magma_explosion_ability")
-		--lightningAbility:SetLevel(1)
+		lightningelemental:AddAbility("elementalist_lightning_elemental_lightning_current_ability") 
+		lightningAbility = lightningelemental:FindAbilityByName("elementalist_lightning_elemental_lightning_current_ability")
+		lightningAbility:SetLevel(1)
 		lightningelemental:SetBaseDamageMin(3026)
 		lightningelemental:SetBaseDamageMax(3034) 
 	end

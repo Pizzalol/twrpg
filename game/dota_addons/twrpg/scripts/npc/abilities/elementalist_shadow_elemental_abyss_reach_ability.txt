@@ -1,4 +1,3 @@
-
 "elementalist_shadow_elemental_abyss_reach_ability"
 {
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AOE"
@@ -17,6 +16,7 @@
 				"RunScript"
 				{
 					"Target"	"TARGET"
+					"Radius"	"%radius"
 					"ScriptFile"	"summon_abilities.lua"
 					"Function"		"AbyssReach"
 				}
@@ -30,8 +30,27 @@
 
 			"Properties"
 			{
-				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "20"
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack"
 			}
+		}
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"		"FIELD_INTEGER"
+			"radius"		"250"
+		}
+		"02"
+		{
+			"var_type"		"FIELD_INTEGER"
+			"attack"		"20"
+		}
+		"03"
+		{
+			"var_type"		"FIELD_FLOAT"
+			"empower"		"2"
 		}
 	}
 }

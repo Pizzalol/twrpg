@@ -31,7 +31,7 @@
 						"ScriptFile"	"summon_abilities.lua"
 						"Function"		"FlameFists"
 					}
-				}	
+				}
 			}
 		}
 
