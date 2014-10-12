@@ -36,7 +36,7 @@
 				{
 					"Target"		"TARGET"
 					"AttributeIncrease"	"%attribute_increase"
-					"ScriptFile"	"summon_abilities.lua"
+					"ScriptFile"	"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
 					"Function"		"WaterBlessing"
 				}
 			}
@@ -45,7 +45,7 @@
 				"RunScript"
 				{
 					"Target"		"TARGET"
-					"ScriptFile"	"summon_abilities.lua"
+					"ScriptFile"	"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
 					"Function"		"WaterBlessingRemove"
 				}
 			}

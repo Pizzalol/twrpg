@@ -61,7 +61,7 @@
 						"HealAmount"	"%heal_amount"
 						"Upkeep"		"%mana_per_interval"
 						"Radius"		"%stomp_radius"
-						"ScriptFile"	"summon_abilities.lua"
+						"ScriptFile"	"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
 						"Function"		"StompInterval"
 					}
 

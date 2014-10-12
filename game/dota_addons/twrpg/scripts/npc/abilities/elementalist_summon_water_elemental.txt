@@ -27,7 +27,7 @@
 				"HPScale"			"%hpscale"
 				"BaseHP"			"%basehp"
 				"ModelScale"		"%modelscale"
-				"ScriptFile"		"summons.lua"
+				"ScriptFile"		"scripts/vscripts/heroes/elementalist_summons.lua"
 				"Function"			"SummonWaterElemental"
 			}
 		}

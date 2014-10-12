@@ -20,7 +20,7 @@
 
 		"RunScript"
 		{
-			"ScriptFile"	"summon_abilities.lua"
+			"ScriptFile"	"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
 			"Function"		"LightningCurrentSwap"
 			"State"			"1"
 		}
@@ -31,7 +31,7 @@
 		"DeleteOnHit" "1"
 		"RunScript"
 		{
-			"ScriptFile"		"summon_abilities.lua"
+			"ScriptFile"		"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
 			"Function"			"CurrentProjectileHit"
 		}
 	
@@ -48,7 +48,7 @@
 			{
 				"RunScript"
 				{
-					"ScriptFile"	"summon_abilities.lua"
+					"ScriptFile"	"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
 					"Function"		"CurrentProjectile"
 					"EffectName" "particles/units/heroes/hero_magnataur/magnataur_shockwave.vpcf"
 					"MoveSpeed" "200"
@@ -77,7 +77,7 @@
 			{
 				"RunScript"
 				{
-					"ScriptFile"	"summon_abilities.lua"
+					"ScriptFile"	"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
 					"Function"		"LightningCurrentToggle"
 				}
 			}

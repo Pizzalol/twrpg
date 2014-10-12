@@ -33,7 +33,7 @@
 		"RunScript"
 		{
 			"Target"		"TARGET"
-			"ScriptFile"	"hero_abilities.lua"
+			"ScriptFile"	"scripts/vscripts/heroes/scripts/vscripts/heroes/elementalist.lua"
 			"Function"		"ElementalLinkCasted"
 		}		
 	}
@@ -49,7 +49,7 @@
 			{
 				"RunScript"
 				{
-					"ScriptFile"	"hero_abilities.lua"
+					"ScriptFile"	"scripts/vscripts/heroes/elementalist.lua"
 					"Function"		"OnCasterDamaged"
 				}
 			}
@@ -58,7 +58,7 @@
 			{
 				"RunScript"
 				{
-					"ScriptFile"	"hero_abilities.lua"
+					"ScriptFile"	"scripts/vscripts/heroes/elementalist.lua"
 					"Function"		"OnCasterHealed"
 				}
 			}
@@ -80,7 +80,7 @@
 				"RunScript"
 				{
 					"Target"	"TARGET"
-					"ScriptFile"	"hero_abilities.lua"
+					"ScriptFile"	"scripts/vscripts/heroes/elementalist.lua"
 					"Function"		"ElementalLink"
 				}
 			}
@@ -95,7 +95,7 @@
 				"RunScript"
 				{
 					"Target"	"TARGET"
-					"ScriptFile"	"hero_abilities.lua"
+					"ScriptFile"	"scripts/vscripts/heroes/elementalist.lua"
 					"Function"		"ElementalLinkAddAbility"
 				}
 			}

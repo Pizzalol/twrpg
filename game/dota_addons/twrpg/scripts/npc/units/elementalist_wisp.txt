@@ -78,7 +78,7 @@
 		"VisionNighttimeRange"		"800"		// Range of vision at night time.
 
 		// AI
-		"vscripts"					"ai_elementalist_wisp.lua"
+		"vscripts"					"scripts/vscripts/ai/ai_elementalist_wisp.lua"
 
 		// Creature Data
 		//----------------------------------------------------------------------------------------------------------------------

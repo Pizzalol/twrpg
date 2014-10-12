@@ -14,7 +14,7 @@
 
 		"RunScript"
 		{
-			"ScriptFile"	"summon_abilities.lua"
+			"ScriptFile"	"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
 			"Function"		"LightningCurrentSwap"
 			"State"			"0"
 		}

@@ -27,7 +27,7 @@
 				"HPScale"			"%hpscale"
 				"ModelScale"		"%modelscale"
 				"BaseHP"			"%basehp"
-				"ScriptFile"		"summons.lua"
+				"ScriptFile"		"scripts/vscripts/heroes/elementalist_summons.lua"
 				"Function"			"SummonLightningElemental"
 			}
 		}

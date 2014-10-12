@@ -41,7 +41,7 @@
 				{
 					"NumberOfWisps"	"%numberofwisps"		
 					"Target"		"POINT"
-					"ScriptFile"	"hero_abilities.lua"
+					"ScriptFile"	"scripts/vscripts/heroes/elementalist.lua"
 					"Function"		"DreamgateCast"
 				}
 			}

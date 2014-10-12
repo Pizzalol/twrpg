@@ -1,4 +1,4 @@
-require('hero_abilities')
+require('heroes/elementalist')
 
 
 function KillSummon( keys )

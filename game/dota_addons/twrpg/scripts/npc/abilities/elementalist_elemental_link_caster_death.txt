@@ -9,7 +9,7 @@
 		"RunScript"
 		{
 			"Target"		"CASTER"
-			"ScriptFile"	"hero_abilities.lua"
+			"ScriptFile"	"scripts/vscripts/heroes/elementalist.lua"
 			"Function"		"ElementalLinkCasterDeath"
 		}
 	}

@@ -39,7 +39,7 @@
 								"DamageAmount"		"%attack_damage"
 								"ReflectAmount"		"%reflect_amount"
 								"Caster"			"CASTER"
-								"ScriptFile"		"summon_abilities.lua"
+								"ScriptFile"		"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
 								"Function"			"ThornsAura"
 							}
 						}
@@ -62,7 +62,7 @@
 					"RunScript"
 					{
 						"BaseArmor"		"%armor_base"
-						"ScriptFile"	"summon_abilities.lua"
+						"ScriptFile"	"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
 						"Function"		"ThornsAuraArmor"
 					}
 				}

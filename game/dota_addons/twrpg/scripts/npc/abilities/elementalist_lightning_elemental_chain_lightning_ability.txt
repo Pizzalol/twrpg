@@ -24,7 +24,7 @@
 					"DamagePercentage"		"%damagepercentage"
 					"ChainJumps"			"%chainjumps"
 					"ManaGain"				"%mana"
-					"ScriptFile"			"summon_abilities.lua"
+					"ScriptFile"			"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
 					"Function"				"ChainLightning"
 				}
 			}
