@@ -1,0 +1,42 @@
+"item_test_skill_damage"
+{
+	"ID" "1042"
+	"BaseClass" "item_datadriven"
+	"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityTextureName" "item_ethereal_blade"
+	"ItemDroppable" "1"
+	"ItemSellable" "1"
+	"ItemKillable" "0"
+	"ItemDisassemblable" "0"
+	"ItemQuality" "epic"
+	"ItemCost" "0"
+	"ItemShopTags" "damage"
+	"ItemShareability" "ITEM_PARTIALLY_SHAREABLE"
+
+	"Modifiers"
+	{
+		"modifier_skill_damage"
+		{
+			"Passive"	"1"
+			"OnCreated"
+			{
+				"RunScript"
+				{
+					"SkillDamage"	"15"
+					"ScriptFile"	"custom_abilities.lua"
+					"Function"	"AddSkillDamage"
+				}
+			}
+			"OnDestroy"
+			{
+				"RunScript"
+				{
+					"SkillDamage"	"15"
+					"ScriptFile"	"custom_abilities.lua"
+					"Function"	"RemoveSkillDamage"
+				}
+			}
+		}
+	}
+
+}

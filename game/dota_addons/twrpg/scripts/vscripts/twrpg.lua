@@ -13,6 +13,11 @@ for i=1,MAX_LEVEL do
 	XP_PER_LEVEL_TABLE[i] = i * 100
 end
 
+
+GameMode = nil
+HeroArray = {}
+
+
 -- Generated from template
 if TWRPGGameMode == nil then
 	print ( '[twrpg] creating twrpg game mode' )
@@ -23,11 +28,6 @@ if TWRPGGameMode == nil then
 	TWRPGGameMode = class({})
 end
 
---[[function TWRPGGameMode:InitGameMode()
-	print( "Template addon is loaded." )
-end]]
-
-GameMode = nil
 
 function TWRPGGameMode:new( o )
 	print ( '[twrpg] TWRPGGameMode:new' )
@@ -67,12 +67,76 @@ function TWRPGGameMode:OnPlayerPicked( keys )
 	print("Old square root is " .. tostring(oldX))]]
 end
 
+function TWRPGGameMode:OnNPCSpawned( keys )
+    local spawnedUnit = EntIndexToHScript( keys.entindex )
+    
+    if spawnedUnit:IsRealHero()  then
+        if spawnedUnit:GetPlayerOwnerID() ~= -1 then
+            if HeroArray[ spawnedUnit:GetPlayerOwnerID() ] == null then
+		        TWRPGGameMode:InitHero( spawnedUnit )
+	          end
+        end
+    end
+end
+
+function TWRPGGameMode:PlayerConnect(keys)
+  print('[twrpg] PlayerConnect')
+  
+  -- Fill in the usernames for this userID
+  self.vUserNames[keys.userid] = keys.name
+  if keys.bot == 1 then
+    -- This user is a Bot, so add it to the bots table
+    self.vBots[keys.userid] = 1
+  end
+end
+
+function TWRPGGameMode:PlayerConnectFull(keys)
+  print ('[twrpg] PlayerConnectFull')
+  TWRPGGameMode:CaptureGameMode()
+
+  
+  
+  local entIndex = keys.index+1
+  local ply = EntIndexToHScript(entIndex)
+  local playerID = ply:GetPlayerID()
+  print("1")
+  self.vUserIds[keys.userid] = ply
+  self.vSteamIds[PlayerResource:GetSteamAccountID(playerID)] = ply
+  print("2")
+  -- If the player is a broadcaster flag it in the Broadcasters table
+  if PlayerResource:IsBroadcaster(playerID) then
+    self.vBroadcasters[keys.userid] = 1
+    return
+  end
+  print("3")
+  -- If this player is a bot (spectator) flag it and continue on
+  if self.vBots[keys.userid] ~= nil then
+    return
+  end
+
+  print("4")
+  playerID = ply:GetPlayerID()
+  -- Figure out if this player is just reconnecting after a disconnect
+  if self.vPlayers[playerID] ~= nil then
+    self.vUserIds[keys.userid] = ply
+    local Hero = HeroArray[playerID].herounit
+    Hero:SetOrigin(HeroArray[playerID].pos_before_dc)
+    return
+  end
+  print("5")
+  
+  self.vPlayers[playerID] = ply
+  print("6")
+  
+end
+
 function TWRPGGameMode:OnPlayerLeveledUp( keys )
 	local player = keys.player - 1
 	if PlayerResource:IsValidPlayer(player) then
 		local hero = PlayerResource:GetSelectedHeroEntity(player) 
 		local level = hero:GetLevel()
-		print(level)
+		print("Current skill damage is: " .. tostring(HeroArray[hero:GetPlayerID()].skill_damage))
+		print(hero:GetPlayerID())
 		if level % 40 == 0 and level <= 320 then
 			local abilityLevel = (level/40) + 1
 			hero:GetAbilityByIndex(3):SetLevel(abilityLevel)
@@ -97,8 +161,10 @@ function TWRPGGameMode:InitGameMode()
 	GameRules:SetGoldPerTick(0)
 
 	--ListenToGameEvent('entity_hurt', Dynamic_Wrap(TWRPGGameMode, 'OnEntityHurt'), self)
-	--ListenToGameEvent( "npc_spawned", Dynamic_Wrap( TWRPGGameMode, "OnNPCSpawned" ), self )
+	ListenToGameEvent( "npc_spawned", Dynamic_Wrap( TWRPGGameMode, "OnNPCSpawned" ), self )
 	ListenToGameEvent( "dota_player_pick_hero", Dynamic_Wrap( TWRPGGameMode, "OnPlayerPicked" ), self )
+	ListenToGameEvent( "player_connect", Dynamic_Wrap(TWRPGGameMode, 'PlayerConnect'), self)
+	ListenToGameEvent( "player_connect_full", Dynamic_Wrap(TWRPGGameMode, 'PlayerConnectFull'), self)
 	--ListenToGameEvent( "player_reconnected", Dynamic_Wrap( TWRPGGameMode, 'OnPlayerReconnected' ), self )
 	--ListenToGameEvent( "entity_killed", Dynamic_Wrap( TWRPGGameMode, 'OnEntityKilled' ), self )
 	--ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( TWRPGGameMode, "OnGameRulesStateChange" ), self )
@@ -110,31 +176,18 @@ function TWRPGGameMode:InitGameMode()
 	--ListenToGameEvent( "dota_player_used_ability", Dynamic_Wrap(TWRPGGameMode, 'OnAbilityCast'), self)
 	--ListenToGameEvent( "dota_item_picked_up", Dynamic_Wrap(TWRPGGameMode, 'OnItemPickedUp'), self)
 
+	-- userID map
+	self.vUserNames = {}
+	self.vUserIds = {}
+	self.vSteamIds = {}
+	self.vBots = {}
+	self.vBroadcasters = {}
+	self.vPlayers = {}
+	self.vPlayerHeroData = {}
+
 	print('[twrpg] Rules set')
 end
 
---[[function TWRPGGameMode:CaptureGameMode()
-	if GameMode == nil then
-		-- Set GameMode parameters
-		GameMode = GameRules:GetGameModeEntity()
-		-- Disables recommended items...though I don't think it works
-		GameMode:SetRecommendedItemsDisabled( true )
-		-- Override the normal camera distance. Usual is 1134
-		GameMode:SetCameraDistanceOverride( 1504.0 )
-		-- Set Buyback options
-		GameMode:SetCustomBuybackCostEnabled( true )
-		GameMode:SetCustomBuybackCooldownEnabled( true )
-		GameMode:SetBuybackEnabled( false )
-		-- Override the top bar values to show your own settings instead of total deaths
-		GameMode:SetTopBarTeamValuesOverride ( true )
-		-- Use custom hero level maximum and your own XP per level
-		GameMode:SetUseCustomHeroLevels ( true )
-		GameMode:SetCustomHeroMaxLevel ( MAX_LEVEL )
-		GameMode:SetCustomXPRequiredToReachNextLevel( XP_PER_LEVEL_TABLE )
-		-- Chage the minimap icon size
-		GameRules:SetHeroMinimapIconSize( 300 )
-	end
-end]]--
 
 function TWRPGGameMode:CaptureGameMode()
 	if GameMode == nil then

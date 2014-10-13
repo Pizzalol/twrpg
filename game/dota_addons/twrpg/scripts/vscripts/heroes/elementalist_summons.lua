@@ -102,6 +102,11 @@ function SummonEarthElemental(keys)
 		elemental:ForceKill(true)
 	end
 
+	print("TESTING SKILL DAMAGE: " .. tostring(HeroArray[caster:GetPlayerID()].skill_damage))
+	local item = CreateItem("item_test_skill_damage", caster, caster)
+	CreateItemOnPositionSync(caster:GetOrigin(), item) 
+	--print(caster:GetPlayerID())
+
 	local earthelemental = CreateUnitByName("elementalist_earth_elemental", target, true, caster, caster, team)
 	earthelemental:SetControllableByPlayer(caster:GetPlayerID() , true)	
 	earthelemental:SetModelScale(modelScale)

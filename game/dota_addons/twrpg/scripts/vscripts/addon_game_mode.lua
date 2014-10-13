@@ -4,6 +4,8 @@
 --require('multiteam')
 require('twrpg')
 require('timers')
+require("hero")
+require("custom_abilities")
 --[[if ReflexGameMode == nil then
 print ( '[REFLEX] creating reflex game mode' )
 ReflexGameMode = class({})
@@ -39,7 +41,7 @@ end
 function Activate()
 	GameRules.AddonTemplate = TWRPGGameMode()
 	GameRules.AddonTemplate:InitGameMode()
-	GameRules.AddonTemplate:CaptureGameMode()
+	--GameRules.AddonTemplate:CaptureGameMode()
 end
 
 
