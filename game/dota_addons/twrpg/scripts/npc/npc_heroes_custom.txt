@@ -26,10 +26,10 @@
 		"AbilityLayout"		"6"
 		"Ability1"		"martial_artist_moonwalk"
 		"Ability2"		"martial_artist_emperor_strike"
-		"Ability3"		""
-		"Ability4"		""
-		"Ability5"		""
-		"Ability6"		""
+		"Ability3"		"martial_artist_palm_strike"
+		"Ability4"		"martial_artist_vacuum_palm"
+		"Ability5"		"martial_artist_inner_meditation"
+		"Ability6"		"martial_artist_heavenly_emperor_strike"
 		"Ability7"		""
 	}
 	//End of file martial_artist.txt

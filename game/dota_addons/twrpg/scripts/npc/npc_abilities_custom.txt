@@ -2317,7 +2317,7 @@
 	//End of file elementalist_wisp_phase_aura.txt
 
 
-	//Start of file martial_artist_emperors_strikes.txt
+	//Start of file martial_artist_emperor_strike.txt
 	"martial_artist_emperor_strike"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -2370,7 +2370,123 @@
 			}
 		}
 	}
-	//End of file martial_artist_emperors_strikes.txt
+	//End of file martial_artist_emperor_strike.txt
+
+
+	//Start of file martial_artist_heavenly_emperor_strike.txt
+	"martial_artist_heavenly_emperor_strike"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"disruptor_static_storm"
+		"MaxLevel"						"10"
+	
+		
+	
+		"Modifiers"
+		{
+			"modifier_heavenly_emperor_strike"
+			{
+				"IsHidden"				"1"
+				"Passive"				"1"
+				
+				"OnAttackStart"
+				{
+					"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/heroes/martial_artist.lua"
+						"Function"			"HeavenlyEmperorStrike"
+					}
+				}
+			}
+	
+			"modifier_heavenly_emperor_strike_attack"
+			{
+				"IsBuff"	"1"
+				"Duration"	"1.0"
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/heroes/martial_artist.lua"
+						"Function"			"HeavenlyEmperorStrikeAttack"
+						"Target"			"TARGET"
+					}
+				}
+			}
+	
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"dodge"				"13 16 19 22 25 28 31 34 37 40"
+			}
+		}
+	}
+	//End of file martial_artist_heavenly_emperor_strike.txt
+
+
+	//Start of file martial_artist_inner_meditation.txt
+	"martial_artist_inner_meditation"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"disruptor_static_storm"
+		"MaxLevel"						"10"
+	
+		
+	
+		"Modifiers"
+		{
+			"modifier_inner_meditation"
+			{
+				"IsHidden"				"1"
+				"Passive"				"1"
+				
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/heroes/martial_artist.lua"
+						"Function"		"InnerMeditation"
+					}
+				}
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"		"10"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"10"
+				}
+			}
+	
+			"modifier_inner_meditation_meditate"
+			{
+				"IsBuff"	"1"
+				"Duration"	"6.0"
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE"		"25"
+					"MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE"				"6"
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"				"10"
+				}
+			}
+	
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"dodge"				"13 16 19 22 25 28 31 34 37 40"
+			}
+		}
+	}
+	//End of file martial_artist_inner_meditation.txt
 
 
 	//Start of file martial_artist_moonwalk.txt
@@ -2407,4 +2523,125 @@
 		}
 	}
 	//End of file martial_artist_moonwalk.txt
+
+
+	//Start of file martial_artist_palm_strike.txt
+	"martial_artist_palm_strike"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"disruptor_static_storm"
+		"MaxLevel"						"10"
+	
+		
+	
+		"Modifiers"
+		{
+			"modifier_palm_strike"
+			{
+				"IsHidden"				"1"
+				"Passive"				"1"
+				
+				"OnAttackStart"
+				{
+					"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/heroes/martial_artist.lua"
+						"Function"			"PalmStrike"
+					}
+				}
+	
+				"OnAttackLanded"
+				{
+					"CleaveAttack"
+					{
+						"CleavePercent"		"100"
+						"CleaveRadius"		"250"
+					}
+				}
+			}
+	
+			"modifier_palm_strike_attack"
+			{
+				"IsBuff"	"1"
+				"Duration"	"1.0"
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/heroes/martial_artist.lua"
+						"Function"			"PalmStrikeAttack"
+						"Target"			"TARGET"
+					}
+				}
+			}
+	
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"dodge"				"13 16 19 22 25 28 31 34 37 40"
+			}
+		}
+	}
+	//End of file martial_artist_palm_strike.txt
+
+
+	//Start of file martial_artist_vacuum_palm.txt
+	"martial_artist_vacuum_palm"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"disruptor_static_storm"
+		"MaxLevel"						"10"
+	
+		
+	
+		"Modifiers"
+		{
+			"modifier_vacuum_palm"
+			{
+				"IsHidden"				"1"
+				"Passive"				"1"
+				
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/heroes/martial_artist.lua"
+						"Function"		"VacuumPalm"
+						"Target"		"TARGET"
+					}
+				}
+			}
+	
+			"modifier_vacuum_palm_slow"
+			{
+				"IsDebuff"	"1"
+				"Duration"	"3.0"
+	
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
+			}
+	
+			"modifier_vacuum_palm_armor"
+			{
+				"IsDebuff"		"1"
+				"Duration"		"6.0"
+			}
+	
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"dodge"				"13 16 19 22 25 28 31 34 37 40"
+			}
+		}
+	}
+	//End of file martial_artist_vacuum_palm.txt
 }
