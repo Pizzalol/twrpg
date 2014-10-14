@@ -1,0 +1,32 @@
+"martial_artist_moonwalk"
+{
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"BaseClass"						"ability_datadriven"
+	"AbilityTextureName"			"disruptor_static_storm"
+	"MaxLevel"						"10"
+
+	
+
+	"Modifiers"
+	{
+		"modifier_moonwalk"
+		{
+			"IsHidden"				"1"
+			"Passive"				"1"
+			
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_EVASION_CONSTANT"	"%dodge"
+			}
+		}
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"dodge"				"13 16 19 22 25 28 31 34 37 40"
+		}
+	}
+}

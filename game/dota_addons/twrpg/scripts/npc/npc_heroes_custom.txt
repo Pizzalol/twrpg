@@ -19,6 +19,22 @@
 	//End of file elementalist.txt
 
 
+	//Start of file martial_artist.txt
+	"npc_dota_hero_martial_artist"
+	{
+		"override_hero"		"npc_dota_hero_dark_seer"
+		"AbilityLayout"		"6"
+		"Ability1"		"martial_artist_moonwalk"
+		"Ability2"		"martial_artist_emperor_strike"
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability7"		""
+	}
+	//End of file martial_artist.txt
+
+
 	//Start of file templar_assassin_template.txt
 	"npc_dota_hero_templar_assassin_template"
 	{

@@ -33,7 +33,7 @@
 		"RunScript"
 		{
 			"Target"		"TARGET"
-			"ScriptFile"	"scripts/vscripts/heroes/scripts/vscripts/heroes/elementalist.lua"
+			"ScriptFile"	"scripts/vscripts/heroes/elementalist.lua"
 			"Function"		"ElementalLinkCasted"
 		}		
 	}
