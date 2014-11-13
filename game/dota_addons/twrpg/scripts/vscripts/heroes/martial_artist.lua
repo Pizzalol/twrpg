@@ -1,3 +1,5 @@
+hasPalmStrike = false
+
 function EmperorStrike( keys )
 	local chance = RandomFloat(0, 100)
 	local ability = keys.ability
@@ -14,12 +16,32 @@ function EmperorStrikeAttack( keys )
 	local target = keys.target
 	local DamageTable = {}
 
-	DamageTable.attacker = caster
-	DamageTable.victim = target
-	DamageTable.damage_type = DAMAGE_TYPE_PURE
 	DamageTable.damage = 100
+	DamageTable.damage_type = DAMAGE_TYPE_PURE
+	DamageTable.attacker = caster
 
-	ApplyDamage(DamageTable)
+
+	if not hasPalmStrike then
+		if caster:GetAbilityByIndex(2):GetLevel() > 0 then
+			hasPalmStrike = true
+			print("Current ability is " .. tostring(caster:GetAbilityByIndex(2)))
+		end
+	end
+
+	if hasPalmStrike then
+		local casterLocation = caster:GetAbsOrigin()
+		local radius = 300
+		local unitsToDamage = FindUnitsInRadius(caster:GetTeam(), casterLocation, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
+		for i,v in ipairs(unitsToDamage) do
+			print("I am an AOE strike")
+			DamageTable.victim = v
+			ApplyDamage(DamageTable)
+		end
+	else
+		print("I am a single target strike")
+		DamageTable.victim = target	
+		ApplyDamage(DamageTable)
+	end
 end
 
 function PalmStrike( keys )
