@@ -1,5 +1,8 @@
-hasPalmStrike = false
+-- Globals
+hasPalmStrike = false -- Check if aoe versions of abilities should be applied
 
+
+--[[Rolls a chance, if positive then the ability triggers]]
 function EmperorStrike( keys )
 	local chance = RandomFloat(0, 100)
 	local ability = keys.ability
@@ -11,6 +14,8 @@ function EmperorStrike( keys )
 	end 
 end
 
+--[[End result of the EmperorStrike function
+	Applies damage to the struck target and targets around the caster if Palm Strike is leveled]]
 function EmperorStrikeAttack( keys )
 	local caster = keys.caster
 	local target = keys.target
@@ -20,7 +25,7 @@ function EmperorStrikeAttack( keys )
 	DamageTable.damage_type = DAMAGE_TYPE_PURE
 	DamageTable.attacker = caster
 
-
+	-- Checks for Palm Strike
 	if not hasPalmStrike then
 		if caster:GetAbilityByIndex(2):GetLevel() > 0 then
 			hasPalmStrike = true
@@ -28,6 +33,7 @@ function EmperorStrikeAttack( keys )
 		end
 	end
 
+	-- AOE version
 	if hasPalmStrike then
 		local casterLocation = caster:GetAbsOrigin()
 		local radius = 300
@@ -37,6 +43,7 @@ function EmperorStrikeAttack( keys )
 			DamageTable.victim = v
 			ApplyDamage(DamageTable)
 		end
+	-- Single target version	
 	else
 		print("I am a single target strike")
 		DamageTable.victim = target	
@@ -67,6 +74,9 @@ function PalmStrikeAttack( keys )
 	ApplyDamage(DamageTable)
 end
 
+--[[Rolls the dice to decide if the slow modifier should be applied
+	On application it checks if theres more than 1 stack of the slow, if there is then
+	it applies the armor reduction modifier]]
 function VacuumPalm( keys )
 	local caster = keys.caster
 	local chance = RandomFloat(0,100)
@@ -78,6 +88,7 @@ function VacuumPalm( keys )
 
 	if chance <= 100 then
 		ability:ApplyDataDrivenModifier(caster, target, "modifier_vacuum_palm_slow", {})
+		-- Stack checking part
 		modCount = target:GetModifierCount()
 		for i = 0, modCount do
 			if target:GetModifierNameByIndex(i) == "modifier_vacuum_palm_slow" then
@@ -86,6 +97,7 @@ function VacuumPalm( keys )
 		end
 		print("Current stack count is : ".. tostring(StackCount))
 
+		-- Armor reduction application part
 		if StackCount >= 2 then
 			print("Hello?")
 			ability:ApplyDataDrivenModifier(caster, target, "modifier_vacuum_palm_armor", {}) 
@@ -93,6 +105,7 @@ function VacuumPalm( keys )
 	end
 end
 
+--[[If the dice roll is successful then it applies a buff to the caster]]
 function InnerMeditation( keys )
 	local caster = keys.caster
 	local ability = keys.ability
@@ -103,6 +116,7 @@ function InnerMeditation( keys )
 	end
 end
 
+--[[Same thing as EmperorStrike just an upgraded version]]
 function HeavenlyEmperorStrike( keys )
 	local chance = RandomFloat(0, 100)
 	local ability = keys.ability
