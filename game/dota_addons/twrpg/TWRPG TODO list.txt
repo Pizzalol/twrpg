@@ -8,6 +8,10 @@ Create map
 Learn more about the particle system
 Balance everything
 
+-- Backup ideas --
+For crit-like abilities roll the dice and then apply the modifier during the OnAttack
+but before the roll remove old modifiers so that it can work with extremely slow attack speeds
+
 -- Specific -- 
 Elementalist
 	Multi shot for water elemental

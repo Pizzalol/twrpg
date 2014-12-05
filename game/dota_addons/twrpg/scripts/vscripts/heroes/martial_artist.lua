@@ -140,3 +140,17 @@ function HeavenlyEmperorStrikeAttack( keys )
 
 	ApplyDamage(DamageTable)
 end
+
+--[[Changes the base attack time and increases the trigger chance of all the other skills]]
+function NamelessArtsStart( keys )
+	local caster = keys.caster
+
+	caster:SetBaseAttackTime(0.05)
+end
+
+-- Reverts the base attack time
+function NamelessArtsEnd( keys )
+	local caster = keys.caster
+
+	caster:SetBaseAttackTime(1.9) 
+end

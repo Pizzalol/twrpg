@@ -2525,6 +2525,91 @@
 	//End of file martial_artist_moonwalk.txt
 
 
+	//Start of file martial_artist_nameless_arts.txt
+	"martial_artist_nameless_arts"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"disruptor_glimpse"
+		"MaxLevel"						"10"
+	
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"		"modifier_nameless_arts_start"
+				"Target"			"CASTER"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_nameless_arts_start"
+			{
+				"IsHidden"				"1"
+				"Duration"				"1.5"
+				
+				"States"
+				{
+					"MODIFIER_STATE_DISARMED"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_COMMAND_RESTRICTED"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+	
+				"OnDestroy"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_nameless_arts"
+						"Target"		"CASTER"
+					}
+				}
+			}
+	
+			"modifier_nameless_arts"
+			{
+				"Duration"			"6"
+	
+				//"OnCreated"
+				//{
+				//	"RunScript"
+				//	{
+				//		"ScriptFile"		"scripts/vscripts/heroes/martial_artist.lua"
+				//		"Function"			"NamelessArtsStart"
+				//		"Target"			"CASTER"
+				//	}
+				//}
+	
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/heroes/martial_artist.lua"
+						"Function"			"NamelessArtsEnd"
+						"Target"			"CASTER"
+					}
+				}
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"1000"
+					"MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT"		"0.1"
+				}
+			}
+		}
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"dodge"				"13 16 19 22 25 28 31 34 37 40"
+			}
+		}
+	}
+	//End of file martial_artist_nameless_arts.txt
+
+
 	//Start of file martial_artist_palm_strike.txt
 	"martial_artist_palm_strike"
 	{

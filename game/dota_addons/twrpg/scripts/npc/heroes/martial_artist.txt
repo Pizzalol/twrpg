@@ -7,6 +7,6 @@
 	"Ability3"		"martial_artist_palm_strike"
 	"Ability4"		"martial_artist_vacuum_palm"
 	"Ability5"		"martial_artist_inner_meditation"
-	"Ability6"		"martial_artist_heavenly_emperor_strike"
+	"Ability6"		"martial_artist_nameless_arts"
 	"Ability7"		""
 }
