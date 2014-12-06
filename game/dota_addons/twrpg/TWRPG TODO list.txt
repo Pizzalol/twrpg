@@ -24,4 +24,6 @@ Elementalist
 Martial Artist
 	Create particle effect for all abilities
 	Add tooltips and spell descriptions
-	Create Nameless arts ability
+	#Create Nameless arts ability
+	Polish up the interactions between the MA abilities
+	

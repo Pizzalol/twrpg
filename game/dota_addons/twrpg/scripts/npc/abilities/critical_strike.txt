@@ -1,0 +1,64 @@
+"critical_strike"
+{
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"                     "ability_datadriven"
+    "AbilityTextureName"            "disruptor_glimpse"
+    "MaxLevel"                      "1"
+
+    "Modifiers"
+    {
+        
+        "modifier_crit"
+        {
+            "Passive"   "1"
+            "IsHidden"  "0"
+            "OnAttackStart"
+            {
+                "RemoveModifier"
+                {
+                    "ModifierName"      "crit"
+                    "Target"            "CASTER"
+                }
+                "Random"
+                {
+                    "Chance" "10"
+                    "OnSuccess"
+                    {
+                        "ApplyModifier"
+                        {
+                            "ModifierName" "crit"
+                            "Target"    "CASTER"    
+                        }        
+                    }
+                }
+            }
+        }
+
+        "crit"
+        {
+            //"Duration"  "1"
+            "IsHidden"  "0"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "300"
+            }
+
+            "OnAttackLanded"
+            {
+                "RemoveModifier"
+                {
+                    "ModifierName"  "crit"
+                    "Target"    "CASTER"    
+                }
+
+                // Basic blood particle effect
+                "FireEffect"
+                {
+                    "EffectName" "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+                    "EffectAttachType"  "follow_origin"
+                    "Target"    "TARGET"
+                }
+            }
+        }
+    }
+}
