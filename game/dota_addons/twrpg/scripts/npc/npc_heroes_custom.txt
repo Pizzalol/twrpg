@@ -31,6 +31,9 @@
 		"Ability5"		"martial_artist_inner_meditation"
 		"Ability6"		"martial_artist_nameless_arts"
 		"Ability7"		""
+	
+		"AttackRate"				"0.05"
+		"AttackAnimationPoint"		"0.1"
 	}
 	//End of file martial_artist.txt
 

@@ -2648,20 +2648,20 @@
 				//	}
 				//}
 	
-				"OnDestroy"
-				{
-					"RunScript"
-					{
-						"ScriptFile"		"scripts/vscripts/heroes/martial_artist.lua"
-						"Function"			"NamelessArtsEnd"
-						"Target"			"CASTER"
-					}
-				}
+				//"OnDestroy"
+				//{
+				//	"RunScript"
+				//	{
+				//		"ScriptFile"		"scripts/vscripts/heroes/martial_artist.lua"
+				//		"Function"			"NamelessArtsEnd"
+				//		"Target"			"CASTER"
+				//	}
+				//}
 	
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"-1000"
-					//"MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT"		"0.1"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"1000"
+					"MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT"		"0.03"
 				}
 			}
 		}
