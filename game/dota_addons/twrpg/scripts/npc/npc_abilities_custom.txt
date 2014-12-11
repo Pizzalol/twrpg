@@ -2228,6 +2228,26 @@
 							"EffectRadius" "slow_radius"
 						}
 					}
+	
+					"OnAttack"
+					{
+						"RunScript"
+						{
+							"ScriptFile"	"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
+							"Function"		"WaterElementalMultishot"
+							"EffectName" "particles/units/heroes/hero_morphling/morphling_base_attack.vpcf"
+							"MoveSpeed" "1300"
+							//"StartPosition" "attach_attack1"
+							//"FixedDistance" ""
+							"StartRadius" "50"
+							"EndRadius" "50"
+							"TargetTeams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"TargetTypes" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+							//"TargetFlags" "DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS"
+							"HasFrontalCone" "0"
+							//"ProvidesVision" "1"
+						}
+					}
 				}
 	
 				"elementalist_water_elemental_ability_slow_slow"

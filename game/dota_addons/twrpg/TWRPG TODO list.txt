@@ -7,6 +7,7 @@ Port items
 Create map
 Learn more about the particle system
 Balance everything
+Implement creature night sleeping
 
 -- Backup ideas --
 For crit-like abilities roll the dice and then apply the modifier during the OnAttack
@@ -15,11 +16,13 @@ but before the roll remove old modifiers so that it can work with extremely slow
 -- Specific -- 
 Elementalist
 	Multi shot for water elemental
+		Projectiles done, make it so that it deals damage on projectile hit + apply the slow debuff
 	Add ability power scaling for all abilities(including summons)
 	Fix Dreamgate wisp AI
 	Remove Dreamgate wisp abilities and give them flying movement
 	Add Dreamgate Earth Elemental special summon ability
 	Fix summon armor scaling -- requires a workshop update, functions handling that are broken
+	Water Blessing should grant 40% mana
 
 Martial Artist
 	Create particle effect for all abilities
