@@ -391,33 +391,52 @@ function WaterElementalMultishot( keys )
 	local unitsToDamage = FindUnitsInRadius(caster:GetTeam(), casterLocation, nil, attackRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 
 	for i,v in ipairs(unitsToDamage) do
-		local info =
-		{
-			EffectName = keys.EffectName,
-			Ability = keys.ability,
-			vSpawnOrigin = casterLocation,
-			--fDistance = tonumber(keys.FixedDistance),
-			fStartRadius = tonumber(keys.StartRadius),
-			fEndRadius = tonumber(keys.EndRadius),
-			Target = v,
-			Source = caster,
-			bHasFrontalCone = false,
-			iMoveSpeed = tonumber(keys.MoveSpeed),
-			bReplaceExisting = false,
-			iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
-			iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
-			iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-			--iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-			--iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
-			--iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_OTHER,
-			--fMaxSpeed = 5200,
-			fExpireTime = GameRules:GetGameTime() + 8.0,
-			bProvidesVision = false,
-			iVisionRadius = 0,
-			iVisionTeamNumber = caster:GetTeamNumber()
-		}
-		ProjectileManager:CreateTrackingProjectile(info)
+		if v ~= target then
+			if maxTargets == 0 then break end
+			local info =
+			{
+				EffectName = keys.EffectName,
+				Ability = keys.ability,
+				vSpawnOrigin = casterLocation,
+				--fDistance = tonumber(keys.FixedDistance),
+				fStartRadius = tonumber(keys.StartRadius),
+				fEndRadius = tonumber(keys.EndRadius),
+				Target = v,
+				Source = caster,
+				bHasFrontalCone = false,
+				iMoveSpeed = tonumber(keys.MoveSpeed),
+				bReplaceExisting = false,
+				iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
+				iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
+				iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+				--iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+				--iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
+				--iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_OTHER,
+				--fMaxSpeed = 5200,
+				fExpireTime = GameRules:GetGameTime() + 8.0,
+				bProvidesVision = false,
+				iVisionRadius = 0,
+				iVisionTeamNumber = caster:GetTeamNumber()
+			}
+			ProjectileManager:CreateTrackingProjectile(info)
+			maxTargets = maxTargets - 1
+		end
 	end
+end
+
+function WaterElementalMultishotHit( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local attackDamage = caster:GetAttackDamage()
+
+	local damageTable = {}
+
+	damageTable.attacker = caster
+	damageTable.damage_type = DAMAGE_TYPE_PHYSICAL
+	damageTable.damage = attackDamage
+	damageTable.victim = target
+
+	if caster:GetAttackTarget() ~= target then ApplyDamage(damageTable) end
 end
 
 -- Lightning Elemental abilities

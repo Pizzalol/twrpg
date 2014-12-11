@@ -13,6 +13,22 @@
 			"particle_folder"				"particles/units/heroes/hero_lich"
 		}
 
+		"OnProjectileHitUnit"
+		{			
+			"RunScript"
+			{
+				"ScriptFile"		"scripts/vscripts/heroes/elementalist_summon_abilities.lua"
+				"Function"			"WaterElementalMultishotHit"
+			}
+
+			"ApplyModifier"
+			{
+				"ModifierName"	"elementalist_water_elemental_ability_slow_slow"
+				"Target"		"TARGET"
+			}
+		
+		}
+
 		// Modifiers
 		//-------------------------------------------------------------------------------------------------------------
 		"Modifiers"
@@ -21,33 +37,6 @@
 			{
 				"IsHidden"				"0"
 				"Passive"				"1"
-				"Orb"
-				{
-					"Priority"			"DOTA_ORB_PRIORITY_ABILITY"
-				}
-				
-				"OnOrbImpact"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName" "elementalist_water_elemental_ability_slow_slow"
-						"Target"
-						{
-							"Center" "TARGET"
-							"Radius" "%slow_radius"
-							"Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-							"Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
-						}
-					}
-
-					"FireEffect"
-					{
-						"Target" "TARGET"
-						"EffectName" "particles/units/heroes/hero_lich/lich_frost_nova.vpcf"
-						"EffectAttachType" "follow_origin"
-						"EffectRadius" "slow_radius"
-					}
-				}
 
 				"OnAttack"
 				{
