@@ -284,11 +284,11 @@ function Purification( keys )
 		--healAmount = healAmount*0.5
 	--end
 
-	target:Heal(healAmount, caster) --[[Returns:void
-	Heal this unit.
-	]]
+	target:Heal(healAmount, caster)
 end
 
+--[[Heals all the affected units to full HP regardless of their current HP
+	Need to make it so that it heals only damaged units and mechanically the same as ChainLightning]]
 function ChainHeal( keys )
 	local caster = keys.caster
 	local target = keys.target
@@ -306,6 +306,7 @@ function ChainHeal( keys )
 	end
 end
 
+--[[Grants the target a 10% buff to their primary attribute and restores 40% of their mana]]
 function WaterBlessing( keys )
 	local target = keys.target 
 	local primaryAttribute = target:GetPrimaryAttribute()
@@ -313,6 +314,8 @@ function WaterBlessing( keys )
 	local attribute
 	local attributeBoostItem
 	local modifierName
+	local maxMana = target:GetMaxMana()
+	local manaPercent = 0.4
 	print("Primary attribute is " .. tostring(primaryAttribute))
 
 	-- 0 STR
@@ -337,7 +340,7 @@ function WaterBlessing( keys )
 	local attributeBoost = math.floor(attribute * attributePercentage)
 	print("Attribute boost is ".. tostring(attributeBoost))
 
-	 
+	-- Attribute increase
 	for p=1, #bitTable do
 		local val = bitTable[p]
 		local count = math.floor(attributeBoost / val)
@@ -349,8 +352,14 @@ function WaterBlessing( keys )
 	-- Cleanup
 	UTIL_RemoveImmediate(attributeBoostItem)
 	attributeBoostItem = nil
+
+	-- Mana restore
+	target:GiveMana(maxMana*manaPercent)
+
 end
 
+--[[This triggers once the buff has expired or the target has died
+	Removes all stat benefits of the buff]]
 function WaterBlessingRemove( keys )
 	local target = keys.target
 	local primaryAttribute = target:GetPrimaryAttribute() 
@@ -369,7 +378,7 @@ function WaterBlessingRemove( keys )
 	end
 	
  
-	-- Gets the list of modifiers on the hero and loops through removing and health modifier
+	-- Gets the list of modifiers on the hero and loops through removing attribute modifiers
 	local modCount = target:GetModifierCount()
 	for i = 0, modCount do
 		for u = 1, #bitTable do
@@ -381,12 +390,15 @@ function WaterBlessingRemove( keys )
 	end
 end
 
+--[[This is called on each attack and creates additional projectiles to launch at nearby enemies
+	It doesnt consider the main target as possibility for extra attacks
+	I should probably add a SourceAttachment in the info block]]
 function WaterElementalMultishot( keys )
 	local caster = keys.caster
 	local target = keys.target
 	local casterLocation = caster:GetAbsOrigin()
-	local attackRange = 600
-	local maxTargets = 3
+	local attackRange = caster:GetAttackRange() -- Getting the attack range since this is supposed to simulate launching several attacks at once
+	local maxTargets = 3 -- Limit of extra targets that we attack
 
 	local unitsToDamage = FindUnitsInRadius(caster:GetTeam(), casterLocation, nil, attackRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 
@@ -424,6 +436,7 @@ function WaterElementalMultishot( keys )
 	end
 end
 
+--[[This is called whenever the attack projectile hits so that the created projectiles can deal damage]]
 function WaterElementalMultishotHit( keys )
 	local caster = keys.caster
 	local target = keys.target
@@ -436,6 +449,7 @@ function WaterElementalMultishotHit( keys )
 	damageTable.damage = attackDamage
 	damageTable.victim = target
 
+	-- Need to make sure that the projectile that triggered the function is not the normal auto attack projectile
 	if caster:GetAttackTarget() ~= target then ApplyDamage(damageTable) end
 end
 
@@ -504,6 +518,11 @@ end
 	end
 end]]
 
+--------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------ Comment the function itself----------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+--[[Chain lightning spell which deals damage to 3 additional targets, granting mana and applying a magic resistance debuff
+	Fires every 4th attack using lightningCount as the attack counter]]
 function ChainLightning( keys )
 	print("Chain Lightning lightning count is " .. tostring(lightningCount[keys.caster]))
 
@@ -635,7 +654,8 @@ end]]
 
 --[[Massive damage single target spell which ministuns on impact
 	It is called once every 8th attack, keeping count of the attacks using lightningCount
-	and reseting the counter once it reaches 8 attacks]]
+	and reseting the counter once it reaches 8 attacks
+	Also grants mana on impact]]
 function ThunderStrike(keys)
 	lightningCount[keys.caster] = lightningCount[keys.caster] or 0
 	lightningCount[keys.caster] = lightningCount[keys.caster] + 1
@@ -675,6 +695,8 @@ function ThunderStrike(keys)
 end
 
 
+--[[Acts as a channel, draining mana per second until cancelled or out of mana
+	Launches projectiles which damage the first that they hit]]
 function CurrentProjectile(keys)
 	local caster = keys.caster
 	local ability = keys.ability
@@ -727,6 +749,7 @@ function CurrentProjectile(keys)
 
 end
 
+--[[Upon finding a target; the projectile deals damage in a small AOE]]
 function CurrentProjectileHit( keys )
 	local caster = keys.caster
 	local target = keys.target
@@ -747,12 +770,14 @@ function CurrentProjectileHit( keys )
 	end
 end
 
+--[[This is called on cancelling the "channel" of the spell; stopping it completely]]
 function LightningCurrentToggle( keys )
 	local caster = keys.caster
 	local ability = caster:FindAbilityByName("elementalist_lightning_elemental_lightning_current_sub_ability") 
 	caster:CastAbilityNoTarget(ability, -1)  
 end
 
+--[[This is called whenever we want to toggle the ability on and off]]
 function LightningCurrentSwap( keys )
 	local state = keys.State
 	local caster = keys.caster
@@ -780,6 +805,10 @@ function AbyssDash( keys )
 	--print("Dash distance " .. distance)
 
 	-- Sets the new distance depending on the target point because it overshoots by ~100-200 for whatever reason
+
+	---------------------------------------------------------------------------------------------------------------
+	--------------------------------------REMINDER try swapping it to BMD's physics library?-----------------------
+	---------------------------------------------------------------------------------------------------------------
 	if distance >= 800 then
 		distance = distance - 300
 	elseif distance >= 600 then
@@ -910,6 +939,8 @@ function AbyssReach( keys )
 	end
 end
 
+--[[Code clusterfuck
+	works good enough for now, I should probably make it better eventually]]
 function AbyssEye( keys )
 	local caster = keys.caster
 	local casterloc = caster:GetAbsOrigin() 

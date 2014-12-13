@@ -9,6 +9,15 @@ Learn more about the particle system
 Balance everything
 Implement creature night sleeping
 Comment code
+	Elementalist summon abilities
+	Elementalist summons
+	Martial Artist
+	Custom abilities
+	twrpg
+	hero
+
+Boss drops
+	AddDrop function?
 
 -- Backup ideas --
 For crit-like abilities roll the dice and then apply the modifier during the OnAttack
@@ -22,6 +31,9 @@ Elementalist
 	Add Dreamgate Earth Elemental special summon ability
 	Fix summon armor scaling -- requires a workshop update, functions handling that are broken
 	Water Blessing should grant 40% mana
+	Change summon searching to modifier based(on creation apply a modifier specific to the element) -- to differentiate between summons
+	Change the searching algorithm to searching by unit name + comparing unit owner -- to find the actual summons
+	Add floating healing numbers for Purification
 
 Martial Artist
 	Create particle effect for all abilities

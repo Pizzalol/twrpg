@@ -1,4 +1,5 @@
-
+--[[Elemental model names
+	WIP should switch over to a modifier based system later on]]
 fire = "phoenix"
 water = "morphling"
 lightning = "razor"
@@ -220,7 +221,7 @@ function ElementalLinkCasted( keys )
 	-- Link particle creation
 	ElementalLinkParticle = ParticleManager:CreateParticle("particles/units/heroes/hero_wisp/wisp_tether.vpcf", PATTACH_CUSTOMORIGIN, caster)
 	ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 0, caster, 5, "attach_hitloc", casterloc, false)
-	ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 1, target, 5, "attach_mouth", targetloc, false)
+	ParticleManager:SetParticleControlEnt(ElementalLinkParticle, 1, target, 5, "attach_hitloc", targetloc, false)
 
 	-- Tries to find if a summon is linked
 	-- Fire Elemental
@@ -336,6 +337,11 @@ function OnCasterDamaged( keys )
 	end
 end
 
+--[[This function is called after a delay on ability cast
+	First it checks if the caster has still has the Dreamgate modifier
+	If the caster does then it summons several wisps depending on the ability level
+	and if there are any other summons present then it summons them to the location
+	Upon finishing the actions it removes the Dreamgate modifier to ensure that other spells using that modifier work correctly]]
 function DreamgateCast( keys )
 	local caster = keys.caster
 	local target = keys.target_points[1]
@@ -397,6 +403,7 @@ function DreamgateCast( keys )
 	end
 end
 
+--[[Function to find specific elemental summons for the caster]]
 function CheckElemental( caster, elemental )
 	local elementalModel = elemental
 
