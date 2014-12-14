@@ -40,7 +40,7 @@ end
 function BehaviorFollow:Begin()
 	self.endTime = GameRules:GetGameTime() + 1
 	
-	--local owner = thisEntity:GetOwner()
+	--[[local owner = thisEntity:GetOwner()
 	
 	if owner then
 		self.order =
@@ -55,12 +55,35 @@ function BehaviorFollow:Begin()
 			UnitIndex = thisEntity:entindex(),
 			OrderType = DOTA_UNIT_ORDER_STOP
 		}
-	end
+	end]]
+	result = {owner:GetAbsOrigin()+Vector(100,0,0),
+	owner:GetAbsOrigin()+Vector(100,100,0),
+	owner:GetAbsOrigin()+Vector(0,100,0),
+	owner:GetAbsOrigin()+Vector(-100,0,0),
+	owner:GetAbsOrigin()+Vector(-100,-100,0),
+	owner:GetAbsOrigin()+Vector(0,-100,0),
+	owner:GetAbsOrigin()+Vector(100,-100,0),
+	owner:GetAbsOrigin()+Vector(-100,100,0)}
+	
+	POSITIONS_retreat = result
+	local happyPlaceIndex =  RandomInt( 1, #POSITIONS_retreat )
+	escapePoint = POSITIONS_retreat[ happyPlaceIndex ]
+
+	self.order =
+	{
+		UnitIndex = thisEntity:entindex(),
+		OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
+		Position = escapePoint
+		
+	}
 end
 
-function BehaviorFollow:Continue()
+
+BehaviorFollow.Continue=BehaviorFollow.Begin
+--[[function BehaviorFollow:Continue()
 	self.endTime = GameRules:GetGameTime() + 1
 
+	--Dont need this, dont even know why i kept it there			BECAUSE IT NEEDS TO GET THE NEW POSITIONS, retard...
 	result = {owner:GetAbsOrigin()+Vector(100,0,0),
 	owner:GetAbsOrigin()+Vector(100,100,0),
 	owner:GetAbsOrigin()+Vector(0,100,0),
@@ -82,7 +105,7 @@ function BehaviorFollow:Continue()
 		Position = escapePoint
 		
 	}
-end
+end]]
 
 --------------------------------------------------------------------------------------------------------
 

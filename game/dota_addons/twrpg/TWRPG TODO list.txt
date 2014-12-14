@@ -1,6 +1,9 @@
 -- General --
 Save/Load system -- Community option?
 Inventory system -- Learn flash + check other maps + use lua
+	Level restrictions
+	Class restrictions
+	Equipment restrictions -- If we are doing wc3 style inventory
 Create UI 
 Port heroes
 Port items
@@ -9,35 +12,39 @@ Learn more about the particle system
 Balance everything
 Implement creature night sleeping
 Comment code
-	Elementalist summon abilities
+	E̶l̶e̶m̶e̶n̶t̶a̶l̶i̶s̶t̶
+	E̶l̶e̶m̶e̶n̶t̶a̶l̶i̶s̶t̶ ̶s̶u̶m̶m̶o̶n̶ ̶a̶b̶i̶l̶i̶t̶i̶e̶s̶
 	Elementalist summons
 	Martial Artist
 	Custom abilities
 	twrpg
 	hero
+	AI scripts
 
 Boss drops
 	AddDrop function?
 
 -- Backup ideas --
-For crit-like abilities roll the dice and then apply the modifier during the OnAttack
-but before the roll remove old modifiers so that it can work with extremely slow attack speeds
+F̶o̶r̶ ̶c̶r̶i̶t̶-̶l̶i̶k̶e̶ ̶a̶b̶i̶l̶i̶t̶i̶e̶s̶ ̶r̶o̶l̶l̶ ̶t̶h̶e̶ ̶d̶i̶c̶e̶ ̶a̶n̶d̶ ̶t̶h̶e̶n̶ ̶a̶p̶p̶l̶y̶ ̶t̶h̶e̶ ̶m̶o̶d̶i̶f̶i̶e̶r̶ ̶d̶u̶r̶i̶n̶g̶ ̶t̶h̶e̶ ̶O̶n̶A̶t̶t̶a̶c̶k̶
+b̶u̶t̶ ̶b̶e̶f̶o̶r̶e̶ ̶t̶h̶e̶ ̶r̶o̶l̶l̶ ̶r̶e̶m̶o̶v̶e̶ ̶o̶l̶d̶ ̶m̶o̶d̶i̶f̶i̶e̶r̶s̶ ̶s̶o̶ ̶t̶h̶a̶t̶ ̶i̶t̶ ̶c̶a̶n̶ ̶w̶o̶r̶k̶ ̶w̶i̶t̶h̶ ̶e̶x̶t̶r̶e̶m̶e̶l̶y̶ ̶s̶l̶o̶w̶ ̶a̶t̶t̶a̶c̶k̶ ̶s̶p̶e̶e̶d̶s̶
 
 -- Specific -- 
 Elementalist
+	W̶a̶t̶e̶r̶ ̶B̶l̶e̶s̶s̶i̶n̶g̶ ̶s̶h̶o̶u̶l̶d̶ ̶g̶r̶a̶n̶t̶ ̶4̶0̶%̶ ̶m̶a̶n̶a̶
 	Add ability power scaling for all abilities(including summons)
-	Fix Dreamgate wisp AI
-	Remove Dreamgate wisp abilities and give them flying movement
+	Fix Dreamgate wisp AI -- Done
+	Remove Dreamgate wisp abilities and give them flying movement -- Done
 	Add Dreamgate Earth Elemental special summon ability
 	Fix summon armor scaling -- requires a workshop update, functions handling that are broken
-	Water Blessing should grant 40% mana
 	Change summon searching to modifier based(on creation apply a modifier specific to the element) -- to differentiate between summons
 	Change the searching algorithm to searching by unit name + comparing unit owner -- to find the actual summons
 	Add floating healing numbers for Purification
+	Autocast AI for Purification
+	SourceAttachment for Multishot
 
 Martial Artist
 	Create particle effect for all abilities
 	Add tooltips and spell descriptions
-	#Create Nameless arts ability
+	C̶r̶e̶a̶t̶e̶ ̶N̶a̶m̶e̶l̶e̶s̶s̶ ̶a̶r̶t̶s̶ ̶a̶b̶i̶l̶i̶t̶y̶
 	Polish up the interactions between the MA abilities
 	

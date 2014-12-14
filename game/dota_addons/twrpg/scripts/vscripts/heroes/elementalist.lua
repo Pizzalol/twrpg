@@ -355,8 +355,8 @@ function DreamgateCast( keys )
 		for i=1, numWisps do
 			local wisp = CreateUnitByName("elementalist_wisp", target, true, caster, caster, team)
 			wisp:SetControllableByPlayer(caster:GetPlayerID(), true)
-			local wispAbility = wisp:FindAbilityByName("elementalist_wisp_phase_aura")
-			wispAbility:SetLevel(1)
+			--local wispAbility = wisp:FindAbilityByName("elementalist_wisp_phase_aura")
+			--wispAbility:SetLevel(1)
 		end
 
 
