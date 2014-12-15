@@ -24,6 +24,9 @@ Comment code
 Boss drops
 	AddDrop function?
 
+Skill slot issue
+	Have a spell swap ability (for elementalist it would be elemental link <> dreamgate)
+
 -- Backup ideas --
 F̶o̶r̶ ̶c̶r̶i̶t̶-̶l̶i̶k̶e̶ ̶a̶b̶i̶l̶i̶t̶i̶e̶s̶ ̶r̶o̶l̶l̶ ̶t̶h̶e̶ ̶d̶i̶c̶e̶ ̶a̶n̶d̶ ̶t̶h̶e̶n̶ ̶a̶p̶p̶l̶y̶ ̶t̶h̶e̶ ̶m̶o̶d̶i̶f̶i̶e̶r̶ ̶d̶u̶r̶i̶n̶g̶ ̶t̶h̶e̶ ̶O̶n̶A̶t̶t̶a̶c̶k̶
 b̶u̶t̶ ̶b̶e̶f̶o̶r̶e̶ ̶t̶h̶e̶ ̶r̶o̶l̶l̶ ̶r̶e̶m̶o̶v̶e̶ ̶o̶l̶d̶ ̶m̶o̶d̶i̶f̶i̶e̶r̶s̶ ̶s̶o̶ ̶t̶h̶a̶t̶ ̶i̶t̶ ̶c̶a̶n̶ ̶w̶o̶r̶k̶ ̶w̶i̶t̶h̶ ̶e̶x̶t̶r̶e̶m̶e̶l̶y̶ ̶s̶l̶o̶w̶ ̶a̶t̶t̶a̶c̶k̶ ̶s̶p̶e̶e̶d̶s̶
@@ -41,6 +44,7 @@ Elementalist
 	Add floating healing numbers for Purification
 	Autocast AI for Purification
 	SourceAttachment for Multishot
+
 
 Martial Artist
 	Create particle effect for all abilities
