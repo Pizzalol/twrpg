@@ -47,9 +47,9 @@ function TWRPGGameMode:OnPlayerPicked( keys )
 	local spawnedUnit = keys.hero
 	local spawnedUnitIndex = EntIndexToHScript(keys.heroindex)
 
-	if spawnedUnitIndex:GetClassname() == "npc_dota_hero_enchantress" then
-		spawnedUnitIndex:GetAbilityByIndex(3):SetLevel(1)
-	end
+	--if spawnedUnitIndex:GetClassname() == "npc_dota_hero_enchantress" then
+	--	spawnedUnitIndex:GetAbilityByIndex(3):SetLevel(1)
+	--end
 
 	--[[a = 9.0
 	oldX = a/2

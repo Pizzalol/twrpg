@@ -1,0 +1,61 @@
+"elementalist_summon_fire_elemental"
+	{
+		// General
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"		"ABILITY_DATADRIVEN"
+		"AbilityTextureName"	"invoker_exort"
+		
+		// Casting
+		"AbilityCastRange"		"400 425 450 475 500"
+		"AbilityCastPoint"		"0.7"
+		"MaxLevel"				"5"
+		"LevelsBetweenUpgrades" "20"
+		"RequiredLevel"			"5"
+
+		// Time
+		"AbilityCooldown"		"45.0"
+
+		// Cost
+		"AbilityManaCost" 		"50 150 450 750 1250"
+
+		
+
+		// SpellStart
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"			"POINT"
+				"ModelScale"		"%modelscale"
+				"HPScale"			"%hpscale"
+				"BaseHP"			"%basehp"
+				"ScriptFile"		"scripts/vscripts/heroes/elementalist_summons.lua"
+				"Function"			"SummonFireElemental"
+			}
+		}
+
+		// Special
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"modelscale"		"0.2 0.4 0.6 0.8 1.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"hpscale"			"6.5 8 9.5 11 12.5"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"tooltipduration"	"180.0"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"basehp"			"2050 4100 6150 8200 10250"
+			}
+		}
+	}

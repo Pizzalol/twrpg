@@ -4,16 +4,21 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
-		"Model"						"models/heroes/phoenix/phoenix_bird.vmdl"	// Model.
-		"SoundSet"					"Undying_Zombie"					// Name of sound set.
-		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_undying.vsndevts"
+		"Model"						"models/heroes/shadow_fiend/shadow_fiend.vmdl"	// Model.
+		"SoundSet"					"Hero_Nevermore"					// Name of sound set.
+		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_nevermore.vsndevts"
 		"ModelScale"				"0.5"
 		"Level"						"1"
 		"ConsideredHero"			"0"
 		"Duration"					"120.0"
 		"precache"
 		{
-			"particle_folder"		"particles/units/heroes/hero_phoenix"
+			//"particle_folder"		"particles/units/heroes/hero_phoenix"
+			"model"			"models/heroes/shadow_fiend/shadow_fiend.vmdl"
+			"model"			"models/heroes/shadow_fiend/shadow_fiend_shoulders.vmdl"
+			"model"			"models/heroes/shadow_fiend/shadow_fiend_arcana_arms.vmdl"
+			"model"			"models/heroes/shadow_fiend/shadow_fiend_arms.vmdl"
+			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_nevermore.vsndevts"
 		}
 		// Abilities
 		//----------------------------------------------------------------
@@ -22,7 +27,7 @@
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
 		"Ability4"					""			// Ability 4.
-		"Ability5"					"elementalist_summon_duration"			// Ability 5.
+		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
 		"Ability8"					""			// Ability 8 - Extra.
@@ -83,5 +88,22 @@
 
 		// Creature Data
 		//----------------------------------------------------------------------------------------------------------------------
-		
+		"Creature"
+		{
+			"AttachWearables"
+			{
+				"Wearable1"
+				{
+					"ItemDef"			"387"		
+				}
+				"Wearable2"
+				{
+					"ItemDef"			"486"		
+				}
+				"Wearable3"
+				{
+					"ItemDef"			"488"		
+				}
+			}
+		}
 	}

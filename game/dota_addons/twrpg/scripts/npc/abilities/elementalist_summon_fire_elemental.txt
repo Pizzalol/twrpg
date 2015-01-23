@@ -1,61 +1,131 @@
 "elementalist_summon_fire_elemental"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"ability_datadriven"
+	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	"AbilityTextureName"			"invoker_exort"
+
+	// Precache
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
 	{
-		// General
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
-		"BaseClass"		"ABILITY_DATADRIVEN"
-		"AbilityTextureName"	"invoker_exort"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
+		"particle"			"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"
+		"particle"  		"particles/units/heroes/hero_nevermore/nevermore_ambient_glow.vpcf"
+		"particle"  		"particles/units/heroes/hero_nevermore/shadow_fiend_ambient_eyes.vpcf"	
+	}
+	
+	// Casting
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastRange"				"400 425 450 475 500"
+	"AbilityCastPoint"				"0.7 0.7 0.7 0.7 0.7"
+
+	// Time		
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCooldown"				"0.0 0.0 0.0 0.0 0.0"
+
+	// Cost
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityManaCost"				"0 0 0 0 0"
 		
-		// Casting
-		"AbilityCastRange"		"400 425 450 475 500"
-		"AbilityCastPoint"		"0.7"
-		"MaxLevel"				"5"
-		"LevelsBetweenUpgrades" "20"
-		"RequiredLevel"			"5"
+	// Stats
+	//-------------------------------------------------------------------------------------------------------------
+	"MaxLevel"				"5"
+	//"LevelsBetweenUpgrades" "20"
+	//"RequiredLevel"			"5"
 
-		// Time
-		"AbilityCooldown"		"45.0"
-
-		// Cost
-		"AbilityManaCost" 		"50 150 450 750 1250"
-
-		
-
-		// SpellStart
-		"OnSpellStart"
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
 		{
-			"RunScript"
-			{
-				"Target"			"POINT"
-				"ModelScale"		"%modelscale"
-				"HPScale"			"%hpscale"
-				"BaseHP"			"%basehp"
-				"ScriptFile"		"scripts/vscripts/heroes/elementalist_summons.lua"
-				"Function"			"SummonFireElemental"
-			}
+			"var_type"			"FIELD_FLOAT"
+			"model_scale"		"0.6 0.7 0.8 0.9 1.0"
 		}
-
-		// Special
-		"AbilitySpecial"
+		"02"
 		{
-			"01"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"modelscale"		"0.2 0.4 0.6 0.8 1.0"
-			}
-			"02"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"hpscale"			"6.5 8 9.5 11 12.5"
-			}
-			"03"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"tooltipduration"	"180.0"
-			}
-			"04"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"basehp"			"2050 4100 6150 8200 10250"
-			}
+			"var_type"			"FIELD_FLOAT"
+			"hp_scale"			"6.5 8 9.5 11 12.5"
+		}
+		"03"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"duration"			"180.0"
+		}
+		"04"
+		{
+			"var_type"			"FIELD_INTEGER"
+			"base_hp"			"2050 4100 6150 8200 10250"
+		}
+		"05"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"radius"			"400"
 		}
 	}
+
+	"OnSpellStart"
+	{
+		"FireSound"
+		{
+			"EffectName"	"Ability.LightStrikeArray"
+			"Target"		"CASTER"
+		}
+
+		"FireEffect"
+		{
+			"EffectName"	"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"
+			"EffectAttachType"	"start_at_customorigin"
+			"TargetPoint"		"POINT"
+			
+
+			"ControlPoints"
+			{
+				"01"	"%radius 0 0"
+			}
+			
+		}
+
+		"RunScript"
+		{
+			"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_fire_elemental.lua"
+			"Function"		"SummonFireElemental"
+			"Target"		"POINT"
+			"ability_1"		"fire_elemental_flamefists"
+			"ability_2"		"fire_elemental_immolation_aura"
+			"ability_3"		"fire_elemental_magma_explosion"
+			"modifier"		"modifier_fire_elemental"
+		}
+		
+	}
+
+	"Modifiers"
+	{
+		"modifier_fire_elemental"
+		{
+			"IsHidden"	"1"
+
+			"EffectName"	"particles/units/heroes/hero_nevermore/nevermore_ambient_glow.vpcf"
+			"EffectAttachType"	"follow_origin"
+
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"        "particles/units/heroes/hero_nevermore/shadow_fiend_ambient_eyes.vpcf"
+					"EffectAttachType"  "follow_origin"
+					"Target"            "TARGET"
+				}
+				
+			}
+			
+		}
+	}
+}
+
+
+

@@ -10,6 +10,9 @@
 !/game/dota_addons
 /game/dota_addons/*
 !/game/dota_addons/twrpg
+/game/dota_addons/twrpg/*
+!/game/dota_addons/twrpg/scripts
+
  
  
 # Ignore content folder, and all default dota_addons folders
@@ -17,4 +20,3 @@
 /content/*
 !/content/dota_addons
 /content/dota_addons/*
-!/content/dota_addons/twrpg
