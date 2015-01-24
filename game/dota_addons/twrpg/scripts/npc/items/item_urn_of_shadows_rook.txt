@@ -1,0 +1,48 @@
+"item_urn_of_shadows_rook"
+{
+	"ID" "1042"
+	"BaseClass" "item_datadriven"
+	"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityTextureName" "item_ethereal_blade"
+	"ItemDroppable" "1"
+	"ItemSellable" "1"
+	"ItemKillable" "0"
+	"ItemDisassemblable" "0"
+	"ItemQuality" "epic"
+	"ItemCost" "0"
+	"ItemShopTags" "damage"
+	"ItemShareability" "ITEM_PARTIALLY_SHAREABLE"
+
+	"Modifiers"
+	{
+		"item_urn_of_shadows_rook_passive_modifier"
+			{
+				"Passive"			"1"
+				"IsHidden"			"0"
+				"IsBuff"			"0"
+				"IsDebuff"			"0"
+				"IsPurgable"		"0"
+				"Attributes" 		"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"TextureName"		"item_urn_of_shadows"
+				
+				"Aura" 				"item_urn_of_shadows_rook_modifier_aura"
+				"Aura_Radius" 		"500"
+				"Aura_Teams" 		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Aura_Types" 		"DOTA_UNIT_TARGET_HERO"
+				"Aura_Flags" 		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+				"Aura_ApplyToCaster" "0"
+			}
+			
+			"item_urn_of_shadows_rook_modifier_aura"
+			{
+				"Passive"			"0"
+				"IsHidden"			"1"
+				"IsBuff"			"0"
+				"IsDebuff"			"0"
+				"IsPurgable"		"0"
+				"Attributes" 		"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"TextureName"		"item_urn_of_shadows_rook"
+			}
+	}
+
+}

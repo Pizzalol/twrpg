@@ -119,10 +119,8 @@
 					"EffectName"        "particles/units/heroes/hero_nevermore/shadow_fiend_ambient_eyes.vpcf"
 					"EffectAttachType"  "follow_origin"
 					"Target"            "TARGET"
-				}
-				
-			}
-			
+				}				
+			}			
 		}
 	}
 }

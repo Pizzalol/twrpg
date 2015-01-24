@@ -6,14 +6,14 @@
 	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
 	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
-	"AbilityTextureName"			"invoker_exort"
+	"AbilityTextureName"			"invoker_quas"
 
 	// Precache
 	//-------------------------------------------------------------------------------------------------------------
 	"precache"
 	{
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_invoker.vsndevts"
-		"particle"			"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_morphling.vsndevts"
+		"particle"			"particles/units/heroes/hero_morphling/morphling_adaptive_strike.vpcf"
 		"particle"  		"particles/units/heroes/hero_morphling/morphling_ambient.vpcf"
 		
 	}
@@ -72,20 +72,20 @@
 	{
 		"FireSound"
 		{
-			"EffectName"	"Hero_Invoker.ForgeSpirit"
+			"EffectName"	"Hero_Morphling.Death"
 			"Target"		"CASTER"
 		}
 
 		"FireEffect"
 		{
-			"EffectName"	"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"
+			"EffectName"	"particles/units/heroes/hero_morphling/morphling_adaptive_strike.vpcf"
 			"EffectAttachType"	"start_at_customorigin"
 			"TargetPoint"		"POINT"
 			
 
 			"ControlPoints"
 			{
-				"01"	"%radius 0 0"
+				"01"	"POINT"
 			}
 			
 		}

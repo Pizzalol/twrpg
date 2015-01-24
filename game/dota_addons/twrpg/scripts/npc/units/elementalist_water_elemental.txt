@@ -12,7 +12,7 @@
 		"ConsideredHero"			"0"
 		"precache"
 		{
-			"model"			"models/heroes/morphling/morphling.vmdl"
+			"model"				"models/heroes/morphling/morphling.vmdl"
 			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_morphling.vsndevts"
 		}
 		// Abilities
