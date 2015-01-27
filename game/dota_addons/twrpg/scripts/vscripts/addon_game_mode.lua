@@ -20,6 +20,9 @@ PrecacheResource( "particle_folder", "particles/folder", context )
 ]]
 	PrecacheUnitByNameSync('elementalist_fire_elemental', context)
 	PrecacheUnitByNameSync('elementalist_water_elemental', context)
+	PrecacheUnitByNameSync('elementalist_lightning_elemental', context)
+	PrecacheUnitByNameSync('elementalist_earth_elemental', context)
+	PrecacheUnitByNameSync('elementalist_shadow_elemental', context)
 	PrecacheResource("particle_folder", "particles/twrpg_gameplay", context)
 end
 -- Create the game mode when we activate

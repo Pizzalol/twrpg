@@ -1,7 +1,7 @@
 --[[Author: Pizzalol
-	Date: 24.01.2015.
+	Date: 27.01.2015.
 	Summons an elemental]]
-function SummonFireElemental( keys )
+function SummonLightningElemental( keys )
 	local caster = keys.caster
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
@@ -27,26 +27,26 @@ function SummonFireElemental( keys )
 	local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
 
 	-- Checks if an elemental already exists
-	if caster.fire_elemental ~= nil and IsValidEntity(caster.fire_elemental) then
-		caster.fire_elemental:ForceKill(true)
+	if caster.lightning_elemental ~= nil and IsValidEntity(caster.lightning_elemental) then
+		caster.lightning_elemental:ForceKill(true)
 	end
 
 	-- Creates the elemental and sets it to be controllable
-	caster.fire_elemental = CreateUnitByName("elementalist_fire_elemental", position, true, caster, caster, caster:GetTeam())
-	caster.fire_elemental:SetControllableByPlayer(player, true)
+	caster.lightning_elemental = CreateUnitByName("elementalist_lightning_elemental", position, true, caster, caster, caster:GetTeam())
+	caster.lightning_elemental:SetControllableByPlayer(player, true)
 
 	-- Sets the stats of the elemental
-	caster.fire_elemental:CreatureLevelUp(ability_level)
-	caster.fire_elemental:SetModelScale(model_scale)
-	caster.fire_elemental:SetMaxHealth(base_hp+hp_scale*caster_int) -- Add skill damage
-	caster.fire_elemental:SetHealth(caster.fire_elemental:GetMaxHealth()) 
+	caster.lightning_elemental:CreatureLevelUp(ability_level)
+	caster.lightning_elemental:SetModelScale(model_scale)
+	caster.lightning_elemental:SetMaxHealth(base_hp+hp_scale*caster_int) -- Add skill damage
+	caster.lightning_elemental:SetHealth(caster.lightning_elemental:GetMaxHealth()) 
 
-	caster.fire_elemental:SetBaseDamageMin(elemenental_damage * 0.9)
-	caster.fire_elemental:SetBaseDamageMax(elemenental_damage * 1.1)
+	caster.lightning_elemental:SetBaseDamageMin(elemenental_damage * 0.9)
+	caster.lightning_elemental:SetBaseDamageMax(elemenental_damage * 1.1)
 
 	-- Applying the duration modifier and particle modifier
-	caster.fire_elemental:AddNewModifier(caster, nil, "modifier_kill", {duration = duration})
-	ability:ApplyDataDrivenModifier(caster, caster.fire_elemental, modifier, {})
+	caster.lightning_elemental:AddNewModifier(caster, nil, "modifier_kill", {duration = duration})
+	ability:ApplyDataDrivenModifier(caster, caster.lightning_elemental, modifier, {})
 
 	-- Dreamgate enhancement
 	if caster:HasModifier("modifier_dreamgate") then
@@ -66,11 +66,11 @@ function SummonFireElemental( keys )
 	end
 
 	-- Adding abilities based on level
-	caster.fire_elemental:AddAbility(ability_1)
+	caster.lightning_elemental:AddAbility(ability_1)
 	if ability_level_lua >= 3 then
-		caster.fire_elemental:AddAbility(ability_2)
+		caster.lightning_elemental:AddAbility(ability_2)
 	end
 	if ability_level >= 5 then
-		caster.fire_elemental:AddAbility(ability_3)
+		caster.lightning_elemental:AddAbility(ability_3)
 	end
 end

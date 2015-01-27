@@ -1,7 +1,7 @@
-// Elementalist Summon Fire Elemental
+// Elementalist Summon Lightning Elemental
 // Author: Pizzalol
-// Date: 24.01.2015.
-"elementalist_summon_fire_elemental"
+// Date: 27.01.2015.
+"elementalist_summon_lightning_elemental"
 {
 	// General
 	//-------------------------------------------------------------------------------------------------------------
@@ -15,10 +15,11 @@
 	//-------------------------------------------------------------------------------------------------------------
 	"precache"
 	{
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
-		"particle"			"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"
-		"particle"  		"particles/units/heroes/hero_nevermore/nevermore_ambient_glow.vpcf"
-		"particle"  		"particles/units/heroes/hero_nevermore/shadow_fiend_ambient_eyes.vpcf"	
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts"
+		"particle"  		"particles/units/heroes/hero_razor/razor_ambient.vpcf"
+		"particle"  		"particles/units/heroes/hero_razor/razor_whip.vpcf"	
+		"particle"  		"particles/units/heroes/hero_razor/razor_loadout.vpcf"
+		
 	}
 	
 	// Casting
@@ -75,53 +76,63 @@
 	{
 		"FireSound"
 		{
-			"EffectName"	"Ability.LightStrikeArray"
+			"EffectName"	"Hero_Zuus.LightningBolt"
 			"Target"		"CASTER"
 		}
 
 		"FireEffect"
 		{
-			"EffectName"	"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"
+			"EffectName"	"particles/units/heroes/hero_razor/razor_loadout.vpcf"
 			"EffectAttachType"	"start_at_customorigin"
 			"TargetPoint"		"POINT"
 			
 
 			"ControlPoints"
 			{
-				"01"	"%radius 0 0"
+				"01"	"0 0 100"
 			}
 			
 		}
 
 		"RunScript"
 		{
-			"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_fire_elemental.lua"
-			"Function"		"SummonFireElemental"
+			"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_lightning_elemental.lua"
+			"Function"		"SummonLightningElemental"
 			"Target"		"POINT"
-			"ability_1"		"fire_elemental_flamefists"
-			"ability_2"		"fire_elemental_immolation_aura"
-			"ability_3"		"fire_elemental_magma_explosion"
-			"modifier"		"modifier_fire_elemental"
+			"ability_1"		"lightning_elemental_flamefists"
+			"ability_2"		"lightning_elemental_immolation_aura"
+			"ability_3"		"lightning_elemental_magma_explosion"
+			"modifier"		"modifier_lightning_elemental"
 		}
 		
 	}
 
 	"Modifiers"
 	{
-		"modifier_fire_elemental"
+		"modifier_lightning_elemental"
 		{
 			"IsHidden"	"1"
 
-			"EffectName"	"particles/units/heroes/hero_nevermore/nevermore_ambient_glow.vpcf"
+			"EffectName"	"particles/units/heroes/hero_razor/razor_ambient.vpcf"
 			"EffectAttachType"	"follow_origin"
 
 			"OnCreated"
 			{
 				"AttachEffect"
 				{
-					"EffectName"        "particles/units/heroes/hero_nevermore/shadow_fiend_ambient_eyes.vpcf"
-					"EffectAttachType"  "follow_origin"
+					"EffectName"        "particles/units/heroes/hero_razor/razor_whip.vpcf"
+					"EffectAttachType"  "start_at_customorigin"
 					"Target"            "TARGET"
+
+					"ControlPointEntities"
+					{
+						"TARGET"	"attach_whip"
+						"TARGET"	"attach_attack1"
+						"TARGET"	"attach_attack1"
+						"TARGET"	"attach_attack1"
+						"TARGET"	"attach_attack1"
+						"TARGET"	"attach_whip"
+					}
 				}				
 			}			
 		}

@@ -184,6 +184,9 @@
 
 
 	//Start of file elementalist_summon_fire_elemental.txt
+	// Elementalist Summon Fire Elemental
+	// Author: Pizzalol
+	// Date: 24.01.2015.
 	"elementalist_summon_fire_elemental"
 	{
 		// General
@@ -316,8 +319,11 @@
 	//End of file elementalist_summon_fire_elemental.txt
 
 
-	//Start of file elementalist_summon_water_elemental.txt
-	"elementalist_summon_water_elemental"
+	//Start of file elementalist_summon_lightning_elemental.txt
+	// Elementalist Summon Lightning Elemental
+	// Author: Pizzalol
+	// Date: 27.01.2015.
+	"elementalist_summon_lightning_elemental"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
@@ -325,6 +331,152 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"			"invoker_exort"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts"
+			"particle"  		"particles/units/heroes/hero_razor/razor_ambient.vpcf"
+			"particle"  		"particles/units/heroes/hero_razor/razor_whip.vpcf"	
+			"particle"  		"particles/units/heroes/hero_razor/razor_loadout.vpcf"
+			
+		}
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"400 425 450 475 500"
+		"AbilityCastPoint"				"0.7 0.7 0.7 0.7 0.7"
+	
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0 0.0 0.0 0.0 0.0"
+	
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0 0 0 0 0"
+			
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"				"5"
+		//"LevelsBetweenUpgrades" "20"
+		//"RequiredLevel"			"5"
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"model_scale"		"0.6 0.7 0.8 0.9 1.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"hp_scale"			"6.5 8 9.5 11 12.5"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"180.0"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"base_hp"			"2050 4100 6150 8200 10250"
+			}
+			"05"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"radius"			"400"
+			}
+		}
+	
+		"OnSpellStart"
+		{
+			"FireSound"
+			{
+				"EffectName"	"Hero_Zuus.LightningBolt"
+				"Target"		"CASTER"
+			}
+	
+			"FireEffect"
+			{
+				"EffectName"	"particles/units/heroes/hero_razor/razor_loadout.vpcf"
+				"EffectAttachType"	"start_at_customorigin"
+				"TargetPoint"		"POINT"
+				
+	
+				"ControlPoints"
+				{
+					"01"	"0 0 100"
+				}
+				
+			}
+	
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_lightning_elemental.lua"
+				"Function"		"SummonLightningElemental"
+				"Target"		"POINT"
+				"ability_1"		"lightning_elemental_flamefists"
+				"ability_2"		"lightning_elemental_immolation_aura"
+				"ability_3"		"lightning_elemental_magma_explosion"
+				"modifier"		"modifier_lightning_elemental"
+			}
+			
+		}
+	
+		"Modifiers"
+		{
+			"modifier_lightning_elemental"
+			{
+				"IsHidden"	"1"
+	
+				"EffectName"	"particles/units/heroes/hero_razor/razor_ambient.vpcf"
+				"EffectAttachType"	"follow_origin"
+	
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"        "particles/units/heroes/hero_razor/razor_whip.vpcf"
+						"EffectAttachType"  "start_at_customorigin"
+						"Target"            "TARGET"
+	
+						"ControlPointEntities"
+						{
+							"TARGET"	"attach_whip"
+							"TARGET"	"attach_attack1"
+							"TARGET"	"attach_attack1"
+							"TARGET"	"attach_attack1"
+							"TARGET"	"attach_attack1"
+							"TARGET"	"attach_whip"
+						}
+					}				
+				}			
+			}
+		}
+	}
+	
+	
+	
+	//End of file elementalist_summon_lightning_elemental.txt
+
+
+	//Start of file elementalist_summon_water_elemental.txt
+	// Elementalist Summon Water Elemental
+	// Author: Pizzalol
+	// Date: 24.01.2015.
+	"elementalist_summon_water_elemental"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
 		"AbilityTextureName"			"invoker_quas"
 	
 		// Precache
@@ -334,7 +486,6 @@
 			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_morphling.vsndevts"
 			"particle"			"particles/units/heroes/hero_morphling/morphling_adaptive_strike.vpcf"
 			"particle"  		"particles/units/heroes/hero_morphling/morphling_ambient.vpcf"
-			
 		}
 		
 		// Casting

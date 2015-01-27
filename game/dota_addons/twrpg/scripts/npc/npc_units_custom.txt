@@ -241,8 +241,8 @@
 			//
 			"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
 			"Model"						"models/heroes/razor/razor.vmdl"	// Model.
-			"SoundSet"					"Undying_Zombie"					// Name of sound set.
-			"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_undying.vsndevts"
+			"SoundSet"					"Hero_Razor"					// Name of sound set.
+			"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_razor.vsndevts"
 			"ModelScale"				"0.5"
 			"Level"						"1"
 			"ConsideredHero"			"0"
@@ -253,12 +253,12 @@
 			// Abilities
 			//----------------------------------------------------------------
 			
-			"Ability1"					"elementalist_lightning_elemental_thunder_strike_ability"		// Ability 1.
+			"Ability1"					""		// Ability 1.
 			"Ability2"					""			// Ability 2.
 			"Ability3"					""			// Ability 3.
 			"Ability4"					""			// Ability 4.
-			"Ability5"					"elementalist_summon_duration"			// Ability 5.
-			"Ability6"					"elementalist_lightning_elemental_lightning_current_sub_ability"			// Ability 6 - Extra.
+			"Ability5"					""			// Ability 5.
+			"Ability6"					""			// Ability 6 - Extra.
 			"Ability7"					""			// Ability 7 - Extra.
 			"Ability8"					""			// Ability 8 - Extra.
 	
@@ -318,7 +318,7 @@
 	
 			// Creature Data
 			//----------------------------------------------------------------------------------------------------------------------
-			Creature
+			"Creature"
 			{
 				"AttachWearables"
 				{
@@ -343,8 +343,7 @@
 						"ItemDef"			"344"
 					}
 				}
-			}
-			
+			}		
 		}
 	//End of file elementalist_lightning_elemental.txt
 
@@ -454,7 +453,7 @@
 			"ConsideredHero"			"0"
 			"precache"
 			{
-				"model"			"models/heroes/morphling/morphling.vmdl"
+				"model"				"models/heroes/morphling/morphling.vmdl"
 				"soundfile"			"soundevents/game_sounds_heroes/game_sounds_morphling.vsndevts"
 			}
 			// Abilities

@@ -1,3 +1,6 @@
+// Elementalist Summon Water Elemental
+// Author: Pizzalol
+// Date: 24.01.2015.
 "elementalist_summon_water_elemental"
 {
 	// General
@@ -5,7 +8,6 @@
 	"BaseClass"						"ability_datadriven"
 	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
-	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 	"AbilityTextureName"			"invoker_quas"
 
 	// Precache
@@ -15,7 +17,6 @@
 		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_morphling.vsndevts"
 		"particle"			"particles/units/heroes/hero_morphling/morphling_adaptive_strike.vpcf"
 		"particle"  		"particles/units/heroes/hero_morphling/morphling_ambient.vpcf"
-		
 	}
 	
 	// Casting

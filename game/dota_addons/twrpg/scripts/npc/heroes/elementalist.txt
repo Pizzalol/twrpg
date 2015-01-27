@@ -4,7 +4,7 @@
 	"AbilityLayout"		"6"
 	"Ability1"		"elementalist_summon_fire_elemental"
 	"Ability2"		"elementalist_summon_water_elemental"
-	"Ability3"		""
+	"Ability3"		"elementalist_summon_lightning_elemental"
 	"Ability4"		""
 	"Ability5"		""
 	"Ability6"		""
