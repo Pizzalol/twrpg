@@ -1,6 +1,5 @@
 // Elementalist Summon Lightning Elemental
 // Author: Pizzalol
-// Date: 27.01.2015.
 "elementalist_summon_lightning_elemental"
 {
 	// General
@@ -9,7 +8,7 @@
 	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
 	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
-	"AbilityTextureName"			"invoker_exort"
+	"AbilityTextureName"			"invoker_wex"
 
 	// Precache
 	//-------------------------------------------------------------------------------------------------------------
@@ -18,8 +17,7 @@
 		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts"
 		"particle"  		"particles/units/heroes/hero_razor/razor_ambient.vpcf"
 		"particle"  		"particles/units/heroes/hero_razor/razor_whip.vpcf"	
-		"particle"  		"particles/units/heroes/hero_razor/razor_loadout.vpcf"
-		
+		"particle"  		"particles/units/heroes/hero_razor/razor_loadout.vpcf"		
 	}
 	
 	// Casting

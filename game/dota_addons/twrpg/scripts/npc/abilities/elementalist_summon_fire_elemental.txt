@@ -1,6 +1,5 @@
 // Elementalist Summon Fire Elemental
 // Author: Pizzalol
-// Date: 24.01.2015.
 "elementalist_summon_fire_elemental"
 {
 	// General
@@ -98,9 +97,9 @@
 			"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_fire_elemental.lua"
 			"Function"		"SummonFireElemental"
 			"Target"		"POINT"
-			"ability_1"		"fire_elemental_flamefists"
-			"ability_2"		"fire_elemental_immolation_aura"
-			"ability_3"		"fire_elemental_magma_explosion"
+			"ability_1"		"elementalist_fire_elemental_flamefists"
+			"ability_2"		"elementalist_fire_elemental_immolation_aura"
+			"ability_3"		"elementalist_fire_elemental_magma_explosion"
 			"modifier"		"modifier_fire_elemental"
 		}
 		

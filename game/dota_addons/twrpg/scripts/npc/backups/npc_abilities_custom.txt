@@ -19,6 +19,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
 			"particle"			"particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground.vpcf"
 		}
 	
@@ -28,19 +29,25 @@
 		{
 			"01"
 			{
-				"var_type"					"FIELD_FLOAT"
-				"radius"					"500"
+				"var_type"					"FIELD_INTEGER"
+				"dragon_slave_speed"		"1200"
 			}
 			
 			"02"
 			{
-				"var_type"					"FIELD_FLOAT"
-				"base_damage"				"100"
+				"var_type"					"FIELD_INTEGER"
+				"dragon_slave_width_initial"	"275"
 			}
 			"03"
 			{
-				"var_type"					"FIELD_FLOAT"
-				"int_scale"					"20"
+				"var_type"					"FIELD_INTEGER"
+				"dragon_slave_width_end"		"200"
+			}
+			
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"dragon_slave_distance"			"1075"
 			}
 		}
 	
@@ -49,22 +56,22 @@
 			"modifier_flamefists"
 			{
 				"Passive"			"1"
-				"IsHidden"			"1"
+				"IsHidden"			"0"
 		
 				"OnAttackLanded"
 				// "%attack_damage" is set to the damage value before mitigation
 				{
+					"FireSound"
+					{
+						"EffectName"	"Hero_Phoenix.FireSpirits.Target"
+						"Target" 		"TARGET"
+					}
+	
 					"FireEffect"
 					{
 						"EffectName"        "particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground.vpcf"
 						"EffectAttachType"  "follow_origin"
 						"Target"            "TARGET"
-					}
-	
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/flame_fists.lua"
-						"Function"		"flame_fists"
 					}
 				}
 			}

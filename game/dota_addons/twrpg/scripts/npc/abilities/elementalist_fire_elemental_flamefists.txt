@@ -1,0 +1,70 @@
+// Elementalist Fire Elemental Flamefists 
+// Author: Pizzalol
+"elementalist_fire_elemental_flamefists"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"AbilityTextureName"			"warlock_golem_flaming_fists"
+	"MaxLevel"						"1"
+
+	// Precache
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
+	{
+		"particle"			"particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground.vpcf"
+	}
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"radius"					"500"
+		}
+		
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"base_damage"				"100"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"int_scale"					"20"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_flamefists"
+		{
+			"Passive"			"1"
+			"IsHidden"			"1"
+	
+			"OnAttackLanded"
+			// "%attack_damage" is set to the damage value before mitigation
+			{
+				"FireEffect"
+				{
+					"EffectName"        "particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground.vpcf"
+					"EffectAttachType"  "follow_origin"
+					"Target"            "TARGET"
+				}
+
+				"RunScript"
+				{
+					"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/flame_fists.lua"
+					"Function"		"flame_fists"
+				}
+			}
+		}
+	}
+}

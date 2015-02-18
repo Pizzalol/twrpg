@@ -1,18 +1,16 @@
 --[[Author: Pizzalol
-	Date: 24.01.2015.
-	Summons an elemental]]
-function SummonFireElemental( keys )
+	Summons an Earth Elemental]]
+function SummonEarthElemental( keys )
 	local caster = keys.caster
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 	local ability_level_lua = ability_level + 1
 	local player = caster:GetPlayerOwnerID()
 
-	-- Abilities and modifiers
+	-- Abilities
 	local ability_1 = keys.ability_1
 	local ability_2 = keys.ability_2
 	local ability_3 = keys.ability_3
-	local modifier = keys.modifier
 
 	-- Custom variables
 	local position = keys.target_points[1]
@@ -27,26 +25,25 @@ function SummonFireElemental( keys )
 	local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
 
 	-- Checks if an elemental already exists
-	if caster.fire_elemental ~= nil and IsValidEntity(caster.fire_elemental) then
-		caster.fire_elemental:ForceKill(true)
+	if caster.earth_elemental ~= nil and IsValidEntity(caster.earth_elemental) then
+		caster.earth_elemental:ForceKill(true)
 	end
 
 	-- Creates the elemental and sets it to be controllable
-	caster.fire_elemental = CreateUnitByName("elementalist_fire_elemental", position, true, caster, caster, caster:GetTeam())
-	caster.fire_elemental:SetControllableByPlayer(player, true)
+	caster.earth_elemental = CreateUnitByName("elementalist_earth_elemental", position, true, caster, caster, caster:GetTeam())
+	caster.earth_elemental:SetControllableByPlayer(player, true)
 
 	-- Sets the stats of the elemental
-	caster.fire_elemental:CreatureLevelUp(ability_level)
-	caster.fire_elemental:SetModelScale(model_scale)
-	caster.fire_elemental:SetMaxHealth(base_hp+hp_scale*caster_int) -- Add skill damage
-	caster.fire_elemental:SetHealth(caster.fire_elemental:GetMaxHealth()) 
+	caster.earth_elemental:CreatureLevelUp(ability_level)
+	caster.earth_elemental:SetModelScale(model_scale)
+	caster.earth_elemental:SetMaxHealth(base_hp+hp_scale*caster_int) -- Add skill damage
+	caster.earth_elemental:SetHealth(caster.earth_elemental:GetMaxHealth()) 
 
-	caster.fire_elemental:SetBaseDamageMin(elemenental_damage * 0.9)
-	caster.fire_elemental:SetBaseDamageMax(elemenental_damage * 1.1)
+	caster.earth_elemental:SetBaseDamageMin(elemenental_damage * 0.9)
+	caster.earth_elemental:SetBaseDamageMax(elemenental_damage * 1.1)
 
-	-- Applying the duration modifier and particle modifier
-	caster.fire_elemental:AddNewModifier(caster, nil, "modifier_kill", {duration = duration})
-	ability:ApplyDataDrivenModifier(caster, caster.fire_elemental, modifier, {})
+	-- Applying the duration modifier
+	caster.earth_elemental:AddNewModifier(caster, nil, "modifier_kill", {duration = duration})
 
 	-- Dreamgate enhancement
 	if caster:HasModifier("modifier_dreamgate") then
@@ -66,17 +63,11 @@ function SummonFireElemental( keys )
 	end
 
 	-- Adding abilities based on level
-	caster.fire_elemental:AddAbility(ability_1)
-	local ability = caster.fire_elemental:FindAbilityByName(ability_1)
-	ability:SetLevel(1)
+	caster.earth_elemental:AddAbility(ability_1)
 	if ability_level_lua >= 3 then
-		caster.fire_elemental:AddAbility(ability_2)
-		ability = caster.fire_elemental:FindAbilityByName(ability_2)
-		ability:SetLevel(1)
+		caster.earth_elemental:AddAbility(ability_2)
 	end
 	if ability_level >= 5 then
-		caster.fire_elemental:AddAbility(ability_3)
-		ability = caster.fire_elemental:FindAbilityByName(ability_3)
-		ability:SetLevel(1)
+		caster.earth_elemental:AddAbility(ability_3)
 	end
 end

@@ -1,21 +1,21 @@
-// Elementalist Summon Water Elemental
+// Elementalist Summon Earth Elemental
 // Author: Pizzalol
-"elementalist_summon_water_elemental"
+"elementalist_summon_earth_elemental"
 {
 	// General
 	//-------------------------------------------------------------------------------------------------------------
 	"BaseClass"						"ability_datadriven"
 	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
-	"AbilityTextureName"			"invoker_quas"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	"AbilityTextureName"			"elementalist_summon_earth_elemental"
 
 	// Precache
 	//-------------------------------------------------------------------------------------------------------------
 	"precache"
 	{
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_morphling.vsndevts"
-		"particle"			"particles/units/heroes/hero_morphling/morphling_adaptive_strike.vpcf"
-		"particle"  		"particles/units/heroes/hero_morphling/morphling_ambient.vpcf"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_treant.vsndevts"
+		"particle"  		"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_summon_earth_elemental.vpcf"		
 	}
 	
 	// Casting
@@ -72,47 +72,35 @@
 	{
 		"FireSound"
 		{
-			"EffectName"	"Hero_Morphling.Death"
+			"EffectName"	"Hero_Treant.LeechSeed.Target"
 			"Target"		"CASTER"
 		}
 
 		"FireEffect"
 		{
-			"EffectName"	"particles/units/heroes/hero_morphling/morphling_adaptive_strike.vpcf"
+			"EffectName"	"particles/units/heroes/hero_dazzle/elementalist_summon_earth_elemental.vpcf"
 			"EffectAttachType"	"start_at_customorigin"
 			"TargetPoint"		"POINT"
 			
 
 			"ControlPoints"
 			{
-				"01"	"POINT"
+				"01"	"75 0 0"
 			}
 			
 		}
 
 		"RunScript"
 		{
-			"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_water_elemental.lua"
-			"Function"		"SummonWaterElemental"
+			"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_earth_elemental.lua"
+			"Function"		"SummonEarthElemental"
 			"Target"		"POINT"
-			"ability_1"		"fire_elemental_flamefists"
-			"ability_2"		"fire_elemental_immolation_aura"
-			"ability_3"		"fire_elemental_magma_explosion"
-			"modifier"		"modifier_water_elemental"
+			"ability_1"		"earth_elemental_flamefists"
+			"ability_2"		"earth_elemental_immolation_aura"
+			"ability_3"		"earth_elemental_magma_explosion"
 		}
 		
-	}
-
-	"Modifiers"
-	{
-		"modifier_water_elemental"
-		{
-			"IsHidden"	"1"
-
-			"EffectName"	"particles/units/heroes/hero_morphling/morphling_ambient.vpcf"
-			"EffectAttachType"	"follow_origin"
-		}
-	}
+	}	
 }
 
 

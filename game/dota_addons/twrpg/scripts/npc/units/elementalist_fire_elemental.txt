@@ -13,7 +13,6 @@
 		"Duration"					"120.0"
 		"precache"
 		{
-			//"particle_folder"		"particles/units/heroes/hero_phoenix"
 			"model"			"models/heroes/shadow_fiend/shadow_fiend.vmdl"
 			"model"			"models/heroes/shadow_fiend/shadow_fiend_shoulders.vmdl"
 			"model"			"models/heroes/shadow_fiend/shadow_fiend_arcana_arms.vmdl"

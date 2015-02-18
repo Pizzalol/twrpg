@@ -1,6 +1,5 @@
 --[[Author: Pizzalol
-	Date: 24.01.2015.
-	Summons an elemental]]
+	Summons a Water Elemental]]
 function SummonWaterElemental( keys )
 	local caster = keys.caster
 	local ability = keys.ability
