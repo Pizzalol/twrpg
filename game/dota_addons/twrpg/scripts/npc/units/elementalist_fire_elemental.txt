@@ -22,10 +22,10 @@
 		// Abilities
 		//----------------------------------------------------------------
 		
-		"Ability1"					"elementalist_fire_elemental_damage_ability"			// Ability 1.
-		"Ability2"					""			// Ability 2.
-		"Ability3"					""			// Ability 3.
-		"Ability4"					""			// Ability 4.
+		"Ability1"					"elementalist_fire_elemental_flamefists"			// Ability 1.
+		"Ability2"					"elementalist_fire_elemental_immolation_aura"			// Ability 2.
+		"Ability3"					"elementalist_fire_elemental_magma_explosion"			// Ability 3.
+		"Ability4"					"elementalist_fire_elemental_blazing_haste"			// Ability 4.
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.

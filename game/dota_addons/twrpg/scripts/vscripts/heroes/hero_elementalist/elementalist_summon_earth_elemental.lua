@@ -62,12 +62,19 @@ function SummonEarthElemental( keys )
 		caster:RemoveModifierByName("modifier_dreamgate")
 	end
 
-	-- Adding abilities based on level
-	caster.earth_elemental:AddAbility(ability_1)
-	if ability_level_lua >= 3 then
-		caster.earth_elemental:AddAbility(ability_2)
+	-- Disable abilities based on level
+	if ability_level_lua < 3 then
+		ability = caster.earth_elemental:FindAbilityByName(ability_1)
+		ability:SetActivated(false)
+
+		ability = caster.earth_elemental:FindAbilityByName(ability_2)
+		ability:SetActivated(false)
+	elseif ability_level_lua < 5 then
+		ability = caster.earth_elemental:FindAbilityByName(ability_2)
+		ability:SetActivated(false)
 	end
-	if ability_level >= 5 then
-		caster.earth_elemental:AddAbility(ability_3)
-	end
+
+	-- Always disable the ultimate ability
+	ability = caster.earth_elemental:FindAbilityByName(ability_3)
+	ability:SetActivated(false)
 end

@@ -65,18 +65,19 @@ function SummonFireElemental( keys )
 		caster:RemoveModifierByName("modifier_dreamgate")
 	end
 
-	-- Adding abilities based on level
-	caster.fire_elemental:AddAbility(ability_1)
-	local ability = caster.fire_elemental:FindAbilityByName(ability_1)
-	ability:SetLevel(1)
-	if ability_level_lua >= 3 then
-		caster.fire_elemental:AddAbility(ability_2)
+	-- Disable abilities based on level
+	if ability_level_lua < 3 then
+		ability = caster.fire_elemental:FindAbilityByName(ability_1)
+		ability:SetActivated(false)
+
 		ability = caster.fire_elemental:FindAbilityByName(ability_2)
-		ability:SetLevel(1)
+		ability:SetActivated(false)
+	elseif ability_level_lua < 5 then
+		ability = caster.fire_elemental:FindAbilityByName(ability_2)
+		ability:SetActivated(false)
 	end
-	if ability_level >= 5 then
-		caster.fire_elemental:AddAbility(ability_3)
-		ability = caster.fire_elemental:FindAbilityByName(ability_3)
-		ability:SetLevel(1)
-	end
+
+	-- Always disable the ultimate ability
+	ability = caster.fire_elemental:FindAbilityByName(ability_3)
+	ability:SetActivated(false)
 end

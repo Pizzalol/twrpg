@@ -78,14 +78,14 @@
 
 		"FireEffect"
 		{
-			"EffectName"	"particles/units/heroes/hero_dazzle/elementalist_summon_earth_elemental.vpcf"
+			"EffectName"	"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_summon_earth_elemental.vpcf"
 			"EffectAttachType"	"start_at_customorigin"
 			"TargetPoint"		"POINT"
 			
 
 			"ControlPoints"
 			{
-				"01"	"75 0 0"
+				"01"	"100 0 0"
 			}
 			
 		}
@@ -98,8 +98,7 @@
 			"ability_1"		"earth_elemental_flamefists"
 			"ability_2"		"earth_elemental_immolation_aura"
 			"ability_3"		"earth_elemental_magma_explosion"
-		}
-		
+		}		
 	}	
 }
 

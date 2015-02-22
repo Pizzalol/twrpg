@@ -1,5 +1,143 @@
 "DOTAAbilities"
 {
+	// Elementalist Fire Elemental Blazing Haste
+	// Author: Pizzalol
+	"elementalist_fire_elemental_blazing_haste"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"nevermore_dark_lord_demon"
+		"MaxLevel"						"1"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
+			"particle"			"particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf"
+		}
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"radius"					"500"
+			}
+			
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"base_damage"				"100"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"int_scale"					"20"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"hp_cost"					"10"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"tick_interval"				"1.0"
+			}
+		}
+	
+		"OnToggleOn"
+		{
+			"FireSound"
+			{
+				"EffectName"	"Hero_Phoenix.IcarusDive.Stop"
+				"Target" 		"CASTER"
+			}
+	
+			"FireEffect"
+			{
+				"EffectName"        "particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf"
+				"EffectAttachType"  "start_at_customorigin"
+	
+				"ControlPointEntities"
+				{
+					"CASTER"	"attach_hitloc"
+					"CASTER"	"attach_hitloc"
+					"CASTER"	"attach_hitloc"
+					"CASTER"	"attach_hitloc"
+				}
+			}		
+	
+			//"RunScript"
+			//{
+			//	"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/immolation_aura.lua"
+			//	"Function"		"immolation_aura"
+			//}
+	
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_immolation_aura"
+				"Target" 		"CASTER"
+			}
+		}
+	
+		"OnToggleOff"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_immolation_aura"
+				"Target" 		"CASTER"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_immolation_aura"
+			{
+				"IsHidden"			"1"
+				"IsPurgable"		"0"
+		
+				"ThinkInterval"  "%tick_interval"
+				"OnIntervalThink"
+				{
+					"FireEffect"
+					{
+						"EffectName"        "particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf"
+						"EffectAttachType"  "start_at_customorigin"
+	
+						"ControlPointEntities"
+						{
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+						}
+					}
+	
+					"FireSound"
+					{
+						"EffectName"	"Hero_Phoenix.IcarusDive.Stop"
+						"Target" 		"TARGET"
+					}
+	
+					//"RunScript"
+					//{
+					//	"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/immolation_aura.lua"
+					//	"Function"		"immolation_aura"
+					//}
+				}
+			}
+		}
+	}
 	// Elementalist Fire Elemental Flamefists 
 	// Author: Pizzalol
 	"elementalist_fire_elemental_flamefists"
@@ -66,6 +204,144 @@
 						"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/flame_fists.lua"
 						"Function"		"flame_fists"
 					}
+				}
+			}
+		}
+	}
+	// Elementalist Fire Elemental Immolation Aura
+	// Author: Pizzalol
+	"elementalist_fire_elemental_immolation_aura"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"jakiro_liquid_fire"
+		"MaxLevel"						"1"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
+			"particle"			"particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf"
+		}
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"radius"					"500"
+			}
+			
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"base_damage"				"100"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"int_scale"					"20"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"hp_cost"					"10"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"tick_interval"				"1.0"
+			}
+		}
+	
+		"OnToggleOn"
+		{
+			"FireSound"
+			{
+				"EffectName"	"Hero_Phoenix.IcarusDive.Stop"
+				"Target" 		"CASTER"
+			}
+	
+			"FireEffect"
+			{
+				"EffectName"        "particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf"
+				"EffectAttachType"  "start_at_customorigin"
+	
+				"ControlPointEntities"
+				{
+					"CASTER"	"attach_hitloc"
+					"CASTER"	"attach_hitloc"
+					"CASTER"	"attach_hitloc"
+					"CASTER"	"attach_hitloc"
+				}
+			}		
+	
+			//"RunScript"
+			//{
+			//	"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/immolation_aura.lua"
+			//	"Function"		"immolation_aura"
+			//}
+	
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_immolation_aura"
+				"Target" 		"CASTER"
+			}
+		}
+	
+		"OnToggleOff"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_immolation_aura"
+				"Target" 		"CASTER"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_immolation_aura"
+			{
+				"IsHidden"			"1"
+				"IsPurgable"		"0"
+		
+				"ThinkInterval"  "%tick_interval"
+				"OnIntervalThink"
+				{
+					"FireEffect"
+					{
+						"EffectName"        "particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf"
+						"EffectAttachType"  "start_at_customorigin"
+	
+						"ControlPointEntities"
+						{
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+						}
+					}
+	
+					"FireSound"
+					{
+						"EffectName"	"Hero_Phoenix.IcarusDive.Stop"
+						"Target" 		"TARGET"
+					}
+	
+					//"RunScript"
+					//{
+					//	"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/immolation_aura.lua"
+					//	"Function"		"immolation_aura"
+					//}
 				}
 			}
 		}
@@ -160,6 +436,144 @@
 				}
 			}
 		}
+	// Elementalist Fire Elemental Magma Explosion
+	// Author: Pizzalol
+	"elementalist_fire_elemental_magma_explosion"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"techies_suicide"
+		"MaxLevel"						"1"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
+			"particle"			"particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf"
+		}
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"radius"					"500"
+			}
+			
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"base_damage"				"100"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"int_scale"					"20"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"hp_cost"					"10"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"tick_interval"				"1.0"
+			}
+		}
+	
+		"OnToggleOn"
+		{
+			"FireSound"
+			{
+				"EffectName"	"Hero_Phoenix.IcarusDive.Stop"
+				"Target" 		"CASTER"
+			}
+	
+			"FireEffect"
+			{
+				"EffectName"        "particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf"
+				"EffectAttachType"  "start_at_customorigin"
+	
+				"ControlPointEntities"
+				{
+					"CASTER"	"attach_hitloc"
+					"CASTER"	"attach_hitloc"
+					"CASTER"	"attach_hitloc"
+					"CASTER"	"attach_hitloc"
+				}
+			}		
+	
+			//"RunScript"
+			//{
+			//	"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/immolation_aura.lua"
+			//	"Function"		"immolation_aura"
+			//}
+	
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_immolation_aura"
+				"Target" 		"CASTER"
+			}
+		}
+	
+		"OnToggleOff"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_immolation_aura"
+				"Target" 		"CASTER"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_immolation_aura"
+			{
+				"IsHidden"			"1"
+				"IsPurgable"		"0"
+		
+				"ThinkInterval"  "%tick_interval"
+				"OnIntervalThink"
+				{
+					"FireEffect"
+					{
+						"EffectName"        "particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf"
+						"EffectAttachType"  "start_at_customorigin"
+	
+						"ControlPointEntities"
+						{
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+						}
+					}
+	
+					"FireSound"
+					{
+						"EffectName"	"Hero_Phoenix.IcarusDive.Stop"
+						"Target" 		"TARGET"
+					}
+	
+					//"RunScript"
+					//{
+					//	"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/immolation_aura.lua"
+					//	"Function"		"immolation_aura"
+					//}
+				}
+			}
+		}
+	}
 	// Fire Elemental aoe damage suicide ability
 		"elementalist_fire_elemental_magma_explosion_ability"
 		{
@@ -272,14 +686,14 @@
 	
 			"FireEffect"
 			{
-				"EffectName"	"particles/units/heroes/hero_dazzle/elementalist_summon_earth_elemental.vpcf"
+				"EffectName"	"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_summon_earth_elemental.vpcf"
 				"EffectAttachType"	"start_at_customorigin"
 				"TargetPoint"		"POINT"
 				
 	
 				"ControlPoints"
 				{
-					"01"	"75 0 0"
+					"01"	"100 0 0"
 				}
 				
 			}
@@ -292,8 +706,7 @@
 				"ability_1"		"earth_elemental_flamefists"
 				"ability_2"		"earth_elemental_immolation_aura"
 				"ability_3"		"earth_elemental_magma_explosion"
-			}
-			
+			}		
 		}	
 	}
 	
@@ -388,7 +801,7 @@
 	
 				"ControlPoints"
 				{
-					"01"	"%radius 0 0"
+					"01"	"100 0 0"
 				}
 				
 			}
@@ -398,9 +811,9 @@
 				"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_fire_elemental.lua"
 				"Function"		"SummonFireElemental"
 				"Target"		"POINT"
-				"ability_1"		"elementalist_fire_elemental_flamefists"
-				"ability_2"		"elementalist_fire_elemental_immolation_aura"
-				"ability_3"		"elementalist_fire_elemental_magma_explosion"
+				"ability_1"		"elementalist_fire_elemental_immolation_aura"
+				"ability_2"		"elementalist_fire_elemental_magma_explosion"
+				"ability_3"		"elementalist_fire_elemental_blazing_haste"
 				"modifier"		"modifier_fire_elemental"
 			}
 			
