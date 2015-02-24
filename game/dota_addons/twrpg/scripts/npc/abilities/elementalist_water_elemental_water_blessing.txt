@@ -1,0 +1,63 @@
+// Elementalist Water Elemental Water Blessing
+// Author: Pizzalol
+"elementalist_water_elemental_water_blessing"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"				"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+	"AbilityTextureName"			"omniknight_guardian_angel"
+
+	// Precache
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
+	{
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dazzle.vsndevts"
+		"particle"			"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_chain_heal.vpcf"
+	}
+
+	// Casting
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastPoint"				"0.2"
+	
+	// Time		
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCooldown"				"5"
+		
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"radius"			"600"
+		}
+		"02"
+		{	
+			"var_type"			"FIELD_INTEGER"
+			"attribute_pct"		"10"
+		}
+		"03"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"duration"			"180"
+		}
+	}
+
+	"OnSpellStart"
+	{
+		
+
+		//"RunScript"
+		//{
+		//	"ScriptFile"	"heroes/hero_elementalist/units/water_elemental/chain_heal.lua"
+		//	"Function"		"chain_heal"
+		//	"chain_heal_particle"	"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_chain_heal.vpcf"
+		//}
+	}
+}
+
