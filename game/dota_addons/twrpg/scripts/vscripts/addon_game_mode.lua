@@ -6,6 +6,7 @@ require('twrpg')
 require('timers')
 require("hero")
 require("custom_abilities")
+require("popup")
 --[[if ReflexGameMode == nil then
 print ( '[REFLEX] creating reflex game mode' )
 ReflexGameMode = class({})

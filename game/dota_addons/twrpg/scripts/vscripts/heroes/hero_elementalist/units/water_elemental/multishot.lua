@@ -1,5 +1,5 @@
 --[[Author: Pizzalol
-	Creates additional attack projectiles for units within the targets attack range]]
+	Creates additional attack projectiles for units within the casters attack range]]
 function multishot_start( keys )
 	local caster = keys.caster
 	local caster_location = caster:GetAbsOrigin()
@@ -17,7 +17,7 @@ function multishot_start( keys )
 
 	local multishot_targets = FindUnitsInRadius(caster:GetTeam(), caster_location, nil, radius, target_team, target_type, target_flags, FIND_CLOSEST, false)
 
-	-- Create projectiles for units that are not the targets current attack target
+	-- Create projectiles for units that are not the casters current attack target
 	for _,v in pairs(multishot_targets) do
 		if v ~= attack_target then
 			local projectile_info = 
