@@ -46,6 +46,11 @@
 			"var_type"			"FIELD_FLOAT"
 			"duration"			"180"
 		}
+		"04"
+		{
+			"var_type"			"FIELD_INTEGER"
+			"mana_restore_pct"	"40"
+		}
 	}
 
 	"OnSpellStart"
