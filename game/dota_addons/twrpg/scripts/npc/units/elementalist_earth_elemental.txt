@@ -22,10 +22,10 @@
 		//----------------------------------------------------------------
 		
 		"AbilityLayout"				"4"
-		"Ability1"					""			// Ability 1.
-		"Ability2"					""			// Ability 2.
-		"Ability3"					""			// Ability 3.
-		"Ability4"					""			// Ability 4.
+		"Ability1"					"elementalist_earth_elemental_taunt"			// Ability 1.
+		"Ability2"					"elementalist_earth_elemental_quake"			// Ability 2.
+		"Ability3"					"elementalist_earth_elemental_thorns"			// Ability 3.
+		"Ability4"					"elementalist_earth_elemental_souloftheforest"			// Ability 4.
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.

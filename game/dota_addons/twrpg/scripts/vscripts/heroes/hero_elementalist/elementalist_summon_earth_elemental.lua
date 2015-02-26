@@ -7,10 +7,11 @@ function SummonEarthElemental( keys )
 	local ability_level_lua = ability_level + 1
 	local player = caster:GetPlayerOwnerID()
 
-	-- Abilities
+	-- Abilities and modifier
 	local ability_1 = keys.ability_1
 	local ability_2 = keys.ability_2
 	local ability_3 = keys.ability_3
+	local modifier = keys.modifier
 
 	-- Custom variables
 	local position = keys.target_points[1]
@@ -42,8 +43,9 @@ function SummonEarthElemental( keys )
 	caster.earth_elemental:SetBaseDamageMin(elemenental_damage * 0.9)
 	caster.earth_elemental:SetBaseDamageMax(elemenental_damage * 1.1)
 
-	-- Applying the duration modifier
+	-- Applying the duration modifier and the elemental modifier
 	caster.earth_elemental:AddNewModifier(caster, nil, "modifier_kill", {duration = duration})
+	ability:ApplyDataDrivenModifier(caster, caster.earth_elemental, modifier, {})
 
 	-- Dreamgate enhancement
 	if caster:HasModifier("modifier_dreamgate") then

@@ -1,5 +1,294 @@
 "DOTAAbilities"
 {
+	// Elementalist Earth Elemental Quake
+	// Author: Pizzalol
+	"elementalist_earth_elemental_quake"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"lone_druid_spirit_bear_entangle"
+		"MaxLevel"						"1"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts"
+			"particle"			"particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
+		}
+	
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"10"
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"radius"					"500"
+			}
+			
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"base_damage"				"100"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"int_scale"					"20"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"tick_cost"					"2"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"tick_interval"				"1.0"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"heal_amount"				"2000"
+			}
+		}
+	
+		"OnToggleOn"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_quake"
+				"Target" 		"CASTER"
+			}
+		}
+	
+		"OnToggleOff"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_quake"
+				"Target" 		"CASTER"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_quake"
+			{
+				"IsHidden"			"1"
+				"IsPurgable"		"0"
+		
+				"ThinkInterval"  "%tick_interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_elementalist/units/earth_elemental/quake.lua"
+						"Function"		"quake"
+						"sound"			"Hero_EarthShaker.Fissure.Cast"
+						"quake_particle"	"particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
+					}			
+				}
+			}
+		}
+	}
+	// Elementalist Earth Elemental Taunt
+	// Author: Pizzalol
+	"elementalist_earth_elemental_taunt"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"FightRecapLevel"				"1"
+		"AbilityTextureName"			"treant_natures_guise"
+		"AOERadius"						"%radius"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"			"particles/status_fx/status_effect_beserkers_call.vpcf"
+		}
+	
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
+	
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"8"
+	
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"0 0 0 0"
+	
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"	
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"500"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_reduction"		"-25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"6.0"
+			}	
+		}
+	
+		"OnSpellStart"
+		{
+			"ActOnTargets"
+			{
+				"Target"
+				{
+					"Center"  	"CASTER"
+					"Radius" 	"%radius"
+					"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+					"Flags"     "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+				}
+			
+				"Action"    
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_beserkers_call_enemy_datadriven"
+						"Target" 		"TARGET"
+						"Duration"		"%duration"
+					}
+				}
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_beserkers_call_enemy_datadriven"
+			{
+				"IsPurgable"		"0"
+				"IsDebuff"			"1"
+	
+				"StatusEffectName" 		"particles/status_fx/status_effect_beserkers_call.vpcf" 	   
+				"StatusEffectPriority"  "10"
+	
+				"ThinkInterval"  "0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_elementalist/units/earth_elemental/taunt.lua"
+						"Function"		"taunt_start"
+					}
+				}
+	
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_elementalist/units/earth_elemental/taunt.lua"
+						"Function"		"taunt_end"
+					}
+				}
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE" "%damage_reduction"
+				}
+			}
+		}
+	}
+	
+	// Elementalist Earth Elemental Thorns
+	// Author: Pizzalol
+	"elementalist_earth_elemental_thorns"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"bristleback_bristleback"
+		"MaxLevel"						"1"
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"reflect_chance"			"100"
+			}		
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"base_armor"				"80"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"int_scale"					"20"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_thorns"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+	
+				"OnTakeDamage"
+				// "%attack_damage" is set to the damage value after mitigation
+				{
+					"Random"
+					{
+						"Chance"			"%reflect_chance"
+						"OnSuccess"
+						{
+							"Damage"
+							{
+								"Target"		"ATTACKER"
+								"Type"			"DAMAGE_TYPE_PURE"
+								"Damage"		"%attack_damage"
+							}
+						}
+					}
+				}
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%base_armor"
+				}
+			}
+		}
+	}
 	// Elementalist Fire Elemental Blazing Haste
 	// Author: Pizzalol
 	"elementalist_fire_elemental_blazing_haste"
@@ -435,11 +724,21 @@
 				"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_earth_elemental.lua"
 				"Function"		"SummonEarthElemental"
 				"Target"		"POINT"
-				"ability_1"		"earth_elemental_flamefists"
-				"ability_2"		"earth_elemental_immolation_aura"
-				"ability_3"		"earth_elemental_magma_explosion"
+				"ability_1"		"earth_elemental_quake"
+				"ability_2"		"earth_elemental_thorns"
+				"ability_3"		"earth_elemental_souloftheforest"
+				"modifer"		"modifier_earth_elemental"
 			}		
-		}	
+		}
+	
+		"Modifiers"
+		{
+			"modifier_earth_elemental"
+			{
+				"IsPurgable"		"0"
+				"IsHidden"			"1"
+			}
+		}
 	}
 	
 	
@@ -709,7 +1008,12 @@
 							"TARGET"	"attach_whip"
 						}
 					}				
-				}			
+				}
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "-0.04"
+				}
 			}
 		}
 	}
@@ -1177,6 +1481,11 @@
 			{
 				"var_type"			"FIELD_FLOAT"
 				"duration"			"180"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"mana_restore_pct"	"40"
 			}
 		}
 	

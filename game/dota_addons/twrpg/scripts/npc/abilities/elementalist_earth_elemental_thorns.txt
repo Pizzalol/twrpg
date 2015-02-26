@@ -1,0 +1,67 @@
+// Elementalist Earth Elemental Thorns
+// Author: Pizzalol
+"elementalist_earth_elemental_thorns"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"	
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"AbilityTextureName"			"bristleback_bristleback"
+	"MaxLevel"						"1"
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"reflect_chance"			"10"
+		}		
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"base_armor"				"80"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"int_scale"					"20"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_thorns"
+		{
+			"Passive"			"1"
+			"IsHidden"			"1"
+
+			"OnTakeDamage"
+			// "%attack_damage" is set to the damage value after mitigation
+			{
+				"Random"
+				{
+					"Chance"			"%reflect_chance"
+					"OnSuccess"
+					{
+						"Damage"
+						{
+							"Target"		"ATTACKER"
+							"Type"			"DAMAGE_TYPE_PURE"
+							"Damage"		"%attack_damage"
+						}
+					}
+				}
+			}
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%base_armor"
+			}
+		}
+	}
+}

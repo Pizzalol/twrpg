@@ -1,0 +1,103 @@
+// Elementalist Earth Elemental Quake
+// Author: Pizzalol
+"elementalist_earth_elemental_quake"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"AbilityTextureName"			"lone_druid_spirit_bear_entangle"
+	"MaxLevel"						"1"
+
+	// Precache
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
+	{
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts"
+		"particle"			"particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
+	}
+
+	// Cost
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityManaCost"				"10"
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"radius"					"500"
+		}
+		
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"base_damage"				"100"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"int_scale"					"20"
+		}
+		"04"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"tick_cost"					"2"
+		}
+		"05"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"tick_interval"				"1.0"
+		}
+		"06"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"heal_amount"				"2000"
+		}
+	}
+
+	"OnToggleOn"
+	{
+		"ApplyModifier"
+		{
+			"ModifierName"	"modifier_quake"
+			"Target" 		"CASTER"
+		}
+	}
+
+	"OnToggleOff"
+	{
+		"RemoveModifier"
+		{
+			"ModifierName"	"modifier_quake"
+			"Target" 		"CASTER"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_quake"
+		{
+			"IsHidden"			"1"
+			"IsPurgable"		"0"
+	
+			"ThinkInterval"  "%tick_interval"
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"heroes/hero_elementalist/units/earth_elemental/quake.lua"
+					"Function"		"quake"
+					"sound"			"Hero_EarthShaker.Fissure.Cast"
+					"quake_particle"	"particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
+				}			
+			}
+		}
+	}
+}

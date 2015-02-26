@@ -132,7 +132,12 @@
 						"TARGET"	"attach_whip"
 					}
 				}				
-			}			
+			}
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "-0.04"
+			}
 		}
 	}
 }
