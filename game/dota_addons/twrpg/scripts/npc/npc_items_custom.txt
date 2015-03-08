@@ -1,619 +1,134 @@
 "DOTAAbilities"
 {
-	"item_agility_modifier"
-		{
-			"ID" "2107"
-			// General
-			//-------------------------------------------------------------------------------------------------------------
-			"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-			"BaseClass" "item_datadriven"
+	//Shield
+	"item_example_item"
+	{
+		"ID"							"1836"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"BaseClass"						"item_datadriven"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		"AbilityTextureName"			"item_example_item"
 	
-			// Item Info
-			//-------------------------------------------------------------------------------------------------------------
-			
-			"Modifiers"
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"900"
+		"AbilityCastPoint"				"0.2"
+		"AbilityCooldown"				"13.0"
+	
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100"
+		"ItemCost"						"750"
+		"ItemInitialCharges"			"0"
+		"ItemDroppable"					"1"
+		"ItemSellable"					"1"
+		"ItemRequiresCharges"			"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+		
+		"MaxUpgradeLevel"				"1"
+		"ItemBaseLevel"					"1"
+		
+		"precache"
+		{
+			"particle"							"particles/frostivus_herofx/queen_shadow_strike_linear_parent.vpcf"
+			"particle_folder"					"particles/test_particle"
+			"soundfile"							"soundevents/game_sounds_heroes/game_sounds_abaddon.vsndevts"
+		}
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
 			{
-				"modifier_agility_mod_1"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"1"
-					}
-				}
-				"modifier_agility_mod_2"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"2"
-					}
-				}
-				"modifier_agility_mod_4"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"4"
-					}
-				}
-				"modifier_agility_mod_8"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"8"
-					}
-				}
-				"modifier_agility_mod_16"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"16"
-					}
-				}
-				"modifier_agility_mod_32"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"32"
-					}
-				}
-				"modifier_agility_mod_64"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"64"
-					}
-				}
-				"modifier_agility_mod_128"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"128"
-					}
-				}
-				"modifier_agility_mod_256"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"256"
-					}
-				}
-				"modifier_agility_mod_512"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"512"
-					}
-				}
+				"EffectName"			"particles/frostivus_herofx/queen_shadow_strike_linear_parent.vpcf"
+				"MoveSpeed"				"%speed"
+				//"StartPosition"	  "attach_attack1"
+				"FixedDistance"   "%distance"
+				"StartRadius"			"%radius"
+				"EndRadius"				"%radius"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"0"
+				"VisionRadius"			"0"
+			}
+			"FireSound"
+			{
+				"EffectName"		"Hero_Abaddon.AphoticShield.Cast"
+				"Target"			  "CASTER"
+			}
+			"ApplyModifier"
+			{
+				"Target"  		"CASTER"
+				"ModifierName"	"modifier_item_shield"
 			}
 		}
-	"item_armor_modifier"
-	{
-	"ID" "2105"
-	// General
-	//-------------------------------------------------------------------------------------------------------------
-	"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-	"BaseClass" "item_datadriven"
-	"Modifiers"
-	{
-	"modifier_armor_mod_1"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "1"
-	}
-	}
-	"modifier_armor_mod_2"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "2"
-	}
-	}
-	"modifier_armor_mod_4"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "4"
-	}
-	}
-	"modifier_armor_mod_8"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "8"
-	}
-	}
-	"modifier_armor_mod_16"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "16"
-	}
-	}
-	"modifier_armor_mod_32"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "32"
-	}
-	}
-	"modifier_armor_mod_64"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "64"
-	}
-	}
-	"modifier_armor_mod_128"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "128"
-	}
-	}
-	"modifier_armor_mod_256"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "256"
-	}
-	}
-	"modifier_armor_mod_512"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "512"
-	}
-	}
-	"modifier_negative_armor_mod_1"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-1"
-	}
-	}
-	"modifier_negative_armor_mod_2"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-2"
-	}
-	}
-	"modifier_negative_armor_mod_4"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-4"
-	}
-	}
-	"modifier_negative_armor_mod_8"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-8"
-	}
-	}
-	"modifier_negative_armor_mod_16"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-16"
-	}
-	}
-	"modifier_negative_armor_mod_32"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-32"
-	}
-	}
-	"modifier_negative_armor_mod_64"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-64"
-	}
-	}
-	"modifier_negative_armor_mod_128"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-128"
-	}
-	}
-	"modifier_negative_armor_mod_256"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-256"
-	}
-	}
-	"modifier_negative_armor_mod_512"
-	{
-	"IsHidden" "1"
-	"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-	"Properties"
-	{
-	// You may use "modifierProperty" completions within quotes here. Below is an example
-	"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-512"
-	}
-	}
-	}
-	}
-	"item_intellect_modifier"
-		{
-			"ID" "2106"
-			// General
-			//-------------------------------------------------------------------------------------------------------------
-			"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-			"BaseClass" "item_datadriven"
-	
-			// Item Info
-			//-------------------------------------------------------------------------------------------------------------
-			
-			"Modifiers"
+	    
+		"OnProjectileHitUnit"
+		{			
+			"DeleteOnHit" "0"
+			"Damage"
 			{
-				"modifier_intellect_mod_1"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"1"
-					}
-				}
-				"modifier_intellect_mod_2"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"2"
-					}
-				}
-				"modifier_intellect_mod_4"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"4"
-					}
-				}
-				"modifier_intellect_mod_8"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"8"
-					}
-				}
-				"modifier_intellect_mod_16"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"16"
-					}
-				}
-				"modifier_intellect_mod_32"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"32"
-					}
-				}
-				"modifier_intellect_mod_64"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"64"
-					}
-				}
-				"modifier_intellect_mod_128"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"128"
-					}
-				}
-				"modifier_intellect_mod_256"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"256"
-					}
-				}
-				"modifier_intellect_mod_512"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"512"
-					}
-				}
+				"Target"  		"TARGET"
+				"Type"		"DAMAGE_TYPE_PURE"
+				"Damage"	"%damage"
 			}
 		}
-	"item_strength_modifier"
-		{
-			"ID" "2108"
-			// General
-			//-------------------------------------------------------------------------------------------------------------
-			"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-			"BaseClass" "item_datadriven"
-	
-			// Item Info
-			//-------------------------------------------------------------------------------------------------------------
-			
-			"Modifiers"
-			{
-				"modifier_strength_mod_1"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"1"
-					}
-				}
-				"modifier_strength_mod_2"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"2"
-					}
-				}
-				"modifier_strength_mod_4"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"4"
-					}
-				}
-				"modifier_strength_mod_8"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"8"
-					}
-				}
-				"modifier_strength_mod_16"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"16"
-					}
-				}
-				"modifier_strength_mod_32"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"32"
-					}
-				}
-				"modifier_strength_mod_64"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"64"
-					}
-				}
-				"modifier_strength_mod_128"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"128"
-					}
-				}
-				"modifier_strength_mod_256"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"256"
-					}
-				}
-				"modifier_strength_mod_512"
-				{
-					"IsHidden" "1"
-					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"512"
-					}
-				}
-			}
-		}
-	"item_test_skill_damage"
-	{
-		"ID" "1042"
-		"BaseClass" "item_datadriven"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityTextureName" "item_ethereal_blade"
-		"ItemDroppable" "1"
-		"ItemSellable" "1"
-		"ItemKillable" "0"
-		"ItemDisassemblable" "0"
-		"ItemQuality" "epic"
-		"ItemCost" "0"
-		"ItemShopTags" "damage"
-		"ItemShareability" "ITEM_PARTIALLY_SHAREABLE"
-	
+		
 		"Modifiers"
 		{
-			"modifier_skill_damage"
+			"modifier_item_shield"
 			{
-				"Passive"	"1"
-				"OnCreated"
+				"EffectName"		"particles/test_particle/damage_immunity.vpcf"
+				"EffectAttachType"	"follow_origin"
+				"Target"			"CASTER"
+				"Duration" 			"%duration"
+				"TextureName" 		"abaddon_aphotic_shield"
+				"Properties"
 				{
-					"RunScript"
-					{
-						"SkillDamage"	"15"
-						"ScriptFile"	"custom_abilities.lua"
-						"Function"	"AddSkillDamage"
-					}
-				}
-				"OnDestroy"
-				{
-					"RunScript"
-					{
-						"SkillDamage"	"15"
-						"ScriptFile"	"custom_abilities.lua"
-						"Function"	"RemoveSkillDamage"
-					}
+					"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"		"%damage_reduction"
 				}
 			}
 		}
-	
-	}
-	"item_urn_of_shadows_rook"
-	{
-		"ID" "1042"
-		"BaseClass" "item_datadriven"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityTextureName" "item_ethereal_blade"
-		"ItemDroppable" "1"
-		"ItemSellable" "1"
-		"ItemKillable" "0"
-		"ItemDisassemblable" "0"
-		"ItemQuality" "epic"
-		"ItemCost" "0"
-		"ItemShopTags" "damage"
-		"ItemShareability" "ITEM_PARTIALLY_SHAREABLE"
-	
-		"Modifiers"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
 		{
-			"item_urn_of_shadows_rook_passive_modifier"
-				{
-					"Passive"			"1"
-					"IsHidden"			"0"
-					"IsBuff"			"0"
-					"IsDebuff"			"0"
-					"IsPurgable"		"0"
-					"Attributes" 		"MODIFIER_ATTRIBUTE_MULTIPLE"
-					"TextureName"		"item_urn_of_shadows"
-					
-					"Aura" 				"item_urn_of_shadows_rook_modifier_aura"
-					"Aura_Radius" 		"500"
-					"Aura_Teams" 		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-					"Aura_Types" 		"DOTA_UNIT_TARGET_HERO"
-					"Aura_Flags" 		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-					"Aura_ApplyToCaster" "0"
-				}
-				
-				"item_urn_of_shadows_rook_modifier_aura"
-				{
-					"Passive"			"0"
-					"IsHidden"			"1"
-					"IsBuff"			"0"
-					"IsDebuff"			"0"
-					"IsPurgable"		"0"
-					"Attributes" 		"MODIFIER_ATTRIBUTE_MULTIPLE"
-					"TextureName"		"item_urn_of_shadows_rook"
-				}
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"4.0"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_reduction"		"-50"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				  "150"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					  "1800"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"distance"		    "900"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER`"
+				"damage"		      "125"
+			}
 		}
-	
 	}
 }

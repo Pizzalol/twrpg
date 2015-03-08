@@ -3,6 +3,7 @@
 	caster HP percentage]]
 function soul_of_the_forest_heal( keys )
 	local caster = keys.caster
+	local caster_location = caster:GetAbsOrigin()
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 

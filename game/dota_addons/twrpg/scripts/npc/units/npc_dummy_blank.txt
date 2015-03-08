@@ -1,4 +1,4 @@
-"npc_dummy_unit"
+"npc_dummy_blank"
 {
 	// General
 	//
@@ -11,7 +11,7 @@
 	// Abilities
 	//----------------------------------------------------------------
 	
-	"Ability1"					"twrpg_dummy_unit"			// Ability 1.
+	"Ability1"					""			// Ability 1.
 	"Ability2"					""			// Ability 2.
 	"Ability3"					""			// Ability 3.
 	"Ability4"					""			// Ability 4.
@@ -56,7 +56,7 @@
 
 	// Bounds
 	//----------------------------------------------------------------
-	"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"			// Hull type used for navigation/locomotion.
+	"BoundsHullName"			"DOTA_HULL_SIZE_HERO"			// Hull type used for navigation/locomotion.
 
 	// Movement
 	//----------------------------------------------------------------
@@ -87,4 +87,4 @@
 	// Bots
 	//----------------------------------------------------------------
 	"AttackDesire"				"1.5"		// How much bots want to attack them vs other non-hero things
-}	
+}
