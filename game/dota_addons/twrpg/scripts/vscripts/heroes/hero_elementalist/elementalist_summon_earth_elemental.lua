@@ -7,10 +7,7 @@ function SummonEarthElemental( keys )
 	local ability_level_lua = ability_level + 1
 	local player = caster:GetPlayerOwnerID()
 
-	-- Abilities and modifier
-	local ability_1 = keys.ability_1
-	local ability_2 = keys.ability_2
-	local ability_3 = keys.ability_3
+	-- Modifier	
 	local modifier = keys.modifier
 
 	-- Custom variables
@@ -64,19 +61,20 @@ function SummonEarthElemental( keys )
 		caster:RemoveModifierByName("modifier_dreamgate")
 	end
 
+	-- Get the abilities
+	local ability_1 = caster.earth_elemental:GetAbilityByIndex(1)
+	local ability_2 = caster.earth_elemental:GetAbilityByIndex(2)
+	local ability_3 = caster.earth_elemental:GetAbilityByIndex(3)
+
 	-- Disable abilities based on level
 	if ability_level_lua < 3 then
-		ability = caster.earth_elemental:FindAbilityByName(ability_1)
-		ability:SetActivated(false)
+		ability_1:SetActivated(false)
 
-		ability = caster.earth_elemental:FindAbilityByName(ability_2)
-		ability:SetActivated(false)
+		ability_2:SetActivated(false)
 	elseif ability_level_lua < 5 then
-		ability = caster.earth_elemental:FindAbilityByName(ability_2)
-		ability:SetActivated(false)
+		ability_2:SetActivated(false)
 	end
 
 	-- Always disable the ultimate ability
-	ability = caster.earth_elemental:FindAbilityByName(ability_3)
-	ability:SetActivated(false)
+	ability_3:SetActivated(false)
 end

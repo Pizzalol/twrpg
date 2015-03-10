@@ -1,6 +1,6 @@
 // Elementalist Lightning Elemental Chain Lightning
 // Author: Pizzalol
-"elementalist_lightning_elemental_thunder_strike"
+"elementalist_lightning_elemental_chain_lightning"
 {
 	// General
 	//-------------------------------------------------------------------------------------------------------------
@@ -10,7 +10,7 @@
 	"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 	"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"	
 	"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_YES"
-	"AbilityTextureName"	"zuus_lightning_bolt"
+	"AbilityTextureName"	"zuus_arc_lightning"
 
 	// Precache
 	//-------------------------------------------------------------------------------------------------------------
@@ -50,13 +50,28 @@
 			"var_type"						"FIELD_FLOAT"
 			"duration"						"4.0"
 		}
+		"06"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"mana_gain"						"2"
+		}
+		"07"
+		{
+			"var_type"						"FIELD_INTEGER"
+			"reduction"						"75"
+		}
+		"08"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"jump_radius"					"500"
+		}
 	}
 
 	"Modifiers"
 	{
 		"modifier_chain_lightning"
 		{
-			"Passive"	"1"
+			"Passive"	"0"
 			"IsHidden"	"1"
 
 			"OnAttackLanded"
@@ -64,10 +79,10 @@
 			{
 				"RunScript"
 				{
-					"ScriptFile"	"heroes/hero_elementalist/units/lightning_elemental/thunder_strike.lua"
-					"Function"		"thunder_strike"
+					"ScriptFile"	"heroes/hero_elementalist/units/lightning_elemental/chain_lightning.lua"
+					"Function"		"chain_lightning"
 					"modifier"		"modifier_chain_lightning_debuff"
-					"thunder_strike_particle"	"particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf"
+					"chain_lightning_particle"	"particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf"
 					"sound"			"Hero_Zuus.ArcLightning.Cast"
 				}
 			}
@@ -80,6 +95,23 @@
 			"Properties"
 			{
 				"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "%magic_resist"
+			}
+		}
+
+		"modifier_chain_lightning_tracker"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"ThinkInterval"  "0.1"
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"custom_functions.lua"
+					"Function"		"ability_tracker"
+					"modifier"		"modifier_chain_lightning"
+				}
 			}
 		}
 	}

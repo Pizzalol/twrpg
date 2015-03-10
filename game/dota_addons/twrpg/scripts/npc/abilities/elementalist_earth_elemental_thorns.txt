@@ -37,7 +37,6 @@
 	{
 		"modifier_thorns"
 		{
-			"Passive"			"1"
 			"IsHidden"			"1"
 
 			"OnTakeDamage"
@@ -61,6 +60,23 @@
 			"Properties"
 			{
 				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%base_armor"
+			}
+		}
+
+		"modifier_thorns_tracker"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"ThinkInterval"  "0.1"
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"custom_functions.lua"
+					"Function"		"ability_tracker"
+					"modifier"		"modifier_thorns"
+				}
 			}
 		}
 	}

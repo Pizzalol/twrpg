@@ -95,9 +95,6 @@
 			"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_water_elemental.lua"
 			"Function"		"SummonWaterElemental"
 			"Target"		"POINT"
-			"ability_1"		"fire_elemental_flamefists"
-			"ability_2"		"fire_elemental_immolation_aura"
-			"ability_3"		"fire_elemental_magma_explosion"
 			"modifier"		"modifier_water_elemental"
 		}
 		

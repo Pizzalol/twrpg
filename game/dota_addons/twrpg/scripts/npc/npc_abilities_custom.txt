@@ -151,7 +151,7 @@
 		{
 			"modifier_souloftheforest_aura"
 			{
-				"Passive"		"1"
+				"Passive"		"0"
 				"IsHidden"		"0"
 	
 				"Aura"          	"modifier_souloftheforest"
@@ -191,6 +191,23 @@
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE" "%damage_reduction_pct"
+				}
+			}
+	
+			"modifier_souloftheforest_tracker"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+	
+				"ThinkInterval"  "0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"custom_functions.lua"
+						"Function"		"ability_tracker"
+						"modifier"		"modifier_souloftheforest_aura"
+					}
 				}
 			}
 		}
@@ -353,7 +370,6 @@
 		{
 			"modifier_thorns"
 			{
-				"Passive"			"1"
 				"IsHidden"			"1"
 	
 				"OnTakeDamage"
@@ -377,6 +393,23 @@
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%base_armor"
+				}
+			}
+	
+			"modifier_thorns_tracker"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+	
+				"ThinkInterval"  "0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"custom_functions.lua"
+						"Function"		"ability_tracker"
+						"modifier"		"modifier_thorns"
+					}
 				}
 			}
 		}
@@ -721,7 +754,7 @@
 	}
 	// Elementalist Lightning Elemental Chain Lightning
 	// Author: Pizzalol
-	"elementalist_lightning_elemental_thunder_strike"
+	"elementalist_lightning_elemental_chain_lightning"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
@@ -731,7 +764,7 @@
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"	
 		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityTextureName"	"zuus_lightning_bolt"
+		"AbilityTextureName"	"zuus_arc_lightning"
 	
 		// Precache
 		//-------------------------------------------------------------------------------------------------------------
@@ -771,13 +804,28 @@
 				"var_type"						"FIELD_FLOAT"
 				"duration"						"4.0"
 			}
+			"06"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"mana_gain"						"2"
+			}
+			"07"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"reduction"						"75"
+			}
+			"08"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"jump_radius"					"500"
+			}
 		}
 	
 		"Modifiers"
 		{
 			"modifier_chain_lightning"
 			{
-				"Passive"	"1"
+				"Passive"	"0"
 				"IsHidden"	"1"
 	
 				"OnAttackLanded"
@@ -785,10 +833,10 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"heroes/hero_elementalist/units/lightning_elemental/thunder_strike.lua"
-						"Function"		"thunder_strike"
+						"ScriptFile"	"heroes/hero_elementalist/units/lightning_elemental/chain_lightning.lua"
+						"Function"		"chain_lightning"
 						"modifier"		"modifier_chain_lightning_debuff"
-						"thunder_strike_particle"	"particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf"
+						"chain_lightning_particle"	"particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf"
 						"sound"			"Hero_Zuus.ArcLightning.Cast"
 					}
 				}
@@ -801,6 +849,196 @@
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "%magic_resist"
+				}
+			}
+	
+			"modifier_chain_lightning_tracker"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+	
+				"ThinkInterval"  "0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"custom_functions.lua"
+						"Function"		"ability_tracker"
+						"modifier"		"modifier_chain_lightning"
+					}
+				}
+			}
+		}
+	}
+	
+	// Elementalist Lightning Elemental Chain Lightning
+	// Author: Pizzalol
+	"elementalist_lightning_elemental_discharge"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"	"zuus_arc_lightning"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts"
+			"particle"			"particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf"
+		}
+		
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"max_targets"					"4"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"int_scale"						"4.5"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"hits_needed"					"4"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"magic_resist"					"-12"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"duration"						"4.0"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"mana_gain"						"2"
+			}
+			"07"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"reduction"						"75"
+			}
+			"08"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"jump_radius"					"500"
+			}
+		}
+	
+		"Modifiers"
+		{
+			
+		}
+	}
+	
+	// Elementalist Lightning Elemental Electric Aura
+	// Author: Pizzalol
+	"elementalist_lightning_elemental_electric_aura"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"AbilityTextureName"	"disruptor_static_storm"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"			"particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf"
+		}
+		
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"radius"						"750"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"move_speed"					"40"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"attack_speed"					"40"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"chain_lightning_reduction"		"100"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"thunderstrike_multiplier"		"5.5"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"discharge_type"				"8" // This is PURE damage type
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_electric_aura"
+			{
+				"IsHidden"	"1"
+	
+				"Aura"          	"modifier_electric"
+				"Aura_Radius"   	"%radius"
+				"Aura_Teams"    	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Aura_Types"    	"DOTA_UNIT_TARGET_BASIC"
+				"Aura_Flags"    	"DOTA_UNIT_TARGET_FLAG_NONE"
+				"Aura_ApplyToCaster" "1"
+			}
+	
+			"modifier_electric"
+			{
+				"IsBuff"	"1"
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack_speed"
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%move_speed" 
+				}
+			}
+	
+			"modifier_electric_tracker"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+	
+				"ThinkInterval"  "0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"custom_functions.lua"
+						"Function"		"ability_tracker"
+						"modifier"		"modifier_electric_aura"
+					}
 				}
 			}
 		}
@@ -848,13 +1086,17 @@
 				"var_type"						"FIELD_INTEGER"
 				"hits_needed"					"8"
 			}
+			"04"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"mana_gain"						"15"
+			}
 		}
 	
 		"Modifiers"
 		{
 			"modifier_thunder_strike"
 			{
-				"Passive"	"1"
 				"IsHidden"	"1"
 	
 				"OnAttackLanded"
@@ -866,6 +1108,23 @@
 						"Function"		"thunder_strike"
 						"thunder_strike_particle"	"particles/units/heroes/hero_zuus/zuus_lightning_bolt.vpcf"
 						"sound"			"Hero_Zuus.LightningBolt"
+					}
+				}
+			}
+	
+			"modifier_thunder_strike_tracker"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+	
+				"ThinkInterval"  "0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"custom_functions.lua"
+						"Function"		"ability_tracker"
+						"modifier"		"modifier_thunder_strike"
 					}
 				}
 			}
@@ -969,9 +1228,6 @@
 				"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_earth_elemental.lua"
 				"Function"		"SummonEarthElemental"
 				"Target"		"POINT"
-				"ability_1"		"earth_elemental_quake"
-				"ability_2"		"earth_elemental_thorns"
-				"ability_3"		"earth_elemental_souloftheforest"
 				"modifer"		"modifier_earth_elemental"
 			}		
 		}
@@ -1087,9 +1343,6 @@
 				"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_fire_elemental.lua"
 				"Function"		"SummonFireElemental"
 				"Target"		"POINT"
-				"ability_1"		"elementalist_fire_elemental_immolation_aura"
-				"ability_2"		"elementalist_fire_elemental_magma_explosion"
-				"ability_3"		"elementalist_fire_elemental_blazing_haste"
 				"modifier"		"modifier_fire_elemental"
 			}
 			
@@ -1218,9 +1471,6 @@
 				"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_lightning_elemental.lua"
 				"Function"		"SummonLightningElemental"
 				"Target"		"POINT"
-				"ability_1"		"lightning_elemental_flamefists"
-				"ability_2"		"lightning_elemental_immolation_aura"
-				"ability_3"		"lightning_elemental_magma_explosion"
 				"modifier"		"modifier_lightning_elemental"
 			}
 			
@@ -1362,9 +1612,6 @@
 				"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_water_elemental.lua"
 				"Function"		"SummonWaterElemental"
 				"Target"		"POINT"
-				"ability_1"		"fire_elemental_flamefists"
-				"ability_2"		"fire_elemental_immolation_aura"
-				"ability_3"		"fire_elemental_magma_explosion"
 				"modifier"		"modifier_water_elemental"
 			}
 			

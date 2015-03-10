@@ -46,7 +46,7 @@
 	{
 		"modifier_souloftheforest_aura"
 		{
-			"Passive"		"1"
+			"Passive"		"0"
 			"IsHidden"		"0"
 
 			"Aura"          	"modifier_souloftheforest"
@@ -86,6 +86,23 @@
 			"Properties"
 			{
 				"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE" "%damage_reduction_pct"
+			}
+		}
+
+		"modifier_souloftheforest_tracker"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"ThinkInterval"  "0.1"
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"custom_functions.lua"
+					"Function"		"ability_tracker"
+					"modifier"		"modifier_souloftheforest_aura"
+				}
 			}
 		}
 	}

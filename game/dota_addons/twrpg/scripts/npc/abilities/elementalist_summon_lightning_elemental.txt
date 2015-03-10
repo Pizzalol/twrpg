@@ -97,9 +97,6 @@
 			"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_lightning_elemental.lua"
 			"Function"		"SummonLightningElemental"
 			"Target"		"POINT"
-			"ability_1"		"lightning_elemental_flamefists"
-			"ability_2"		"lightning_elemental_immolation_aura"
-			"ability_3"		"lightning_elemental_magma_explosion"
 			"modifier"		"modifier_lightning_elemental"
 		}
 		

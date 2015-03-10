@@ -8,10 +8,7 @@ function SummonLightningElemental( keys )
 	local ability_level_lua = ability_level + 1
 	local player = caster:GetPlayerOwnerID()
 
-	-- Abilities and modifiers
-	local ability_1 = keys.ability_1
-	local ability_2 = keys.ability_2
-	local ability_3 = keys.ability_3
+	-- Modifiers
 	local modifier = keys.modifier
 
 	-- Custom variables
@@ -44,6 +41,10 @@ function SummonLightningElemental( keys )
 	caster.lightning_elemental:SetBaseDamageMin(elemenental_damage * 0.9)
 	caster.lightning_elemental:SetBaseDamageMax(elemenental_damage * 1.1)
 
+	-- Initialize the hit tracking
+	caster.lightning_elemental.lightning_hits = 0
+	caster.lightning_elemental.thunder_hits = 0
+
 	-- Applying the duration modifier and particle modifier
 	caster.lightning_elemental:AddNewModifier(caster, nil, "modifier_kill", {duration = duration})
 	ability:ApplyDataDrivenModifier(caster, caster.lightning_elemental, modifier, {})
@@ -65,19 +66,20 @@ function SummonLightningElemental( keys )
 		caster:RemoveModifierByName("modifier_dreamgate")
 	end
 
+	-- Get the abilities
+	local ability_1 = caster.lightning_elemental:GetAbilityByIndex(1)
+	local ability_2 = caster.lightning_elemental:GetAbilityByIndex(2)
+	local ability_3 = caster.lightning_elemental:GetAbilityByIndex(3)
+
 	-- Disable abilities based on level
 	if ability_level_lua < 3 then
-		ability = caster.lightning_elemental:FindAbilityByName(ability_1)
-		ability:SetActivated(false)
+		ability_1:SetActivated(false)
 
-		ability = caster.lightning_elemental:FindAbilityByName(ability_2)
-		ability:SetActivated(false)
+		ability_2:SetActivated(false)
 	elseif ability_level_lua < 5 then
-		ability = caster.lightning_elemental:FindAbilityByName(ability_2)
-		ability:SetActivated(false)
+		ability_2:SetActivated(false)
 	end
 
 	-- Always disable the ultimate ability
-	ability = caster.lightning_elemental:FindAbilityByName(ability_3)
-	ability:SetActivated(false)
+	ability_3:SetActivated(false)
 end

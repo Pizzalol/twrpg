@@ -95,9 +95,6 @@
 			"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_earth_elemental.lua"
 			"Function"		"SummonEarthElemental"
 			"Target"		"POINT"
-			"ability_1"		"earth_elemental_quake"
-			"ability_2"		"earth_elemental_thorns"
-			"ability_3"		"earth_elemental_souloftheforest"
 			"modifer"		"modifier_earth_elemental"
 		}		
 	}

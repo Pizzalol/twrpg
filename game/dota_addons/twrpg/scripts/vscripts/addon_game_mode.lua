@@ -3,7 +3,7 @@ BASE_MODULES = {
 	'timers',
 	'physics',
 	'lib.statcollection',
-	'custom_abilities',
+	'custom_functions',
 	'twrpg',
 	'popups',
 }
