@@ -871,26 +871,26 @@
 		}
 	}
 	
-	// Elementalist Lightning Elemental Chain Lightning
+	// Elementalist Lightning Elemental Discharge
 	// Author: Pizzalol
 	"elementalist_lightning_elemental_discharge"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"				"ability_datadriven"
-		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_TOGGLE"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"	
 		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityTextureName"	"zuus_arc_lightning"
+		"AbilityTextureName"	"magnataur_shockwave"
 	
 		// Precache
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts"
-			"particle"			"particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf"
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_magnataur.vsndevts"
+			"particle"			"particles/units/heroes/hero_magnataur/magnataur_shockwave.vpcf"
 		}
 		
 	
@@ -901,7 +901,7 @@
 			"01"
 			{
 				"var_type"						"FIELD_INTEGER"
-				"max_targets"					"4"
+				"mana_cost"						"3"
 			}
 			"02"
 			{
@@ -911,38 +911,95 @@
 			"03"
 			{
 				"var_type"						"FIELD_INTEGER"
-				"hits_needed"					"4"
+				"radius"						"100"
 			}
 			"04"
 			{
 				"var_type"						"FIELD_INTEGER"
-				"magic_resist"					"-12"
+				"range"							"800"
 			}
 			"05"
 			{
-				"var_type"						"FIELD_FLOAT"
-				"duration"						"4.0"
+				"var_type"						"FIELD_INTEGER"
+				"discharge_speed"				"500"
 			}
 			"06"
 			{
 				"var_type"						"FIELD_FLOAT"
-				"mana_gain"						"2"
+				"discharge_interval"			"0.5"
 			}
-			"07"
+		}
+	
+		"OnToggleOn"
+		{
+			"ApplyModifier"
 			{
-				"var_type"						"FIELD_INTEGER"
-				"reduction"						"75"
+				"ModifierName"	"modifier_discharge"
+				"Target" 		"CASTER"
 			}
-			"08"
+		}
+	
+		"OnToggleOff"
+		{
+			"RemoveModifier"
 			{
-				"var_type"						"FIELD_FLOAT"
-				"jump_radius"					"500"
+				"ModifierName"	"modifier_discharge"
+				"Target" 		"CASTER"
+			}
+		}
+	
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"	"1"
+			
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_elementalist/units/lightning_elemental/discharge.lua"
+				"Function"		"discharge_hit"
 			}
 		}
 	
 		"Modifiers"
 		{
-			
+			"modifier_discharge"
+			{
+				"IsHidden"	"0"
+	
+				"ThinkInterval"  "%discharge_interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_elementalist/units/lightning_elemental/discharge.lua"
+						"Function"		"discharge"
+						"modifier"		"modifier_discharge_visual"
+						"sound"			"Hero_Magnataur.ShockWave.Particle"
+						"projectile_particle"	"particles/units/heroes/hero_magnataur/magnataur_shockwave.vpcf"
+					}
+				}
+	
+				"OnOrder"
+				// Triggers on Move/Casting/Hold/Stop
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_elementalist/units/lightning_elemental/discharge.lua"
+						"Function"		"discharge_order"
+					}
+				}
+	
+				"States"
+				{
+					"MODIFIER_STATE_DISARMED"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_ROOTED"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+	
+			"modifier_discharge_visual"
+			{
+				"IsHidden"	"1"
+				"OverrideAnimation"     "ACT_DOTA_ATTACK"
+			}
 		}
 	}
 	
