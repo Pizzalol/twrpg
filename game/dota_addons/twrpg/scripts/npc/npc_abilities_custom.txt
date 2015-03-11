@@ -2000,8 +2000,8 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dazzle.vsndevts"
-			"particle"			"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_chain_heal.vpcf"
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_morphling.vsndevts"
+			"particle"			"particles/units/heroes/hero_slardar/slardar_crush.vpcf"
 		}
 	
 		// Casting
@@ -2040,14 +2040,43 @@
 	
 		"OnSpellStart"
 		{
-			
+			"FireSound"
+			{
+				"EffectName"	"Hero_Morphling.ReplicateEnd"
+				"Target" 		"CASTER"
+			}
 	
-			//"RunScript"
-			//{
-			//	"ScriptFile"	"heroes/hero_elementalist/units/water_elemental/chain_heal.lua"
-			//	"Function"		"chain_heal"
-			//	"chain_heal_particle"	"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_chain_heal.vpcf"
-			//}
+			"FireEffect"
+			{
+				"EffectName"        "particles/units/heroes/hero_slardar/slardar_crush.vpcf"
+				"EffectAttachType"  "attach_origin"
+				"Target"            "CASTER"
+	
+				"ControlPoints"
+				{
+					"01"	"%radius 0 0"
+				}
+			}
+	
+			"ActOnTargets"
+			{
+				"Target"
+				{
+					"Center"  	"CASTER"
+					"Radius" 	"%radius"
+					"Teams" 	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+					"Types" 	"DOTA_UNIT_TARGET_HERO"
+				}
+			
+				"Action"    
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_elementalist/units/water_elemental/water_blessing.lua"
+						"Function"		"water_blessing"
+					}
+				}
+			}
 		}
 	}
 	
