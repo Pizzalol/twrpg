@@ -5,20 +5,20 @@
 	// General
 	//-------------------------------------------------------------------------------------------------------------
 	"BaseClass"						"ability_datadriven"
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
 	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-	"AbilityTextureName"			"nevermore_dark_lord_demon"
+	"AbilityTextureName"			"elementalist_blazing_haste"
 	"MaxLevel"						"1"
+	"AOERadius"						"%radius_max"
 
 	// Precache
 	//-------------------------------------------------------------------------------------------------------------
 	"precache"
 	{
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
-		"particle"			"particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf"
+		"particle"			"particles/units/heroes/hero_lina/lina_fiery_soul.vpcf"
 	}
 
 	// Special
@@ -28,30 +28,96 @@
 		"01"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"radius"					"500"
+			"radius_min"				"300"
 		}
 		
 		"02"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"base_damage"				"100"
+			"radius_max"				"600"
 		}
 		"03"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"int_scale"					"20"
+			"int_scale_min"				"80"
 		}
 		"04"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"hp_cost"					"10"
+			"int_scale_max"				"40"
 		}
 		"05"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"tick_interval"				"1.0"
+			"base_damage"				"100"
+		}
+		"06"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"max_stacks"				"4"
+		}
+		"07"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"bonus_attack_speed"		"25"
 		}
 	}
 
-	// Placeholder
+	"Modifiers"
+	{
+		"modifier_blazing_haste_tracker"
+		{
+			"Passive"			"1"
+			"IsHidden"			"1"
+
+			"ThinkInterval"  "0.1"
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"custom_functions.lua"
+					"Function"		"ability_tracker"
+					"modifier"		"modifier_blazing_haste"
+				}
+			}
+		}
+
+		"modifier_blazing_haste"
+		{
+			"IsHidden"	"1"
+
+			"OnAttack"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/blazing_haste.lua"
+					"Function"		"blazing_haste"
+					"modifier"		"modifier_blazing_haste_stack"
+				}
+			}
+
+			"OnDeath"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/blazing_haste.lua"
+					"Function"		"blazing_haste_explosion"
+				}
+			}
+		}
+
+		"modifier_blazing_haste_stack"
+		{
+			"IsBuff"		"1"
+			"IsPurgable"	"0"
+
+			"EffectName"	"particles/units/heroes/hero_lina/lina_fiery_soul.vpcf"
+			"EffectAttachType"	"follow_overhead"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%bonus_attack_speed"
+			}
+		}
+	}
 }

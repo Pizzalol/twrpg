@@ -64,7 +64,7 @@
 		"FireEffect"
 		{
 			"EffectName"        "particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf"
-			"EffectAttachType"  "follow_origin"
+			"EffectAttachType"  "attach_origin"
 			"Target"            "CASTER"
 		}
 
