@@ -28,8 +28,7 @@
 		{
 			"var_type"					"FIELD_FLOAT"
 			"radius"					"500"
-		}
-		
+		}		
 		"02"
 		{
 			"var_type"					"FIELD_FLOAT"

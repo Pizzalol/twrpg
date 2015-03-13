@@ -61,6 +61,11 @@
 			"var_type"					"FIELD_INTEGER"
 			"bonus_attack_speed"		"25"
 		}
+		"08"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"immolation_hp_cost"		"5"
+		}
 	}
 
 	"Modifiers"
@@ -102,6 +107,8 @@
 				{
 					"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/blazing_haste.lua"
 					"Function"		"blazing_haste_explosion"
+					"explosion_particle"	"particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf"
+					"sound"					"Hero_Techies.Suicide"
 				}
 			}
 		}

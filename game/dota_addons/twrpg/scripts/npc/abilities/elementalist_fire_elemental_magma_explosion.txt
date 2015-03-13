@@ -12,6 +12,8 @@
 	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 	"AbilityTextureName"			"techies_suicide"
 	"MaxLevel"						"1"
+	"AOERadius"						"%radius_max"
+
 
 	// Precache
 	//-------------------------------------------------------------------------------------------------------------
@@ -28,28 +30,28 @@
 		"01"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"radius"					"500"
+			"radius_min"				"300"
 		}
 		
 		"02"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"base_damage"				"100"
+			"radius_max"				"600"
 		}
 		"03"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"int_scale"					"20"
+			"int_scale_min"				"80"
 		}
 		"04"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"hp_cost"					"10"
+			"int_scale_max"				"40"
 		}
 		"05"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"tick_interval"				"1.0"
+			"base_damage"				"100"
 		}
 	}
 
@@ -68,6 +70,10 @@
 			"Target"            "CASTER"
 		}
 
-		// Run suicide script
+		"RunScript"
+		{
+			"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/magma_explosion.lua"
+			"Function"		"magma_explosion"
+		}
 	}
 }

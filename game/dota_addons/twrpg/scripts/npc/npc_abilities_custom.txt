@@ -477,6 +477,11 @@
 				"var_type"					"FIELD_INTEGER"
 				"bonus_attack_speed"		"25"
 			}
+			"08"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"immolation_hp_cost"		"5"
+			}
 		}
 	
 		"Modifiers"
@@ -518,6 +523,8 @@
 					{
 						"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/blazing_haste.lua"
 						"Function"		"blazing_haste_explosion"
+						"explosion_particle"	"particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf"
+						"sound"					"Hero_Techies.Suicide"
 					}
 				}
 			}
@@ -567,8 +574,7 @@
 			{
 				"var_type"					"FIELD_FLOAT"
 				"radius"					"500"
-			}
-			
+			}		
 			"02"
 			{
 				"var_type"					"FIELD_FLOAT"
@@ -621,6 +627,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityTextureName"			"jakiro_liquid_fire"
 		"MaxLevel"						"1"
+		"AOERadius"						"%radius"
 	
 		// Precache
 		//-------------------------------------------------------------------------------------------------------------
@@ -638,8 +645,7 @@
 			{
 				"var_type"					"FIELD_FLOAT"
 				"radius"					"500"
-			}
-			
+			}		
 			"02"
 			{
 				"var_type"					"FIELD_FLOAT"
@@ -659,6 +665,11 @@
 			{
 				"var_type"					"FIELD_FLOAT"
 				"tick_interval"				"1.0"
+			}
+			"08"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"blazing_haste_hp_cost"		"5"
 			}
 		}
 	
@@ -684,11 +695,12 @@
 				}
 			}		
 	
-			//"RunScript"
-			//{
-			//	"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/immolation_aura.lua"
-			//	"Function"		"immolation_aura"
-			//}
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/immolation_aura.lua"
+				"Function"		"immolation_aura"
+				"modifier"		"modifier_blazing_haste"
+			}
 	
 			"ApplyModifier"
 			{
@@ -736,11 +748,12 @@
 						"Target" 		"TARGET"
 					}
 	
-					//"RunScript"
-					//{
-					//	"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/immolation_aura.lua"
-					//	"Function"		"immolation_aura"
-					//}
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/immolation_aura.lua"
+						"Function"		"immolation_aura"
+						"modifier"		"modifier_blazing_haste"
+					}
 				}
 			}
 		}
@@ -759,6 +772,8 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityTextureName"			"techies_suicide"
 		"MaxLevel"						"1"
+		"AOERadius"						"%radius_max"
+	
 	
 		// Precache
 		//-------------------------------------------------------------------------------------------------------------
@@ -775,28 +790,28 @@
 			"01"
 			{
 				"var_type"					"FIELD_FLOAT"
-				"radius"					"500"
+				"radius_min"				"300"
 			}
 			
 			"02"
 			{
 				"var_type"					"FIELD_FLOAT"
-				"base_damage"				"100"
+				"radius_max"				"600"
 			}
 			"03"
 			{
 				"var_type"					"FIELD_FLOAT"
-				"int_scale"					"20"
+				"int_scale_min"				"80"
 			}
 			"04"
 			{
 				"var_type"					"FIELD_FLOAT"
-				"hp_cost"					"10"
+				"int_scale_max"				"40"
 			}
 			"05"
 			{
 				"var_type"					"FIELD_FLOAT"
-				"tick_interval"				"1.0"
+				"base_damage"				"100"
 			}
 		}
 	
@@ -815,7 +830,11 @@
 				"Target"            "CASTER"
 			}
 	
-			// Run suicide script
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/magma_explosion.lua"
+				"Function"		"magma_explosion"
+			}
 		}
 	}
 	// Elementalist Lightning Elemental Chain Lightning
@@ -2136,13 +2155,324 @@
 			
 				"Action"    
 				{
+					"RemoveModifier"
+					{
+						"ModifierName"	"modifier_water_blessing"
+						"Target" 		"TARGET"
+					}
+	
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_water_blessing"
+						"Target" 		"TARGET"
+						"Duration"		"%duration"
+					}
+				}
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_water_blessing"
+			{
+				"IsBuff"			"1"
+				"TextureName"		"omniknight_guardian_angel"
+		
+				"OnCreated"
+				{
 					"RunScript"
 					{
 						"ScriptFile"	"heroes/hero_elementalist/units/water_elemental/water_blessing.lua"
 						"Function"		"water_blessing"
 					}
 				}
+	
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_elementalist/units/water_elemental/water_blessing.lua"
+						"Function"		"water_blessing_remove"
+					}
+				}
 			}
+	
+			// INTELLECT MODIFIERS
+			"modifier_intellect_mod_1"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"1"
+					}
+				}
+				"modifier_intellect_mod_2"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"2"
+					}
+				}
+				"modifier_intellect_mod_4"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"4"
+					}
+				}
+				"modifier_intellect_mod_8"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"8"
+					}
+				}
+				"modifier_intellect_mod_16"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"16"
+					}
+				}
+				"modifier_intellect_mod_32"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"32"
+					}
+				}
+				"modifier_intellect_mod_64"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"64"
+					}
+				}
+				"modifier_intellect_mod_128"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"128"
+					}
+				}
+				"modifier_intellect_mod_256"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"256"
+					}
+				}
+				"modifier_intellect_mod_512"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"512"
+					}
+				}
+	
+			// AGILITY MODIFIERS
+	
+			"modifier_agility_mod_1"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"1"
+					}
+				}
+				"modifier_agility_mod_2"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"2"
+					}
+				}
+				"modifier_agility_mod_4"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"4"
+					}
+				}
+				"modifier_agility_mod_8"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"8"
+					}
+				}
+				"modifier_agility_mod_16"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"16"
+					}
+				}
+				"modifier_agility_mod_32"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"32"
+					}
+				}
+				"modifier_agility_mod_64"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"64"
+					}
+				}
+				"modifier_agility_mod_128"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"128"
+					}
+				}
+				"modifier_agility_mod_256"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"256"
+					}
+				}
+				"modifier_agility_mod_512"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"512"
+					}
+				}
+	
+			// STRENGTH MODIFIERS
+			"modifier_strength_mod_1"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"1"
+					}
+				}
+				"modifier_strength_mod_2"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"2"
+					}
+				}
+				"modifier_strength_mod_4"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"4"
+					}
+				}
+				"modifier_strength_mod_8"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"8"
+					}
+				}
+				"modifier_strength_mod_16"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"16"
+					}
+				}
+				"modifier_strength_mod_32"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"32"
+					}
+				}
+				"modifier_strength_mod_64"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"64"
+					}
+				}
+				"modifier_strength_mod_128"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"128"
+					}
+				}
+				"modifier_strength_mod_256"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"256"
+					}
+				}
+				"modifier_strength_mod_512"
+				{
+					"IsHidden" "1"
+					"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"512"
+					}
+				}
 		}
 	}
 	
