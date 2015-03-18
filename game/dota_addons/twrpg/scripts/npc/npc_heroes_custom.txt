@@ -8,7 +8,7 @@
 		"Ability2"		"elementalist_summon_water_elemental"
 		"Ability3"		"elementalist_summon_lightning_elemental"
 		"Ability4"		"elementalist_summon_earth_elemental"
-		"Ability5"		""
+		"Ability5"		"elementalist_elemental_link"
 		"Ability6"		""
 		"Ability7"		""
 	}

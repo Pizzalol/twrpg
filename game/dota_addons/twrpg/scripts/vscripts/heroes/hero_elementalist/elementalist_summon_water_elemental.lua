@@ -76,5 +76,5 @@ function SummonWaterElemental( keys )
 	end
 
 	-- Always disable the ultimate ability
-	--ability_3:SetActivated(false)
+	ability_3:SetActivated(false)
 end

@@ -10,6 +10,14 @@
 	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 	"AbilityTextureName"			"treant_living_armor"
 	"MaxLevel"						"1"
+	"AOERadius"						"%radius"
+
+	// Precache
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
+	{
+		"particle"			"particles/units/heroes/hero_treant/treant_livingarmor.vpcf"
+	}
 
 	// Special
 	//-------------------------------------------------------------------------------------------------------------
@@ -55,6 +63,22 @@
 			"Aura_Types"    	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 			"Aura_Flags"    	"DOTA_UNIT_TARGET_FLAG_NONE"
 			"Aura_ApplyToCaster" "0"
+
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"        "particles/units/heroes/hero_treant/treant_livingarmor.vpcf"
+					"EffectAttachType"  "follow_origin"
+					"Target"            "TARGET"
+
+					"ControlPointEntities"
+					{
+						"TARGET"	"follow_origin"
+						"TARGET"	"follow_origin"
+					}
+				}
+			}
 
 			"OnTakeDamage"
 			// "%attack_damage" is set to the damage value after mitigation

@@ -18,7 +18,7 @@
 	//-------------------------------------------------------------------------------------------------------------
 	"precache"
 	{
-		"particle"			"particles/units/heroes/hero_lina/lina_fiery_soul.vpcf"
+		"particle"			"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_blazing_haste.vpcf"
 	}
 
 	// Special
@@ -91,6 +91,9 @@
 		{
 			"IsHidden"	"1"
 
+			"EffectName"	"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_blazing_haste.vpcf"
+			"EffectAttachType"	"follow_origin"
+
 			"OnAttack"
 			{
 				"RunScript"
@@ -117,9 +120,6 @@
 		{
 			"IsBuff"		"1"
 			"IsPurgable"	"0"
-
-			"EffectName"	"particles/units/heroes/hero_lina/lina_fiery_soul.vpcf"
-			"EffectAttachType"	"follow_overhead"
 
 			"Properties"
 			{

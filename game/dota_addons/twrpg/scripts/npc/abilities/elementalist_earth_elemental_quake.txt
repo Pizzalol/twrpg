@@ -12,6 +12,7 @@
 	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 	"AbilityTextureName"			"lone_druid_spirit_bear_entangle"
 	"MaxLevel"						"1"
+	"AOERadius"						"%radius"
 
 	// Precache
 	//-------------------------------------------------------------------------------------------------------------
