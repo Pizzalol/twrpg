@@ -29,6 +29,7 @@ function Precache( context )
 	PrecacheUnitByNameSync('elementalist_lightning_elemental', context)
 	PrecacheUnitByNameSync('elementalist_earth_elemental', context)
 	PrecacheUnitByNameSync('elementalist_shadow_elemental', context)
+	PrecacheUnitByNameSync('elementalist_wisp', context)
 	PrecacheResource("particle_folder", "particles/twrpg_gameplay", context)
 
 	-- Sounds can precached here like anything else

@@ -7,6 +7,6 @@
 	"Ability3"		"elementalist_summon_lightning_elemental"
 	"Ability4"		"elementalist_summon_earth_elemental"
 	"Ability5"		"elementalist_elemental_link"
-	"Ability6"		""
+	"Ability6"		"elementalist_dreamgate"
 	"Ability7"		""
 }

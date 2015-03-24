@@ -113,7 +113,7 @@ function elemental_link_distance( keys )
 	local ability_level = ability:GetLevel() - 1
 
 	-- Ability variables
-	local link_distance = 700--ability:GetLevelSpecialValueFor("link_distance", ability_level)
+	local link_distance = ability:GetLevelSpecialValueFor("link_distance", ability_level)
 	local modifier = keys.modifier
 
 	-- Calculate the distance between the two linked targets
