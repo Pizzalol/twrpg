@@ -12,7 +12,7 @@ function elemental_link_check( keys )
 		and target ~= caster.lightning_elemental
 		and target ~= caster.earth_elemental then
 
-		caster:Stop() 
+		caster:Stop()
 
 		-- Play Error Sound
 		EmitSoundOnClient("General.CastFail_InvalidTarget_Hero", player)
