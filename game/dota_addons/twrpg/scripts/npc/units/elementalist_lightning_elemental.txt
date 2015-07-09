@@ -1,0 +1,111 @@
+// Hero Elementalist Lightning Elemental summon
+	"elementalist_lightning_elemental"
+	{
+		// General
+		//
+		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
+		"Model"						"models/heroes/razor/razor.vmdl"	// Model.
+		"SoundSet"					"Hero_Razor"					// Name of sound set.
+		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_razor.vsndevts"
+		"ModelScale"				"0.5"
+		"Level"						"1"
+		"ConsideredHero"			"0"
+		"precache"
+		{
+			"particle_folder"		"particles/units/heroes/hero_razor"
+		}
+		// Abilities
+		//----------------------------------------------------------------
+		
+		"Ability1"					"elementalist_lightning_elemental_discharge"		// Ability 1.
+		"Ability2"					"elementalist_lightning_elemental_thunder_strike"			// Ability 2.
+		"Ability3"					"elementalist_lightning_elemental_chain_lightning"			// Ability 3.
+		"Ability4"					"elementalist_lightning_elemental_electric_aura"			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		"Ability6"					""			// Ability 6 - Extra.
+		"Ability7"					""			// Ability 7 - Extra.
+		"Ability8"					""			// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"14"			// Physical protection.
+		"MagicalResistance"			"0"		// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"35"		// Damage range min.
+		"AttackDamageMax"			"44"		// Damage range max.
+		"AttackRate"				"1.0"		// Speed of attack.
+		"AttackAnimationPoint"		"0.375"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
+		"AttackRange"				"550"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/units/heroes/hero_razor/razor_base_attack.vpcf"			// Particle system model for projectile.
+		"ProjectileSpeed"			"3000"			// Speed of projectile.
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"		// Experience earn.
+		"BountyGoldMin"				"0"			// Gold earned min.
+		"BountyGoldMax"				"0"			// Gold earned max.
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"75"
+		"HealthBarOffset"			"235"
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"	
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"			// Type of locomotion - ground, air
+		"MovementSpeed"				"300"		// Speed
+		"MovementTurnRate"			"0.60"		// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"2050"		// Base health.
+		"StatusHealthRegen"			"5"			// Health regeneration rate.
+		"StatusMana"				"100"		// Base mana.
+		"StatusManaRegen"			"0.00"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		//"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		//"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		//"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_SOFT"
+		//"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1400"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1000"		// Range of vision at night time.
+
+		// Creature Data
+		//----------------------------------------------------------------------------------------------------------------------
+		"Creature"
+		{
+			"AttachWearables"
+			{
+				"Wearable1"
+				{
+					"ItemDef"			"340"		
+				}
+				"Wearable2"
+				{
+					"ItemDef"			"341"		
+				}
+				"Wearable3"
+				{
+					"ItemDef"			"342"		
+				}
+				"Wearable4"
+				{
+					"ItemDef"			"343"		
+				}
+				"Wearable5"
+				{
+					"ItemDef"			"344"
+				}
+			}
+		}		
+	}

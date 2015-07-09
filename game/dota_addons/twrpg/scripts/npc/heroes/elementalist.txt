@@ -1,0 +1,12 @@
+"hero_elementalist"
+{
+	"override_hero"		"npc_dota_hero_enchantress"
+	"AbilityLayout"		"6"
+	"Ability1"		"elementalist_summon_fire_elemental"
+	"Ability2"		"elementalist_summon_water_elemental"
+	"Ability3"		"elementalist_summon_lightning_elemental"
+	"Ability4"		"elementalist_summon_earth_elemental"
+	"Ability5"		"elementalist_elemental_link"
+	"Ability6"		"elementalist_dreamgate"
+	"Ability7"		""
+}
