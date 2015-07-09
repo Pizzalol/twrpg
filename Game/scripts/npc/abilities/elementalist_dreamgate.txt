@@ -1,0 +1,141 @@
+// Elementalist Dreamgate
+// Author: Pizzalol
+"elementalist_dreamgate"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"				"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"AbilityTextureName"			"elder_titan_earth_splitter"
+
+	// Precache
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
+	{
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_wisp.vsndevts"
+		"particle"			"particles/units/heroes/hero_wisp/wisp_relocate_channel.vpcf"
+		"particle"			"particles/units/heroes/hero_wisp/wisp_relocate_teleport.vpcf"
+		"particle"			"particles/units/heroes/hero_wisp/wisp_ambient.vpcf"
+	}
+
+	// Casting
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastPoint"				"0.0"
+
+	// Time		
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCooldown"				"12.0 12.0 12.0 12.0"
+	"AbilityDuration"				"12.0 12.0 12.0 12.0"
+
+	// Cost
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityManaCost"				"40 40 40 40"
+	
+	// Cast Range
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastRange"				"600 800 1000"
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"duration"			"120"
+		}
+		"02"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"incoming_damage"	"-30 -40 -50"
+		}
+		"03"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"link_distance"		"800 1000 1200"
+		}
+	}
+
+	"OnSpellStart"
+	{
+		"CreateThinker"
+		{
+			"ModifierName"	"modifier_dreamgate_thinker"
+			"Target" 		"POINT"
+		}
+
+		"ApplyModifier"
+		{
+			"ModifierName"	"modifier_dreamgate_timer"
+			"Target" 		"CASTER"
+			"Duration"		"1.5"
+		}
+
+		"DelayedAction"
+		{
+			"Delay"     "1.25"
+			"Action"    
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"heroes/hero_elementalist/dreamgate.lua"
+					"Function"		"dreamgate"
+					"Target"		"POINT"
+					"modifier_dreamgate"	"modifier_dreamgate_timer"
+					"modifier_wisp"			"modifier_wisp_ambient"
+				}
+			}
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_dreamgate_thinker"
+		{
+			"Duration"			"1.5"
+	
+			"EffectName"		"particles/units/heroes/hero_wisp/wisp_relocate_channel.vpcf"
+			"EffectAttachType"	"follow_origin"
+	
+			"OnDestroy"
+			{
+				"FireEffect"
+				{
+					"EffectName"        "particles/units/heroes/hero_wisp/wisp_relocate_teleport.vpcf"
+					"EffectAttachType"  "start_at_customorigin"
+					"TargetPoint"       "TARGET"
+				}
+			}
+		}
+
+		"modifier_dreamgate_timer"
+		{
+			"IsHidden"		"1"
+			"IsPurgable"	"0"
+		}
+
+		"modifier_wisp_ambient"
+		{
+			"IsHidden"		"1"
+			"IsPurgable"	"0"
+
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"        "particles/units/heroes/hero_wisp/wisp_ambient.vpcf"
+					"EffectAttachType"  "start_at_customorigin"
+					"Target"            "TARGET"
+
+					"ControlPointEntities"
+					{
+						"TARGET"	"attach_hitloc"
+						"TARGET"	"attach_origin"
+					}
+				}
+			}
+		}
+	}
+}
+

@@ -1,0 +1,99 @@
+// Elementalist Lightning Elemental Electric Aura
+// Author: Pizzalol
+"elementalist_lightning_elemental_electric_aura"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"				"ability_datadriven"
+	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+	"AbilityTextureName"	"disruptor_static_storm"
+	"AOERadius"				"%radius"
+
+	// Precache
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
+	{
+		"particle"			"particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf"
+	}
+	
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"						"FIELD_INTEGER"
+			"radius"						"750"
+		}
+		"02"
+		{
+			"var_type"						"FIELD_INTEGER"
+			"move_speed"					"40"
+		}
+		"03"
+		{
+			"var_type"						"FIELD_INTEGER"
+			"attack_speed"					"40"
+		}
+		"04"
+		{
+			"var_type"						"FIELD_INTEGER"
+			"chain_lightning_reduction"		"100"
+		}
+		"05"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"thunderstrike_multiplier"		"5.5"
+		}
+		"06"
+		{
+			"var_type"						"FIELD_INTEGER"
+			"discharge_type"				"8" // This is PURE damage type
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_electric_aura"
+		{
+			"IsHidden"	"1"
+
+			"Aura"          	"modifier_electric"
+			"Aura_Radius"   	"%radius"
+			"Aura_Teams"    	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"Aura_Types"    	"DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"    	"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster" "1"
+		}
+
+		"modifier_electric"
+		{
+			"IsBuff"	"1"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack_speed"
+			    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%move_speed" 
+			}
+		}
+
+		"modifier_electric_tracker"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"ThinkInterval"  "0.1"
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"custom_functions.lua"
+					"Function"		"ability_tracker"
+					"modifier"		"modifier_electric_aura"
+				}
+			}
+		}
+	}
+}
+

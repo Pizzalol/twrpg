@@ -1,0 +1,128 @@
+// Elementalist Summon Fire Elemental
+// Author: Pizzalol
+"elementalist_summon_fire_elemental"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"ability_datadriven"
+	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	"AbilityTextureName"			"invoker_exort"
+
+	// Precache
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
+	{
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
+		"particle"			"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"
+		"particle"  		"particles/units/heroes/hero_nevermore/nevermore_ambient_glow.vpcf"
+		"particle"  		"particles/units/heroes/hero_nevermore/shadow_fiend_ambient_eyes.vpcf"	
+	}
+	
+	// Casting
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastRange"				"400 425 450 475 500"
+	"AbilityCastPoint"				"0.7 0.7 0.7 0.7 0.7"
+
+	// Time		
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCooldown"				"0.0 0.0 0.0 0.0 0.0"
+
+	// Cost
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityManaCost"				"0 0 0 0 0"
+		
+	// Stats
+	//-------------------------------------------------------------------------------------------------------------
+	"MaxLevel"				"5"
+	//"LevelsBetweenUpgrades" "20"
+	//"RequiredLevel"			"5"
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"model_scale"		"0.6 0.7 0.8 0.9 1.0"
+		}
+		"02"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"hp_scale"			"6.5 8 9.5 11 12.5"
+		}
+		"03"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"duration"			"180.0"
+		}
+		"04"
+		{
+			"var_type"			"FIELD_INTEGER"
+			"base_hp"			"2050 4100 6150 8200 10250"
+		}
+		"05"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"radius"			"400"
+		}
+	}
+
+	"OnSpellStart"
+	{
+		"FireSound"
+		{
+			"EffectName"	"Ability.LightStrikeArray"
+			"Target"		"CASTER"
+		}
+
+		"FireEffect"
+		{
+			"EffectName"	"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"
+			"EffectAttachType"	"start_at_customorigin"
+			"TargetPoint"		"POINT"
+			
+
+			"ControlPoints"
+			{
+				"01"	"100 0 0"
+			}
+			
+		}
+
+		"RunScript"
+		{
+			"ScriptFile"	"heroes/hero_elementalist/elementalist_summon_fire_elemental.lua"
+			"Function"		"SummonFireElemental"
+			"Target"		"POINT"
+			"modifier"		"modifier_fire_elemental"
+		}
+		
+	}
+
+	"Modifiers"
+	{
+		"modifier_fire_elemental"
+		{
+			"IsHidden"	"1"
+
+			"EffectName"	"particles/units/heroes/hero_nevermore/nevermore_ambient_glow.vpcf"
+			"EffectAttachType"	"follow_origin"
+
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"        "particles/units/heroes/hero_nevermore/shadow_fiend_ambient_eyes.vpcf"
+					"EffectAttachType"  "follow_origin"
+					"Target"            "TARGET"
+				}				
+			}			
+		}
+	}
+}
+
+
+

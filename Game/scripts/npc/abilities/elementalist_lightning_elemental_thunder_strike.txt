@@ -1,0 +1,87 @@
+// Elementalist Lightning Elemental Thunder Strike
+// Author: Pizzalol
+"elementalist_lightning_elemental_thunder_strike"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"				"ability_datadriven"
+	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"	
+	"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_YES"
+	"AbilityTextureName"	"zuus_lightning_bolt"
+
+	// Precache
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
+	{
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts"
+		"particle"			"particles/units/heroes/hero_zuus/zuus_lightning_bolt.vpcf"
+	}
+	
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"stun_duration"					"0.1"
+		}
+		"02"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"int_scale"						"4.5"
+		}
+		"03"
+		{
+			"var_type"						"FIELD_INTEGER"
+			"hits_needed"					"8"
+		}
+		"04"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"mana_gain"						"15"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_thunder_strike"
+		{
+			"IsHidden"	"1"
+
+			"OnAttackLanded"
+			// "%attack_damage" is set to the damage value before mitigation
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"heroes/hero_elementalist/units/lightning_elemental/thunder_strike.lua"
+					"Function"		"thunder_strike"
+					"thunder_strike_particle"	"particles/units/heroes/hero_zuus/zuus_lightning_bolt.vpcf"
+					"sound"			"Hero_Zuus.LightningBolt"
+				}
+			}
+		}
+
+		"modifier_thunder_strike_tracker"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"ThinkInterval"  "0.1"
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"custom_functions.lua"
+					"Function"		"ability_tracker"
+					"modifier"		"modifier_thunder_strike"
+				}
+			}
+		}
+	}
+}
+

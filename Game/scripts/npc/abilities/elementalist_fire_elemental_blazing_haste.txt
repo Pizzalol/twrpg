@@ -1,0 +1,130 @@
+// Elementalist Fire Elemental Blazing Haste
+// Author: Pizzalol
+"elementalist_fire_elemental_blazing_haste"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"AbilityTextureName"			"elementalist_blazing_haste"
+	"MaxLevel"						"1"
+	"AOERadius"						"%radius_max"
+
+	// Precache
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
+	{
+		"particle"			"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_blazing_haste.vpcf"
+	}
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"radius_min"				"300"
+		}
+		
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"radius_max"				"600"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"int_scale_min"				"80"
+		}
+		"04"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"int_scale_max"				"40"
+		}
+		"05"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"base_damage"				"100"
+		}
+		"06"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"max_stacks"				"4"
+		}
+		"07"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"bonus_attack_speed"		"25"
+		}
+		"08"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"immolation_hp_cost"		"5"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_blazing_haste_tracker"
+		{
+			"Passive"			"1"
+			"IsHidden"			"1"
+
+			"ThinkInterval"  "0.1"
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"custom_functions.lua"
+					"Function"		"ability_tracker"
+					"modifier"		"modifier_blazing_haste"
+				}
+			}
+		}
+
+		"modifier_blazing_haste"
+		{
+			"IsHidden"	"1"
+
+			"EffectName"	"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_blazing_haste.vpcf"
+			"EffectAttachType"	"follow_origin"
+
+			"OnAttack"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/blazing_haste.lua"
+					"Function"		"blazing_haste"
+					"modifier"		"modifier_blazing_haste_stack"
+				}
+			}
+
+			"OnDeath"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"heroes/hero_elementalist/units/fire_elemental/blazing_haste.lua"
+					"Function"		"blazing_haste_explosion"
+					"explosion_particle"	"particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf"
+					"sound"					"Hero_Techies.Suicide"
+				}
+			}
+		}
+
+		"modifier_blazing_haste_stack"
+		{
+			"IsBuff"		"1"
+			"IsPurgable"	"0"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%bonus_attack_speed"
+			}
+		}
+	}
+}
