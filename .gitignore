@@ -1,12 +1,30 @@
-/*
- 
-!.gitignore
-!.gitattributes
+# Cache crap that Valve autogenerates
 *.bin
- 
-# Ignore game folder, and all default dota_addons folders
-!game
- 
- 
-# Ignore content folder, and all default dota_addons folders
-/content/*
+
+# Unnecessary folders
+Content/*
+Game/resource/flash3/*
+
+# Compiled formats
+*.vpcf_c
+*.vtex_c
+*.vsndevts_c
+*.vmat_c
+*.vjs_c
+*.vxml_c
+*.vcss_c
+
+# Commit panorama compiled textures
+!Game/panorama/images/*.vtex_c
+!Game/panorama/images/custom_game/*.vtex_c
+
+# Map files
+*.vpk
+
+# Map overviews
+Content/materials/overviews/*
+Game/materials/overviews/*
+Game/resource/overviews/*
+
+#Github dump
+*.stackdump
