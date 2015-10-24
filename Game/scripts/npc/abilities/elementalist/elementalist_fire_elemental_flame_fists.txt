@@ -1,0 +1,35 @@
+// Elementalist Fire Elemental Flame fists ability
+// Author: Pizzalol
+"elementalist_fire_elemental_flame_fists"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"ability_lua"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	"AbilityTextureName"			"warlock_golem_flaming_fists"
+	"ScriptFile"					"heroes/hero_elementalist/fire_elemental/elementalist_fire_elemental_flame_fists.lua"
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"radius"					"500"
+		}		
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"base_damage"				"100"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"int_scale"					"20"
+		}
+	}
+}
