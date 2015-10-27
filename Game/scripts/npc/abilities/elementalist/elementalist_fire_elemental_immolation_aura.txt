@@ -1,0 +1,51 @@
+// Elementalist Fire Elemental Immolation Aura
+// Author: Pizzalol
+"elementalist_fire_elemental_immolation_aura"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"ability_lua"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_AOE"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"AbilityTextureName"			"jakiro_liquid_fire"
+	"ScriptFile"					"heroes/hero_elementalist/fire_elemental/elementalist_fire_elemental_immolation_aura.lua"
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"radius"					"500"
+		}		
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"base_damage"				"100"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"int_scale"					"20"
+		}
+		"04"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"hp_cost"					"10"
+		}
+		"05"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"tick_interval"				"1.0"
+		}
+		"08"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"blazing_haste_hp_cost"		"5"
+		}
+	}
+}

@@ -1,7 +1,10 @@
 modifier_elementalist_fire_elemental_flame_fists = class({})
 
+--[[ Author: Pizzalol
+	Deals scaling damage in an aoe around the target whenever the caster lands an attack]]
+
 function modifier_elementalist_fire_elemental_flame_fists:IsHidden()
-	return false
+	return true
 end
 
 function modifier_elementalist_fire_elemental_flame_fists:DeclareFunctions()
@@ -43,6 +46,11 @@ function modifier_elementalist_fire_elemental_flame_fists:OnAttackLanded(keys)
 		tDamage_table.ability = self:GetAbility()
 		tDamage_table.damage_type = self:GetAbility():GetAbilityDamageType()
 		tDamage_table.damage = nBase_damage
+
+		-- Play the flame fist particle
+		local nFlameFX = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground.vpcf", PATTACH_CUSTOMORIGIN_FOLLOW, hTarget)
+		ParticleManager:SetParticleControlEnt(nFlameFX, 0, hTarget, PATTACH_POINT_FOLLOW, "attach_hitloc", vLocation, false)
+		ParticleManager:ReleaseParticleIndex(nFlameFX)
 
 		-- Find all valid targets around the attacked unit and then damage them
 		local tFlame_targets = FindUnitsInRadius(self:GetParent():GetTeamNumber(), vLocation, nil, nRadius, nTarget_team, nTarget_type, nTarget_flag, FIND_CLOSEST, false)

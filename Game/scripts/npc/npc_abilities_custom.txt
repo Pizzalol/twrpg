@@ -352,6 +352,100 @@
 			}
 		}
 	}
+	// Elementalist Fire Elemental Immolation Aura
+	// Author: Pizzalol
+	"elementalist_fire_elemental_immolation_aura"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"jakiro_liquid_fire"
+		"ScriptFile"					"heroes/hero_elementalist/fire_elemental/elementalist_fire_elemental_immolation_aura.lua"
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"radius"					"500"
+			}		
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"base_damage"				"100"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"int_scale"					"20"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"hp_cost"					"10"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"tick_interval"				"1.0"
+			}
+			"08"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"blazing_haste_hp_cost"		"5"
+			}
+		}
+	}
+	// Elementalist Fire Elemental Magma Explosion
+	// Author: Pizzalol
+	"elementalist_fire_elemental_magma_explosion"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"techies_suicide"
+		"ScriptFile"					"heroes/hero_elementalist/fire_elemental/elementalist_fire_elemental_magma_explosion.lua"
+		"AOERadius"						"%radius_max"
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"radius_min"				"300"
+			}
+			
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"radius_max"				"600"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"int_scale"					"80"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"base_damage"				"100"
+			}
+		}
+	}
 	// Elementalist Summon Fire Elemental
 	// Author: Pizzalol
 	"elementalist_summon_fire_elemental"
@@ -369,23 +463,31 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
-			"particle"			"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"
-			"particle"  		"particles/units/heroes/hero_nevermore/nevermore_ambient_glow.vpcf"
-			"particle"  		"particles/units/heroes/hero_nevermore/shadow_fiend_ambient_eyes.vpcf"	
-			"particle"			"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_ambient.vpcf"
-			"particle"			"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_ambient_eyes.vpcf"
-			"particle"			"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_trail.vpcf"
+			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
+			"particle"		"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"		
 	
 			// Unit
-			"model"			"models/heroes/shadow_fiend/shadow_fiend.vmdl"
+			"particle" 		"particles/units/heroes/hero_nevermore/nevermore_ambient_glow.vpcf"
+			"particle" 		"particles/units/heroes/hero_nevermore/shadow_fiend_ambient_eyes.vpcf"	
+			"particle"		"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_ambient.vpcf"
+			"particle"		"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_ambient_eyes.vpcf"
+			"particle"		"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_trail.vpcf"
 			"model"			"models/heroes/shadow_fiend/shadow_fiend_shoulders.vmdl"
-			"model"			"models/heroes/shadow_fiend/shadow_fiend_arcana_arms.vmdl"
 			"model"			"models/heroes/shadow_fiend/shadow_fiend_arms.vmdl"
 			"model"			"models/heroes/shadow_fiend/shadow_fiend_arcana.vmdl"
 			"model"			"models/heroes/shadow_fiend/head_arcana.vmdl"
-			"model"			"models/heroes/shadow_fiend/fx_shadow_fiend_arcana_hand.vmdl"
 			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_nevermore.vsndevts"
+	
+			// Flame fists
+			"particle"			"particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground.vpcf"
+	
+			// Immolation aura
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts"
+			"particle"			"particles/units/heroes/hero_ember_spirit/ember_spirit_flameguard.vpcf"
+	
+			// Magma explosion
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_techies.vsndevts"
+			"particle"			"particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf"
 		}
 		
 		// Casting

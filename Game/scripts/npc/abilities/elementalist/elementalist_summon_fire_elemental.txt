@@ -15,23 +15,31 @@
 	//-------------------------------------------------------------------------------------------------------------
 	"precache"
 	{
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
-		"particle"			"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"
-		"particle"  		"particles/units/heroes/hero_nevermore/nevermore_ambient_glow.vpcf"
-		"particle"  		"particles/units/heroes/hero_nevermore/shadow_fiend_ambient_eyes.vpcf"	
-		"particle"			"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_ambient.vpcf"
-		"particle"			"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_ambient_eyes.vpcf"
-		"particle"			"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_trail.vpcf"
+		"soundfile"		"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
+		"particle"		"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"		
 
 		// Unit
-		"model"			"models/heroes/shadow_fiend/shadow_fiend.vmdl"
+		"particle" 		"particles/units/heroes/hero_nevermore/nevermore_ambient_glow.vpcf"
+		"particle" 		"particles/units/heroes/hero_nevermore/shadow_fiend_ambient_eyes.vpcf"	
+		"particle"		"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_ambient.vpcf"
+		"particle"		"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_ambient_eyes.vpcf"
+		"particle"		"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_trail.vpcf"
 		"model"			"models/heroes/shadow_fiend/shadow_fiend_shoulders.vmdl"
-		"model"			"models/heroes/shadow_fiend/shadow_fiend_arcana_arms.vmdl"
 		"model"			"models/heroes/shadow_fiend/shadow_fiend_arms.vmdl"
 		"model"			"models/heroes/shadow_fiend/shadow_fiend_arcana.vmdl"
 		"model"			"models/heroes/shadow_fiend/head_arcana.vmdl"
-		"model"			"models/heroes/shadow_fiend/fx_shadow_fiend_arcana_hand.vmdl"
 		"soundfile"		"soundevents/game_sounds_heroes/game_sounds_nevermore.vsndevts"
+
+		// Flame fists
+		"particle"			"particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground.vpcf"
+
+		// Immolation aura
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts"
+		"particle"			"particles/units/heroes/hero_ember_spirit/ember_spirit_flameguard.vpcf"
+
+		// Magma explosion
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_techies.vsndevts"
+		"particle"			"particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf"
 	}
 	
 	// Casting
