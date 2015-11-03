@@ -40,6 +40,9 @@
 		// Magma explosion
 		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_techies.vsndevts"
 		"particle"			"particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf"
+
+		// Blazing haste
+		"particle"			"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_blazing_haste.vpcf"
 	}
 	
 	// Casting

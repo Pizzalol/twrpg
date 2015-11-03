@@ -36,6 +36,7 @@ function elementalist_fire_elemental_magma_explosion:OnSpellStart()
 		-- for damage outside the full damage zone
 		if flDistance > self.radius_min then
 			-- For values min 300 and max 600 the coefficient will be 0.5 at maximum distance
+			-- The coefficient falls from 1 to (radius_max - radius_min)/radius_max
 			flDistance_coefficient = 1 - ((flDistance - self.radius_min)/self.radius_max)
 		end
 

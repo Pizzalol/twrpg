@@ -317,6 +317,33 @@
 	    "BaseClass"           "ability_datadriven"
 	    "AbilityTextureName"            "rubick_empty1"
 	  }
+	// Elementalist Fire Elemental Blazing Haste
+	// Author: Pizzalol
+	"elementalist_fire_elemental_blazing_haste"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"elementalist/elementalist_fire_elemental_blazing_haste"
+		"ScriptFile"					"heroes/hero_elementalist/fire_elemental/elementalist_fire_elemental_blazing_haste.lua"
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_stacks"				"4"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_attack_speed"		"25"
+			}
+		}
+	}
 	// Elementalist Fire Elemental Flame fists ability
 	// Author: Pizzalol
 	"elementalist_fire_elemental_flame_fists"
@@ -488,6 +515,9 @@
 			// Magma explosion
 			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_techies.vsndevts"
 			"particle"			"particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf"
+	
+			// Blazing haste
+			"particle"			"particles/twrpg_gameplay/heroes/hero_elementalist/elementalist_blazing_haste.vpcf"
 		}
 		
 		// Casting

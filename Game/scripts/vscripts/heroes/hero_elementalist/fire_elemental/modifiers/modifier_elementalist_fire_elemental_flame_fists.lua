@@ -26,7 +26,7 @@ function modifier_elementalist_fire_elemental_flame_fists:OnCreated()
 end
 
 function modifier_elementalist_fire_elemental_flame_fists:OnAttackLanded(keys)
-	if IsServer() then
+	if IsServer() and keys.attacker == self:GetParent() then
 		local hTarget = keys.target
 		local vLocation = hTarget:GetAbsOrigin()
 

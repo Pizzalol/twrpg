@@ -1,0 +1,27 @@
+// Elementalist Fire Elemental Blazing Haste
+// Author: Pizzalol
+"elementalist_fire_elemental_blazing_haste"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"ability_lua"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityTextureName"			"elementalist/elementalist_fire_elemental_blazing_haste"
+	"ScriptFile"					"heroes/hero_elementalist/fire_elemental/elementalist_fire_elemental_blazing_haste.lua"
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"max_stacks"				"4"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"bonus_attack_speed"		"25"
+		}
+	}
+}

@@ -30,4 +30,8 @@ function elementalist_summon_fire_elemental:OnSpellStart()
     ParticleManager:SetParticleControl(nTrailFX, 6, Vector(1,0,0))
 
     --hCaster.fire_elemental:GetAbilityByIndex(0):SetActivated(false)
+    --hCaster.fire_elemental:GetAbilityByIndex(1):SetActivated(false)
+    --hCaster.fire_elemental:GetAbilityByIndex(2):SetActivated(false)
+    hCaster.fire_elemental:GetAbilityByIndex(3):SetActivated(false)
+    hCaster.fire_elemental:GetAbilityByIndex(3):OnOwnerSpawned() -- Required to activate the ability if the elemental has been linked
 end
